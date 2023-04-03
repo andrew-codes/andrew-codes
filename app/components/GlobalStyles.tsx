@@ -3,8 +3,12 @@ import * as styled from "styled-components"
 const GlobalStyles = styled.createGlobalStyle`
   @font-face {
     font-family: "Lato-Regular";
-    src: url("/fonts/Lato-Regular.ttf") format("truetype")
-      url("/fonts/Lato-Bold.ttf") format("truetype");
+    src: url("/fonts/Lato-Regular.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "Lato-Bold";
+    src: url("/fonts/Lato-Bold.ttf") format("truetype");
   }
 
   @font-face {

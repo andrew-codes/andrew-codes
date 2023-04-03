@@ -29,7 +29,13 @@ export default async function handleRequest(
       ),
   )
 
+  let cacheControlHeader = "public, s-maxage=60"
+  if (process.env.NODE_ENV === "development") {
+    cacheControlHeader = "no-cache"
+  }
+
   responseHeaders.set("Content-Type", "text/html")
+  responseHeaders.set("Cache-Control", cacheControlHeader)
 
   return new Response("<!DOCTYPE html>" + processMarkup(markup), {
     status: responseStatusCode,
