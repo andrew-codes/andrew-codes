@@ -1,22 +1,18 @@
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import type { LoaderArgs } from "@remix-run/server-runtime"
+import type { LoaderArgs } from "@remix-run/node"
 import { getMDXComponent } from "mdx-bundler/client"
-import path from "path"
 import { useMemo } from "react"
-import mdx from "../libs/mdx.server"
 import * as styled from "styled-components"
+import { Helmet } from "react-helmet"
+import { Page } from "~/components/resume"
+import { getPostById } from "~/libs/posts/posts.server"
 
 const loader = async (args: LoaderArgs) => {
-  const fs = require("fs/promises")
   const { id } = args.params
-  const post = await fs.readFile(
-    path.join(__dirname, "..", "app", "posts", `${id}.mdx`),
-    "utf8",
-  )
-  const [code, metadata] = await mdx(post)
+  const [code, metadata] = await getPostById(id)
 
-  return json({ code: code.toString(), metadata })
+  return json({ code, metadata })
 }
 
 const PostRoute = () => {
@@ -25,7 +21,14 @@ const PostRoute = () => {
 
   return (
     <>
-      <Component />
+      <Helmet>
+        <title>{metadata?.title}</title>
+        <meta name="description" content={metadata?.description} />
+      </Helmet>
+      <Page>
+        <h1>{metadata?.title}</h1>
+        <Component components={{}} />
+      </Page>
     </>
   )
 }

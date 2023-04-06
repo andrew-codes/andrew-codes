@@ -2,7 +2,7 @@ import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import { merge } from "lodash"
 
-import { readDirFiles } from "./fs"
+import { readDirFiles } from "./fs.server"
 
 const mdx = async (source: string) => {
   const componentsDir = path.join("app", "components")

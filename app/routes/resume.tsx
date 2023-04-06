@@ -32,7 +32,6 @@ import {
   Strong,
   SummarizedItem,
   SummarizedItems,
-  ToDo,
   WorkExperience,
 } from "~/components/resume"
 

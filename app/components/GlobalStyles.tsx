@@ -2,36 +2,41 @@ import { createGlobalStyle } from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
+    font-display:swap;
     font-family: "Lato-Regular";
     src: url("/fonts/Lato-Regular.ttf") format("truetype");
   }
 
   @font-face {
+    font-display:swap;
     font-family: "Lato-Bold";
     src: url("/fonts/Lato-Bold.ttf") format("truetype");
   }
 
   @font-face {
+    font-display:swap;
     font-family: "Lato-Thin";
     src: url("/fonts/Lato-Thin.ttf") format("truetype");
   }
 
   @font-face {
+    font-display:swap;
     font-family: "Lato-Black";
     src: url("/fonts/Lato-Black.ttf") format("truetype");
   }
 
   @font-face {
+    font-display:swap;
     font-family: "Lato-Light";
     src: url("/fonts/Lato-Light.ttf") format("truetype");
   }
 
   * {
     box-sizing: border-box;
+    font-family: "Lato-Regular", sans-serif;
   }
 
   body {
-    font-family: "Lato-Regular", sans-serif;
     margin: 0 auto !important;
   }
 
