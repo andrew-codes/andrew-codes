@@ -1,6 +1,7 @@
 .DS_Store
 /build
 /public/build
+/public/files
 .env
 node_modules
 

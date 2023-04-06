@@ -1,5 +1,4 @@
 import type { FC } from "react"
-import type { HeadersFunction } from "@remix-run/node"
 import { LiveReload, Outlet, Scripts } from "@remix-run/react"
 import GlobalStyles from "./components/GlobalStyles"
 

@@ -387,7 +387,6 @@ const ResumeRoute: FC<{}> = () => {
                     </>
                   }
                 />
-
                 <SummarizedItem
                   role="Workshop Host"
                   name="Learn Redux by Building It"

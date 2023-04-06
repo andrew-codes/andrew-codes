@@ -7,6 +7,6 @@ module.exports = {
     v2_meta: true,
   },
   cacheDirectory: "./node_modules/.cache/remix",
-  serverDependenciesToBundle: [/.*/],
+  serverDependenciesToBundle: [/.*(!?(esbuild))/],
   ignoredRouteFiles: ["**/.*"],
 }

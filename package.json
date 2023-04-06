@@ -15,10 +15,13 @@
     "@remix-run/react": "^1.15.0",
     "@remix-run/serve": "^1.15.0",
     "lodash": "^4.17.21",
+    "mdx-bundler": "^9.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-is": "^18.2.0",
+    "remark-gfm": "^3.0.1",
+    "remark-mdx-images": "^2.0.0",
     "remix": "^1.15.0",
     "styled-components": "^5.3.9"
   },

@@ -1,0 +1,152 @@
+---
+title: Guest Presence Detection
+date: "2020-11-13"
+category: tech
+tags:
+  - home automation
+  - home assistant
+  - python
+  - node.js
+---
+
+## Overview
+
+I previously gave a presentation on how detect house guests' presence for my home automation and I want to share more details on how I accomplished it. The [slide deck](https://andrew_codes.keybase.pub/Presentations%20and%20Workshops/Home%20Automation%20-%20Guest%20Detection.pdf?dl=1) may also be downloaded as a PDF.
+
+## Problem
+
+Presence detection is the ability for your smart home to know when you or your family members are home. This is useful in a lot of scenarios; such as, turn off all the lights, lock the doors, and arm your home security once everyone has left. Some of my automation would behave slightly differently if I knew we had guests staying with us. Here are a few examples:
+
+### One Example Guest Automation Problem
+
+| Automation | Action Without Guests   | Action With Guests                                                               |
+| :--------- | :---------------------- | :------------------------------------------------------------------------------- |
+| Goodnight  | Turn off all the lights | Turn off all the lights, except those in the guest room and primary living areas |
+
+#### Explanation
+
+Without any guests, going to bed would often turn off all the lights, lock the doors, and adjust the thermostat to be cold (like 68 degrees cold). This is not ideal when we have guests over as they may not go to bed the same time we do. What I found was that the lights were shutting off for guests and it became too cold to feel comfortable once we had gone to bed.
+
+### Another Guest Automation Problem
+
+| Automation | Action Without Guests                      | Action With Guests                                                  |
+| :--------- | :----------------------------------------- | :------------------------------------------------------------------ |
+| Goodbye    | Lock the doors and arm the security system | Only lock and arm security once all family **AND** guests have left |
+
+#### Explanation
+
+Sometimes we have guests that stay for an event and they may come and go on their own. In these cases, I give them a temporary digital key for the locks; however, the security system may arm when a guest is still home or not arm properly if the guests are the last to leave.
+
+## Presence Detection
+
+There are a number of ways to implement presence detection, GPS geo-fencing, device wifi/network connectivity, LTE Bluetooth fobs; all having their own set of pros and cons. By far, the most successful presence detection I've used is with geo-fencing. This technique requires an app to be installed on each family member's phone. The app can access the phone's GPS and determine if the family member is within the boundaries of a defined "home" area.
+
+While this works great for family members, there is a catch! It requires the installation of an app on every guest's phone. This is simply a deal-breaker for me. I do not wan to enforce my guests to install something on their phone.
+
+## Solution
+
+The overview of my solutions is fairly simple: a guest is considered present (at home) while they are connected to my guest wifi network. There, of course, some edge cases, such as a guest connecting their laptop to the guest wifi; a device that may or may not leave with them. I have handled this and other cases with my design.
+
+### Solution Overview
+
+Below illustrates the actors/systems in my solution and the general workflow of they interact with one another.
+
+### Intercepting Guests Joining Network
+
+> This is made possible by my Ubiquiti USG due to its captive portal feature **and** it having an API.
+
+I set the router to send guests to a custom captive portal upon connecting to the guest network. The router also sends the connecting device's MAC address as a query string parameter to the captive portal. The captive portal is a simple node express app; with an index route serving a page with a "Connect" button.
+
+Upon clicking the connect button, the express app authorizes the guest to connect to the guest network via Ubiquiti's API. Because this is considered a hotspot connection, there is a maximum lease time for the MAC address. Once the lease runs out, the guest will need to go through this process again. Although I automated the renewal of guest leases to prevent this, I am not covering it in this article.
+
+### Registering Guests with Home Assistant
+
+While the above provides the ability to know when a guest connects to the network, it does not automatically register them as "home" or "away" in [Home Assistant](https://www.home-assistant.io/). This is accomplished with a custom Python automation via [AppDaemon](https://appdaemon.readthedocs.io/en/latest/). In addition to the above, clicking the "Connect" button publishes a message on my MQTT bus and the python automation subscribes to these messages.
+
+For each messsage, the automation creates an entity for the MAC address and adds it to a "Guests" group as a device tracker; ignoring any guest devices that are already registered. Upon doing this, Home Assistant will track the entity as "home" or "away" based on when it connects/disconnects from the network. The group is used for knowing once all guests are "not home."
+
+Below is the python automation I used via AppDaemon. Values, such as the group name, mqtt connection details, and MQTT topic, of the script are pulled from the application's configuration in AppDaemon.
+
+```python
+import paho.mqtt.client as mqtt
+import hassapi as hass
+
+
+class GuestTracker(hass.Hass):
+
+    def initialize(self):
+        self.log('Starting Guest Tracker')
+        self.client = mqtt.Client()
+        self.client.username_pw_set(
+            self.args["mqtt_username"], password=self.args["mqtt_password"])
+        self.client.on_connect = self.on_connect
+        self.client.on_message = self.on_message
+
+        self.client.connect(self.args["mqtt_host"], self.args["mqtt_port"], 60)
+        self.client.loop_start()
+
+    def terminate(self):
+        self.client.loop_stop()
+
+    def on_connect(self, client, userdata, flags, rc):
+        self.log("Connected with result code " + str(rc))
+        self.client.publish('/appdaemon/birth', qos=2)
+        self.client.subscribe(self.args["topic"])
+
+    def on_message(self, client, userdata, msg):
+        self.log(msg.topic+" "+msg.payload.decode())
+        groupName = self.args["group_name"]
+        groupEntityId = "group." + groupName
+        all_entities = self.get_state()
+        g = all_entities[groupEntityId]
+        self.log(g)
+        entity_of_mac = None
+        for key, value in all_entities.items():
+            if value['attributes'] and 'mac' in value['attributes']:
+                if str(value['attributes']['mac']) == msg.payload.decode():
+                    entity_of_mac = value
+
+        self.log(g)
+        if entity_of_mac is None:
+            return
+
+        entity_id = entity_of_mac['entity_id']
+        self.log(entity_of_mac)
+        group_members = g['attributes']['entity_id']
+        new_group_members = list(filter(lambda id: id != entity_id, group_members)) + [
+            entity_id]
+        self.log('New group members')
+        self.log(new_group_members)
+        self.call_service('group/set', object_id=groupName,
+                          name=g['attributes']['friendly_name'], entities=new_group_members)
+        self.log('Guest group members updated')
+```
+
+## Guest Devices that Stay Home
+
+Many times a guest will bring a laptop or device that will remain home during their stay. These devices should not be registered with Home Assistant or, at the very least, not in the same group. I handled this case by adding a checkbox to the captive portal. The checkbox indicates whether the connecting device is a phone or something else. Phones are considered primary devices and follow the flow outlined above. All other devices may be ignored. Personally, I register these devices with Home Assitant via a different MQTT topic subscription and different Home Assistant group. This is one reason why these values are passed into the automation via the configuration YAML. This enables me to run two instances of the automation; one for phones and one for all other devices.
+
+> Example Automation Configuration
+
+```yaml
+---
+guest_tracker:
+  module: guest_tracker
+  class: GuestTracker
+  mqtt_host: !secret mqtt_host
+  mqtt_port: !secret mqtt_port
+  mqtt_username: !secret mqtt_username
+  mqtt_password: !secret mqtt_password
+  topic: /home/guest/track-device
+  group_name: guests
+
+guest_tracker_other_devies:
+  module: guest_tracker
+  class: GuestTracker
+  mqtt_host: !secret mqtt_host
+  mqtt_port: !secret mqtt_port
+  mqtt_username: !secret mqtt_username
+  mqtt_password: !secret mqtt_password
+  topic: /home/guest/track-other-device
+  group_name: guests_other_devices
+```

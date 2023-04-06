@@ -1,6 +1,6 @@
-import * as styled from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
-const GlobalStyles = styled.createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: "Lato-Regular";
     src: url("/fonts/Lato-Regular.ttf") format("truetype");
