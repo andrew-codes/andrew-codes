@@ -1,5 +1,5 @@
 import type { FC } from "react"
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import {
   Address,
   ContactCard,
@@ -52,6 +52,10 @@ const GlobalStyles = createGlobalStyle`
     }
 `
 
+const Main = styled.main`
+  margin: 0;
+`
+
 const ResumeRoute: FC<{}> = () => {
   const today = new Date()
   const yearsOfExperience =
@@ -65,7 +69,7 @@ const ResumeRoute: FC<{}> = () => {
         title="James Andrew Smith's Resume"
         description="General resume of James Andrew Smith."
       />
-      <main>
+      <Main>
         <PaginatedResume>
           <Page>
             <ContactCard as={ResumeContactCard}>
@@ -433,7 +437,7 @@ const ResumeRoute: FC<{}> = () => {
             </Section>
           </Page>
         </PaginatedResume>
-      </main>
+      </Main>
     </>
   )
 }

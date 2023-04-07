@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
-const Page = styled.div`
-  background: rgb(255, 255, 255);
+const Paper = styled.div`
+  background-color: rgb(249, 251, 253);
   border: 1px solid rgb(198, 198, 198);
-  padding: 0.5in;
+  border-radius: 1rem;
+  padding: 1.5rem;
 
   @media print {
     border: none;
@@ -11,4 +12,4 @@ const Page = styled.div`
   }
 `
 
-export default Page
+export default Paper

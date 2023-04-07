@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react"
 import styled from "styled-components"
+import Paper from "../Paper"
 
 const Resume = styled.div`
   position: relative;
@@ -12,15 +13,11 @@ const Resume = styled.div`
     margin: 16pt auto 0 auto;
   }
   > :first-child {
-    margin-top: 0.5in;
-
     @media print {
       margin-top: 0 !important;
     }
   }
   > :last-child {
-    margin-bottom: 0.5in;
-
     @media print {
       margin-bottom: 0 !important;
     }
@@ -246,12 +243,11 @@ const PaginatedResume = styled(Resume)`
     page-break-before: unset;
   }
 `
-const Page = styled.div`
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(198, 198, 198);
+const Page = styled(Paper)`
   height: 11in;
   padding: 0.5in;
   width: 8.5in;
+  border-radius: 0;
 
   > section {
     margin-top: 16pt;

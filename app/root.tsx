@@ -1,6 +1,15 @@
 import type { FC } from "react"
 import { LiveReload, Outlet, Scripts } from "@remix-run/react"
 import GlobalStyles from "./components/GlobalStyles"
+import styled from "styled-components"
+
+const Root = styled.div`
+  max-width: 1200px;
+  margin: 2rem auto;
+  > * {
+    margin: 0 2rem;
+  }
+`
 
 const App: FC<{}> = () => (
   <html lang="en">
@@ -17,7 +26,9 @@ const App: FC<{}> = () => (
     </head>
     <body>
       <GlobalStyles />
-      <Outlet />
+      <Root>
+        <Outlet />
+      </Root>
       <Scripts />
       <LiveReload />
     </body>

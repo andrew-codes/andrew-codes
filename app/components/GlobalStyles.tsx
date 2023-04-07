@@ -37,7 +37,9 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    margin: 0 auto !important;
+    margin: 0 !important;
+    background: rgb(34,35,39);
+    font-size: 16px;
   }
 
   @media print {

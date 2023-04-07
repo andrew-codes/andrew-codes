@@ -1,4 +1,4 @@
-import type { PostMetadata } from "./posts.server"
+import type { PostMetadata } from "./types.d"
 
 const parsedMetadata = (metadata: Record<string, any>): PostMetadata => ({
   ...metadata,
