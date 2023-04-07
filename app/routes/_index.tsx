@@ -6,7 +6,6 @@ import { getPosts } from "~/libs/posts/posts.server"
 import type { Post } from "~/libs/posts/types.d"
 import parsedMetadata from "~/libs/posts/parsedMetadata"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-// import { Link, useLoaderData } from "@remix-run/react"
 
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
