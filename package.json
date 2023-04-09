@@ -20,8 +20,11 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-is": "^18.2.0",
+    "rehype-highlight": "^6.0.0",
     "remark-gfm": "^3.0.1",
     "remark-mdx-images": "^2.0.0",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
     "remix": "^1.15.0",
     "styled-components": "^5.3.9"
   },

@@ -22,6 +22,7 @@ const App: FC<{}> = () => (
       <link rel="preload" as="font" href="/fonts/Lato-Thin.ttf" />
       <link rel="preload" as="font" href="/fonts/Lato-Black.ttf" />
       <link rel="preload" as="font" href="/fonts/Lato-Light.ttf" />
+      <link rel="stylesheet" type="text/css" href="/css/dracula.css" />
       {typeof document === "undefined" ? "__STYLES__" : null}
     </head>
     <body>

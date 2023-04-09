@@ -1,7 +1,6 @@
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import { merge } from "lodash"
-
 import { readDirFiles } from "./fs.server"
 
 const mdx = async (source: string) => {
@@ -18,6 +17,10 @@ const mdx = async (source: string) => {
   const postDir = path.join("app", "posts")
   const { default: remarkMdxImages } = await import("remark-mdx-images")
   const { default: remarkGfm } = await import("remark-gfm")
+  const { default: rehypeHighlight } = await import("rehype-highlight")
+  const { default: remarkParse } = await import("remark-parse")
+  const { default: remarkRehype } = await import("remark-rehype")
+
   const { code, frontmatter } = await bundleMDX({
     source: source.trim(),
     cwd: path.resolve(postDir),
@@ -26,8 +29,11 @@ const mdx = async (source: string) => {
     mdxOptions: (options) => {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
+        remarkParse,
         remarkMdxImages,
         remarkGfm,
+        remarkRehype,
+        rehypeHighlight,
       ]
 
       return options
