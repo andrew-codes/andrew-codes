@@ -14,8 +14,7 @@ import styled from "styled-components"
 import { getDescription, getColor } from "~/libs/categories"
 import type { Category } from "~/libs/categories"
 import Link from "~/components/Link"
-import SmallContentDivider from "~/components/SmallContentDivider"
-import { Tag, Tags } from "~/components/Tags"
+import Tags from "~/components/Tags"
 
 const categorizedPosts = flow(getClientPosts, postsByCategory)
 
@@ -106,7 +105,7 @@ const HomeRoute = () => {
   return (
     <>
       <PageMeta title="Home - Andrew Smith" description="" />
-      <Paper as="header">
+      <Paper as="section">
         <h1>Hi, &#x1f44b;!</h1>
       </Paper>
       <PostCategories>

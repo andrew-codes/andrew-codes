@@ -2,12 +2,17 @@ import type { FC } from "react"
 import { LiveReload, Outlet, Scripts } from "@remix-run/react"
 import GlobalStyles from "./components/GlobalStyles"
 import styled from "styled-components"
+import GlobalNav from "./components/MainNav"
 
 const Root = styled.div`
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto;
+
   > * {
     margin: 0 2rem;
+  }
+  > *:first-child {
+    margin-top: 1rem;
   }
 `
 
@@ -27,6 +32,7 @@ const App: FC<{}> = () => (
     </head>
     <body>
       <GlobalStyles />
+      <GlobalNav />
       <Root>
         <Outlet />
       </Root>

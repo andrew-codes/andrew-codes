@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { Helmet } from "react-helmet"
-import favicon from "./../favicon-48.png"
-import favicon1024 from "./../favicon-1024.png"
+import favicon from "./../images/favicon-48.png"
+import favicon1024 from "./../images/favicon-1024.png"
 
 type PageMetaProps = {
   title: string

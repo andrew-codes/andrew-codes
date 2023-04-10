@@ -38,4 +38,3 @@ const Tags: FC<{ tags: string[] }> = ({ tags }) => (
 )
 
 export default Tags
-export { Tags, Tag }

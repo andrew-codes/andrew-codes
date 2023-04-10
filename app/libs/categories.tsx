@@ -11,10 +11,14 @@ type Category = (typeof categories)[number]
 const getCategories = (): readonly Category[] => categories
 
 const colors: Record<Category, string> = {
-  explanation: "linear-gradient(45deg, rgb(181, 60, 255), rgb(249, 82, 255))",
-  presentation: "linear-gradient(45deg, rgb(35, 189, 56), rgb(65, 235, 169))",
-  tutorial: "linear-gradient(45deg, rgb(248, 87, 166), rgb(255, 88, 88))",
-  reference: "linear-gradient(45deg, rgb(50, 122, 231), rgb(107, 208, 255))",
+  explanation:
+    "linear-gradient(45deg, rgba(181, 60, 255, 0.75), rgba(249, 82, 255, 0.75))",
+  presentation:
+    "linear-gradient(45deg, rgba(35, 189, 56, 0.75), rgba(65, 235, 169, 0.75))",
+  tutorial:
+    "linear-gradient(45deg, rgba(248, 87, 166, 0.75), rgba(255, 88, 88, 0.75))",
+  reference:
+    "linear-gradient(45deg, rgba(50, 122, 231, 0.75), rgba(107, 208, 255, 0.75))",
 }
 
 const descriptions: Record<Category, string | ReactNode> = {

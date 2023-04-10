@@ -10,8 +10,7 @@ import Paper from "~/components/Paper"
 import Link from "~/components/Link"
 import type { Category } from "~/libs/categories"
 import { getColor } from "~/libs/categories"
-import { Tag, Tags } from "~/components/Tags"
-import SmallContentDivider from "~/components/SmallContentDivider"
+import Tags from "~/components/Tags"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params

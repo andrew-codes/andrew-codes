@@ -35,10 +35,14 @@ import {
   WorkExperience,
 } from "~/components/resume"
 
+const Main = styled.main`
+  margin: 0;
+`
+
 const GlobalStyles = createGlobalStyle`
     body {
         background-color: rgb(249,251,253) !important;
-        padding: 0.5in 0 !important;
+
         @media print {
             background-color: transparent !important;
             padding: 0 !important;
@@ -50,10 +54,6 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Lato-Regular';
         font-size: 12pt;
     }
-`
-
-const Main = styled.main`
-  margin: 0;
 `
 
 const ResumeRoute: FC<{}> = () => {
