@@ -14,7 +14,11 @@ tags:
 
 ## Overview
 
-I previously gave a presentation on how detect house guests' presence for my home automation and I want to share more details on how I accomplished it. The [slide deck](https://andrew_codes.keybase.pub/Presentations%20and%20Workshops/Home%20Automation%20-%20Guest%20Detection.pdf?dl=1) may also be downloaded as a PDF.
+> I previously gave a presentation on how detect house guests' presence for my home automation and I want to share more details on how I accomplished it. The [slide deck](https://andrew_codes.keybase.pub/Presentations%20and%20Workshops/Home%20Automation%20-%20Guest%20Detection.pdf?dl=1) may also be downloaded as a PDF.
+
+There are a number of ways to implement presence detection, GPS geo-fencing, device wifi/network connectivity, LTE Bluetooth fobs; all having their own set of pros and cons. By far, the most successful presence detection I've used is with geo-fencing. This technique requires an app to be installed on each family member's phone. The app can access the phone's GPS and determine if the family member is within the boundaries of a defined "home" area.
+
+While this works great for family members, there is a catch! It requires the installation of an app on every guest's phone. This is simply a deal-breaker for me. I do not wan to enforce my guests to install something on their phone.
 
 ## Problem
 
