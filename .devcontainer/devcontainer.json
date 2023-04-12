@@ -16,6 +16,7 @@
         "EditorConfig.EditorConfig",
         "esbenp.prettier-vscode",
         "GitHub.copilot",
+        "GitHub.vscode-pull-request-github",
         "mikestead.dotenv",
         "Orta.vscode-jest",
         "paulmolluzzo.convert-css-in-js",
