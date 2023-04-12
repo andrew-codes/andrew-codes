@@ -12,6 +12,7 @@ import type { Category } from "~/libs/categories"
 import { getColor } from "~/libs/categories"
 import Tags from "~/components/Tags"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
+import parsedMetadata from "~/libs/posts/parsedMetadata"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
@@ -30,6 +31,7 @@ const Post = styled.default(Paper)`
 
   ${Header} {
     padding: 1.5rem;
+    position: relative;
     border-radius: 1rem 1rem 0 0;
 
     h1 {
@@ -38,6 +40,15 @@ const Post = styled.default(Paper)`
       padding: 0
     }
 
+    time {
+      align-self: end;
+      color: rgb(80,80,80);
+      font-size: 1.125rem;
+      position: absolute;
+      right: 1.5rem;
+      text-align-last: end;
+      bottom: -2rem;
+    }
   }
 
   article {
@@ -62,8 +73,9 @@ const Post = styled.default(Paper)`
 `
 
 const PostRoute = () => {
-  const { code, metadata } = useLoaderData<typeof loader>()
+  const { code, metadata: rawMetadata } = useLoaderData<typeof loader>()
   const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
+  const metadata = parsedMetadata(rawMetadata)
 
   return (
     <>
@@ -74,6 +86,14 @@ const PostRoute = () => {
       <Post>
         <Header category={metadata?.category}>
           <h1>{metadata?.title}</h1>
+          {!!metadata?.date && (
+            <time datetime={metadata.date.toLocaleString()}>
+              {metadata.date.toLocaleDateString(undefined, {
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
+          )}
           {!!metadata?.tags && metadata?.tags.length > 0 && (
             <Tags tags={metadata.tags} />
           )}
