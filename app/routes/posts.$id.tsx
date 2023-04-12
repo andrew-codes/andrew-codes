@@ -11,6 +11,7 @@ import Link from "~/components/Link"
 import type { Category } from "~/libs/categories"
 import { getColor } from "~/libs/categories"
 import Tags from "~/components/Tags"
+import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
@@ -32,13 +33,31 @@ const Post = styled.default(Paper)`
     border-radius: 1rem 1rem 0 0;
 
     h1 {
+      font-variant: small-caps;
       margin: 0;
       padding: 0
     }
+
   }
 
   article {
-    padding: 0 1.5rem 1.5rem  ;
+    padding: 0 1.5rem 1.5rem;
+
+    ${H2} {
+      margin: 1.5rem 0;
+    }
+    
+    ${H3} {
+      margin-bottom: 0.5rem;
+    }
+
+    ${H4} {
+      margin-bottom: 0.5rem;
+    }
+
+    ${Paragraph} {
+      margin-bottom: 1.125rem;
+    }
   }
 `
 
@@ -60,7 +79,17 @@ const PostRoute = () => {
           )}
         </Header>
         <article>
-          <Component components={{ a: Link }} />
+          <Component
+            components={{
+              a: Link,
+              blockquote: Blockquote,
+              h2: H2,
+              h3: H3,
+              h4: H4,
+              p: Paragraph,
+              table: Table,
+            }}
+          />
         </article>
       </Post>
     </>
