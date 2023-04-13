@@ -8,7 +8,9 @@
     "yarn": ">=3.3.1"
   },
   "scripts": {
-    "start": "remix dev"
+    "start": "remix dev",
+    "clean": "rm -rf public/build",
+    "build": "remix build"
   },
   "dependencies": {
     "@remix-run/node": "^1.15.0",

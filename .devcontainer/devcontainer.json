@@ -17,6 +17,7 @@
         "esbenp.prettier-vscode",
         "GitHub.copilot",
         "GitHub.vscode-pull-request-github",
+        "Grafana.vscode-jsonnet",
         "mikestead.dotenv",
         "Orta.vscode-jest",
         "paulmolluzzo.convert-css-in-js",

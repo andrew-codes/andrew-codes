@@ -4,6 +4,8 @@
 /public/files
 .env
 node_modules
+vendor
+deployment/dist
 
 .yarn/*
 !.yarn/cache
