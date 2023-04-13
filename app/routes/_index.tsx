@@ -33,7 +33,7 @@ const PostCategory = styled(Paper)<{ name: Category }>`
   color: rgb(255, 255, 255) !important;
   min-height: 370px;
   padding: 1rem 1.25rem;
-  width: calc(50% - 1rem);
+  width: calc(50% - 0.5rem);
 
   h2 {
     font-size: 1.75rem;
