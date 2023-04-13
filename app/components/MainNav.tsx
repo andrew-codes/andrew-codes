@@ -14,9 +14,9 @@ const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);
   border-radius: 50%;
   grid-area: 1/1;
-  margin: 1.5rem;
-  max-height: 128px;
-  min-height: 48px;
+  margin: 1rem;
+  max-height: 7rem;
+  min-height: 3rem;
 `
 const ProfileInformation = styled.div`
   align-self: center;
