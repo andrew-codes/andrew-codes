@@ -1,18 +1,18 @@
+import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import type { LoaderArgs } from "@remix-run/node"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
 import * as styled from "styled-components"
-import { Helmet } from "react-helmet"
-import { getPostById } from "~/libs/posts/posts.server"
-import Paper from "~/components/Paper"
+import { Header } from "~/components/Category"
 import Link from "~/components/Link"
-import type { Category } from "~/libs/categories"
-import { getColor } from "~/libs/categories"
-import Tags from "~/components/Tags"
+import PageMeta from "~/components/PageMeta"
+import PageWithHeader from "~/components/PageWithHeader"
+import Paper from "~/components/Paper"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
+import Tags from "~/components/Tags"
 import parsedMetadata from "~/libs/posts/parsedMetadata"
+import { getPostById } from "~/libs/posts/posts.server"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
@@ -21,25 +21,8 @@ const loader = async (args: LoaderArgs) => {
   return json({ code, metadata })
 }
 
-const Header = styled.default.header<{ category: Category }>`
-  background: ${({ category }) => getColor(category)};
-  color: rgb(255,255,255);
-`
-const Post = styled.default(Paper)`
-  border: none;
-  padding: 0;
-
+const Post = styled.default(PageWithHeader)`
   ${Header} {
-    padding: 1.5rem;
-    position: relative;
-    border-radius: 1rem 1rem 0 0;
-
-    h1 {
-      font-variant: small-caps;
-      margin: 0;
-      padding: 0
-    }
-
     time {
       align-self: end;
       color: rgb(80,80,80);
@@ -51,7 +34,7 @@ const Post = styled.default(Paper)`
     }
   }
 
-  article {
+  section {
     padding: 0 1.5rem 1.5rem;
 
     ${H2} {
@@ -79,15 +62,12 @@ const PostRoute = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{metadata?.title}</title>
-        <meta name="description" content={metadata?.description} />
-      </Helmet>
-      <Post>
+      <PageMeta title={metadata?.title} description={metadata?.description} />
+      <Post as="article">
         <Header category={metadata?.category}>
           <h1>{metadata?.title}</h1>
           {!!metadata?.date && (
-            <time datetime={metadata.date.toLocaleString()}>
+            <time dateTime={metadata.date.toLocaleString()}>
               {metadata.date.toLocaleDateString(undefined, {
                 month: "long",
                 year: "numeric",
@@ -98,7 +78,7 @@ const PostRoute = () => {
             <Tags tags={metadata.tags} />
           )}
         </Header>
-        <article>
+        <section>
           <Component
             components={{
               a: Link,
@@ -110,7 +90,7 @@ const PostRoute = () => {
               table: Table,
             }}
           />
-        </article>
+        </section>
       </Post>
     </>
   )

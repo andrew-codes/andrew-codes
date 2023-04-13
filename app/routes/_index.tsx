@@ -15,6 +15,7 @@ import { getDescription, getColor } from "~/libs/categories"
 import type { Category } from "~/libs/categories"
 import Link from "~/components/Link"
 import Tags from "~/components/Tags"
+import { Posts } from "~/components/Post"
 
 const categorizedPosts = flow(getClientPosts, postsByCategory)
 
@@ -23,12 +24,6 @@ const loader = async (args: LoaderArgs) => {
 
   return json({ posts: postsBySlug })
 }
-
-const Posts = styled.ol`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`
 
 const PostCategory = styled(Paper)<{ name: Category }>`
   background: ${({ name }) => {
@@ -87,9 +82,21 @@ const PostCategories = styled.main`
   display: flex;
   flex-direction: rows;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 
   > ${PostCategory} {
-    margin: 1rem;
+    margin: 0.5rem;
+    height: 466px;
+    position: relative;
+    padding-bottom: 3rem;
+
+    > ${Link} {
+      bottom: 1rem;
+      display: block;
+      position: absolute;
+      right: 1rem;
+      text-align: right;
+    }
   }
   > ${PostCategory}:nth-child(odd) {
     margin-left: 0;
@@ -116,6 +123,7 @@ const HomeRoute = () => {
               <p>{getDescription(category)}</p>
               <Posts>
                 {posts
+                  .slice(0, 3)
                   .sort(sortByMany(newestFirst, alphabetically))
                   .map(([slug, [_, metadata]]) => (
                     <li key={slug}>
@@ -129,6 +137,7 @@ const HomeRoute = () => {
                     </li>
                   ))}
               </Posts>
+              <Link to={`category/${category}`}>See more...</Link>
             </PostCategory>
           ),
         )}
