@@ -25,7 +25,7 @@ const descriptions: Record<Category, string | ReactNode> = {
   explanation: (
     <>
       Attempt to document my learnings throughout my career; coalescing into
-      articles that predominately explain concepts and technologies..
+      articles that predominately explain concepts and technologies.
     </>
   ),
   presentation: (

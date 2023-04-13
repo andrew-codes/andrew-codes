@@ -61,4 +61,10 @@ const Blockquote = styled.blockquote`
   }
 `
 
-export { Blockquote, H2, H3, H4, Paragraph, Table }
+const Posts = styled.ol`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+export { Blockquote, H2, H3, H4, Paragraph, Posts, Table }

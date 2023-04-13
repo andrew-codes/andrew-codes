@@ -1,3 +1,4 @@
+import { FC } from "react"
 import styled from "styled-components"
 import Link from "./Link"
 import SmallContentDivider from "./SmallContentDivider"
@@ -16,8 +17,8 @@ const TagList = styled.ul`
   }
 `
 
-const Tags: FC<{ tags: string[] }> = ({ tags }) => (
-  <TagList>
+const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
+  <TagList {...props}>
     {tags.map((tag: string, index: number) =>
       index === 0 ? (
         <li key={tag}>
