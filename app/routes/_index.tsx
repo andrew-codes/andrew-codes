@@ -25,6 +25,21 @@ const loader = async (args: LoaderArgs) => {
   return json({ posts: postsBySlug })
 }
 
+const Blockquote = styled.blockquote`
+  font-size: 1.125rem;
+`
+const Hero = styled(Paper)`
+  padding: 1rem 1.5rem;
+
+  h1 {
+    margin-top: 0;
+  }
+
+  ${Blockquote} {
+    margin-bottom: 0;
+  }
+`
+
 const PostCategory = styled(Paper)<{ name: Category }>`
   background: ${({ name }) => {
     return getColor(name)
@@ -109,12 +124,27 @@ const PostCategories = styled.main`
 const HomeRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
 
+  const today = new Date()
+  const yearsOfExperience =
+    new Date(today.getTime() - new Date(2008, 1, 1).getTime()).getFullYear() -
+    1970
+
   return (
     <>
       <PageMeta title="Home - Andrew Smith" description="" />
-      <Paper as="section">
+      <Hero as="section">
         <h1>Hi, &#x1f44b;!</h1>
-      </Paper>
+        <Blockquote>
+          I'm Andrew and I <strong>empower</strong> others through{" "}
+          <strong>quality</strong> software.
+          <br />
+          <br />I aim to make software development more accessible to a wider
+          audience. I accomplish this through mentorship,{" "}
+          <abbr title="Open source software">OSS</abbr>, and sharing my
+          experiences. This site is my professional profile, resume, and some
+          learnings over my {yearsOfExperience} year career.
+        </Blockquote>
+      </Hero>
       <PostCategories>
         {categorizedPosts(Object.entries(posts as Record<string, Post>)).map(
           ([category, posts]) => (

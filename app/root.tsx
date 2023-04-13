@@ -11,9 +11,6 @@ const Root = styled.div`
   > * {
     margin: 0 2rem;
   }
-  > *:first-child {
-    margin-top: 1rem;
-  }
 `
 
 const App: FC<{}> = () => (
