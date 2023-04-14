@@ -1,18 +1,23 @@
-FROM node:lts-bullseye
+FROM ubuntu:22.04
+ENV DEBIAN_FRONTEND=noninteractive
+ENV OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+RUN apt update -y
+RUN apt-get install \
+    apt-transport-https \
+    wget \
+    software-properties-common
+RUN RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt update -y --fix-missing
+RUN apt-get install -y \
+    nodejs
 RUN corepack enable
 RUN corepack prepare yarn@stable --activate
 RUN yarn set version stable
 
-RUN curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | (OUT=$(apt-key add - 2>&1) || echo $OUT)
-RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN wget -c https://dl.google.com/go/go1.18.1.linux-amd64.tar.gz -O - | tar -xz -C /usr/local
 RUN ln -s /usr/local/go/bin/go /usr/local/bin
 RUN go install github.com/google/go-jsonnet/cmd/jsonnet@latest
 RUN go install -a github.com/jsonnet-bundler/jsonnet-bundler/cmd/jb@latest
 RUN ln -s $(go env GOPATH)/bin/jsonnet /usr/local/bin
 RUN ln -s $(go env GOPATH)/bin/jb /usr/local/bin
-RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-RUN apt-get update -y
-RUN apt-get install -y \ 
-kubectl
