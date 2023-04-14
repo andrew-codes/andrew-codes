@@ -16,5 +16,6 @@ COPY public /app/public
 
 WORKDIR /app
 ENV NODE_ENV=production
-EXPOSE 3000
+ENV PORT=80
+EXPOSE 80
 ENTRYPOINT ["yarn", "dlx", "@remix-run/serve", "build"]
