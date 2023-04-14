@@ -19,7 +19,7 @@ RUN apt-get remove \
     docker-engine \
     docker.io \
     containerd \
-    runc
+    runc || true
 RUN apt-get install -y \
     apt-transport-https \
     wget \
