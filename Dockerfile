@@ -4,13 +4,11 @@ RUN corepack enable
 RUN corepack prepare yarn@stable --activate
 RUN yarn set version stable
 
-COPY package.json /app/package.json
 COPY build /app/build
 COPY public /app/public
 
-WORKDIR /app
-RUN yarn add @remix-run/serve
 
+WORKDIR /app
 ENV NODE_ENV=production
-EXPOSE 80
-ENTRYPOINT ['yarn' 'remix-serve' 'build']
+EXPOSE 3000
+ENTRYPOINT ['yarn', 'dlx', '@remix-run/serve', 'build']
