@@ -1,0 +1,50 @@
+name: Deploy latest production artifact to production
+on:
+  registry_package:
+    types:
+      - published
+      - updated
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: '${{ secrets.resource_group }}' 
+          cluster-name: '${{ secrets.cluster_name }}'
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Create deployment manifest
+        run: |
+          mkdir -p deployment/dist
+          jsonnet -J ./vendor --ext-str name="andrew.codes" --ext-str image="${{ env.REGISTRY }}/andrew-codes/andrew.codes:latest" ./deployment/production.jsonnet > ./deployment/dist/production.yaml
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'default'
+          manifests: |
+             ./deployment/dist/production.yaml
+          images: '${{ env.REGISTRY }}/andrew-codes/andrew.codes:latest'
+          pull-images: true 

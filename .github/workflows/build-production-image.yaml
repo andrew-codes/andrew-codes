@@ -1,4 +1,4 @@
-name: deploy_production
+name: Publish production artifact
 on:
   push:
     branches:

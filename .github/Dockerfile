@@ -3,7 +3,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 RUN apt update -y
-RUN apt-get install \
+RUN apt-get install -y \
     apt-transport-https \
     wget \
     software-properties-common
