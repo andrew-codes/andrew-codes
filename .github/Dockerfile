@@ -2,15 +2,19 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-RUN apt update -y
+RUN RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+
+RUN apt update -y --fix-missing
 RUN apt-get install -y \
     apt-transport-https \
     wget \
-    software-properties-common
-RUN RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-RUN apt update -y --fix-missing
-RUN apt-get install -y \
-    nodejs
+    software-properties-common \
+    gcc \
+    gcc++ \
+    python3 \
+    make \
+    nodejs \
+    python3-pip
 RUN corepack enable
 RUN corepack prepare yarn@stable --activate
 RUN yarn set version stable
