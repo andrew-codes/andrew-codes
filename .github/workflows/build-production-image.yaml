@@ -16,7 +16,7 @@ jobs:
       contents: read
       packages: write
     container:
-      image: ghcr.io/andrew-codes/andrew-codes:latest
+      image: ghcr.io/andrew-codes/gh-action-runner:latest
     steps:
       - name: Checkout source code 
         uses: actions/checkout@v3
