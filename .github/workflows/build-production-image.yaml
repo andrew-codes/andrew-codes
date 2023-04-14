@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: andrew.codes
+  IMAGE_NAME: andrew-codes/andrew.codes
 
 jobs:
   build:
@@ -43,4 +43,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: latest
+          tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest'

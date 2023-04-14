@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: andrew-codes/gh-action-runner
 
 jobs:
   build:
@@ -37,4 +37,4 @@ jobs:
           context: .
           file: ./.github/Dockerfile
           push: true
-          tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/gh-action-runner:latest'
+          tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest'
