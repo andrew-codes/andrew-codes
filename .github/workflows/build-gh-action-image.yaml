@@ -25,7 +25,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.REGISTRY_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
@@ -37,4 +37,4 @@ jobs:
           context: .
           file: ./.github/Dockerfile
           push: true
-          tags: latest
+          tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/gh-action-runner:latest'
