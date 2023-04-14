@@ -8,7 +8,7 @@ RUN yarn set version stable
 COPY package.json /package.json
 COPY .yarn /app/.yarn
 COPY yarn.lock /app/yarn.lock
-COPY .pnp.cjs /app .pnp.cjs
+COPY .pnp.cjs /app/.pnp.cjs
 COPY .pnp.loader.mjs /app/.pnp.loader.mjs
 COPY build /app/build
 COPY public /app/public
