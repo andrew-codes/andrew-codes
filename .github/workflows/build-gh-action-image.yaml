@@ -1,4 +1,4 @@
-name: deploy_production
+name: Build GitHub action runner image
 on:
   push:
     branches:
