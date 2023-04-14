@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - .github/Dockerfile
+      - .github/workflows/build-gh-action-image.yaml
 
 env:
   REGISTRY: ghcr.io
