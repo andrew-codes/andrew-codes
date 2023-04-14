@@ -9,8 +9,6 @@ RUN apt-get install -y \
     apt-transport-https \
     wget \
     software-properties-common \
-    gcc \
-    gcc++ \
     python3 \
     make \
     nodejs \
