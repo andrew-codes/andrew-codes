@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: read
+      packages: write
     container:
       image: ghcr.io/andrew-codes/andrew-codes:latest
     steps:
