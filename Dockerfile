@@ -9,7 +9,7 @@ COPY build /app/build
 COPY public /app/public
 
 WORKDIR /app
-RUN yarn global add @remix-run/serve
+RUN yarn add @remix-run/serve
 
 ENV NODE_ENV=production
 EXPOSE 80
