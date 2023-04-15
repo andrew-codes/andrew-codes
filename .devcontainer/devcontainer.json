@@ -19,6 +19,7 @@
         "GitHub.vscode-pull-request-github",
         "Grafana.vscode-jsonnet",
         "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
         "Orta.vscode-jest",
         "paulmolluzzo.convert-css-in-js",
         "pflannery.vscode-versionlens",

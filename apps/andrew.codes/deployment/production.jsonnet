@@ -2,7 +2,7 @@ local k = import 'github.com/jsonnet-libs/k8s-libsonnet/1.26/main.libsonnet';
 
 local name = std.extVar('name');
 local image = std.extVar('image');
-local containerPort = 3000;
+local containerPort = 80;
 local cacheVolumeClaimName = 'cache-pv-claim';
 
 local andrewcodesCacheStorageClass = {
@@ -46,6 +46,51 @@ local cacheVolumeClaim = {
 }
 ;
 
+local appService = {
+  apiVersion: 'v1',
+  kind: 'Service',
+  metadata: {
+    name: name,
+  },
+  spec: {
+    selector: { name: name },
+    ports: [{
+      protocol: 'TCP',
+      port: 80,
+      targetPort: 80,
+    }],
+  },
+}
+;
+
+local appIngress = {
+  apiVersion: 'networking.k8s.io/v1',
+  kind: 'Ingress',
+  metadata: {
+    name: name,
+    annotations: { 'kubernetes.io/ingress.class': 'azure/application-gateway' },
+  },
+  spec: {
+    rules: [{
+      http: {
+        paths: [{
+          path: '/',
+          backend: {
+            service: {
+              name: name,
+              port: {
+                number: 80,
+              },
+            },
+          },
+          pathType: 'Exact',
+        }],
+      },
+    }],
+  },
+}
+;
+
 local appContainer = k.core.v1.container.new(name=name, image=image)
                      + k.core.v1.container.withImagePullPolicy('Always')
                      + k.core.v1.container.withPorts({
@@ -68,4 +113,4 @@ local deployment = k.apps.v1.deployment.new(name=name, containers=[appContainer]
                    } }
 ;
 
-[andrewcodesCacheStorageClass, cacheVolumeClaim, deployment]
+[andrewcodesCacheStorageClass, cacheVolumeClaim, appService, appIngress, deployment]

@@ -13,9 +13,6 @@
     "target": "ES2019",
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      "~/*": ["./app/*"]
-    },
     "skipLibCheck": true,
     "noEmit": true,
     "allowJs": true,

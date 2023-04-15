@@ -1,0 +1,9 @@
+{
+  "name": "@andrew-codes/gh-action-runner",
+  "description": "Custom GitHub action runner image used to build and deploy andrew.codes.",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "nx": "15.9.2"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "root": "apps/gh-action-runner",
+  "sourceRoot": "apps/gh-action-runner/src",
+  "projectType": "application",
+  "targets": {
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t ghcr.io/andrew-codes/gh-action-runner:latest -f apps/gh-action-runner/Dockerfile .",
+        "cwd": "{projectRoot}"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": []
+}
