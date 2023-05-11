@@ -1,6 +1,15 @@
 {
   "name": "James Andrew Smith's profile website.",
-  "dockerFile": "Dockerfile",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "dockerDashComposeVersion":"v2"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18.15.0"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
   "customizations": {
     "vscode": {
       "settings": {},
@@ -37,5 +46,5 @@
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": "yarn install"
+  "postCreateCommand": ".devcontainer/postCreateCommand.sh"
 }

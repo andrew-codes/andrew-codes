@@ -21,30 +21,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Azure login
-        id: login
-        uses: azure/login@v1.4.3
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Set AKS context
-        id: set-context
-        uses: azure/aks-set-context@v3
-        with:
-          resource-group: '${{ secrets.resource_group }}' 
-          cluster-name: '${{ secrets.cluster_name }}'
-      - name: Setup kubectl
-        id: install-kubectl
-        uses: azure/setup-kubectl@v3
-      - name: Create deployment manifest
-        run: |
-          mkdir -p deployment/dist
-          jsonnet -J ./vendor --ext-str name="andrewcodes" --ext-str image="${{ env.REGISTRY }}/andrew-codes/andrew.codes:latest" ./deployment/production.jsonnet > ./deployment/dist/production.yaml
-      - name: Deploy to AKS
-        id: deploy-aks
-        uses: Azure/k8s-deploy@v4
-        with:
-          namespace: 'default'
-          manifests: |
-             ./deployment/dist/production.yaml
-          images: '${{ env.REGISTRY }}/andrew-codes/andrew.codes:latest'
-          pull-images: true 
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --image ghcr.io/andrew-codes/andrew.codes:latest
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

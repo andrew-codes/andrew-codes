@@ -5,7 +5,7 @@
   "private": true,
   "engines": {
     "node": ">=18.15.0",
-    "yarn": ">=3.3.1"
+    "yarn": ">=3.5.0"
   },
   "scripts": {
     "start": "remix dev",

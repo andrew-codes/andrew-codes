@@ -9,8 +9,10 @@ on:
       - public
       - yarn.lock
       - remix.config.js
+      - package.json
+      - remix.env.d.ts
+      - tsconfig.json
       - Dockerfile
-
 
 env:
   REGISTRY: ghcr.io
