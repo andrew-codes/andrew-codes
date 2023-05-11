@@ -1,18 +1,21 @@
-name: Publish production artifact
+name: Publish production artifact and deploy
 on:
   push:
     branches:
       - main
     paths:
-      - .github/workflows/build-production-image.yaml
+      - .dockerignore
+      - .github/workflows/build-production-image-and-deploy.yaml
       - app
-      - public
-      - yarn.lock
-      - remix.config.js
+      - Dockerfile
+      - fly.toml
+      - LICENSE
       - package.json
+      - public
+      - remix.config.js
       - remix.env.d.ts
       - tsconfig.json
-      - Dockerfile
+      - yarn.lock
 
 env:
   REGISTRY: ghcr.io
@@ -53,3 +56,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest'
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --image ghcr.io/andrew-codes/andrew.codes:latest
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
