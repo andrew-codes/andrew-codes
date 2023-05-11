@@ -25,6 +25,7 @@
         "EditorConfig.EditorConfig",
         "esbenp.prettier-vscode",
         "GitHub.copilot",
+        "GitHub.vscode-github-actions",
         "GitHub.vscode-pull-request-github",
         "Grafana.vscode-jsonnet",
         "mikestead.dotenv",
