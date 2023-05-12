@@ -6,7 +6,8 @@ import parsedMetadata from "./parsedMetadata"
 import type { Post } from "./types"
 
 const getPosts = async (): Promise<Record<string, Post>> => {
-  const postFilePaths = await readDir("app/posts")
+  const filesPathsInPostsDirectory = await readDir("app/posts")
+  const postFilePaths = filesPathsInPostsDirectory.filter((filePath) => /^.*\.mdx?$/.test(filePath))
 
   let posts = {}
   for (let filePath of postFilePaths) {
