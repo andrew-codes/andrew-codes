@@ -45,42 +45,7 @@ Today I'd like to share some of my developer workbench and the software I regula
 
 > I used a script to pull my current extensions into the format below. The script pull the extension IDs from vscode via its CLI interface and queries the VS marketplace for additional information for the table. Assumes you have `jq` installed from the above list.
 
-```bash
-markdown_list_output="|Extension Name | Description |
-|:--|:--|"
-markdown_install_output="\`\`\`bash"
-readarray -t extensions <<< $(code --list-extensions)
-for val in "${extensions[@]}"; do
-    extension_data=$(
-        curl \
-            -s \
-            --data "{\"assetTypes\":null,\"filters\":[{\"criteria\":[{\"filterType\":7,\"value\":\"$val\"}],\"direction\":2,\"pageSize\":100,\"pageNumber\":1,\"sortBy\":0,\"sortOrder\":0,\"pagingToken\":null}],\"flags\":2151}" \
-            --header "accept: application/json;api-version=3.0-preview.1" \
-            --header "content-type: application/json" \
-            https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery
-    )
-
-    extensionName="$(echo "$extension_data" | jq '.results[0].extensions[0].extensionName')"
-    if [ extensionName == 'null' ]; then
-        continue
-    fi
-    markdown_list_output="$markdown_list_output
-$(
-        echo "$extension_data" |
-            jq '"|[\(.results[0].extensions[0].displayName)](https://marketplace.visualstudio.com/items?itemName=\(.results[0].extensions[0].publisher.publisherName).\(.results[0].extensions[0].extensionName)) | \(.results[0].extensions[0].shortDescription) |"' |
-            sed 's/\"//g'
-    )"
-
-    markdown_install_output="$markdown_install_output
-code --install-extension $val"
-done
-markdown_install_output="$markdown_install_output
-\`\`\`"
-
-echo "$markdown_list_output
-
-$markdown_install_output"
-```
+<CodePostAsset fileName="ls-vscode-extensions.code.sh" language="bash" />
 
 | Extension Name                                                                                                                                   | Description                                                                                                                                                                                                                                                        |
 | :----------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -116,7 +81,6 @@ $markdown_install_output"
 | [CodeMetrics](https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-codemetrics)                                              | Computes complexity in TypeScript / JavaScript files.                                                                                                                                                                                                              |
 | [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)                                         | Open any folder or repository inside a Docker container and take advantage of Visual Studio Code's full feature set.                                                                                                                                               |
 | [Remote - SSH: Editing Configuration Files](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit)                | Edit SSH configuration files                                                                                                                                                                                                                                       |
-| [Azure Repos](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-repos)                                                         | Remotely browse and edit any Azure Repos                                                                                                                                                                                                                           |
 | [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer)                                                 | View remote machines for SSH and Tunnels.                                                                                                                                                                                                                          |
 | [Remote Repositories](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-repositories)                                         | Remotely browse and edit git repositories                                                                                                                                                                                                                          |
 | [Test Adapter Converter](https://marketplace.visualstudio.com/items?itemName=ms-vscode.test-adapter-converter)                                   | Converter extension from the Test Adapter UI to native VS Code testing                                                                                                                                                                                             |

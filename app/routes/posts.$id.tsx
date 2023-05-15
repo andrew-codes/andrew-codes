@@ -2,22 +2,38 @@ import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
+import path from "path"
 import { useMemo } from "react"
 import * as styled from "styled-components"
 import { Header } from "~/components/Category"
+import getCodePostAssetComponent from "~/components/CodePostAsset"
 import Link from "~/components/Link"
 import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
+import { directoryPath, fileName, readDirFiles } from "~/libs/fs.server"
 import parsedMetadata from "~/libs/posts/parsedMetadata"
 import { getPostById } from "~/libs/posts/posts.server"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
-  const [code, metadata] = await getPostById(id)
+  const [code, metadata, filePath] = await getPostById(id)
 
-  return json({ code, metadata })
+  const assetsFiles = await readDirFiles(
+    path.join(directoryPath(filePath), "assets"),
+  )
+  const codeAssets = assetsFiles
+    .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
+    .reduce(
+      (acc, [assetFilePath, assetFileContent]) => ({
+        ...acc,
+        [fileName(assetFilePath)]: assetFileContent,
+      }),
+      {},
+    )
+
+  return json({ code, metadata, codeAssets })
 }
 
 const Post = styled.default(PageWithHeader)`
@@ -55,9 +71,17 @@ const Post = styled.default(PageWithHeader)`
 `
 
 const PostRoute = () => {
-  const { code, metadata: rawMetadata } = useLoaderData<typeof loader>()
+  const {
+    code,
+    metadata: rawMetadata,
+    codeAssets,
+  } = useLoaderData<typeof loader>()
   const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
   const metadata = parsedMetadata(rawMetadata)
+  const PostCodeAsset = useMemo(
+    () => getCodePostAssetComponent(codeAssets),
+    [codeAssets],
+  )
 
   return (
     <>
@@ -80,6 +104,7 @@ const PostRoute = () => {
         <section>
           <Component
             components={{
+              CodePostAsset: PostCodeAsset,
               a: Link,
               blockquote: Blockquote,
               h2: H2,

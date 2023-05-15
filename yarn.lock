@@ -37,6 +37,7 @@ __metadata:
     esbuild-register: ^3.3.2
     eslint: ^8.27.0
     eslint-config-prettier: ^8.5.0
+    highlight.js: ^11.8.0
     lodash: ^4.17.21
     mdx-bundler: ^9.2.1
     prettier: ^2.8.7
@@ -6534,6 +6535,13 @@ __metadata:
   version: 2.0.1
   resolution: "hast-util-whitespace@npm:2.0.1"
   checksum: 431be6b2f35472f951615540d7a53f69f39461e5e080c0190268bdeb2be9ab9b1dddfd1f467dd26c1de7e7952df67beb1307b6ee940baf78b24a71b5e0663868
+  languageName: node
+  linkType: hard
+
+"highlight.js@npm:^11.8.0":
+  version: 11.8.0
+  resolution: "highlight.js@npm:11.8.0"
+  checksum: d2578a57aee7315946ff19379053fd0a28b127baabf7617ab1d28d62cdc4eaf3d75053569cb8479a5afdc7a68f1ba9a6c1d612d8ae399b4b9aa43093b4fb6831
   languageName: node
   linkType: hard
 

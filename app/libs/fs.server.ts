@@ -38,4 +38,7 @@ const readDirFiles = async (dir: string): Promise<[string, string][]> => {
   return results
 }
 
-export { readDir, readDirFiles }
+const fileName = (filePath: string): string => path.basename(filePath)
+const directoryPath = (filePath: string): string => path.dirname(filePath)
+
+export { directoryPath, fileName, readDir, readDirFiles }

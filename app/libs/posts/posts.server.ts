@@ -26,7 +26,7 @@ const getPosts = async (): Promise<Record<string, Post>> => {
     }
 
     posts = merge({}, posts, {
-      [metadata.slug]: [code.toString(), parsedMetadata(metadata)],
+      [metadata.slug]: [code.toString(), parsedMetadata(metadata), filePath],
     })
   }
 

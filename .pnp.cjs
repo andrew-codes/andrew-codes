@@ -46,6 +46,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["esbuild-register", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.4.2"],\
             ["eslint", "npm:8.37.0"],\
             ["eslint-config-prettier", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.8.0"],\
+            ["highlight.js", "npm:11.8.0"],\
             ["lodash", "npm:4.17.21"],\
             ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:9.2.1"],\
             ["prettier", "npm:2.8.7"],\
@@ -100,6 +101,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["esbuild-register", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.4.2"],\
             ["eslint", "npm:8.37.0"],\
             ["eslint-config-prettier", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.8.0"],\
+            ["highlight.js", "npm:11.8.0"],\
             ["lodash", "npm:4.17.21"],\
             ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:9.2.1"],\
             ["prettier", "npm:2.8.7"],\
@@ -8476,6 +8478,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/highlight.js-npm-11.7.0-02dfe9a289-19e3fb8b56.zip/node_modules/highlight.js/",\
           "packageDependencies": [\
             ["highlight.js", "npm:11.7.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:11.8.0", {\
+          "packageLocation": "./.yarn/cache/highlight.js-npm-11.8.0-6ff1e42749-d2578a57ae.zip/node_modules/highlight.js/",\
+          "packageDependencies": [\
+            ["highlight.js", "npm:11.8.0"]\
           ],\
           "linkType": "HARD"\
         }]\
