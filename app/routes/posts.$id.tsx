@@ -20,18 +20,21 @@ const loader = async (args: LoaderArgs) => {
   const { id } = args.params
   const [code, metadata, filePath] = await getPostById(id)
 
-  const assetsFiles = await readDirFiles(
-    path.join(directoryPath(filePath), "assets"),
-  )
-  const codeAssets = assetsFiles
-    .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
-    .reduce(
-      (acc, [assetFilePath, assetFileContent]) => ({
-        ...acc,
-        [fileName(assetFilePath)]: assetFileContent,
-      }),
-      {},
+  let codeAssets = {}
+  try {
+    const assetsFiles = await readDirFiles(
+      path.join(directoryPath(filePath), "assets"),
     )
+    codeAssets = assetsFiles
+      .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
+      .reduce(
+        (acc, [assetFilePath, assetFileContent]) => ({
+          ...acc,
+          [fileName(assetFilePath)]: assetFileContent,
+        }),
+        {},
+      )
+  } catch (error) {}
 
   return json({ code, metadata, codeAssets })
 }
@@ -64,8 +67,12 @@ const Post = styled.default(PageWithHeader)`
       margin-bottom: 0.5rem;
     }
 
-    ${Paragraph} {
+    > ${Paragraph} {
       margin-bottom: 1.125rem;
+    }
+
+    dt {
+      font-weight: bold;
     }
   }
 `
