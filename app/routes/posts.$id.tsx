@@ -14,11 +14,12 @@ import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
 import { directoryPath, fileName, readDirFiles } from "~/libs/fs.server"
 import parsedMetadata from "~/libs/posts/parsedMetadata"
-import { getPostById } from "~/libs/posts/posts.server"
+import { getHash, getPostById } from "~/libs/posts/posts.server"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
-  const [code, metadata, filePath] = await getPostById(id)
+  const post = await getPostById(id)
+  const [code, metadata, { filePath }] = post
 
   let codeAssets = {}
   try {
@@ -36,7 +37,10 @@ const loader = async (args: LoaderArgs) => {
       )
   } catch (error) {}
 
-  return json({ code, metadata, codeAssets })
+  return json(
+    { code, metadata, codeAssets },
+    { headers: { ETag: getHash([post]) } },
+  )
 }
 
 const Post = styled.default(PageWithHeader)`

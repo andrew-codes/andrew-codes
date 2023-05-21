@@ -1,7 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
-import { entries, filter, flow } from "lodash/fp"
 import styled from "styled-components"
 import { Header } from "~/components/Category"
 import Link from "~/components/Link"
@@ -10,22 +9,28 @@ import PageWithHeader from "~/components/PageWithHeader"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
 import type { Category } from "~/libs/categories"
-import getClientPosts from "~/libs/posts/posts"
-import { getPosts } from "~/libs/posts/posts.server"
+import deserializePosts from "~/libs/posts/posts"
+import { getHash, getPosts, toClientPosts } from "~/libs/posts/posts.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import type { Post } from "~/libs/posts/types"
+import type { ClientPost, Post, PostMetadata } from "~/libs/posts/types"
 
-const onlyForTag = (tag: string) =>
-  flow(
-    entries,
-    filter(([_, [__, metadata]]) => metadata?.tags.includes(tag)),
-  )
+const onlyForTag =
+  (tag: string) => (posts: Record<string, Post<PostMetadata>>) =>
+    Object.fromEntries(
+      Object.entries(posts).filter(([_, [__, metadata]]) =>
+        metadata?.tags?.includes(tag),
+      ),
+    )
+
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
-
-  return json({
-    posts: onlyForTag(args.params.id as Category)(postsBySlug),
-  })
+  const postsForTagBySlug = onlyForTag(args.params.id as Category)(postsBySlug)
+  return json(
+    {
+      posts: toClientPosts(postsForTagBySlug),
+    },
+    { headers: { ETag: getHash(Object.values(postsForTagBySlug)) } },
+  )
 }
 
 const Page = styled(PageWithHeader)`
@@ -61,12 +66,11 @@ const Page = styled(PageWithHeader)`
     color: rgb(0, 0, 0);
   }
 `
-const toPosts = flow(getClientPosts)
 const CategoryRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
-  const tagPosts = toPosts(posts).sort(
-    sortByMany(newestFirst, alphabetically),
-  ) as [string, Post][]
+  const tagPosts = deserializePosts(
+    Object.entries(posts as Record<string, ClientPost>),
+  ).sort(sortByMany(newestFirst, alphabetically)) as [string, ClientPost][]
   const { id } = useParams()
 
   return (

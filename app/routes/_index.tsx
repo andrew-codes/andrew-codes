@@ -1,29 +1,36 @@
-// import { json } from "@remix-run/node"
-import type { LoaderArgs } from "@remix-run/node"
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { getPosts } from "~/libs/posts/posts.server"
-import getClientPosts from "~/libs/posts/posts"
-import type { Post } from "~/libs/posts/types.d"
-import { flow } from "lodash"
-import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
+import styled from "styled-components"
+import Link from "~/components/Link"
 import PageMeta from "~/components/PageMeta"
 import Paper from "~/components/Paper"
-import postsByCategory from "~/libs/posts/categorize"
-import styled from "styled-components"
-import { getDescription, getColor } from "~/libs/categories"
-import type { Category } from "~/libs/categories"
-import Link from "~/components/Link"
-import Tags from "~/components/Tags"
 import { Posts } from "~/components/Post"
-
-const categorizedPosts = flow(getClientPosts, postsByCategory)
+import Tags from "~/components/Tags"
+import type { Category } from "~/libs/categories"
+import { getColor, getDescription } from "~/libs/categories"
+import postsByCategory from "~/libs/posts/categorize"
+import deserializePosts from "~/libs/posts/posts"
+import { getHash, getPosts, toClientPosts } from "~/libs/posts/posts.server"
+import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
+import type { ClientPost } from "~/libs/posts/types.d"
 
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
 
-  return json({ posts: postsBySlug })
+  return json(
+    { posts: toClientPosts(postsBySlug) },
+    {
+      headers: {
+        ETag: getHash(Object.values(postsBySlug)),
+      },
+    },
+  )
 }
+
+const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  ETag: loaderHeaders.get("ETag"),
+})
 
 const Blockquote = styled.blockquote`
   font-size: 1.125rem;
@@ -146,7 +153,7 @@ const HomeRoute = () => {
         </Blockquote>
       </Hero>
       <PostCategories>
-        {categorizedPosts(Object.entries(posts as Record<string, Post>)).map(
+        {postsByCategory(deserializePosts(Object.entries(posts))).map(
           ([category, posts]) => (
             <PostCategory as="section" key={category} name={category}>
               <h2>{category}</h2>
@@ -177,4 +184,4 @@ const HomeRoute = () => {
 }
 
 export default HomeRoute
-export { loader }
+export { headers, loader }

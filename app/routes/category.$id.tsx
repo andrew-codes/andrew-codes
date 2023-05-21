@@ -1,7 +1,6 @@
 import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
-import { entries, filter, flow } from "lodash/fp"
 import styled from "styled-components"
 import { Header } from "~/components/Category"
 import Link from "~/components/Link"
@@ -10,22 +9,29 @@ import PageWithHeader from "~/components/PageWithHeader"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
 import type { Category } from "~/libs/categories"
-import getClientPosts from "~/libs/posts/posts"
-import { getPosts } from "~/libs/posts/posts.server"
+import deserializePosts from "~/libs/posts/posts"
+import { getHash, getPosts, toClientPosts } from "~/libs/posts/posts.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 import type { Post } from "~/libs/posts/types"
 
-const onlyForCategory = (category: Category) =>
-  flow(
-    entries,
-    filter(([_, [__, metadata]]) => metadata?.category === category),
+const onlyForCategory = (category: Category) => (posts: Record<string, Post>) =>
+  Object.fromEntries(
+    Object.entries(posts).filter(
+      ([_, [__, metadata]]) => metadata?.category == category,
+    ),
   )
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
+  const postsForCategoryBySlug = onlyForCategory(args.params.id as Category)(
+    postsBySlug,
+  )
 
-  return json({
-    posts: onlyForCategory(args.params.id as Category)(postsBySlug),
-  })
+  return json(
+    {
+      posts: toClientPosts(postsForCategoryBySlug),
+    },
+    { headers: { ETag: getHash(Object.values(postsForCategoryBySlug)) } },
+  )
 }
 
 const Page = styled(PageWithHeader)`
@@ -60,12 +66,12 @@ const Page = styled(PageWithHeader)`
     color: rgb(0, 0, 0);
   }
 `
-const toPosts = flow(getClientPosts)
+
 const CategoryRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
-  const categoryPosts = toPosts(posts).sort(
+  const categoryPosts = deserializePosts(Object.entries(posts)).sort(
     sortByMany(newestFirst, alphabetically),
-  ) as [string, Post][]
+  )
   const { id } = useParams()
 
   return (

@@ -1,5 +1,5 @@
-import type { Post } from "./types"
-type PostSort = (a: [string, Post], b: [string, Post]) => 0 | 1 | -1
+import type { ClientPost } from "./types"
+type PostSort = (a: [string, ClientPost], b: [string, ClientPost]) => 0 | 1 | -1
 
 const newestFirst: PostSort = ([_, [__, a]], [___, [____, b]]) => {
   if (a?.date?.getTime() ?? 0 > (b?.date?.getTime() ?? 0)) {
