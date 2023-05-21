@@ -9,8 +9,13 @@ import PageWithHeader from "~/components/PageWithHeader"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
 import type { Category } from "~/libs/categories"
+import { getHash } from "~/libs/hash.server"
 import deserializePosts from "~/libs/posts/posts"
-import { getHash, getPosts, toClientPosts } from "~/libs/posts/posts.server"
+import {
+  getPartsToHash,
+  getPosts,
+  toClientPosts,
+} from "~/libs/posts/posts.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 import type { ClientPost, Post, PostMetadata } from "~/libs/posts/types"
 
@@ -29,7 +34,11 @@ const loader = async (args: LoaderArgs) => {
     {
       posts: toClientPosts(postsForTagBySlug),
     },
-    { headers: { ETag: getHash(Object.values(postsForTagBySlug)) } },
+    {
+      headers: {
+        ETag: getHash(getPartsToHash(Object.values(postsForTagBySlug))),
+      },
+    },
   )
 }
 

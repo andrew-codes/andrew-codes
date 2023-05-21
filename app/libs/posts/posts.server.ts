@@ -42,11 +42,11 @@ const getPosts = async (): Promise<Record<string, Post<PostMetadata>>> => {
   return posts
 }
 
-const getHash = (posts: Post<PostMetadata>[]): string => {
-  const dataToCalculateHash = posts
-    .map(([_, __, fileMetadata]) => fileMetadata.source)
-    .join("")
-  return sha1(dataToCalculateHash)
+const getPartsToHash = (posts: Post<PostMetadata>[]): string[] => {
+  const dataToCalculateHash = posts.map(
+    ([_, __, fileMetadata]) => fileMetadata.source,
+  )
+  return dataToCalculateHash
 }
 
 const getPostById = async (
@@ -78,4 +78,4 @@ const toClientPosts = (
   )
 }
 
-export { getHash, getPosts, getPostById, toClientPost, toClientPosts }
+export { getPartsToHash, getPosts, getPostById, toClientPost, toClientPosts }

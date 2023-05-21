@@ -13,8 +13,9 @@ import PageWithHeader from "~/components/PageWithHeader"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
 import { directoryPath, fileName, readDirFiles } from "~/libs/fs.server"
+import { getHash } from "~/libs/hash.server"
 import parsedMetadata from "~/libs/posts/parsedMetadata"
-import { getHash, getPostById } from "~/libs/posts/posts.server"
+import { getPartsToHash, getPostById } from "~/libs/posts/posts.server"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
@@ -39,7 +40,7 @@ const loader = async (args: LoaderArgs) => {
 
   return json(
     { code, metadata, codeAssets },
-    { headers: { ETag: getHash([post]) } },
+    { headers: { ETag: getHash(getPartsToHash([post])) } },
   )
 }
 

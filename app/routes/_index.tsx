@@ -9,20 +9,31 @@ import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
 import type { Category } from "~/libs/categories"
 import { getColor, getDescription } from "~/libs/categories"
+import { getHash, getFilePartsToHash } from "~/libs/hash.server"
 import postsByCategory from "~/libs/posts/categorize"
 import deserializePosts from "~/libs/posts/posts"
-import { getHash, getPosts, toClientPosts } from "~/libs/posts/posts.server"
+import {
+  getPartsToHash,
+  getPosts,
+  toClientPosts,
+} from "~/libs/posts/posts.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import type { ClientPost } from "~/libs/posts/types.d"
 
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
+
+  const selfHash = await getFilePartsToHash(__filename)
+  console.log(
+    getHash(getPartsToHash(Object.values(postsBySlug)).concat(selfHash)),
+  )
 
   return json(
     { posts: toClientPosts(postsBySlug) },
     {
       headers: {
-        ETag: getHash(Object.values(postsBySlug)),
+        ETag: getHash(
+          getPartsToHash(Object.values(postsBySlug)).concat(selfHash),
+        ),
       },
     },
   )
