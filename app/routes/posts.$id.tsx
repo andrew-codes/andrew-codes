@@ -1,25 +1,52 @@
-import type { LoaderArgs } from "@remix-run/node"
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
+import path from "path"
 import { useMemo } from "react"
 import * as styled from "styled-components"
 import { Header } from "~/components/Category"
+import getCodePostAssetComponent from "~/components/CodePostAsset"
 import Link from "~/components/Link"
 import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
-import Paper from "~/components/Paper"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
+import { directoryPath, fileName, readDirFiles } from "~/libs/fs.server"
+import { getHash } from "~/libs/hash.server"
 import parsedMetadata from "~/libs/posts/parsedMetadata"
-import { getPostById } from "~/libs/posts/posts.server"
+import { getPartsToHash, getPostById } from "~/libs/posts/posts.server"
 
 const loader = async (args: LoaderArgs) => {
   const { id } = args.params
-  const [code, metadata] = await getPostById(id)
+  const post = await getPostById(id)
+  const [code, metadata, { filePath }] = post
 
-  return json({ code, metadata })
+  let codeAssets = {}
+  try {
+    const assetsFiles = await readDirFiles(
+      path.join(directoryPath(filePath), "assets"),
+    )
+    codeAssets = assetsFiles
+      .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
+      .reduce(
+        (acc, [assetFilePath, assetFileContent]) => ({
+          ...acc,
+          [fileName(assetFilePath)]: assetFileContent,
+        }),
+        {},
+      )
+  } catch (error) {}
+
+  return json(
+    { code, metadata, codeAssets },
+    { headers: { ETag: getHash(getPartsToHash([post])) } },
+  )
 }
+
+const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  ETag: loaderHeaders.get("ETag"),
+})
 
 const Post = styled.default(PageWithHeader)`
   ${Header} {
@@ -49,16 +76,28 @@ const Post = styled.default(PageWithHeader)`
       margin-bottom: 0.5rem;
     }
 
-    ${Paragraph} {
+    > ${Paragraph} {
       margin-bottom: 1.125rem;
+    }
+
+    dt {
+      font-weight: bold;
     }
   }
 `
 
 const PostRoute = () => {
-  const { code, metadata: rawMetadata } = useLoaderData<typeof loader>()
+  const {
+    code,
+    metadata: rawMetadata,
+    codeAssets,
+  } = useLoaderData<typeof loader>()
   const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
   const metadata = parsedMetadata(rawMetadata)
+  const PostCodeAsset = useMemo(
+    () => getCodePostAssetComponent(codeAssets),
+    [codeAssets],
+  )
 
   return (
     <>
@@ -81,6 +120,7 @@ const PostRoute = () => {
         <section>
           <Component
             components={{
+              CodePostAsset: PostCodeAsset,
               a: Link,
               blockquote: Blockquote,
               h2: H2,
@@ -97,4 +137,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { loader }
+export { headers, loader }

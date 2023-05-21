@@ -31,12 +31,14 @@ __metadata:
     "@types/react": ^18.0.31
     "@types/react-dom": ^18.0.11
     "@types/react-helmet": ^6.1.6
+    "@types/sha1": ^1.1.3
     "@types/styled-components": ^5.1.26
     cypress: ^12.9.0
     esbuild: ^0.17.14
     esbuild-register: ^3.3.2
     eslint: ^8.27.0
     eslint-config-prettier: ^8.5.0
+    highlight.js: ^11.8.0
     lodash: ^4.17.21
     mdx-bundler: ^9.2.1
     prettier: ^2.8.7
@@ -50,6 +52,7 @@ __metadata:
     remark-parse: ^10.0.1
     remark-rehype: ^10.1.0
     remix: ^1.15.0
+    sha1: ^1.1.1
     styled-components: ^5.3.9
     tsc: ^2.0.4
     typescript: ^4.9.4
@@ -2833,6 +2836,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/sha1@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "@types/sha1@npm:1.1.3"
+  dependencies:
+    "@types/node": "*"
+  checksum: 654bd64df38229f6cb05cc20d07c0cda52b301a3e5b3fd13fe32b3da5dac7faa9f6230b3067323564369505ec12a247756867fd1aa851e331c7f5085e3427ca0
+  languageName: node
+  linkType: hard
+
 "@types/sinonjs__fake-timers@npm:8.1.1":
   version: 8.1.1
   resolution: "@types/sinonjs__fake-timers@npm:8.1.1"
@@ -3911,6 +3923,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"charenc@npm:>= 0.0.1":
+  version: 0.0.2
+  resolution: "charenc@npm:0.0.2"
+  checksum: 81dcadbe57e861d527faf6dd3855dc857395a1c4d6781f4847288ab23cffb7b3ee80d57c15bba7252ffe3e5e8019db767757ee7975663ad2ca0939bb8fcaf2e5
+  languageName: node
+  linkType: hard
+
 "check-more-types@npm:^2.24.0":
   version: 2.24.0
   resolution: "check-more-types@npm:2.24.0"
@@ -4225,6 +4244,13 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
+  languageName: node
+  linkType: hard
+
+"crypt@npm:>= 0.0.1":
+  version: 0.0.2
+  resolution: "crypt@npm:0.0.2"
+  checksum: baf4c7bbe05df656ec230018af8cf7dbe8c14b36b98726939cef008d473f6fe7a4fad906cfea4062c93af516f1550a3f43ceb4d6615329612c6511378ed9fe34
   languageName: node
   linkType: hard
 
@@ -6534,6 +6560,13 @@ __metadata:
   version: 2.0.1
   resolution: "hast-util-whitespace@npm:2.0.1"
   checksum: 431be6b2f35472f951615540d7a53f69f39461e5e080c0190268bdeb2be9ab9b1dddfd1f467dd26c1de7e7952df67beb1307b6ee940baf78b24a71b5e0663868
+  languageName: node
+  linkType: hard
+
+"highlight.js@npm:^11.8.0":
+  version: 11.8.0
+  resolution: "highlight.js@npm:11.8.0"
+  checksum: d2578a57aee7315946ff19379053fd0a28b127baabf7617ab1d28d62cdc4eaf3d75053569cb8479a5afdc7a68f1ba9a6c1d612d8ae399b4b9aa43093b4fb6831
   languageName: node
   linkType: hard
 
@@ -10418,6 +10451,16 @@ __metadata:
   version: 1.2.0
   resolution: "setprototypeof@npm:1.2.0"
   checksum: be18cbbf70e7d8097c97f713a2e76edf84e87299b40d085c6bf8b65314e994cc15e2e317727342fa6996e38e1f52c59720b53fe621e2eb593a6847bf0356db89
+  languageName: node
+  linkType: hard
+
+"sha1@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "sha1@npm:1.1.1"
+  dependencies:
+    charenc: ">= 0.0.1"
+    crypt: ">= 0.0.1"
+  checksum: da9f47e949988e2f595ef19733fd1dc736866ef6de4e421a55c13b444c03ae532e528b7350ae6ea55d9fb053be61d4648ec2cd5250d46cfdbdf4f6b4e763713d
   languageName: node
   linkType: hard
 

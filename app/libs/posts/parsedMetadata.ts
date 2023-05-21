@@ -1,6 +1,6 @@
-import type { PostMetadata } from "./types.d"
+import type { ParsedPostMetadata } from "./types.d"
 
-const parsedMetadata = (metadata: Record<string, any>): PostMetadata => ({
+const parsedMetadata = (metadata: Record<string, any>): ParsedPostMetadata => ({
   ...metadata,
   date: metadata?.date ? new Date(metadata?.date) : undefined,
 })

@@ -40,12 +40,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.31"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["@types/react-helmet", "npm:6.1.6"],\
+            ["@types/sha1", "npm:1.1.3"],\
             ["@types/styled-components", "npm:5.1.26"],\
             ["cypress", "npm:12.9.0"],\
             ["esbuild", "npm:0.17.14"],\
             ["esbuild-register", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.4.2"],\
             ["eslint", "npm:8.37.0"],\
             ["eslint-config-prettier", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.8.0"],\
+            ["highlight.js", "npm:11.8.0"],\
             ["lodash", "npm:4.17.21"],\
             ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:9.2.1"],\
             ["prettier", "npm:2.8.7"],\
@@ -59,6 +61,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-parse", "npm:10.0.1"],\
             ["remark-rehype", "npm:10.1.0"],\
             ["remix", "npm:1.15.0"],\
+            ["sha1", "npm:1.1.1"],\
             ["styled-components", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:5.3.9"],\
             ["tsc", "npm:2.0.4"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
@@ -94,12 +97,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.0.31"],\
             ["@types/react-dom", "npm:18.0.11"],\
             ["@types/react-helmet", "npm:6.1.6"],\
+            ["@types/sha1", "npm:1.1.3"],\
             ["@types/styled-components", "npm:5.1.26"],\
             ["cypress", "npm:12.9.0"],\
             ["esbuild", "npm:0.17.14"],\
             ["esbuild-register", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.4.2"],\
             ["eslint", "npm:8.37.0"],\
             ["eslint-config-prettier", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.8.0"],\
+            ["highlight.js", "npm:11.8.0"],\
             ["lodash", "npm:4.17.21"],\
             ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:9.2.1"],\
             ["prettier", "npm:2.8.7"],\
@@ -113,6 +118,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-parse", "npm:10.0.1"],\
             ["remark-rehype", "npm:10.1.0"],\
             ["remix", "npm:1.15.0"],\
+            ["sha1", "npm:1.1.1"],\
             ["styled-components", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:5.3.9"],\
             ["tsc", "npm:2.0.4"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
@@ -4169,6 +4175,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/sha1", [\
+        ["npm:1.1.3", {\
+          "packageLocation": "./.yarn/cache/@types-sha1-npm-1.1.3-87f8220857-654bd64df3.zip/node_modules/@types/sha1/",\
+          "packageDependencies": [\
+            ["@types/sha1", "npm:1.1.3"],\
+            ["@types/node", "npm:18.15.11"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/sinonjs__fake-timers", [\
         ["npm:8.1.1", {\
           "packageLocation": "./.yarn/cache/@types-sinonjs__fake-timers-npm-8.1.1-95ac9b59b5-ca09d54d47.zip/node_modules/@types/sinonjs__fake-timers/",\
@@ -5529,6 +5545,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["charenc", [\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/charenc-npm-0.0.2-aca0c2f207-81dcadbe57.zip/node_modules/charenc/",\
+          "packageDependencies": [\
+            ["charenc", "npm:0.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["check-more-types", [\
         ["npm:2.24.0", {\
           "packageLocation": "./.yarn/cache/check-more-types-npm-2.24.0-fa2e491b27-b09080ec34.zip/node_modules/check-more-types/",\
@@ -5885,6 +5910,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["path-key", "npm:3.1.1"],\
             ["shebang-command", "npm:2.0.0"],\
             ["which", "npm:2.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["crypt", [\
+        ["npm:0.0.2", {\
+          "packageLocation": "./.yarn/cache/crypt-npm-0.0.2-033627d94f-baf4c7bbe0.zip/node_modules/crypt/",\
+          "packageDependencies": [\
+            ["crypt", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -8476,6 +8510,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/highlight.js-npm-11.7.0-02dfe9a289-19e3fb8b56.zip/node_modules/highlight.js/",\
           "packageDependencies": [\
             ["highlight.js", "npm:11.7.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:11.8.0", {\
+          "packageLocation": "./.yarn/cache/highlight.js-npm-11.8.0-6ff1e42749-d2578a57ae.zip/node_modules/highlight.js/",\
+          "packageDependencies": [\
+            ["highlight.js", "npm:11.8.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -12923,6 +12964,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/setprototypeof-npm-1.2.0-0fedbdcd3a-be18cbbf70.zip/node_modules/setprototypeof/",\
           "packageDependencies": [\
             ["setprototypeof", "npm:1.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["sha1", [\
+        ["npm:1.1.1", {\
+          "packageLocation": "./.yarn/cache/sha1-npm-1.1.1-5020443cbb-da9f47e949.zip/node_modules/sha1/",\
+          "packageDependencies": [\
+            ["sha1", "npm:1.1.1"],\
+            ["charenc", "npm:0.0.2"],\
+            ["crypt", "npm:0.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\

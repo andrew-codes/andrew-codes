@@ -1,3 +1,4 @@
+import { HeadersFunction } from "@remix-run/node"
 import type { FC } from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import {
@@ -34,6 +35,24 @@ import {
   SummarizedItems,
   WorkExperience,
 } from "~/components/resume"
+import { getFilePartsToHash } from "~/libs/hash.server"
+
+const loader = async (args: LoaderArgs) => {
+  const selfFilePartsToHash = await getFilePartsToHash(__filename)
+
+  return json(
+    {},
+    {
+      headers: {
+        ETag: getHash(selfFilePartsToHash),
+      },
+    },
+  )
+}
+
+const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  ETag: loaderHeaders.get("ETag"),
+})
 
 const Main = styled.main`
   margin: 0;
@@ -443,3 +462,4 @@ const ResumeRoute: FC<{}> = () => {
 }
 
 export default ResumeRoute
+export { headers, loaders }

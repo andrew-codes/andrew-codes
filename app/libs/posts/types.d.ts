@@ -1,4 +1,15 @@
-type PostMetadata = Record<string, any> & { id?: string; date?: Date }
-type Post = [string, PostMetadata]
+type PostMetadata = Record<string, any> & { id?: string; date?: Date | string }
+type ParsedPostMetadata = PostMetadata & { date?: Date }
+type FileMeta = {
+  filePath: string
+  modified: Date | string
+  source: string
+}
+type Post<TPostMetadata extends PostMetadata> = [
+  string,
+  TPostMetadata,
+  FileMeta,
+]
+type ClientPost = OmitLast<Post<ParsedPostMetadata>>
 
-export { Post, PostMetadata }
+export { ClientPost, FileMeta, ParsedPostMetadata, Post, PostMetadata }

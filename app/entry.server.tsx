@@ -29,7 +29,7 @@ export default async function handleRequest(
       ),
   )
 
-  let cacheControlHeader = "public, s-maxage=60"
+  let cacheControlHeader = "public, max-age=300, s-maxage=3600"
   if (process.env.NODE_ENV === "development") {
     cacheControlHeader = "no-cache"
   }
