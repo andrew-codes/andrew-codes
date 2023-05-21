@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node"
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
 import styled from "styled-components"
@@ -17,14 +17,15 @@ import {
   toClientPosts,
 } from "~/libs/posts/posts.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import type { Post } from "~/libs/posts/types"
+import type { Post, PostMetadata } from "~/libs/posts/types"
 
-const onlyForCategory = (category: Category) => (posts: Record<string, Post>) =>
-  Object.fromEntries(
-    Object.entries(posts).filter(
-      ([_, [__, metadata]]) => metadata?.category == category,
-    ),
-  )
+const onlyForCategory =
+  (category: Category) => (posts: Record<string, Post<PostMetadata>>) =>
+    Object.fromEntries(
+      Object.entries(posts).filter(
+        ([_, [__, metadata]]) => metadata?.category == category,
+      ),
+    )
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
   const postsForCategoryBySlug = onlyForCategory(args.params.id as Category)(
@@ -42,6 +43,10 @@ const loader = async (args: LoaderArgs) => {
     },
   )
 }
+
+const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  ETag: loaderHeaders.get("ETag"),
+})
 
 const Page = styled(PageWithHeader)`
   padding-bottom: 2rem;
@@ -119,4 +124,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { loader }
+export { headers, loader }

@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node"
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
 import styled from "styled-components"
@@ -41,6 +41,10 @@ const loader = async (args: LoaderArgs) => {
     },
   )
 }
+
+const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  ETag: loaderHeaders.get("ETag"),
+})
 
 const Page = styled(PageWithHeader)`
   padding-bottom: 2rem;
@@ -118,4 +122,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { loader }
+export { headers, loader }

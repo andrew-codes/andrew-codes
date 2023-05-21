@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node"
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
@@ -43,6 +43,10 @@ const loader = async (args: LoaderArgs) => {
     { headers: { ETag: getHash(getPartsToHash([post])) } },
   )
 }
+
+const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  ETag: loaderHeaders.get("ETag"),
+})
 
 const Post = styled.default(PageWithHeader)`
   ${Header} {
@@ -133,4 +137,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { loader }
+export { headers, loader }

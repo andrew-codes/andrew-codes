@@ -22,17 +22,16 @@ import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 const loader = async (args: LoaderArgs) => {
   const postsBySlug = await getPosts()
 
-  const selfHash = await getFilePartsToHash(__filename)
-  console.log(
-    getHash(getPartsToHash(Object.values(postsBySlug)).concat(selfHash)),
-  )
+  const selfFilePartsToHash = await getFilePartsToHash(__filename)
 
   return json(
     { posts: toClientPosts(postsBySlug) },
     {
       headers: {
         ETag: getHash(
-          getPartsToHash(Object.values(postsBySlug)).concat(selfHash),
+          getPartsToHash(Object.values(postsBySlug)).concat(
+            selfFilePartsToHash,
+          ),
         ),
       },
     },
