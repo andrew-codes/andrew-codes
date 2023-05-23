@@ -3,11 +3,10 @@
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
-    "types": ["@types/react", "@types/node", "@types/react-dom"],
+    "types": ["@types/react", "@types/node", "@types/react-dom", "@types/styled-components", "@types/sha1", "@types/lodash"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "module": "ES2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES2019",

@@ -10,15 +10,18 @@ type Category = (typeof categories)[number]
 
 const getCategories = (): readonly Category[] => categories
 
-const colors: Record<Category, string> = {
-  explanation:
-    "linear-gradient(45deg, rgba(181, 60, 255, 0.75), rgba(249, 82, 255, 0.75))",
-  presentation:
-    "linear-gradient(45deg, rgba(35, 189, 56, 0.75), rgba(65, 235, 169, 0.75))",
-  tutorial:
-    "linear-gradient(45deg, rgba(248, 87, 166, 0.75), rgba(255, 88, 88, 0.75))",
-  reference:
-    "linear-gradient(45deg, rgba(50, 122, 231, 0.75), rgba(107, 208, 255, 0.75))",
+const colors: Record<Category, string[]> = {
+  explanation: ["rgba(174, 64, 202)", "rgba(180, 66, 201)"] as string[],
+  presentation: ["rgba(49, 163, 86)", "rgba(58, 178, 123)"] as string[],
+  tutorial: ["rgba(196, 75, 120)", "rgba(198, 75, 87)"] as string[],
+  reference: ["rgba(59, 119, 188)", "rgba(82, 152, 197)"] as string[],
+}
+
+const colorGradient: Record<Category, string> = {
+  explanation: `linear-gradient(45deg, ${colors["explanation"].join(", ")})`,
+  presentation: `linear-gradient(45deg, ${colors["presentation"].join(", ")})`,
+  tutorial: `linear-gradient(45deg, ${colors["tutorial"].join(", ")})`,
+  reference: `linear-gradient(45deg, ${colors["reference"].join(", ")})`,
 }
 
 const descriptions: Record<Category, string | ReactNode> = {
@@ -42,12 +45,14 @@ const descriptions: Record<Category, string | ReactNode> = {
   ),
   reference: <>Evaluation or comparison of technologies.</>,
 }
-const getColor = (name: Category): string => {
-  return colors[name] ?? "rgb(255,255,255)"
+const getBackgroundGradient = (name: Category): string => {
+  return colorGradient[name] ?? "rgb(255,255,255)"
 }
+
+const getColors = (name: Category): string[] => colors[name] ?? []
 
 const getDescription = (name: Category): string | ReactNode =>
   descriptions[name] ?? ""
 
-export { getCategories, getDescription, getColor }
+export { getCategories, getDescription, getBackgroundGradient, getColors }
 export type { Category }
