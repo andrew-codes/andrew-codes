@@ -95,6 +95,14 @@ const PostCategory = styled(Paper)<{ name: Category }>`
     :first-child {
       margin-top: 0;
     }
+
+    p {
+      display: -webkit-box;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
 
   h3 {

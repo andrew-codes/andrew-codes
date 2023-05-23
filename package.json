@@ -10,7 +10,8 @@
   "scripts": {
     "start": "remix dev",
     "clean": "rm -rf public/build",
-    "build": "remix build"
+    "build": "remix build",
+    "postinstall": "remix-esbuild-override"
   },
   "dependencies": {
     "@remix-run/node": "^1.15.0",
@@ -33,6 +34,8 @@
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@parcel/css": "^1.10.1",
     "@remix-run/dev": "^1.15.0",
     "@remix-run/eslint-config": "^1.15.0",
     "@remix-run/server-runtime": "^1.15.0",
@@ -44,12 +47,14 @@
     "@types/react-helmet": "^6.1.6",
     "@types/sha1": "^1.1.3",
     "@types/styled-components": "^5.1.26",
+    "babel-plugin-styled-components": "^2.1.3",
     "cypress": "^12.9.0",
     "esbuild": "^0.17.14",
     "esbuild-register": "^3.3.2",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.8.7",
+    "remix-esbuild-override": "^3.1.0",
     "tsc": "^2.0.4",
     "typescript": "^4.9.4"
   },

@@ -33,7 +33,6 @@ const ProfileSummary = styled.div`
   grid-template-columns: auto auto;
 `
 const HeaderBoundary = styled.div`
-  display: flex;
   margin: 0 auto;
   max-width: 1200px;
   width: 100%;
