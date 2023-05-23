@@ -11,10 +11,10 @@ type Category = (typeof categories)[number]
 const getCategories = (): readonly Category[] => categories
 
 const colors: Record<Category, string[]> = {
-  explanation: ["rgba(174, 64, 202, 1)", "rgba(180, 66, 201, 1)"] as string[],
-  presentation: ["rgba(49, 163, 86, 1)", "rgba(58, 178, 123, 1)"] as string[],
-  tutorial: ["rgba(196, 75, 120)", "rgba(198, 75, 87, 1)"] as string[],
-  reference: ["rgba(59, 119, 188, 1)", "rgba(82, 152, 197, 1)"] as string[],
+  explanation: ["rgba(174, 64, 202)", "rgba(180, 66, 201)"] as string[],
+  presentation: ["rgba(49, 163, 86)", "rgba(58, 178, 123)"] as string[],
+  tutorial: ["rgba(196, 75, 120)", "rgba(198, 75, 87)"] as string[],
+  reference: ["rgba(59, 119, 188)", "rgba(82, 152, 197)"] as string[],
 }
 
 const colorGradient: Record<Category, string> = {

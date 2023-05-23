@@ -74,6 +74,26 @@ const GlobalStyles = createGlobalStyle`
         font-size: 12pt;
     }
 `
+const Note = styled.div`
+  display: none;
+
+  @media (max-width: 600px) {
+    background: rgba(198, 75, 87, 0.75);
+    border: 4px solid rgba(196, 75, 120);
+    color: rgb(0, 0, 0);
+    display: block;
+    font-size: 1.25rem;
+    margin: 0 auto;
+    margin: 0.5rem;
+    padding: 0.5rem;
+
+    strong {
+      color: rgb(0, 0, 0);
+      font-size: 1.25rem;
+      text-decoration: underline;
+    }
+  }
+`
 
 const ResumeRoute: FC<{}> = () => {
   const today = new Date()
@@ -88,6 +108,11 @@ const ResumeRoute: FC<{}> = () => {
         title="James Andrew Smith's Resume"
         description="General resume of James Andrew Smith."
       />
+      <Note>
+        Please note: this resume is optimized for <strong>print</strong> and{" "}
+        <strong>desktop</strong> media. Try printing the page (without headers
+        and footers) or view on your desktop.
+      </Note>
       <Main>
         <PaginatedResume>
           <Page>
