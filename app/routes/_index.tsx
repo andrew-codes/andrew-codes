@@ -54,6 +54,10 @@ const Hero = styled(Paper)`
 
   ${Blockquote} {
     margin-bottom: 0;
+
+    @media (max-width: 600px) {
+      margin: 0 0.5rem;
+    }
   }
 `
 
@@ -66,6 +70,11 @@ const PostCategory = styled(Paper)<{ name: Category }>`
   min-height: 370px;
   padding: 1rem 1.25rem;
   width: calc(50% - 0.5rem);
+
+  @media (max-width: 600px) {
+    width: 100%;
+    min-height: unset !important;
+  }
 
   h2 {
     font-size: 1.75rem;
@@ -98,8 +107,8 @@ const PostCategory = styled(Paper)<{ name: Category }>`
 
     p {
       display: -webkit-box;
-      text-overflow: ellipsis;
       overflow: hidden;
+      text-overflow: ellipsis;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
@@ -129,6 +138,11 @@ const PostCategories = styled.main`
     height: 466px;
     position: relative;
     padding-bottom: 3rem;
+
+    @media (max-width: 600px) {
+      height: unset !important;
+      margin: 0.5rem 0 !important;
+    }
 
     > ${Link} {
       bottom: 1rem;
