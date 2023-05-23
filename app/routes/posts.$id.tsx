@@ -49,6 +49,10 @@ const headers: HeadersFunction = ({ loaderHeaders }) => ({
 })
 
 const Post = styled.default(PageWithHeader)`
+@media (max-width: 600px) {
+margin: 0;
+}
+
   ${Header} {
     time {
       align-self: end;
@@ -63,6 +67,10 @@ const Post = styled.default(PageWithHeader)`
 
   section {
     padding: 0 1.5rem 1.5rem;
+
+    @media (max-width: 600px) {
+    padding: 0 0.75rem;
+    }
 
     ${H2} {
       margin: 1.5rem 0;

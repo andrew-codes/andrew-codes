@@ -17,6 +17,10 @@ const Image = styled.img`
   margin: 1rem;
   max-height: 7rem;
   min-height: 3rem;
+
+  @media (max-width: 600px) {
+    margin-left: 0.25rem;
+  }
 `
 const ProfileInformation = styled.div`
   align-self: center;
@@ -27,6 +31,9 @@ const ProfileInformation = styled.div`
 
 const ProfileName = styled.h1`
   margin: 0;
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `
 const ProfileSummary = styled.div`
   display: grid;
@@ -39,6 +46,10 @@ const HeaderBoundary = styled.div`
 
   > * {
     margin: 0 4rem;
+
+    @media (max-width: 600px) {
+      margin: 0 0.5rem;
+    }
   }
 `
 const Header = styled.header`

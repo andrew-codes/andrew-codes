@@ -7,8 +7,8 @@ import PageMeta from "~/components/PageMeta"
 import Paper from "~/components/Paper"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
-import type { Category } from "~/libs/categories"
-import { getColor, getDescription } from "~/libs/categories"
+import { Category, getColors } from "~/libs/categories"
+import { getBackgroundGradient, getDescription } from "~/libs/categories"
 import { getHash, getFilePartsToHash } from "~/libs/hash.server"
 import postsByCategory from "~/libs/posts/categorize"
 import deserializePosts from "~/libs/posts/posts"
@@ -48,6 +48,23 @@ const Blockquote = styled.blockquote`
 const Hero = styled(Paper)`
   padding: 1rem 1.5rem;
 
+  @media (max-width: 600px) {
+    border-radius: 1rem 1rem 0 0;
+    margin: 0;
+    position: relative;
+
+    ::after {
+      background-color: rgb(255, 255, 255);
+      bottom: -1rem;
+      content: "";
+      height: 1rem;
+      left: 0;
+      position: absolute;
+      right: 0;
+      z-index: 1;
+    }
+  }
+
   h1 {
     margin-top: 0;
   }
@@ -63,7 +80,7 @@ const Hero = styled(Paper)`
 
 const PostCategory = styled(Paper)<{ name: Category }>`
   background: ${({ name }) => {
-    return getColor(name)
+    return getBackgroundGradient(name)
   }};
   border: none;
   color: rgb(255, 255, 255) !important;
@@ -72,8 +89,23 @@ const PostCategory = styled(Paper)<{ name: Category }>`
   width: calc(50% - 0.5rem);
 
   @media (max-width: 600px) {
-    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+    margin: 0;
     min-height: unset !important;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+
+    ::after {
+      background-color: ${({ name }) => getColors(name)[0]};
+      bottom: -1rem;
+      content: "";
+      height: 1rem;
+      left: 0;
+      position: absolute;
+      right: 0;
+      z-index: 1;
+    }
   }
 
   h2 {
@@ -133,6 +165,10 @@ const PostCategories = styled.main`
   flex-wrap: wrap;
   margin-top: 0.5rem;
 
+  @media (max-width: 600px) {
+    margin: 0;
+  }
+
   > ${PostCategory} {
     margin: 0.5rem;
     height: 466px;
@@ -141,7 +177,7 @@ const PostCategories = styled.main`
 
     @media (max-width: 600px) {
       height: unset !important;
-      margin: 0.5rem 0 !important;
+      margin: 0 !important;
     }
 
     > ${Link} {
