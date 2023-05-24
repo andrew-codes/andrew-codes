@@ -13,7 +13,6 @@ import {
 const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);
   border-radius: 50%;
-  grid-area: 1/1;
   margin: 1rem;
   max-height: 7rem;
   min-height: 3rem;
@@ -26,7 +25,6 @@ const ProfileInformation = styled.div`
   align-self: center;
   display: flex;
   flex-direction: column;
-  grid-area: 1/2;
 `
 
 const ProfileName = styled.h1`
@@ -36,8 +34,9 @@ const ProfileName = styled.h1`
   }
 `
 const ProfileSummary = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
 `
 const HeaderBoundary = styled.div`
   margin: 0 auto;
