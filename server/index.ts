@@ -162,9 +162,9 @@ app.use(
       directives: {
         "connect-src": MODE === "development" ? ["ws:", "'self'"] : null,
         "font-src": ["'self'"],
-        "frame-src": ["'self'"],
+        "frame-src": ["'self'", "https://www.youtube.com"],
         "img-src": ["'self'", "data:"],
-        "media-src": ["'self'", "data:", "blob:"],
+        "media-src": ["'self'", "data:", "blob:", "https://www.youtube.com"],
         "script-src": [
           "'strict-dynamic'",
           "'unsafe-eval'",
@@ -188,8 +188,10 @@ function getRequestHandlerOptions(): Parameters<
   }
   if (MODE === "production" && !process.env.DISABLE_METRONOME) {
     const buildWithMetronome = registerMetronome(build)
-    const metronomeGetLoadContext =
-      createMetronomeGetLoadContext(buildWithMetronome)
+    const metronomeGetLoadContext = createMetronomeGetLoadContext(
+      buildWithMetronome,
+      require("../config/metronome.config.js"),
+    )
     return {
       build: buildWithMetronome,
       getLoadContext: combineGetLoadContexts(
