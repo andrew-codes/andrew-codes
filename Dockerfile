@@ -29,6 +29,7 @@ RUN echo "#!/bin/sh\nset -x\nsqlite3 \$CACHE_DATABASE_PATH" >/usr/local/bin/cach
 WORKDIR /app
 # Copy built application
 COPY --from=build /app/package.json /app/package.json
+COPY --from=build /app/.yarn/patches /app/.yarn/patches
 COPY --from=build /app/build /app/build
 COPY --from=build /app/public /app/public
 COPY --from=build /app/start.js /app/start.js
