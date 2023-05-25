@@ -14,7 +14,7 @@
     "clean": "rimraf ./node_modules/.cache ./server/dist ./build ./public/build ./server-build",
     "prebuild": "yarn run clean",
     "build": "concurrently 'yarn run build/server' 'yarn run build/remix'",
-    "build/remix": "remix build --sourcemap",
+    "build/remix": "remix-esbuild-override && remix build",
     "build/server": "yarn node scripts/build-server.js"
   },
   "dependencies": {
@@ -79,6 +79,7 @@
     "esbuild-register": "^3.3.2",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
+    "fs-extra": "^11.1.1",
     "prettier": "^2.8.7",
     "remix-esbuild-override": "^3.1.0",
     "rimraf": "^5.0.1",
