@@ -2,7 +2,8 @@
 /build
 /public/build
 /public/files
-.env
+*.env
+!sample.env
 node_modules
 vendor
 deployment/dist

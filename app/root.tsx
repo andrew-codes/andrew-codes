@@ -7,9 +7,11 @@ import {
 } from "@remix-run/react"
 import type { FC } from "react"
 import { Helmet } from "react-helmet"
+import { MetronomeLinks } from "@metronome-sh/react"
 import styled from "styled-components"
 import GlobalStyles from "./components/GlobalStyles"
 import GlobalNav from "./components/MainNav"
+import { useNonce } from "./libs/NonceProvider"
 
 const Root = styled.div`
   max-width: 1200px;
@@ -27,6 +29,8 @@ const Root = styled.div`
 `
 
 const App: FC<{}> = () => {
+  const nonce = useNonce()
+
   return (
     <>
       <Helmet>
@@ -39,15 +43,16 @@ const App: FC<{}> = () => {
         <link rel="preload" as="font" href="/fonts/Lato-Light.ttf" />
         <link rel="stylesheet" type="text/css" href="/css/dracula.css" />
       </Helmet>
+      <MetronomeLinks nonce={nonce} />
       <Links />
       <GlobalStyles />
       <GlobalNav />
       <Root>
         <Outlet />
       </Root>
-      <ScrollRestoration />
-      <Scripts />
-      <LiveReload />
+      <ScrollRestoration nonce={nonce} />
+      <Scripts nonce={nonce} />
+      <LiveReload nonce={nonce} />
     </>
   )
 }

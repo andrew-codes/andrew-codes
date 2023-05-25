@@ -1,0 +1,9 @@
+POST,DELETE,PATCH,PUT  /                                        https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+# # Old blog post URLs
+
+/automating-my-developer-workbench-part-1                       /posts/devtools
+/guest-presence-detection                                       /posts/guest-presence-detection
+/jest-vs-mocha-why-jest-wins                                    /posts/jest-vs-mocha-why-jest-wins
+/react-with-relay-and-graphql-talk                              /posts/react-with-relay-graphql-talk
+/software-craftsmanship                                         /posts/software-craftsmanship
