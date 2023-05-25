@@ -1,9 +1,16 @@
 import { hydrateRoot } from "react-dom/client"
-import { startTransition, StrictMode } from "react"
+import { startTransition } from "react"
 import { RemixBrowser } from "@remix-run/react"
-// import { hydrate } from "react-dom"
 
-// hydrate(<RemixBrowser />, document)
-startTransition(() => {
-  hydrateRoot(document.body, <RemixBrowser />)
-})
+function hydrateApp() {
+  startTransition(() => {
+    hydrateRoot(document.body, <RemixBrowser />)
+  })
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+if (window.requestIdleCallback) {
+  window.requestIdleCallback(hydrateApp)
+} else {
+  window.setTimeout(hydrateApp, 1)
+}
