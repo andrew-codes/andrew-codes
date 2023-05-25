@@ -10,7 +10,8 @@ ENV NODE_ENV="production"
 FROM base as build
 RUN apt-get update -qq && \
     apt-get install -y python-is-python3 pkg-config build-essential
-COPY package.json yarn.lock .yarn/patches .
+COPY package.json yarn.lock .
+COPY ./.yarn/patches .
 RUN yarn install
 COPY . .
 RUN yarn run build
