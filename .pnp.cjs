@@ -64,6 +64,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.18.2"],\
             ["express-async-errors", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.1.1"],\
             ["fs-extra", "npm:11.1.1"],\
+            ["glob", "npm:10.2.6"],\
             ["helmet", "npm:7.0.0"],\
             ["highlight.js", "npm:11.8.0"],\
             ["isbot", "npm:3.6.10"],\
@@ -149,6 +150,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["express", "npm:4.18.2"],\
             ["express-async-errors", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.1.1"],\
             ["fs-extra", "npm:11.1.1"],\
+            ["glob", "npm:10.2.6"],\
             ["helmet", "npm:7.0.0"],\
             ["highlight.js", "npm:11.8.0"],\
             ["isbot", "npm:3.6.10"],\
