@@ -9,6 +9,7 @@ vendor
 deployment/dist
 data/cache.db
 /litefs
+/server-build
 
 .yarn/*
 !.yarn/cache
