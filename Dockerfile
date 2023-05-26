@@ -24,8 +24,6 @@ ENV CACHE_DATABASE_PATH="/$LITEFS_DIR/$CACHE_DATABASE_FILENAME"
 
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$CACHE_DATABASE_PATH" >/usr/local/bin/cache-database-cli && chmod +x /usr/local/bin/cache-database-cli
 
-RUN apt-get install -y ca-certificates
-
 WORKDIR /app
 # Copy built application
 COPY --from=build /app/package.json /app/package.json
