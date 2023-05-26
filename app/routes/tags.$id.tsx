@@ -1,6 +1,7 @@
 import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
+import { uniq } from "lodash"
 import styled from "styled-components"
 import { Header } from "~/components/Category"
 import Link from "~/components/Link"
@@ -12,7 +13,20 @@ import { getHash } from "~/libs/hash.server"
 import { getMdxPages } from "~/libs/mdx.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 import { tryFormatDate } from "~/libs/utils"
-import type { MdxPage } from "~/types"
+import type { Handle, MdxPage } from "~/types"
+
+const handle: Handle = {
+  getSitemapEntries: async (request) => {
+    const timings = {}
+    const posts = await getMdxPages({ request, timings })
+
+    const tags = uniq(posts.flatMap((post) => post.frontmatter.tags ?? []))
+
+    return tags.map((tag) => {
+      return { route: `/tags/${tag}`, priority: 0.4 }
+    })
+  },
+}
 
 const onlyForTag = (tag: string) => (posts: MdxPage[]) =>
   posts.filter((post) => post.frontmatter.tags?.includes(tag))
@@ -20,7 +34,7 @@ const onlyForTag = (tag: string) => (posts: MdxPage[]) =>
 const loader = async ({ request, params }: LoaderArgs) => {
   const timings = {}
   const posts = await getMdxPages({ request, timings })
-  const postsForTag = onlyForTag(params.id as Category)(posts)
+  const postsForTag = onlyForTag(params.id ?? "")(posts)
   return json(
     {
       posts: postsForTag,
@@ -120,4 +134,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { headers, loader }
+export { handle, headers, loader }

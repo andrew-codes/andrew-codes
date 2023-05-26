@@ -12,7 +12,16 @@ import { getHash } from "~/libs/hash.server"
 import { getMdxPages } from "~/libs/mdx.server"
 import { tryFormatDate } from "~/libs/utils"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import type { Category, MdxPage } from "~/types"
+import type { Category, Handle, MdxPage } from "~/types"
+import { getCategories } from "~/libs/categories"
+
+const handle: Handle = {
+  getSitemapEntries: async () => {
+    return getCategories().map((category) => {
+      return { route: `/${category}`, priority: 0.2 }
+    })
+  },
+}
 
 const onlyForCategory = (category: Category) => (posts: MdxPage[]) =>
   posts.filter((post) => post.frontmatter.category == category)
@@ -122,4 +131,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { headers, loader }
+export { handle, headers, loader }

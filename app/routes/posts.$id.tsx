@@ -2,7 +2,6 @@ import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
-import path from "path"
 import { useMemo } from "react"
 import * as styled from "styled-components"
 import { Header } from "~/components/Category"
@@ -13,8 +12,19 @@ import PageWithHeader from "~/components/PageWithHeader"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
 import { getHash } from "~/libs/hash.server"
-import { getMdxPage } from "~/libs/mdx.server"
+import { getMdxPage, getMdxPages } from "~/libs/mdx.server"
 import { tryFormatDate } from "~/libs/utils"
+import type { Handle } from "~/types"
+
+const handle: Handle = {
+  getSitemapEntries: async (request) => {
+    const timings = {}
+    const pages = await getMdxPages({ request, timings })
+    return pages.map((page) => {
+      return { route: `/${page.slug}`, priority: 0.6 }
+    })
+  },
+}
 
 const loader = async ({ params, request }: LoaderArgs) => {
   const { id } = params
@@ -129,4 +139,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { headers, loader }
+export { handle, headers, loader }

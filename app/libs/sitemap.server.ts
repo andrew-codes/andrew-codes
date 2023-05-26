@@ -20,12 +20,14 @@ async function getSitemapXml(request: Request, remixContext: EntryContext) {
   const rawSitemapEntries = (
     await Promise.all(
       Object.entries(remixContext.routeModules).map(async ([id, mod]) => {
+        console.log(id, mod)
         if (id === "root") return
         if (id.startsWith("routes/_")) return
         if (id.startsWith("__test_routes__")) return
 
         const handle = mod.handle as Handle | undefined
         if (handle?.getSitemapEntries) {
+          console.log("2")
           return handle.getSitemapEntries(request)
         }
 
@@ -47,6 +49,7 @@ async function getSitemapXml(request: Request, remixContext: EntryContext) {
         } else if (manifestEntry.index) {
           path = ""
         } else {
+          console.log("1")
           return
         }
 
