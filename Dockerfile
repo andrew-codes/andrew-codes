@@ -36,9 +36,9 @@ COPY --from=build /app/start.js /app/start.js
 COPY --from=build /app/index.js /app/index.js
 COPY --from=build /app/server-build /app/server-build
 
-COPY --from=flyio/litefs:0.4 /usr/local/bin/litefs /usr/local/bin/litefs
+COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
 
 # Start the server by default, this can be overwritten at runtime
-CMD ["/usr/local/bin/litefs", "mount", "--" "yarn", "node", "start.js" ]
+CMD ["litefs", "mount", "--" "yarn", "node", "start.js" ]
