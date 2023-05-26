@@ -4,11 +4,11 @@ RUN corepack enable
 RUN corepack prepare yarn@3.5.0 --activate
 RUN yarn set version 3.5.0
 LABEL fly_launch_runtime="Remix"
-WORKDIR /app
 ENV NODE_ENV="production"
 
 FROM base as build
 RUN apt-get update -qq && apt-get install -y python-is-python3 pkg-config build-essential
+WORKDIR /app
 COPY . .
 RUN yarn install
 RUN yarn run build
@@ -29,6 +29,7 @@ RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
 WORKDIR /app
 # Copy built application
 COPY --from=build /app/package.json /app/package.json
+COPY --from=build /app/yarn.lock /app/yarn.lock
 COPY --from=build /app/.yarn/patches /app/.yarn/patches
 COPY --from=build /app/build /app/build
 COPY --from=build /app/public /app/public
@@ -39,6 +40,6 @@ COPY --from=build /app/server-build /app/server-build
 COPY ./litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
-RUN cd /app
+
 # Start the server by default, this can be overwritten at runtime
 CMD ["yarn", "node", "start.js" ]
