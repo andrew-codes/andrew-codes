@@ -29,9 +29,8 @@ building...`)
 
 require("esbuild")
   .build({
-    entryPoints: [here("../server/index.ts")],
+    entryPoints: glob.sync("server/**/*.ts"),
     outdir: here("../server-build"),
-    bundle: true,
     target: [`node${pkg.engines.node}`],
     platform: "node",
     format: "cjs",
