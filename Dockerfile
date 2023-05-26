@@ -8,7 +8,7 @@ WORKDIR /app
 ENV NODE_ENV="production"
 
 FROM base as build
-RUN apt-get update -qq && \
+RUN apt-get update -qq &&
     apt-get install -y python-is-python3 pkg-config build-essential
 COPY . .
 RUN yarn install
@@ -19,7 +19,7 @@ FROM base
 ENV INTERNAL_PORT="8080"
 ENV PRIMARY_REGION="atl"
 ENV FLY="true"
-ENV LITEFS_DIR="/data/litefs"
+ENV LITEFS_DIR="/litefs"
 ENV CACHE_DATABASE_FILENAME="cache.db"
 ENV CACHE_DATABASE_PATH="/$LITEFS_DIR/$CACHE_DATABASE_FILENAME"
 
@@ -37,7 +37,7 @@ COPY --from=build /app/server-build /app/server-build
 
 COPY --from=flyio/litefs:sha-9ff02a3 /usr/local/bin/litefs /usr/local/bin/litefs
 ADD ./litefs.yml /etc/litefs.yml
-RUN mkdir -p ${LITEFS_DIR}
+RUN mkdir -p /data ${LITEFS_DIR}
 
 # Start the server by default, this can be overwritten at runtime
 CMD ["litefs", "mount", "--" "node", "start.js" ]
