@@ -23,11 +23,17 @@ const CodePostAsset: FC<{ code: string; language: string }> = ({
   )
 }
 
-const getCodePostAssetComponent = (codeAssets: Record<string, string>) => {
+const getCodePostAssetComponent = (
+  codeAssets: Record<string, string> | undefined,
+) => {
   const C: FC<{ fileName: string; language: string | undefined | null }> = ({
     fileName,
     language,
   }) => {
+    if (!codeAssets) {
+      return null
+    }
+
     const code = codeAssets[fileName]
     let lang = ""
 

@@ -23,3 +23,6 @@ type Handle = {
 }
 
 export type { Handle, SitemapEntry }
+export * from "./configuration"
+export * from "./Categories"
+export * from "./MdxPage"

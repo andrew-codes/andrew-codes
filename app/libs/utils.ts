@@ -18,4 +18,16 @@ function typedBoolean<T>(
   return Boolean(value)
 }
 
-export { getDomainUrl, removeTrailingSlash, typedBoolean }
+const tryFormatDate = (
+  dateString: string,
+  options?: Intl.DateTimeFormatOptions,
+  locale?: Intl.LocalesArgument = "en-us",
+) => {
+  try {
+    return new Date(dateString).toLocaleDateString(locale, options)
+  } catch {
+    return ""
+  }
+}
+
+export { tryFormatDate, getDomainUrl, removeTrailingSlash, typedBoolean }

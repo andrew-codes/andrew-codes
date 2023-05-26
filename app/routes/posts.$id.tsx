@@ -12,36 +12,22 @@ import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
-import { directoryPath, fileName, readDirFiles } from "~/libs/fs.server"
 import { getHash } from "~/libs/hash.server"
-import parsedMetadata from "~/libs/posts/parsedMetadata"
-import { getPartsToHash, getPostById } from "~/libs/posts/posts.server"
+import { getMdxPage } from "~/libs/mdx.server"
+import { tryFormatDate } from "~/libs/utils"
 
-const loader = async (args: LoaderArgs) => {
-  const { id } = args.params
-  const post = await getPostById(id)
-  const [code, metadata, { filePath }] = post
+const loader = async ({ params, request }: LoaderArgs) => {
+  const { id } = params
+  if (!id) {
+    throw new Error("Missing id")
+  }
 
-  let codeAssets = {}
-  try {
-    const assetsFiles = await readDirFiles(
-      path.join(directoryPath(filePath), "assets"),
-    )
-    codeAssets = assetsFiles
-      .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
-      .reduce(
-        (acc, [assetFilePath, assetFileContent]) => ({
-          ...acc,
-          [fileName(assetFilePath)]: assetFileContent,
-        }),
-        {},
-      )
-  } catch (error) {}
+  const timings = {}
+  const post = await getMdxPage(id, { request, timings })
 
-  return json(
-    { code, metadata, codeAssets },
-    { headers: { ETag: getHash(getPartsToHash([post])) } },
-  )
+  return json(post, {
+    headers: { ETag: getHash([post.code, JSON.stringify(post.frontmatter)]) },
+  })
 }
 
 const headers: HeadersFunction = ({ loaderHeaders }) => ({
@@ -95,13 +81,8 @@ margin: 0;
 `
 
 const PostRoute = () => {
-  const {
-    code,
-    metadata: rawMetadata,
-    codeAssets,
-  } = useLoaderData<typeof loader>()
+  const { code, frontmatter, codeAssets } = useLoaderData<typeof loader>()
   const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
-  const metadata = parsedMetadata(rawMetadata)
   const PostCodeAsset = useMemo(
     () => getCodePostAssetComponent(codeAssets),
     [codeAssets],
@@ -109,20 +90,23 @@ const PostRoute = () => {
 
   return (
     <>
-      <PageMeta title={metadata?.title} description={metadata?.description} />
+      <PageMeta
+        title={frontmatter.title ?? "Post - Andrew Smith"}
+        description={frontmatter.description ?? ""}
+      />
       <Post as="article">
-        <Header category={metadata?.category}>
-          <h1>{metadata?.title}</h1>
-          {!!metadata?.date && (
-            <time dateTime={metadata.date.toLocaleString()}>
-              {metadata.date.toLocaleDateString(undefined, {
+        <Header category={frontmatter.category}>
+          <h1>{frontmatter.title}</h1>
+          {!!frontmatter.date && (
+            <time dateTime={tryFormatDate(frontmatter.date)}>
+              {tryFormatDate(frontmatter.date, {
                 month: "long",
                 year: "numeric",
               })}
             </time>
           )}
-          {!!metadata?.tags && metadata?.tags.length > 0 && (
-            <Tags tags={metadata.tags} />
+          {!!frontmatter.tags && frontmatter.tags.length > 0 && (
+            <Tags tags={frontmatter.tags} />
           )}
         </Header>
         <section>

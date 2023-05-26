@@ -7,31 +7,31 @@ import PageMeta from "~/components/PageMeta"
 import Paper from "~/components/Paper"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
-import { Category, getColors } from "~/libs/categories"
-import { getBackgroundGradient, getDescription } from "~/libs/categories"
-import { getHash, getFilePartsToHash } from "~/libs/hash.server"
-import postsByCategory from "~/libs/posts/categorize"
-import deserializePosts from "~/libs/posts/posts"
 import {
-  getPartsToHash,
-  getPosts,
-  toClientPosts,
-} from "~/libs/posts/posts.server"
+  getBackgroundGradient,
+  getColors,
+  getDescription,
+} from "~/libs/categories"
+import { getHash, getFilePartsToHash } from "~/libs/hash.server"
+import { getMdxPages } from "~/libs/mdx.server"
+import postsByCategory from "~/libs/posts/categorize"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
+import type { Category } from "~/types"
 
-const loader = async (args: LoaderArgs) => {
-  const postsBySlug = await getPosts()
+const loader = async ({ request, params }: LoaderArgs) => {
+  const timings = {}
+  const posts = await getMdxPages({ request, timings })
 
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
 
   return json(
-    { posts: toClientPosts(postsBySlug) },
+    { posts: posts },
     {
       headers: {
         ETag: getHash(
-          getPartsToHash(Object.values(postsBySlug)).concat(
-            selfFilePartsToHash,
-          ),
+          posts
+            .flatMap((post) => [post.code, JSON.stringify(post.frontmatter)])
+            .concat([selfFilePartsToHash]),
         ),
       },
     },
@@ -221,31 +221,34 @@ const HomeRoute = () => {
         </Blockquote>
       </Hero>
       <PostCategories>
-        {postsByCategory(deserializePosts(Object.entries(posts))).map(
-          ([category, posts]) => (
-            <PostCategory as="section" key={category} name={category}>
-              <h2>{category}</h2>
-              <p>{getDescription(category)}</p>
-              <Posts>
-                {posts
-                  .slice(0, 3)
-                  .sort(sortByMany(newestFirst, alphabetically))
-                  .map(([slug, [_, metadata]]) => (
-                    <li key={slug}>
-                      <h3>
-                        <Link to={`/posts/${slug}`}>{metadata?.title}</Link>
-                      </h3>
-                      {metadata?.description && <p>{metadata?.description}</p>}
-                      {!!metadata?.tags && metadata?.tags.length > 0 && (
-                        <Tags tags={metadata.tags} />
+        {postsByCategory(posts).map(([category, posts]) => (
+          <PostCategory as="section" key={category} name={category}>
+            <h2>{category}</h2>
+            <p>{getDescription(category)}</p>
+            <Posts>
+              {posts
+                .slice(0, 3)
+                .sort(sortByMany(newestFirst, alphabetically))
+                .map((post) => (
+                  <li key={post.slug}>
+                    <h3>
+                      <Link to={`/posts/${post.slug}`}>
+                        {post.frontmatter.title}
+                      </Link>
+                    </h3>
+                    {post.frontmatter.description && (
+                      <p>{post.frontmatter.description}</p>
+                    )}
+                    {!!post.frontmatter.tags &&
+                      post.frontmatter.tags.length > 0 && (
+                        <Tags tags={post.frontmatter.tags} />
                       )}
-                    </li>
-                  ))}
-              </Posts>
-              <Link to={`category/${category}`}>See more...</Link>
-            </PostCategory>
-          ),
-        )}
+                  </li>
+                ))}
+            </Posts>
+            <Link to={`category/${category}`}>See more...</Link>
+          </PostCategory>
+        ))}
       </PostCategories>
     </>
   )
