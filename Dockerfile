@@ -39,6 +39,6 @@ COPY --from=build /app/server-build /app/server-build
 COPY ./litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
-
+RUN cd /app
 # Start the server by default, this can be overwritten at runtime
 CMD ["yarn", "node", "start.js" ]
