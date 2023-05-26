@@ -41,4 +41,4 @@ ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
 
 # Start the server by default, this can be overwritten at runtime
-CMD ["litefs", "mount", "--" "yarn", "node", "start.js" ]
+CMD ["yarn", "node", "start.js" ]
