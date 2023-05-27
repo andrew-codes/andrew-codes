@@ -32,7 +32,8 @@ COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/yarn.lock /app/yarn.lock
 COPY --from=build /app/.yarn /app/.yarn
 COPY --from=build /app/build /app/build
-COPY --from=build /app/posts /app/posts
+COPY ./app/posts /app/app/posts
+COPY ./app/components /app/app/components
 COPY --from=build /app/public /app/public
 COPY --from=build /app/start.js /app/start.js
 COPY --from=build /app/index.js /app/index.js
