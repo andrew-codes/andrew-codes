@@ -36,12 +36,42 @@ const App: FC<{}> = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="preload" as="font" href="/fonts/Lato-Regular.ttf" />
-        <link rel="preload" as="font" href="/fonts/Lato-Bold.ttf" />
-        <link rel="preload" as="font" href="/fonts/Lato-Thin.ttf" />
-        <link rel="preload" as="font" href="/fonts/Lato-Black.ttf" />
-        <link rel="preload" as="font" href="/fonts/Lato-Light.ttf" />
-        <link rel="stylesheet" type="text/css" href="/css/dracula.css" />
+        <link
+          crossOrigin="anonymous"
+          rel="preload"
+          as="font"
+          href="/fonts/Lato-Regular.ttf"
+        />
+        <link
+          crossOrigin="anonymous"
+          rel="preload"
+          as="font"
+          href="/fonts/Lato-Bold.ttf"
+        />
+        <link
+          crossOrigin="anonymous"
+          rel="preload"
+          as="font"
+          href="/fonts/Lato-Thin.ttf"
+        />
+        <link
+          crossOrigin="anonymous"
+          rel="preload"
+          as="font"
+          href="/fonts/Lato-Black.ttf"
+        />
+        <link
+          crossOrigin="anonymous"
+          rel="preload"
+          as="font"
+          href="/fonts/Lato-Light.ttf"
+        />
+        <link
+          crossOrigin="anonymous"
+          rel="stylesheet"
+          type="text/css"
+          href="/css/dracula.css"
+        />
       </Helmet>
       <MetronomeLinks nonce={nonce} />
       <Links />
