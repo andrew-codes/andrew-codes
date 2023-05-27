@@ -43,16 +43,16 @@ const App: FC<{}> = () => {
         <link rel="preload" as="font" href="/fonts/Lato-Light.ttf" />
         <link rel="stylesheet" type="text/css" href="/css/dracula.css" />
       </Helmet>
-      <MetronomeLinks nonce={`nonce-${nonce}`} />
+      <MetronomeLinks nonce={nonce} />
       <Links />
       <GlobalStyles />
       <GlobalNav />
       <Root>
         <Outlet />
       </Root>
-      <ScrollRestoration nonce={`nonce-${nonce}`} />
-      <Scripts nonce={`nonce-${nonce}`} />
-      <LiveReload nonce={`nonce-${nonce}`} />
+      <ScrollRestoration nonce={nonce} />
+      <Scripts nonce={nonce} />
+      <LiveReload nonce={nonce} />
     </>
   )
 }
