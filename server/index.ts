@@ -169,8 +169,9 @@ app.use(
           "'strict-dynamic'",
           "'unsafe-eval'",
           "'self'",
-          // @ts-expect-error
-          (req, res) => `'nonce-${res.locals.cspNonce}'`,
+          "'unsafe-inline'",
+          /* // @ts-expect-error*/
+          // (req, res) => `'nonce-${res.locals.cspNonce}'`,
         ],
         "script-src-attr": ["'unsafe-inline'"],
         "upgrade-insecure-requests": null,
