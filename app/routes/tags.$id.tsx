@@ -12,7 +12,8 @@ import Tags from "~/components/Tags"
 import { getHash } from "~/libs/hash.server"
 import { getMdxPages } from "~/libs/mdx.server"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import { tryFormatDate } from "~/libs/utils"
+import { getServerTimeHeader } from "~/libs/timing.server"
+import { tryFormatDate, useLoaderHeaders } from "~/libs/utils"
 import type { Handle, MdxPage } from "~/types"
 
 const handle: Handle = {
@@ -40,7 +41,11 @@ const loader = async ({ request, params }: LoaderArgs) => {
       posts: postsForTag,
     },
     {
+      status: 200,
       headers: {
+        "Cache-Control": "private, max-age=3600",
+        Vary: "Cookie",
+        "Server-Timing": getServerTimeHeader(timings),
         ETag: getHash(
           postsForTag.flatMap((post) => [
             post.code,
@@ -52,9 +57,8 @@ const loader = async ({ request, params }: LoaderArgs) => {
   )
 }
 
-const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  ETag: loaderHeaders.get("ETag"),
-})
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Page = styled(PageWithHeader)`
   padding-bottom: 2rem;

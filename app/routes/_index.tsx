@@ -16,6 +16,8 @@ import { getHash, getFilePartsToHash } from "~/libs/hash.server"
 import { getMdxPages } from "~/libs/mdx.server"
 import postsByCategory from "~/libs/posts/categorize"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
+import { getServerTimeHeader } from "~/libs/timing.server"
+import { useLoaderHeaders } from "~/libs/utils"
 import type { Category } from "~/types"
 
 const loader = async ({ request, params }: LoaderArgs) => {
@@ -27,7 +29,11 @@ const loader = async ({ request, params }: LoaderArgs) => {
   return json(
     { posts: posts },
     {
+      status: 200,
       headers: {
+        "Cache-Control": "private, max-age=3600",
+        Vary: "Cookie",
+        "Server-Timing": getServerTimeHeader(timings),
         ETag: getHash(
           posts
             .flatMap((post) => [post.code, JSON.stringify(post.frontmatter)])
@@ -38,9 +44,8 @@ const loader = async ({ request, params }: LoaderArgs) => {
   )
 }
 
-const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  ETag: loaderHeaders.get("ETag"),
-})
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Blockquote = styled.blockquote`
   font-size: 1.125rem;

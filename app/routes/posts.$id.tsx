@@ -13,7 +13,8 @@ import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
 import { getHash } from "~/libs/hash.server"
 import { getMdxPage, getMdxPages } from "~/libs/mdx.server"
-import { tryFormatDate } from "~/libs/utils"
+import { getServerTimeHeader } from "~/libs/timing.server"
+import { tryFormatDate, useLoaderHeaders } from "~/libs/utils"
 import type { Handle } from "~/types"
 
 const handle: Handle = {
@@ -36,13 +37,18 @@ const loader = async ({ params, request }: LoaderArgs) => {
   const post = await getMdxPage(id, { request, timings })
 
   return json(post, {
-    headers: { ETag: getHash([post.code, JSON.stringify(post.frontmatter)]) },
+    status: 200,
+    headers: {
+      "Cache-Control": "private, max-age=3600",
+      Vary: "Cookie",
+      "Server-Timing": getServerTimeHeader(timings),
+      ETag: getHash([post.code, JSON.stringify(post.frontmatter)]),
+    },
   })
 }
 
-const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  ETag: loaderHeaders.get("ETag"),
-})
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Post = styled.default(PageWithHeader)`
 @media (max-width: 600px) {

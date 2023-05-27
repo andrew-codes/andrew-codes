@@ -10,10 +10,11 @@ import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
 import { getHash } from "~/libs/hash.server"
 import { getMdxPages } from "~/libs/mdx.server"
-import { tryFormatDate } from "~/libs/utils"
+import { tryFormatDate, useLoaderHeaders } from "~/libs/utils"
 import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 import type { Category, Handle, MdxPage } from "~/types"
 import { getCategories } from "~/libs/categories"
+import { getServerTimeHeader } from "~/libs/timing.server"
 
 const handle: Handle = {
   getSitemapEntries: async () => {
@@ -36,7 +37,11 @@ const loader = async ({ request, params }: LoaderArgs) => {
       posts: postsForCategory,
     },
     {
+      status: 200,
       headers: {
+        "Cache-Control": "private, max-age=3600",
+        Vary: "Cookie",
+        "Server-Timing": getServerTimeHeader(timings),
         ETag: getHash(
           postsForCategory.flatMap((post) => [
             post.code,
@@ -48,9 +53,8 @@ const loader = async ({ request, params }: LoaderArgs) => {
   )
 }
 
-const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  ETag: loaderHeaders.get("ETag"),
-})
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Page = styled(PageWithHeader)`
   padding-bottom: 2rem;
