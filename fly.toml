@@ -2,7 +2,7 @@
 #
 
 app = "andrew-codes"
-primary_region = "atl"
+primary_region = "iad"
 kill_signal = "SIGINT"
 kill_timeout = 5
 
