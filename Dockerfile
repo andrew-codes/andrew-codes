@@ -36,8 +36,8 @@ COPY --from=build /app/public /app/public
 COPY --from=build /app/start.js /app/start.js
 COPY --from=build /app/index.js /app/index.js
 COPY --from=build /app/server-build /app/server-build
-
-COPY ./litefs /app/litefs
+COPY --from=build /app/config /app/config
+COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
 
