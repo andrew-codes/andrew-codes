@@ -1,15 +1,13 @@
-const fsExtra = require("fs-extra")
-const path = require("path")
-const glob = require("glob")
-const pkg = require("../package.json")
+import fsExtra from "fs-extra"
+import path from "path"
+import glob from "glob"
+import pkg from "../package.json"
 
-const here = (...s) => path.join(__dirname, ...s)
+const here = (...s: string[]) => path.join(__dirname, ...s)
 
 const allFiles = glob.sync("server/**/*.*", {
   ignore: ["**/tsconfig.json", "**/eslint*", "**/__tests__/**"],
 })
-
-console.log(allFiles)
 
 const entries = []
 for (const file of allFiles) {
@@ -36,7 +34,7 @@ require("esbuild")
     format: "cjs",
     logLevel: "info",
   })
-  .catch((error) => {
+  .catch((error: any) => {
     console.error(error)
     process.exit(1)
   })

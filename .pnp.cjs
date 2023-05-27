@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/compression", "npm:1.7.2"],\
             ["@types/eslint", "npm:8.37.0"],\
             ["@types/express", "npm:4.17.17"],\
+            ["@types/fs-extra", "npm:11.0.1"],\
             ["@types/lodash", "npm:4.14.192"],\
             ["@types/morgan", "npm:1.9.4"],\
             ["@types/node", "npm:17.0.45"],\
@@ -134,6 +135,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/compression", "npm:1.7.2"],\
             ["@types/eslint", "npm:8.37.0"],\
             ["@types/express", "npm:4.17.17"],\
+            ["@types/fs-extra", "npm:11.0.1"],\
             ["@types/lodash", "npm:4.14.192"],\
             ["@types/morgan", "npm:1.9.4"],\
             ["@types/node", "npm:17.0.45"],\
@@ -4637,6 +4639,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/fs-extra", [\
+        ["npm:11.0.1", {\
+          "packageLocation": "./.yarn/cache/@types-fs-extra-npm-11.0.1-f11620397b-3e930346e5.zip/node_modules/@types/fs-extra/",\
+          "packageDependencies": [\
+            ["@types/fs-extra", "npm:11.0.1"],\
+            ["@types/jsonfile", "npm:6.1.1"],\
+            ["@types/node", "npm:18.15.11"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/glob", [\
         ["npm:7.2.0", {\
           "packageLocation": "./.yarn/cache/@types-glob-npm-7.2.0-772334bf9a-6ae717fedf.zip/node_modules/@types/glob/",\
@@ -4692,6 +4705,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",\
           "packageDependencies": [\
             ["@types/json5", "npm:0.0.29"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/jsonfile", [\
+        ["npm:6.1.1", {\
+          "packageLocation": "./.yarn/cache/@types-jsonfile-npm-6.1.1-62ad833c58-0f8fe0a922.zip/node_modules/@types/jsonfile/",\
+          "packageDependencies": [\
+            ["@types/jsonfile", "npm:6.1.1"],\
+            ["@types/node", "npm:18.15.11"]\
           ],\
           "linkType": "HARD"\
         }]\

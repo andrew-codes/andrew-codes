@@ -15,7 +15,7 @@
     "prebuild": "yarn run clean",
     "build": "concurrently 'yarn run build/server' 'yarn run build/remix'",
     "build/remix": "remix-esbuild-override && remix build",
-    "build/server": "yarn node scripts/build-server.js"
+    "build/server": "yarn node --require esbuild-register scripts/build-server.ts"
   },
   "dependencies": {
     "@metronome-sh/express": "^6.0.1",
@@ -68,6 +68,7 @@
     "@types/compression": "^1.7.2",
     "@types/eslint": "^8.4.1",
     "@types/express": "^4.17.17",
+    "@types/fs-extra": "^11.0.1",
     "@types/lodash": "^4.14.192",
     "@types/morgan": "^1.9.4",
     "@types/node": "^17.0.31",
