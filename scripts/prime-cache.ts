@@ -1,4 +1,4 @@
-import { getMdxPages } from "app/libs/mdx.server"
+import { getMdxPages } from "../app/libs/mdx.server"
 
 const run = async () => {
   await getMdxPages({ forceFresh: true })

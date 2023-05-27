@@ -28,18 +28,7 @@ RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
 
 WORKDIR /app
 # Copy built application
-COPY --from=build /app/package.json /app/package.json
-COPY --from=build /app/yarn.lock /app/yarn.lock
-COPY --from=build /app/.yarn /app/.yarn
-COPY --from=build /app/build /app/build
-COPY --from=build /app/scripts/prime-cache.ts /app/scripts/prime-cache.ts
-COPY ./app/posts /app/app/posts
-COPY ./app/components /app/app/components
-COPY --from=build /app/public /app/public
-COPY --from=build /app/start.js /app/start.js
-COPY --from=build /app/index.js /app/index.js
-COPY --from=build /app/server-build /app/server-build
-COPY --from=build /app/config /app/config
+COPY --from=build /app /app
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
