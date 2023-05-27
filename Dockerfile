@@ -41,5 +41,7 @@ COPY ./litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
 
+RUN yarn install
+
 # Start the server by default, this can be overwritten at runtime
 CMD ["yarn", "node", "start.js" ]
