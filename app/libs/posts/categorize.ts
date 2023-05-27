@@ -1,13 +1,10 @@
-import type { Category } from "../categories"
+import type { Category, MdxPage } from "~/types"
 import { getCategories } from "../categories"
-import type { Post, PostMetadata } from "./types"
 
-const postsByCategory = (
-  posts: [string, Post<PostMetadata>][],
-): [Category, [string, Post<PostMetadata>][]][] => {
+const postsByCategory = (posts: MdxPage[]): [Category, MdxPage[]][] => {
   return getCategories().map((category) => [
     category,
-    posts.filter(([_, post]) => post[1]?.category === category),
+    posts.filter((post) => post.frontmatter.category === category),
   ])
 }
 

@@ -2,7 +2,6 @@ import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
-import path from "path"
 import { useMemo } from "react"
 import * as styled from "styled-components"
 import { Header } from "~/components/Category"
@@ -12,41 +11,44 @@ import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
-import { directoryPath, fileName, readDirFiles } from "~/libs/fs.server"
 import { getHash } from "~/libs/hash.server"
-import parsedMetadata from "~/libs/posts/parsedMetadata"
-import { getPartsToHash, getPostById } from "~/libs/posts/posts.server"
+import { getMdxPage, getMdxPages } from "~/libs/mdx.server"
+import { getServerTimeHeader } from "~/libs/timing.server"
+import { tryFormatDate, useLoaderHeaders } from "~/libs/utils"
+import type { Handle } from "~/types"
 
-const loader = async (args: LoaderArgs) => {
-  const { id } = args.params
-  const post = await getPostById(id)
-  const [code, metadata, { filePath }] = post
-
-  let codeAssets = {}
-  try {
-    const assetsFiles = await readDirFiles(
-      path.join(directoryPath(filePath), "assets"),
-    )
-    codeAssets = assetsFiles
-      .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
-      .reduce(
-        (acc, [assetFilePath, assetFileContent]) => ({
-          ...acc,
-          [fileName(assetFilePath)]: assetFileContent,
-        }),
-        {},
-      )
-  } catch (error) {}
-
-  return json(
-    { code, metadata, codeAssets },
-    { headers: { ETag: getHash(getPartsToHash([post])) } },
-  )
+const handle: Handle = {
+  getSitemapEntries: async (request) => {
+    const timings = {}
+    const pages = await getMdxPages({ request, timings })
+    return pages.map((page) => {
+      return { route: `/${page.slug}`, priority: 0.6 }
+    })
+  },
 }
 
-const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  ETag: loaderHeaders.get("ETag"),
-})
+const loader = async ({ params, request }: LoaderArgs) => {
+  const { id } = params
+  if (!id) {
+    throw new Error("Missing id")
+  }
+
+  const timings = {}
+  const post = await getMdxPage(id, { request, timings })
+
+  return json(post, {
+    status: 200,
+    headers: {
+      "Cache-Control": "private, max-age=3600",
+      Vary: "Cookie",
+      "Server-Timing": getServerTimeHeader(timings),
+      ETag: getHash([post.code, JSON.stringify(post.frontmatter)]),
+    },
+  })
+}
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Post = styled.default(PageWithHeader)`
 @media (max-width: 600px) {
@@ -95,13 +97,8 @@ margin: 0;
 `
 
 const PostRoute = () => {
-  const {
-    code,
-    metadata: rawMetadata,
-    codeAssets,
-  } = useLoaderData<typeof loader>()
+  const { code, frontmatter, codeAssets } = useLoaderData<typeof loader>()
   const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
-  const metadata = parsedMetadata(rawMetadata)
   const PostCodeAsset = useMemo(
     () => getCodePostAssetComponent(codeAssets),
     [codeAssets],
@@ -109,20 +106,23 @@ const PostRoute = () => {
 
   return (
     <>
-      <PageMeta title={metadata?.title} description={metadata?.description} />
+      <PageMeta
+        title={frontmatter.title ?? "Post - Andrew Smith"}
+        description={frontmatter.description ?? ""}
+      />
       <Post as="article">
-        <Header category={metadata?.category}>
-          <h1>{metadata?.title}</h1>
-          {!!metadata?.date && (
-            <time dateTime={metadata.date.toLocaleString()}>
-              {metadata.date.toLocaleDateString(undefined, {
+        <Header category={frontmatter.category}>
+          <h1>{frontmatter.title}</h1>
+          {!!frontmatter.date && (
+            <time dateTime={tryFormatDate(frontmatter.date)}>
+              {tryFormatDate(frontmatter.date, {
                 month: "long",
                 year: "numeric",
               })}
             </time>
           )}
-          {!!metadata?.tags && metadata?.tags.length > 0 && (
-            <Tags tags={metadata.tags} />
+          {!!frontmatter.tags && frontmatter.tags.length > 0 && (
+            <Tags tags={frontmatter.tags} />
           )}
         </Header>
         <section>
@@ -145,4 +145,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { headers, loader }
+export { handle, headers, loader }

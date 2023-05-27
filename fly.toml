@@ -1,16 +1,53 @@
-# fly.toml app configuration file generated for andrew-codes on 2023-05-11T13:25:17Z
-#
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "andrew-codes"
 primary_region = "atl"
+kill_signal = "SIGINT"
+kill_timeout = 5
 
-[env]
-  PORT = "8080"
+[deploy]
+release_command = "yarn node --require esbuild-register scripts/prime-cache.ts"
 
-[http_service]
+[mounts]
+  source = "litefs"
+  destination = "/data/litefs"
+
+[experimental]
+  enable_consul = true
+
+[[services]]
+  # This is set to the INTERNAL_PORT env variable in the Dockerfile
   internal_port = 8080
-  force_https = true
-  auto_stop_machines = false
-  auto_start_machines = true
+  protocol = "tcp"
+  script_checks = []
+
+  [services.concurrency]
+    hard_limit = 200
+    soft_limit = 150
+    type = "requests"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "10s"
+    interval = "15s"
+    restart_limit = 6
+    timeout = "2s"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "600s"
+    method = "get"
+    path = "/healthcheck"
+    protocol = "http"
+    timeout = 5000
+    tls_skip_verify = false
+    [services.http_checks.headers]

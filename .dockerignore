@@ -12,8 +12,6 @@ node_modules
 /.cache
 /public/build
 /build
-/.yarn
-!/.yarn/releases
 .eslintrc.js
 .prettierignore
 prettier.config.js

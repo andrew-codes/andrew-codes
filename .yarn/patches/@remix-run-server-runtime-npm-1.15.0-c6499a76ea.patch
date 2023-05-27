@@ -1,0 +1,43 @@
+diff --git a/dist/build.d.ts b/dist/build.d.ts
+index 458cfd17a15d19e08ce01c03501d899007a8c7c1..0ae53924c43c3705ae657ff0fefdbdad1323a389 100644
+--- a/dist/build.d.ts
++++ b/dist/build.d.ts
+@@ -1,6 +1,7 @@
+ import type { DataFunctionArgs } from "./routeModules";
+ import type { AssetsManifest, EntryContext, FutureConfig } from "./entry";
+ import type { ServerRouteManifest } from "./routes";
++import type { AppLoadContext } from "./data";
+ /**
+  * The output of the compiler for the server build.
+  */
+@@ -18,7 +19,7 @@ export interface ServerBuild {
+     };
+ }
+ export interface HandleDocumentRequestFunction {
+-    (request: Request, responseStatusCode: number, responseHeaders: Headers, context: EntryContext): Promise<Response> | Response;
++    (request: Request, responseStatusCode: number, responseHeaders: Headers, context: EntryContext, loadContext: AppLoadContext): Promise<Response> | Response;
+ }
+ export interface HandleDataRequestFunction {
+     (response: Response, args: DataFunctionArgs): Promise<Response> | Response;
+diff --git a/dist/server.js b/dist/server.js
+index fd10bc563175ba69bda9b21ccc7732b20f794900..9137c4fb4166b77599f1068106d92f9c774e8644 100644
+--- a/dist/server.js
++++ b/dist/server.js
+@@ -201,7 +201,7 @@ async function handleDocumentRequestRR(serverMode, build, staticHandler, request
+   };
+   let handleDocumentRequestFunction = build.entry.module.default;
+   try {
+-    return await handleDocumentRequestFunction(request, context.statusCode, headers$1, entryContext);
++    return await handleDocumentRequestFunction(request, context.statusCode, headers$1, entryContext, loadContext);
+   } catch (error) {
+     // Get a new StaticHandlerContext that contains the error at the right boundary
+     context = router.getStaticContextFromError(staticHandler.dataRoutes, context, error);
+@@ -230,7 +230,7 @@ async function handleDocumentRequestRR(serverMode, build, staticHandler, request
+       })
+     };
+     try {
+-      return await handleDocumentRequestFunction(request, context.statusCode, headers$1, entryContext);
++      return await handleDocumentRequestFunction(request, context.statusCode, headers$1, entryContext, loadContext);
+     } catch (error) {
+       logServerErrorIfNotAborted(error, request, serverMode);
+       return returnLastResortErrorResponse(error, serverMode);

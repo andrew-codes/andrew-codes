@@ -1,4 +1,5 @@
-import { FC } from "react"
+import type { FC } from "react"
+import { Fragment } from "react"
 import styled from "styled-components"
 import Link from "./Link"
 import SmallContentDivider from "./SmallContentDivider"
@@ -25,14 +26,14 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
           <Tag to={`/tags/${tag}`}>{tag}</Tag>
         </li>
       ) : (
-        <>
+        <Fragment key={tag}>
           <li key={`${tag}-divider`}>
             <SmallContentDivider />
           </li>
           <li key={tag}>
             <Tag to={`/tags/${tag}`}>{tag}</Tag>
           </li>
-        </>
+        </Fragment>
       ),
     )}
   </TagList>

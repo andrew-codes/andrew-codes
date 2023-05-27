@@ -1,4 +1,5 @@
-import { HeadersFunction } from "@remix-run/node"
+import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
+import { json } from "@remix-run/node"
 import type { FC } from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import {
@@ -35,24 +36,30 @@ import {
   SummarizedItems,
   WorkExperience,
 } from "~/components/resume"
-import { getFilePartsToHash } from "~/libs/hash.server"
+import { getFilePartsToHash, getHash } from "~/libs/hash.server"
+import { getServerTimeHeader } from "~/libs/timing.server"
+import { useLoaderHeaders } from "~/libs/utils"
 
 const loader = async (args: LoaderArgs) => {
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
+  const timings = {}
 
   return json(
     {},
     {
+      status: 200,
       headers: {
-        ETag: getHash(selfFilePartsToHash),
+        "Cache-Control": "private, max-age=3600",
+        Vary: "Cookie",
+        "Server-Timing": getServerTimeHeader(timings),
+        ETag: getHash([selfFilePartsToHash]),
       },
     },
   )
 }
 
-const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  ETag: loaderHeaders.get("ETag"),
-})
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Main = styled.main`
   margin: 0;
@@ -487,4 +494,4 @@ const ResumeRoute: FC<{}> = () => {
 }
 
 export default ResumeRoute
-export { headers, loaders }
+export { headers, loader }

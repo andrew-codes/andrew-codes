@@ -1,22 +1,28 @@
-import type { ClientPost } from "./types"
-type PostSort = (a: [string, ClientPost], b: [string, ClientPost]) => 0 | 1 | -1
+import type { MdxPage } from "~/types"
 
-const newestFirst: PostSort = ([_, [__, a]], [___, [____, b]]) => {
-  if (a?.date?.getTime() ?? 0 > (b?.date?.getTime() ?? 0)) {
+type PostSort = (a: MdxPage, b: MdxPage) => 0 | 1 | -1
+
+const newestFirst: PostSort = (a, b) => {
+  const aDate = new Date(a.frontmatter?.date ?? 0)
+  const bDate = new Date(b.frontmatter?.date ?? 0)
+
+  if (aDate.getTime() ?? 0 > (bDate.getTime() ?? 0)) {
     return -1
   }
-  if (b?.date?.getTime() ?? 0 > (a?.date?.getTime() ?? 0)) {
+  if (bDate.getTime() ?? 0 > (aDate.getTime() ?? 0)) {
     return 1
   }
 
   return 0
 }
 
-const alphabetically: PostSort = ([_, [__, a]], [___, [____, b]]) => {
-  if (a?.title > b?.title) {
+const alphabetically: PostSort = (a, b) => {
+  const aTitle = a.frontmatter?.title ?? ""
+  const bTitle = b.frontmatter?.title ?? ""
+  if (aTitle > bTitle) {
     return 1
   }
-  if (b?.title > a?.title) {
+  if (bTitle > aTitle) {
     return -1
   }
 
