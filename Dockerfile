@@ -31,8 +31,8 @@ RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
 WORKDIR /app
 # Copy built application
 COPY --from=build /app/dist /app/dist
-COPY --from=build /app/app.index.js /app/app.index.js
-COPY --from=build /app/app.start.js /app/app.start.js
+COPY --from=build /app/index.js /app/index.js
+COPY --from=build /app/start.js /app/start.js
 COPY --from=build /app/.yarn /app/.yarn
 COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
