@@ -4,19 +4,21 @@ RUN corepack enable
 RUN corepack prepare yarn@3.5.0 --activate
 RUN yarn set version 3.5.0
 LABEL fly_launch_runtime="Remix"
-ENV NODE_ENV="production"
 
 FROM base as build
+ENV NODE_ENV="production"
 RUN apt-get update -qq && apt-get install -y python-is-python3 pkg-config build-essential
 WORKDIR /app
 COPY . .
 RUN yarn install
-RUN yarn run build
+RUN yarn run build/app
+RUN yarn run build/proxy
 
 # Final stage for app image
 FROM base
+ENV NODE_ENV="production"
 ENV INTERNAL_PORT="8080"
-ENV PRIMARY_REGION="atl"
+ENV PRIMARY_REGION="iad"
 ENV FLY="true"
 ENV LITEFS_DIR="/litefs"
 ENV CACHE_DATABASE_FILENAME="cache.db"
@@ -28,7 +30,14 @@ RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
 
 WORKDIR /app
 # Copy built application
-COPY --from=build /app /app
+COPY --from=build /app/dist /app/dist
+COPY --from=build /app/app.index.js /app/app.index.js
+COPY --from=build /app/app.start.js /app/app.start.js
+COPY --from=build /app/.yarn /app/.yarn
+COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
+COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
+COPY --from=build /app/package.json.js /app/package.json
+
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}

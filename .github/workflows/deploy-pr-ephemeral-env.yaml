@@ -1,0 +1,34 @@
+name: Deploy
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+    branches:
+      - main
+    paths:
+      - app
+      - config
+      - app.router
+      - types
+      - .babelrc
+      - index.js
+      - remix.config.js
+      - remix.env.d.ts
+      - start.js
+      - styled-components-esbuild-plugin.js
+      - tsconfig.json
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: andrew-codes/andrew.codes
+  PR_NUMBER: ${{ github.event.number }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/andrew-codes/gh-action-runner:latest
+    steps:
+      - name: ⬇️ Checkout source code
+        uses: actions/checkout@v3

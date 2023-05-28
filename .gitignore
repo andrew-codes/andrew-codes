@@ -9,6 +9,7 @@ vendor
 deployment/dist
 data/cache.db
 /server-build
+/dist
 
 .yarn/*
 !.yarn/cache

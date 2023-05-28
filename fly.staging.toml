@@ -1,8 +1,8 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "andrew-codes"
-primary_region = "iad"
+app = "andrew-codes-staging"
+primary_region = "atl"
 kill_signal = "SIGINT"
 kill_timeout = 5
 
