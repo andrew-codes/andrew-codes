@@ -6,18 +6,6 @@ on:
       - reopened
     branches:
       - main
-    paths:
-      - app
-      - config
-      - app.router
-      - types
-      - .babelrc
-      - index.js
-      - remix.config.js
-      - remix.env.d.ts
-      - start.js
-      - styled-components-esbuild-plugin.js
-      - tsconfig.json
 
 env:
   REGISTRY: ghcr.io
