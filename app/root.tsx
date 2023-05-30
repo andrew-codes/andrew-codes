@@ -75,7 +75,7 @@ const App: FC<{}> = () => {
           href={`${prefix}/css/dracula.css`}
         />
       </Helmet>
-      {prefix !== "" && <MetronomeLinks nonce={nonce} />}
+      {prefix === "" && <MetronomeLinks nonce={nonce} />}
       <Links />
       <GlobalStyles prefix={prefix} />
       <GlobalNav />

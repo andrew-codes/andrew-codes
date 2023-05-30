@@ -27,7 +27,6 @@ module.exports = {
     const routes = {
       ...baseRoutes,
     }
-
     return routes
   },
 }
