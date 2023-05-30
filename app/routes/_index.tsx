@@ -251,7 +251,7 @@ const HomeRoute = () => {
                   </li>
                 ))}
             </Posts>
-            <Link to={`category/${category}`}>See more...</Link>
+            <Link to={`/category/${category}`}>See more...</Link>
           </PostCategory>
         ))}
       </PostCategories>

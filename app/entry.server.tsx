@@ -10,6 +10,8 @@ import { ensurePrimary } from "litefs-js/remix"
 import { routes as otherRoutes } from "./other-routes.server"
 import { getEnv } from "./libs/env.server"
 import { NonceProvider } from "./libs/NonceProvider"
+import { Provider as DeploymentEnvironmentProvider } from "./components/DeploymentEnvironment"
+import configuration from "./libs/configuration.server"
 
 const ABORT_DELAY = 5_000
 global.ENV = getEnv()
@@ -76,46 +78,51 @@ function serveTheBots(...args: DocRequestArgs) {
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
   const sheet = new ServerStyleSheet()
 
-  return new Promise((resolve, reject) => {
-    const stream = renderToPipeableStream(
-      sheet.collectStyles(
-        <NonceProvider value={nonce}>
-          <RemixServer
-            context={remixContext}
-            url={request.url}
-            abortDelay={ABORT_DELAY}
-          />
-        </NonceProvider>,
-      ),
-      {
-        nonce,
-        // Use onAllReady to wait for the entire document to be ready
-        onAllReady() {
-          responseHeaders.set("Content-Type", "text/html")
-          const body = new PassThrough()
+  return configuration.getValue("prNumber").then(
+    ({ value }) =>
+      new Promise((resolve, reject) => {
+        const stream = renderToPipeableStream(
+          sheet.collectStyles(
+            <NonceProvider value={nonce}>
+              <DeploymentEnvironmentProvider value={!value ? "" : `/${value}`}>
+                <RemixServer
+                  context={remixContext}
+                  url={request.url}
+                  abortDelay={ABORT_DELAY}
+                />
+              </DeploymentEnvironmentProvider>
+            </NonceProvider>,
+          ),
+          {
+            nonce,
+            // Use onAllReady to wait for the entire document to be ready
+            onAllReady() {
+              responseHeaders.set("Content-Type", "text/html")
+              const body = new PassThrough()
 
-          const helmet = Helmet.renderStatic()
-          body.write("<!DOCTYPE html>", "utf-8")
-          body.write(
-            `<html lang="en"><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${helmet.style.toString()}${helmet.script.toString()}${sheet.getStyleTags()}</head><body>`,
-            "utf-8",
-          )
-          stream.pipe(body)
-          body.write(`</body></html>`, "utf-8")
-          resolve(
-            new Response(body, {
-              status: responseStatusCode,
-              headers: responseHeaders,
-            }),
-          )
-        },
-        onShellError(err: unknown) {
-          reject(err)
-        },
-      },
-    )
-    setTimeout(() => stream.abort(), ABORT_DELAY)
-  })
+              const helmet = Helmet.renderStatic()
+              body.write("<!DOCTYPE html>", "utf-8")
+              body.write(
+                `<html lang="en"><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${helmet.style.toString()}${helmet.script.toString()}${sheet.getStyleTags()}</head><body>`,
+                "utf-8",
+              )
+              stream.pipe(body)
+              body.write(`</body></html>`, "utf-8")
+              resolve(
+                new Response(body, {
+                  status: responseStatusCode,
+                  headers: responseHeaders,
+                }),
+              )
+            },
+            onShellError(err: unknown) {
+              reject(err)
+            },
+          },
+        )
+        setTimeout(() => stream.abort(), ABORT_DELAY)
+      }),
+  )
 }
 
 function serveBrowsers(...args: DocRequestArgs) {
@@ -128,51 +135,58 @@ function serveBrowsers(...args: DocRequestArgs) {
   ] = args
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
   const sheet = new ServerStyleSheet()
-  return new Promise((resolve, reject) => {
-    let didError = false
-    const stream = renderToPipeableStream(
-      sheet.collectStyles(
-        <NonceProvider value={nonce}>
-          <RemixServer
-            context={remixContext}
-            url={request.url}
-            abortDelay={ABORT_DELAY}
-          />
-        </NonceProvider>,
-      ),
-      {
-        nonce,
-        onShellReady() {
-          responseHeaders.set("Content-Type", "text/html")
-          const body = new PassThrough()
 
-          const helmet = Helmet.renderStatic()
-          body.write("<!DOCTYPE html>", "utf-8")
-          body.write(
-            `<html lang="en"><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${helmet.style.toString()}${helmet.script.toString()}${sheet.getStyleTags()}</head><body>`,
-            "utf-8",
-          )
-          stream.pipe(body)
-          body.write(`</body></html>`, "utf-8")
+  return configuration.getValue("prNumber").then(
+    ({ value }) =>
+      new Promise((resolve, reject) => {
+        let didError = false
 
-          resolve(
-            new Response(body, {
-              status: didError ? 500 : responseStatusCode,
-              headers: responseHeaders,
-            }),
-          )
-        },
-        onShellError(err: unknown) {
-          reject(err)
-        },
-        onError(err: unknown) {
-          didError = true
-          console.error(err)
-        },
-      },
-    )
-    setTimeout(() => stream.abort(), ABORT_DELAY)
-  })
+        const stream = renderToPipeableStream(
+          sheet.collectStyles(
+            <NonceProvider value={nonce}>
+              <DeploymentEnvironmentProvider value={!value ? "" : `/${value}`}>
+                <RemixServer
+                  context={remixContext}
+                  url={request.url}
+                  abortDelay={ABORT_DELAY}
+                />
+              </DeploymentEnvironmentProvider>
+            </NonceProvider>,
+          ),
+          {
+            nonce,
+            onShellReady() {
+              responseHeaders.set("Content-Type", "text/html")
+              const body = new PassThrough()
+
+              const helmet = Helmet.renderStatic()
+              body.write("<!DOCTYPE html>", "utf-8")
+              body.write(
+                `<html lang="en"><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${helmet.style.toString()}${helmet.script.toString()}${sheet.getStyleTags()}</head><body>`,
+                "utf-8",
+              )
+              stream.pipe(body)
+              body.write(`</body></html>`, "utf-8")
+
+              resolve(
+                new Response(body, {
+                  status: didError ? 500 : responseStatusCode,
+                  headers: responseHeaders,
+                }),
+              )
+            },
+            onShellError(err: unknown) {
+              reject(err)
+            },
+            onError(err: unknown) {
+              didError = true
+              console.error(err)
+            },
+          },
+        )
+        setTimeout(() => stream.abort(), ABORT_DELAY)
+      }),
+  )
 }
 
 async function handleDataRequest(response: Response) {

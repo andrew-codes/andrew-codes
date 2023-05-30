@@ -51,6 +51,7 @@ const envConfigurationDefintion = {
   cacheDatabasePath: "CACHE_DATABASE_PATH",
   primaryHost: "PRIMARY_HOST",
   nodeEnv: "NODE_ENV",
+  prNumber: "PR_NUMBER",
 }
 
 const configuration = createEnvConfigResolver(envConfigurationDefintion)
