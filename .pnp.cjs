@@ -94,11 +94,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-rehype", "npm:10.1.0"],\
             ["remix", "npm:1.15.0"],\
             ["remix-esbuild-override", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.1.0"],\
+            ["remix-mount-routes", "npm:0.1.3"],\
             ["rimraf", "npm:5.0.1"],\
             ["server-timing", "npm:3.3.3"],\
             ["sha1", "npm:1.1.1"],\
             ["styled-components", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:5.3.9"],\
             ["tsc", "npm:2.0.4"],\
+            ["tslib", "npm:2.5.2"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
           ],\
           "linkType": "SOFT"\
@@ -186,11 +188,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["remark-rehype", "npm:10.1.0"],\
             ["remix", "npm:1.15.0"],\
             ["remix-esbuild-override", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.1.0"],\
+            ["remix-mount-routes", "npm:0.1.3"],\
             ["rimraf", "npm:5.0.1"],\
             ["server-timing", "npm:3.3.3"],\
             ["sha1", "npm:1.1.1"],\
             ["styled-components", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:5.3.9"],\
             ["tsc", "npm:2.0.4"],\
+            ["tslib", "npm:2.5.2"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"]\
           ],\
           "linkType": "SOFT"\
@@ -14595,6 +14599,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["remix-mount-routes", [\
+        ["npm:0.1.3", {\
+          "packageLocation": "./.yarn/cache/remix-mount-routes-npm-0.1.3-71699b89d4-dcdb84cf8d.zip/node_modules/remix-mount-routes/",\
+          "packageDependencies": [\
+            ["remix-mount-routes", "npm:0.1.3"],\
+            ["minimatch", "npm:5.1.6"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["request-progress", [\
         ["npm:3.0.0", {\
           "packageLocation": "./.yarn/cache/request-progress-npm-3.0.0-f79f1c9e67-6ea1761dcc.zip/node_modules/request-progress/",\
@@ -15974,6 +15988,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/tslib-npm-2.5.0-bb364efebd-ae3ed5f9ce.zip/node_modules/tslib/",\
           "packageDependencies": [\
             ["tslib", "npm:2.5.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.5.2", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.5.2-3f1b58afbb-4d3c1e238b.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:2.5.2"]\
           ],\
           "linkType": "HARD"\
         }]\

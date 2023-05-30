@@ -7,6 +7,10 @@ LABEL fly_launch_runtime="Remix"
 
 FROM base as build
 ENV NODE_ENV="production"
+ARG PR_NUMBER
+ENV PR_NUMBER=${PR_NUMBER}
+ARG DEPLOYMENT_ENV
+ENV PR_NUMBER=${DEPLOYMENT_ENV}
 RUN apt-get update -qq && apt-get install -y python-is-python3 pkg-config build-essential
 WORKDIR /app
 COPY . .
