@@ -45,7 +45,7 @@ RUN mkdir -p /data ${LITEFS_DIR}
 
 ARG PR_NUMBER
 ENV PR_NUMBER=${PR_NUMBER}
-ENV APP_STAGING_DIR="/data/litefs/apps"
+ENV APP_STAGING_DIR="/app/data/litefs/apps"
 RUN mkdir -p ${APP_STAGING_DIR}
 COPY --from=build /app/scripts/stage-app.js /app/scripts/stage-app.js
 

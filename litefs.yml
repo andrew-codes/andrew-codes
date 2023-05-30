@@ -21,7 +21,7 @@ fuse:
 # to extend retention too long.
 data:
   # Path to internal data storage.
-  dir: "/data/litefs"
+  dir: "/app/data/litefs"
 
 proxy:
   # matches the internal_port in fly.toml
