@@ -5,7 +5,14 @@ module.exports = {
       script: "index.js",
       interpreter_args:
         "--require ./.pnp.cjs --require esbuild-register --inspect",
-      watch: ["./index.js", "./server/**/*.ts", "./.env"],
+      watch: [
+        "./index.js",
+        "./app.router/**/*.ts",
+        "./server/**/*.ts",
+        "./.env",
+        "config/app/**",
+        "config/pm2.config.js",
+      ],
       env: {
         NODE_ENV: process.env.NODE_ENV ?? "development",
         FORCE_COLOR: "1",
@@ -13,7 +20,7 @@ module.exports = {
     },
     {
       name: "Remix",
-      script: "start.remix.dev.js",
+      script: "app.start.remix.dev.js",
       interpreter_args:
         "--require ./.pnp.cjs --require esbuild-register --inspect",
       ignore_watch: ["."],

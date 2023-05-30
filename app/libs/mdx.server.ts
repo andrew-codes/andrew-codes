@@ -16,7 +16,9 @@ const mdx = async (
   mdxFile: MdxPageFile,
 ): Promise<{ code: string; frontmatter: Record<string, any> }> => {
   const source = await fs.readFile(mdxFile.filePath, "utf8")
-  const componentsDir = path.join("app", "components")
+  const componentsDir = path.join(
+    path.join(__dirname, "..", "app", "components"),
+  )
   const allComponentFiles = await readDirFiles(componentsDir)
   const files = allComponentFiles
     .filter(([filePath]) => !/GlobalStyles\.tsx/.test(filePath))
@@ -26,7 +28,7 @@ const mdx = async (
     ])
     .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
 
-  const postDir = path.join("app", "posts")
+  const postDir = path.join(__dirname, "..", "app", "posts")
   const { default: remarkMdxImages } = await import("remark-mdx-images")
   const { default: remarkGfm } = await import("remark-gfm")
   const { default: rehypeHighlight } = await import("rehype-highlight")
@@ -74,7 +76,9 @@ const mdx = async (
 const getMdxFiles = async (
   options: CachifiedOptions,
 ): Promise<Record<string, MdxPageFile>> => {
-  const allFilesInPostsDirectory = await readDir("app/posts")
+  const allFilesInPostsDirectory = await readDir(
+    path.join(__dirname, "..", "app", "posts"),
+  )
   return allFilesInPostsDirectory
     .filter((filePath) => /^.*\.mdx?$/.test(filePath))
 
@@ -94,7 +98,10 @@ const getCodeAssets = async (
 ): Promise<Record<string, string>> => {
   try {
     const assetsFiles = await readDirFiles(
-      path.join(mdxFile.filePath, "assets"),
+      path.join(
+        mdxFile.filePath.replace(new RegExp(`${mdxFile.fileName}$`), ""),
+        "assets",
+      ),
     )
     return assetsFiles
       .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))

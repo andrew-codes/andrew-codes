@@ -11,10 +11,14 @@
     "start": "yarn node index.js",
     "start/dev": "pm2-dev ./config/pm2.config.js",
     "start/dev/remix": "remix watch",
-    "clean": "rimraf ./node_modules/.cache ./server/dist ./build ./public/build ./server-build",
+    "clean/build": "rimraf  ./build ./public/build ./app.router-build ./server-build",
+    "clean/dist": "rimraf ./dist",
+    "clean": "rimraf ./node_modules/.cache && concurrently 'yarn run clean/build' 'yarn run clean/dist'",
     "prebuild": "yarn run clean",
-    "build": "concurrently 'yarn run build/server' 'yarn run build/remix'",
+    "build": "yarn run prebuild && concurrently 'yarn run build/app.router' 'yarn run build/server' 'yarn run build/remix' && yarn run postbuild",
+    "postbuild": "yarn node --require esbuild-register scripts/package.ts",
     "build/remix": "remix-esbuild-override && remix build",
+    "build/app.router": "yarn node --require esbuild-register scripts/build-app.router.ts",
     "build/server": "yarn node --require esbuild-register scripts/build-server.ts"
   },
   "dependencies": {

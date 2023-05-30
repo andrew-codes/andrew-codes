@@ -49,6 +49,8 @@ const envConfigurationDefintion = {
   litefsDir: "LITEFS_DIR",
   cacheDatabaseFilename: "CACHE_DATABASE_FILENAME",
   cacheDatabasePath: "CACHE_DATABASE_PATH",
+  primaryHost: "PRIMARY_HOST",
+  nodeEnv: "NODE_ENV",
 }
 
 const configuration = createEnvConfigResolver(envConfigurationDefintion)
