@@ -36,12 +36,11 @@ COPY --from=build /app/.yarn /app/.yarn
 COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
 COPY --from=build /app/package.json /app/package.json
+RUN yarn install
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR} ${APP_STAGING_DIR}
-
-RUN yarn install
 
 ARG PR_NUMBER
 ENV PR_NUMBER=${PR_NUMBER}
