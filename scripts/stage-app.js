@@ -1,7 +1,7 @@
-import fsExtra, { ensureDir } from "fs-extra"
-import path from "path"
+const fsExtra = require("fs-extra")
+const path = require("path")
 
-const ensureStagedAppDirectory = async (): Promise<string> => {
+const ensureStagedAppDirectory = async () => {
   if (
     process.env.APP_STAGING_DIR === undefined ||
     process.env.PR_NUMBER === undefined
@@ -13,7 +13,7 @@ const ensureStagedAppDirectory = async (): Promise<string> => {
     process.env.APP_STAGING_DIR,
     `pr-${process.env.PR_NUMBER}`,
   )
-  await ensureDir(appDir)
+  await fsExtra.ensureDir(appDir)
 
   return appDir
 }
@@ -52,7 +52,4 @@ const run = async () => {
   }
 }
 
-if (require.main === module) {
-  run()
-}
-export default run
+module.exports = run

@@ -47,7 +47,7 @@ ARG PR_NUMBER
 ENV PR_NUMBER=${PR_NUMBER}
 ENV APP_STAGING_DIR="/data/litefs/apps"
 RUN mkdir -p ${APP_STAGING_DIR}
-COPY --from=build /app/scripts/stage-app.ts /app/scripts/stage-app.ts
+COPY --from=build /app/scripts/stage-app.js /app/scripts/stage-app.js
 
 # Start the server by default, this can be overwritten at runtime
 CMD ["yarn", "node", "start.js" ]
