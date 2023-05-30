@@ -19,13 +19,13 @@ const run = async () => {
       if (!fsEntryStat.isDirectory() && !fsPath.startsWith("pr-")) {
         continue
       }
-      routers[
-        `/${fsPath.replace(/^pr-/, "")}`
-      ] = require(`${fsEntryPath}/app.router`)
+      routers[`/${fsPath.replace(/^pr-/, "")}`] =
+        require(`${fsEntryPath}/app.router`).default
     }
   } else {
-    routers["/"] = require("../app.router")
+    routers["/"] = require("../app.router").default
   }
+  console.dir(routers)
   Object.entries(routers).forEach(([path, router]) => {
     app.use(path, router)
   })
