@@ -1,4 +1,4 @@
-import type { ErrorRequestHandler, ErrorRequestHandler, Router } from "express"
+import type { Router } from "express"
 import fs from "fs/promises"
 import express from "express"
 import "express-async-errors"
