@@ -1,6 +1,7 @@
 import { createRequestHandler } from "@remix-run/express"
 import compression from "compression"
 import crypto from "crypto"
+import type { RequestHandler } from "express"
 import express from "express"
 import "express-async-errors"
 import fs from "fs"
@@ -26,6 +27,12 @@ const getHost = (req: { get: (key: string) => string | undefined }) =>
 const MODE = process.env.NODE_ENV
 const BUILD_DIR = path.join(process.cwd(), "build")
 
+const asyncHandler =
+  (fn: RequestHandler): RequestHandler =>
+  (req, res, next) => {
+    return Promise.resolve(fn(req, res, next)).catch(next)
+  }
+
 const app = express.Router()
 app.use(serverTiming())
 
@@ -36,36 +43,41 @@ if (process.env.DISABLE_METRONOME) {
   })
 }
 
-app.use(async (req, res, next) => {
-  const { currentInstance, primaryInstance } = await getInstanceInfo()
-  res.set("X-Fly-Region", process.env.FLY_REGION ?? "unknown")
-  res.set("X-Fly-App", process.env.FLY_APP_NAME ?? "unknown")
-  res.set("X-Fly-Instance", currentInstance)
-  res.set("X-Fly-Primary-Instance", primaryInstance)
-  res.set("X-Frame-Options", "SAMEORIGIN")
+app.use(
+  asyncHandler(async (req, res, next) => {
+    console.log("here")
+    const { currentInstance, primaryInstance } = await getInstanceInfo()
+    res.set("X-Fly-Region", process.env.FLY_REGION ?? "unknown")
+    res.set("X-Fly-App", process.env.FLY_APP_NAME ?? "unknown")
+    res.set("X-Fly-Instance", currentInstance)
+    res.set("X-Fly-Primary-Instance", primaryInstance)
+    res.set("X-Frame-Options", "SAMEORIGIN")
 
-  const host = getHost(req)
-  if (!host.endsWith(primaryHost)) {
-    res.set("X-Robots-Tag", "noindex")
-  }
-  res.set("Access-Control-Allow-Origin", `https://${host}`)
+    const host = getHost(req)
+    if (!host.endsWith(primaryHost)) {
+      res.set("X-Robots-Tag", "noindex")
+    }
+    res.set("Access-Control-Allow-Origin", `https://${host}`)
 
-  res.set("Strict-Transport-Security", `max-age=${60 * 60 * 24 * 365 * 100}`)
-  next()
-})
+    res.set("Strict-Transport-Security", `max-age=${60 * 60 * 24 * 365 * 100}`)
+    next()
+  }),
+)
 
-app.use(async (req, res, next) => {
-  if (req.get("cf-visitor")) {
-    // console.log(`👺 disallowed cf-visitor`, req.headers)
-    // Make them wait for it...
-    await new Promise((resolve) => setTimeout(resolve, 90_000))
-    return res.send(
-      `Please go to https://${primaryHost} instead! Ping Andrew if you think you should not be seeing this...`,
-    )
-  } else {
-    return next()
-  }
-})
+app.use(
+  asyncHandler(async (req, res, next) => {
+    if (req.get("cf-visitor")) {
+      // console.log(`👺 disallowed cf-visitor`, req.headers)
+      // Make them wait for it...
+      await new Promise((resolve) => setTimeout(resolve, 90_000))
+      return res.send(
+        `Please go to https://${primaryHost} instead! Ping Andrew if you think you should not be seeing this...`,
+      )
+    } else {
+      return next()
+    }
+  }),
+)
 
 app.use((req, res, next) => {
   const proto = req.get("X-Forwarded-Proto")

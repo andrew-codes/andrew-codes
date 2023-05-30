@@ -1,4 +1,4 @@
-import type { Router } from "express"
+import type { ErrorRequestHandler, ErrorRequestHandler, Router } from "express"
 import fs from "fs/promises"
 import express from "express"
 import "express-async-errors"
@@ -28,6 +28,11 @@ const run = async () => {
   console.dir(routers)
   Object.entries(routers).forEach(([path, router]) => {
     app.use(path, router)
+  })
+
+  app.use((err: any, req: any, res: any, next: any) => {
+    console.error(err.stack)
+    res.status(500).send("Error")
   })
 
   const port = process.env.PORT ?? 3000
