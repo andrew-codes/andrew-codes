@@ -36,6 +36,7 @@ COPY --from=build /app/.yarn /app/.yarn
 COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
 COPY --from=build /app/package.json /app/package.json
+COPY --from=build /app/yarn.lock /app/yarn.lock
 RUN yarn install
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
