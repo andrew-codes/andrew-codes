@@ -22,7 +22,6 @@ module.exports = {
   serverDependenciesToBundle: [/.*(!?(esbuild))/],
   ignoredRouteFiles: ["**/.*"],
   publicPath: `/${basePath}/build/`,
-  assetsBuildDirectory: `public/${basePath}/build`,
   routes: (defineRoutes) => {
     const baseRoutes = mountRoutes(basePath, "routes")
     const routes = {
