@@ -26,7 +26,7 @@ const mdx = async (
     ])
     .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
 
-  const postDir = path.join("app", "posts")
+  const postDir = path.join(__dirname, "..", "posts")
   const { default: remarkMdxImages } = await import("remark-mdx-images")
   const { default: remarkGfm } = await import("remark-gfm")
   const { default: rehypeHighlight } = await import("rehype-highlight")
