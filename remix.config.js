@@ -23,7 +23,7 @@ module.exports = {
   ignoredRouteFiles: ["**/.*"],
   publicPath: `/${basePath}/build/`,
   routes: (defineRoutes) => {
-    const baseRoutes = mountRoutes(basePath, "routes")
+    const baseRoutes = mountRoutes(`/${basePath}`, "routes")
     const routes = {
       ...baseRoutes,
     }
