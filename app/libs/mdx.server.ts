@@ -16,7 +16,9 @@ const mdx = async (
   mdxFile: MdxPageFile,
 ): Promise<{ code: string; frontmatter: Record<string, any> }> => {
   const source = await fs.readFile(mdxFile.filePath, "utf8")
-  const componentsDir = path.join("app", "components")
+  const componentsDir = path.join(
+    path.join(__dirname, "..", "app", "components"),
+  )
   const allComponentFiles = await readDirFiles(componentsDir)
   const files = allComponentFiles
     .filter(([filePath]) => !/GlobalStyles\.tsx/.test(filePath))
