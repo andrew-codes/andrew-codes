@@ -1,8 +1,21 @@
 const { spawn } = require("child_process")
 
 async function run() {
-  console.log("Starting app...")
-  await exec("yarn run start")
+  try {
+    const prNumber = process.env.PR_NUMBER
+    const deploymentEnv = process.env.DEPLOYMENT_ENV
+
+    if (deploymentEnv === "staging" && prNumber) {
+      const stageApps = require("./scripts/stageApps")
+      await stageApps()
+    }
+
+    console.log("Starting app...")
+    await exec("yarn run start")
+  } catch (e) {
+    console.error(e)
+    process.exit(1)
+  }
 }
 run()
 
