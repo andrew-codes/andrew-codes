@@ -35,7 +35,7 @@ COPY --from=build /app/start.js /app/start.js
 COPY --from=build /app/.yarn /app/.yarn
 COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
-COPY --from=build /app/package.json.js /app/package.json
+COPY --from=build /app/package.json /app/package.json
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
