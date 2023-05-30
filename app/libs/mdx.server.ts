@@ -74,7 +74,9 @@ const mdx = async (
 const getMdxFiles = async (
   options: CachifiedOptions,
 ): Promise<Record<string, MdxPageFile>> => {
-  const allFilesInPostsDirectory = await readDir("app/posts")
+  const allFilesInPostsDirectory = await readDir(
+    path.join(__dirname, "..", "app", "posts"),
+  )
   return allFilesInPostsDirectory
     .filter((filePath) => /^.*\.mdx?$/.test(filePath))
 
