@@ -6,6 +6,9 @@ primary_region = "iad"
 kill_signal = "SIGINT"
 kill_timeout = 5
 
+[env]
+  DEPLOYMENT_ENV = "production"
+
 [mounts]
   source = "litefs"
   destination = "/data/litefs"
