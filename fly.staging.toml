@@ -9,6 +9,7 @@ kill_timeout = 5
  
 [env]
   DEPLOYMENT_ENV = "staging"
+  DISABLE_METRONOME = "true"
 
 [mounts]
   source = "litefs"
