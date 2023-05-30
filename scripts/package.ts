@@ -11,6 +11,7 @@ const run = async () => {
     here("../app/components"),
     path.join(appDir, "app", "components"),
   )
+  await fsExtra.copy(here("../app/posts"), path.join(appDir, "app", "posts"))
   await fsExtra.copy(here("../public"), path.join(appDir, "public"))
   await fsExtra.copy(
     here("../app.router-build"),
