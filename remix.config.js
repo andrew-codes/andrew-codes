@@ -21,7 +21,7 @@ module.exports = {
   cacheDirectory: "./node_modules/.cache/remix",
   serverDependenciesToBundle: [/.*(!?(esbuild))/],
   ignoredRouteFiles: ["**/.*"],
-  publicPath: `${basePath}/build/`,
+  publicPath: `/${basePath}/build/`,
   assetsBuildDirectory: `public/${basePath}/build`,
   routes: (defineRoutes) => {
     const baseRoutes = mountRoutes(basePath, "routes")
