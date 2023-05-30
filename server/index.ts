@@ -22,10 +22,11 @@ const run = async () => {
       routers[`/${fsPath.replace(/^pr-/, "")}`] =
         require(`${fsEntryPath}/app.router`).default
     }
+    app.use("/healthcheck", (req, res) => res.status(200).send("OK"))
   } else {
     routers["/"] = require("../app.router").default
   }
-  console.dir(routers)
+  console.dir(Object.keys(routers))
   Object.entries(routers).forEach(([path, router]) => {
     app.use(path, router)
   })
