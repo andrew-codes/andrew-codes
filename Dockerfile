@@ -11,8 +11,7 @@ RUN apt-get update -qq && apt-get install -y python-is-python3 pkg-config build-
 WORKDIR /app
 COPY . .
 RUN yarn install
-RUN yarn run build/app
-RUN yarn run build/proxy
+RUN yarn run build
 
 # Final stage for app image
 FROM base
