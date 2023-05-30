@@ -7,6 +7,9 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 
  
+[env]
+  DEPLOYMENT_ENV = "staging"
+
 [deploy]
 release_command = "yarn node --require esbuild-register ./scripts/stage-app.ts"
 
