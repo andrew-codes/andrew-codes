@@ -1,5 +1,4 @@
 import { Link as RemixLink } from "@remix-run/react"
-import type { RemixLinkProps } from "@remix-run/react/dist/components"
 import type { FC } from "react"
 import styled from "styled-components"
 import { useDeploymentUrlPrefix } from "./DeploymentEnvironment"
@@ -12,10 +11,7 @@ const StyledLink = styled(RemixLink)`
   }
 `
 
-const Link: FC<RemixLinkProps & React.RefAttributes<HTMLAnchorElement>> = ({
-  to,
-  ...props
-}) => {
+const Link: FC<{ to?: string } & Record<string, any>> = ({ to, ...props }) => {
   const linkPrefix = useDeploymentUrlPrefix()
 
   return <StyledLink {...props} to={`${linkPrefix}${to}`} />

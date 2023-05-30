@@ -2,7 +2,7 @@ import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import styled from "styled-components"
-import Link from "~/components/Link"
+import GenericLink from "~/components/Link"
 import PageMeta from "~/components/PageMeta"
 import Paper from "~/components/Paper"
 import { Posts } from "~/components/Post"
@@ -47,6 +47,7 @@ const loader = async ({ request, params }: LoaderArgs) => {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const headers: HeadersFunction = useLoaderHeaders()
 
+const Link = styled(GenericLink)``
 const Blockquote = styled.blockquote`
   font-size: 1.125rem;
 `
