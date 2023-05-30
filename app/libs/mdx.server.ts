@@ -98,7 +98,10 @@ const getCodeAssets = async (
 ): Promise<Record<string, string>> => {
   try {
     const assetsFiles = await readDirFiles(
-      path.join(mdxFile.filePath, "assets"),
+      path.join(
+        mdxFile.filePath.replace(new RegExp(`${mdxFile.fileName}$`), ""),
+        "assets",
+      ),
     )
     return assetsFiles
       .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
