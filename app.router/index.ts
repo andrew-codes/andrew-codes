@@ -45,7 +45,6 @@ if (process.env.DISABLE_METRONOME) {
 
 app.use(
   asyncHandler(async (req, res, next) => {
-    console.log("here")
     const { currentInstance, primaryInstance } = await getInstanceInfo()
     res.set("X-Fly-Region", process.env.FLY_REGION ?? "unknown")
     res.set("X-Fly-App", process.env.FLY_APP_NAME ?? "unknown")
