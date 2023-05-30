@@ -17,7 +17,6 @@ const run = async () => {
         entries.push(file)
       } else {
         const dest = file.replace("app.router", "app.router-build")
-        console.log(file, dest)
         await fsExtra.ensureDir(path.parse(dest).dir)
         fsExtra.copySync(file, dest)
         console.log(`copied: ${file.replace(`${here("app.router")}/`, "")}`)

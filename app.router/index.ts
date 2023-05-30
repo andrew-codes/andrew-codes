@@ -195,7 +195,6 @@ function getRequestHandlerOptions(): Parameters<
 >[0] {
   const build = require("../build")
   function getLoadContext(req: any, res: any) {
-    console.log(res.locals.cspNonce)
     return { cspNonce: res.locals.cspNonce }
   }
   if (MODE === "production" && !process.env.DISABLE_METRONOME) {

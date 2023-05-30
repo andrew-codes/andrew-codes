@@ -16,7 +16,6 @@ const run = async () => {
         entries.push(file)
       } else {
         const dest = file.replace("server", "server-build")
-        console.log(file, dest)
         fsExtra.ensureDir(path.parse(dest).dir)
         fsExtra.copySync(file, dest)
         console.log(`copied: ${file.replace(`${here("server")}/`, "")}`)
