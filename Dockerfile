@@ -41,11 +41,12 @@ RUN yarn install
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
-RUN mkdir -p /data ${LITEFS_DIR} ${APP_STAGING_DIR}
+RUN mkdir -p /data ${LITEFS_DIR}
 
 ARG PR_NUMBER
 ENV PR_NUMBER=${PR_NUMBER}
 ENV APP_STAGING_DIR="/data/litefs/apps"
+RUN mkdir -p ${APP_STAGING_DIR}
 COPY --from=build /app/scripts/stage-app.ts /app/scripts/stage-app.ts
 
 # Start the server by default, this can be overwritten at runtime
