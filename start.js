@@ -6,7 +6,7 @@ async function run() {
     const deploymentEnv = process.env.DEPLOYMENT_ENV
 
     if (deploymentEnv === "staging" && prNumber) {
-      const stageApps = require("./scripts/stageApps").default
+      const stageApps = require("./scripts/stage-app").default
       await stageApps()
     }
 
