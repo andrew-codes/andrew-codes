@@ -77,7 +77,7 @@ const App: FC<{}> = () => {
       </Helmet>
       <MetronomeLinks nonce={nonce} />
       <Links />
-      <GlobalStyles />
+      <GlobalStyles prefix={prefix} />
       <GlobalNav />
       <Root>
         <Outlet />
