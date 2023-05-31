@@ -9,6 +9,7 @@ import { ensurePrimary } from "litefs-js/remix"
 import { routes as otherRoutes } from "./other-routes.server"
 import { getEnv } from "./libs/env.server"
 import { NonceProvider } from "./libs/NonceProvider"
+import WritableWithStyles from "./libs/WriteableWithStyles"
 
 const ABORT_DELAY = 5_000
 global.ENV = getEnv()
@@ -93,8 +94,10 @@ function serveTheBots(...args: DocRequestArgs) {
           responseHeaders.set("Content-Type", "text/html")
           const body = new PassThrough()
 
+          const streamWithStyles = new WritableWithStyles(body, sheet)
+
           body.write("<!DOCTYPE html>", "utf-8")
-          stream.pipe(body)
+          stream.pipe(streamWithStyles)
           resolve(
             new Response(body, {
               status: responseStatusCode,
@@ -141,8 +144,10 @@ function serveBrowsers(...args: DocRequestArgs) {
           responseHeaders.set("Content-Type", "text/html")
           const body = new PassThrough()
 
+          const streamWithStyles = new WritableWithStyles(body, sheet)
+
           body.write("<!DOCTYPE html>", "utf-8")
-          stream.pipe(body)
+          stream.pipe(streamWithStyles)
 
           resolve(
             new Response(body, {
