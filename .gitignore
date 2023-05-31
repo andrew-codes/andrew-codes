@@ -9,7 +9,6 @@ vendor
 deployment/dist
 data/cache.db
 /server-build
-/app.router-build
 /dist
 
 .yarn/*

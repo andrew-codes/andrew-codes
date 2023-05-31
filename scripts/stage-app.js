@@ -13,6 +13,7 @@ const ensureStagedAppDirectory = async () => {
     process.env.APP_STAGING_DIR,
     `pr-${process.env.PR_NUMBER}`,
   )
+  await fsExtra.remove(appDir)
   await fsExtra.ensureDir(appDir)
 
   return appDir

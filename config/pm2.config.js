@@ -7,7 +7,6 @@ module.exports = {
         "--require ./.pnp.cjs --require esbuild-register --inspect",
       watch: [
         "./index.js",
-        "./app.router/**/*.ts",
         "./server/**/*.ts",
         "./.env",
         "config/app/**",

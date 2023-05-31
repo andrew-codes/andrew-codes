@@ -7,15 +7,21 @@ async function run() {
     const deploymentEnv = process.env.DEPLOYMENT_ENV
     const stagedAppsDir = process.env.APP_STAGING_DIR
 
+    const processes = []
     if (deploymentEnv === "staging" && prNumber && stagedAppsDir) {
       const stageApps = require("./scripts/stage-app")
       await stageApps()
 
       console.log("Starting staging server...")
-      exec(`yarn node staging-server/index.js`)
+      processes.push(
+        exec(`yarn node staging-server/index.js`, {
+          env: process.env,
+          PORT: "3001",
+        }),
+      )
 
       console.log("Starting staged apps...")
-      let port = 30000
+      let port = 3002
       const ports = {}
       const fsPaths = await fs.readdir(stagedAppsDir)
       for (const fsPath of fsPaths) {
@@ -25,27 +31,25 @@ async function run() {
           continue
         }
         ports[prNumber] = port
-        console.log(`Starting staged app for PR ${prNumber} on port ${port}...`)
-        exec(`yarn node ${fsEntryPath}/server/index.js`, {
-          env: { PORT: port },
-        })
+        console.log(
+          `Starting staged app for PR ${prNumber}, located at ${fsEntryPath}, on port ${port}...`,
+        )
+        processes.push(
+          exec(`yarn node ${fsEntryPath}/server/index.js`, {
+            env: { ...process.env, PORT: port.toString() },
+          }),
+        )
         port += 1
       }
 
       console.log("Configuring nginx...")
       const nginxConfig = `
       server {
-        server_name staging.smith-simms.family;
+        server_name staging.andrew.codes;
         listen 8080;
-        if ($scheme != "https") {
-          return 301 https://$host$request_uri;
-        }
-
-        ${Object.entries(ports)
-          .map(
-            ([prNumber, port]) => `
-location ${prNumber} {
-          proxy_pass localhost:${port}/;
+       
+        location /healthcheck {
+          proxy_pass http://localhost:3001/healthcheck;
           proxy_pass_header Authorization;
           proxy_set_header Host $host;
           proxy_set_header Upgrade $http_upgrade;
@@ -57,19 +61,47 @@ location ${prNumber} {
           proxy_http_version 1.1;
           proxy_set_header Connection "upgrade";
           client_max_body_size 0;
+        }
+
+        ${Object.entries(ports)
+          .map(
+            ([prNumber, port]) => `
+location /${prNumber} {
+          proxy_pass http://localhost:${port};
+          proxy_pass_header Authorization;
+          proxy_set_header Host $host;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-Proto https;
+          add_header Front-End-Https on;
+          add_header Strict-Transport-Security "max-age=15552000";
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+          proxy_set_header Connection "upgrade";
+          client_max_body_size 0;
+          rewrite ^/${prNumber}(.*)$ $1 break;
+          sub_filter 'href="/' 'href="/${prNumber}/';
+          sub_filter 'src="/' 'src="/${prNumber}/';
+          sub_filter_once off;
         }`,
           )
           .join("\n")}
       }
       `
-      await fs.writeFile("/etc/nginx/sites-available/default", nginxConfig)
-      await exec("nginx -g daemon off;")
+      console.log(nginxConfig)
+      await fs.writeFile(
+        "/etc/nginx/sites-enabled/default",
+        nginxConfig,
+        "utf8",
+      )
 
-      return
+      processes.push(exec('nginx -g "daemon off;"'))
+
+      await Promise.all(processes)
+    } else {
+      console.log("Starting production app...")
+      await exec("yarn node index.js")
     }
-
-    console.log("Starting production app...")
-    await exec("yarn node index.js")
   } catch (e) {
     console.error(e)
     process.exit(1)

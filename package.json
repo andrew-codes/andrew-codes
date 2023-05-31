@@ -11,14 +11,13 @@
     "start": "yarn node index.js",
     "start/dev": "pm2-dev ./config/pm2.config.js",
     "start/dev/remix": "remix watch",
-    "clean/build": "rimraf  ./build ./public/build ./app.router-build ./server-build",
+    "clean/build": "rimraf  ./build ./public/build ./server-build",
     "clean/dist": "rimraf ./dist",
     "clean": "rimraf ./node_modules/.cache && concurrently 'yarn run clean/build' 'yarn run clean/dist'",
     "prebuild": "yarn run clean",
-    "build": "yarn run prebuild && concurrently 'yarn run build/app.router' 'yarn run build/server' 'yarn run build/remix' && yarn run postbuild",
+    "build": "yarn run prebuild && concurrently 'yarn run build/server' 'yarn run build/remix' && yarn run postbuild",
     "postbuild": "yarn node --require esbuild-register scripts/package.ts",
     "build/remix": "remix-esbuild-override && remix build",
-    "build/app.router": "yarn node --require esbuild-register scripts/build-app.router.ts",
     "build/server": "yarn node --require esbuild-register scripts/build-server.ts"
   },
   "dependencies": {
@@ -57,7 +56,6 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "remix": "1.15.0",
-    "remix-mount-routes": "^0.1.3",
     "server-timing": "^3.3.3",
     "sha1": "^1.1.1",
     "styled-components": "^6.0.0-rc.2"
@@ -92,6 +90,7 @@
     "glob": "^10.2.6",
     "prettier": "^2.8.7",
     "remix-esbuild-override": "^3.1.0",
+    "remix-mount-routes": "^0.1.3",
     "rimraf": "^5.0.1",
     "tsc": "^2.0.4",
     "tslib": "^2.5.2",

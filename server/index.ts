@@ -30,6 +30,7 @@ const getHost = (req: { get: (key: string) => string | undefined }) =>
 
 const MODE = process.env.NODE_ENV
 const BUILD_DIR = path.join(process.cwd(), "build")
+const deploymentEnv = process.env.DEPLOYMENT_ENV ?? "production"
 
 const asyncHandler =
   (fn: RequestHandler): RequestHandler =>
@@ -83,6 +84,11 @@ app.use(
 )
 
 app.use((req, res, next) => {
+  if (deploymentEnv === "staging") {
+    next()
+    return
+  }
+
   const proto = req.get("X-Forwarded-Proto")
   const host = getHost(req)
   if (proto === "http") {
@@ -237,11 +243,11 @@ app.use((err: any, req: any, res: any, next: any) => {
 
 const port = process.env.PORT ?? 3000
 app.listen(port, () => {
-  if (MODE === "production") {
+  if (MODE === "production" && process.env.DEPLOYMENT_ENV !== "staging") {
     require("../build")
   }
 
-  console.log(`Express server listening on port ${port}`)
+  console.log(`Production express server listening on port ${port}`)
 })
 
 ////////////////////////////////////////////////////////////////////////////////
