@@ -6,7 +6,8 @@ RUN yarn set version 3.5.0
 LABEL fly_launch_runtime="Remix"
 
 FROM base as build
-ENV NODE_ENV="production"
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 ARG PR_NUMBER
 ENV PR_NUMBER=${PR_NUMBER}
 ARG DEPLOYMENT_ENV
@@ -19,7 +20,8 @@ RUN yarn run build
 
 # Final stage for app image
 FROM base
-ENV NODE_ENV="production"
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 ENV INTERNAL_PORT="8080"
 ENV PRIMARY_REGION="iad"
 ENV FLY="true"
