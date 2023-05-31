@@ -28,9 +28,6 @@ const createEnvConfigResolver = <T extends Record<string, string>>(
     ) => {
       const name = configDefinition[key]
       const originalValue = process.env[name]
-      if (!originalValue || originalValue === undefined) {
-        throw new Error(`Configuration value for ${key} is not defined`)
-      }
 
       return {
         key,

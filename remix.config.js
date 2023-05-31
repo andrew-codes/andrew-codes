@@ -9,21 +9,21 @@ withEsbuildOverride((option) => {
 })
 
 const { mountRoutes } = require("remix-mount-routes")
-const basePath = process.env.PR_NUMBER ?? ""
+const basePath = process.env.PR_NUMBER
 
 module.exports = {
   future: {
     v2_routeConvention: true,
     v2_errorBoundary: true,
     v2_normalizeFormMethod: true,
-    v2_meta: false,
+    v2_meta: true,
   },
   cacheDirectory: "./node_modules/.cache/remix",
   serverDependenciesToBundle: [/.*(!?(esbuild))/],
   ignoredRouteFiles: ["**/.*"],
-  publicPath: `/${basePath}/build/`,
+  publicPath: basePath ? `/${basePath}/build/` : "/build/",
   routes: (defineRoutes) => {
-    const baseRoutes = mountRoutes(`/${basePath}`, "routes")
+    const baseRoutes = mountRoutes(`/${basePath ?? ""}`, "routes")
     const routes = {
       ...baseRoutes,
     }

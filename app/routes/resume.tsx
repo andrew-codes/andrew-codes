@@ -1,4 +1,8 @@
-import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import type { FC } from "react"
 import styled, { createGlobalStyle } from "styled-components"
@@ -15,7 +19,6 @@ import {
   Telephone,
   Url,
 } from "~/components/ContactCard"
-import PageMeta from "~/components/PageMeta"
 import {
   Education,
   List,
@@ -39,6 +42,10 @@ import {
 import { getFilePartsToHash, getHash } from "~/libs/hash.server"
 import { getServerTimeHeader } from "~/libs/timing.server"
 import { useLoaderHeaders } from "~/libs/utils"
+
+const meta: V2_MetaFunction = () => {
+  return [{ title: "Andrew Smith | Resume" }]
+}
 
 const loader = async (args: LoaderArgs) => {
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
@@ -111,10 +118,6 @@ const ResumeRoute: FC<{}> = () => {
   return (
     <>
       <GlobalStyles />
-      <PageMeta
-        title="James Andrew Smith's Resume"
-        description="General resume of James Andrew Smith."
-      />
       <Note>
         Please note: this resume is optimized for <strong>print</strong> and{" "}
         <strong>desktop</strong> media. Try printing the page (without headers
@@ -494,4 +497,4 @@ const ResumeRoute: FC<{}> = () => {
 }
 
 export default ResumeRoute
-export { headers, loader }
+export { headers, loader, meta }
