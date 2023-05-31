@@ -11,7 +11,6 @@ import styled from "styled-components"
 import GlobalStyles from "./components/GlobalStyles"
 import GlobalNav from "./components/MainNav"
 import { useNonce } from "./libs/NonceProvider"
-import { useDeploymentUrlPrefix } from "./components/DeploymentEnvironment"
 import favicon from "./images/favicon-48.png"
 import favicon1024 from "./images/favicon-1024.png"
 
@@ -32,7 +31,6 @@ const Root = styled.div`
 
 const App: FC<{}> = () => {
   const nonce = useNonce()
-  const prefix = useDeploymentUrlPrefix()
 
   return (
     <html lang="en">
@@ -43,31 +41,31 @@ const App: FC<{}> = () => {
           crossOrigin="anonymous"
           rel="preload"
           as="font"
-          href={`${prefix}/fonts/Lato-Regular.ttf`}
+          href={`/fonts/Lato-Regular.ttf`}
         />
         <link
           crossOrigin="anonymous"
           rel="preload"
           as="font"
-          href={`${prefix}/fonts/Lato-Bold.ttf`}
+          href={`/fonts/Lato-Bold.ttf`}
         />
         <link
           crossOrigin="anonymous"
           rel="preload"
           as="font"
-          href={`${prefix}/fonts/Lato-Thin.ttf`}
+          href={`/fonts/Lato-Thin.ttf`}
         />
         <link
           crossOrigin="anonymous"
           rel="preload"
           as="font"
-          href={`${prefix}/fonts/Lato-Black.ttf`}
+          href={`/fonts/Lato-Black.ttf`}
         />
         <link
           crossOrigin="anonymous"
           rel="preload"
           as="font"
-          href={`${prefix}/fonts/Lato-Light.ttf`}
+          href={`/fonts/Lato-Light.ttf`}
         />
         <meta name="og:title" content="Senior Software Engineer" />
         <meta name="og:type" content="website" />
@@ -77,13 +75,13 @@ const App: FC<{}> = () => {
           crossOrigin="anonymous"
           rel="stylesheet"
           type="text/css"
-          href={`${prefix}/css/dracula.css`}
+          href={`/css/dracula.css`}
         />
       </head>
       <body>
-        {prefix === "" && <MetronomeLinks nonce={nonce} />}
+        <MetronomeLinks nonce={nonce} />
         <Links />
-        <GlobalStyles prefix={prefix} />
+        <GlobalStyles />
         <GlobalNav />
         <Root>
           <Outlet />

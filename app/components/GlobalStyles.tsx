@@ -1,36 +1,31 @@
 import { createGlobalStyle } from "styled-components"
 
-const GlobalStyles = createGlobalStyle<{ prefix: string }>`
+const GlobalStyles = createGlobalStyle`
   @font-face {
     font-display:swap;
     font-family: "Lato-Regular";
-    src: ${({ prefix }) =>
-      `url("${prefix}/fonts/Lato-Regular.ttf") format("truetype");`}
+    src: url("/fonts/Lato-Regular.ttf") format("truetype");
   }
 
   @font-face {
     font-display:swap;
     font-family: "Lato-Bold";
-    src: ${({ prefix }) =>
-      `url("${prefix}/fonts/Lato-Bold.ttf") format("truetype");`}
+    src: url("/fonts/Lato-Bold.ttf") format("truetype");
   }
 
   @font-face {
     font-display:swap;
-    font-family: "Lato-Thin";src: ${({ prefix }) =>
-      `url("${prefix}/fonts/Lato-Thin.ttf") format("truetype");`}
+    font-family: "Lato-Thin";src: url("/fonts/Lato-Thin.ttf") format("truetype");
   }
 
   @font-face {
     font-display:swap;
-    font-family: "Lato-Black";src: ${({ prefix }) =>
-      `url("${prefix}/fonts/Lato-Black.ttf") format("truetype");`}
+    font-family: "Lato-Black";src: url("/fonts/Lato-Black.ttf") format("truetype");
   }
 
   @font-face {
     font-display:swap;
-    font-family: "Lato-Light";src: ${({ prefix }) =>
-      `url("${prefix}/fonts/Lato-Light.ttf") format("truetype");`}
+    font-family: "Lato-Light";src: url("/fonts/Lato-Light.ttf") format("truetype");
   }
 
   * {

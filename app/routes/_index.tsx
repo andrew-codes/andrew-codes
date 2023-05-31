@@ -6,7 +6,7 @@ import type {
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import styled from "styled-components"
-import GenericLink from "~/components/Link"
+import Link from "~/components/Link"
 import Paper from "~/components/Paper"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
@@ -54,7 +54,6 @@ const loader = async ({ request, params }: LoaderArgs) => {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const headers: HeadersFunction = useLoaderHeaders()
 
-const Link = styled(GenericLink)``
 const Blockquote = styled.blockquote`
   font-size: 1.125rem;
 `

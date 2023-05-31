@@ -8,7 +8,7 @@ import { useLoaderData, useParams } from "@remix-run/react"
 import { startCase, uniq } from "lodash"
 import styled from "styled-components"
 import { Header } from "~/components/Category"
-import GenericLink from "~/components/Link"
+import Link from "~/components/Link"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
@@ -67,7 +67,6 @@ const loader = async ({ request, params }: LoaderArgs) => {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const headers: HeadersFunction = useLoaderHeaders()
 
-const Link = styled(GenericLink)``
 const Page = styled(PageWithHeader)`
   padding-bottom: 2rem;
 
