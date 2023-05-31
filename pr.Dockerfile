@@ -8,6 +8,10 @@ LABEL fly_launch_runtime="Remix"
 FROM base as build
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+ARG PR_NUMBER
+ENV PR_NUMBER=${PR_NUMBER}
+ARG DEPLOYMENT_ENV
+ENV DEPLOYMENT_ENV=${DEPLOYMENT_ENV}
 RUN apt-get update -qq && apt-get install -y python-is-python3 pkg-config build-essential
 WORKDIR /app
 COPY . .
@@ -39,11 +43,25 @@ COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
 COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/yarn.lock /app/yarn.lock
+COPY --from=build /app/staging-server /app/staging-server
 RUN yarn install
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
+
+ARG PR_NUMBER
+ENV PR_NUMBER=${PR_NUMBER}
+ENV APP_STAGING_DIR="/app/data/litefs/apps"
+RUN mkdir -p ${APP_STAGING_DIR}
+COPY --from=build /app/scripts/stage-app.js /app/scripts/stage-app.js
+
+# Install nginx
+RUN apt-get update -qq
+RUN apt-get install --no-install-recommends --no-install-suggests -y \
+    ca-certificates \
+    nginx \
+    lsb-release
 
 # Start the server by default, this can be overwritten at runtime
 CMD ["yarn", "node", "start.js" ]

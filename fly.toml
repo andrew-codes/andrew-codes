@@ -8,6 +8,7 @@ kill_timeout = 5
 
 [env]
   DEPLOYMENT_ENV = "production"
+  NODE_ENV = "production"
 
 [mounts]
   source = "litefs"

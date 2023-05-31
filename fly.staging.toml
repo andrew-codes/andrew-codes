@@ -8,6 +8,7 @@ kill_timeout = 5
 
  
 [env]
+  NODE_ENV = "production"
   DEPLOYMENT_ENV = "staging"
   DISABLE_METRONOME = "true"
 

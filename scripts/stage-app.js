@@ -8,7 +8,7 @@ const ensureStagedAppDirectory = async () => {
   ) {
     throw new Error("APP STAGING environment variables not set")
   }
-
+  console.log("Moving app to PR staging directory")
   const appDir = path.join(
     process.env.APP_STAGING_DIR,
     `pr-${process.env.PR_NUMBER}`,
@@ -35,8 +35,8 @@ const run = async () => {
       path.join(stagedAppDirectory, ".babelrc"),
     )
     await fsExtra.copy(
-      path.join(distAppDir, "app.router"),
-      path.join(stagedAppDirectory, "app.router"),
+      path.join(distAppDir, "server"),
+      path.join(stagedAppDirectory, "server"),
     )
     await fsExtra.copy(
       path.join(distAppDir, "public"),

@@ -129,6 +129,8 @@ function serveBrowsers(...args: DocRequestArgs) {
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
   const sheet = new ServerStyleSheet()
 
+  console.dir(remixContext)
+
   return configuration.getValue("prNumber").then(
     ({ value }) =>
       new Promise((resolve, reject) => {
