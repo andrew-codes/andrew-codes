@@ -68,12 +68,13 @@ async function run() {
             ([prNumber, port]) => `
 location /${prNumber} {
           proxy_pass http://localhost:${port};
-          proxy_redirect /${prNumber}/ /;
+          proxy_redirect / /${prNumber}/;
           proxy_pass_header Authorization;
           proxy_set_header Host $host;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-Proto https;
+          proxy_set_header Accept-Encoding "";
           add_header Front-End-Https on;
           add_header Strict-Transport-Security "max-age=15552000";
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -81,9 +82,9 @@ location /${prNumber} {
           proxy_set_header Connection "upgrade";
           client_max_body_size 0;
           rewrite ^/${prNumber}(.*)$ $1 break;
+          sub_filter_types text/html text/css application/javascript;
           sub_filter '"/' '"/${prNumber}/';
           sub_filter "'/" "'/${prNumber}/";
-          sub_filter_types *;
           sub_filter_once off;
         }`,
           )
@@ -97,6 +98,7 @@ location /${prNumber} {
         "utf8",
       )
 
+      processes.push(exec("nginx -V"))
       processes.push(exec('nginx -g "daemon off;"'))
 
       await Promise.all(processes)
