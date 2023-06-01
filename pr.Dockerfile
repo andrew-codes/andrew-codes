@@ -43,7 +43,7 @@ COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
 COPY --from=build /app/package.json /app/package.json
 COPY --from=build /app/yarn.lock /app/yarn.lock
-COPY --from=build /app/staging-server /app/staging-server
+COPY --from=build /app/runtime-utils /app/runtime-utils
 RUN yarn install
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
@@ -54,7 +54,7 @@ ARG PR_NUMBER
 ENV PR_NUMBER=${PR_NUMBER}
 ENV APP_STAGING_DIR="/app/data/litefs/apps"
 RUN mkdir -p ${APP_STAGING_DIR}
-COPY --from=build /app/scripts/stage-app.js /app/scripts/stage-app.js
+COPY --from=build /app/staging-server /app/staging-server
 
 # Install nginx
 RUN apt-get update -qq
