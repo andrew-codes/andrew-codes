@@ -1,11 +1,14 @@
-import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
-import { uniq } from "lodash"
+import { startCase, uniq } from "lodash"
 import styled from "styled-components"
 import { Header } from "~/components/Category"
 import Link from "~/components/Link"
-import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
@@ -27,6 +30,10 @@ const handle: Handle = {
       return { route: `/tags/${tag}`, priority: 0.4 }
     })
   },
+}
+
+const meta: V2_MetaFunction<typeof loader> = ({ params }) => {
+  return [{ title: `${startCase(params.id)} tagged Articles | Andrew Smith` }]
 }
 
 const onlyForTag = (tag: string) => (posts: MdxPage[]) =>
@@ -100,7 +107,6 @@ const CategoryRoute = () => {
 
   return (
     <>
-      <PageMeta title="Home - Andrew Smith" description="" />
       <Page as="article">
         <Header category={null}>
           <h1>{id}</h1>
@@ -138,4 +144,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { handle, headers, loader }
+export { handle, headers, loader, meta }

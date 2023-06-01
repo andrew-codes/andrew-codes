@@ -8,10 +8,11 @@ kill_timeout = 5
 
 [env]
   DEPLOYMENT_ENV = "production"
+  NODE_ENV = "production"
 
 [mounts]
   source = "litefs"
-  destination = "/data/litefs"
+  destination = "/app/data/litefs"
 
 [experimental]
   enable_consul = true

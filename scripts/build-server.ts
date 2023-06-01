@@ -4,6 +4,7 @@ import { sync } from "glob"
 import pkg from "../package.json"
 
 const here = (...s: string[]) => path.join(__dirname, ...s)
+
 const run = async () => {
   try {
     const allFiles = sync("server/**/*.*", {
@@ -16,15 +17,14 @@ const run = async () => {
         entries.push(file)
       } else {
         const dest = file.replace("server", "server-build")
-        console.log(file, dest)
-        fsExtra.ensureDir(path.parse(dest).dir)
+        await fsExtra.ensureDir(path.parse(dest).dir)
         fsExtra.copySync(file, dest)
         console.log(`copied: ${file.replace(`${here("server")}/`, "")}`)
       }
     }
 
     console.log(`
-building server...`)
+building app router...`)
 
     await require("esbuild").build({
       entryPoints: sync("server/**/*.ts"),

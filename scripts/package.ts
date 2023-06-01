@@ -13,18 +13,13 @@ const run = async () => {
   )
   await fsExtra.copy(here("../app/posts"), path.join(appDir, "app", "posts"))
   await fsExtra.copy(here("../public"), path.join(appDir, "public"))
-  await fsExtra.copy(
-    here("../app.router-build"),
-    path.join(appDir, "app.router"),
-  )
+  await fsExtra.copy(here("../server-build"), path.join(appDir, "server"))
   await fsExtra.copy(here("../config/app"), path.join(appDir, "config", "app"))
   await fsExtra.copy(here("../.babelrc"), path.join(appDir, ".babelrc"))
   await fsExtra.copy(
     here("../tsconfig.json"),
     path.join(appDir, "tsconfig.json"),
   )
-
-  await fsExtra.copy(here("../server-build"), path.join(appDir, "server"))
 }
 
 if (require.main === module) {

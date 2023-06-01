@@ -1,19 +1,20 @@
-import fsExtra, { ensureDir } from "fs-extra"
-import path from "path"
+const fsExtra = require("fs-extra")
+const path = require("path")
 
-const ensureStagedAppDirectory = async (): Promise<string> => {
+const ensureStagedAppDirectory = async () => {
   if (
     process.env.APP_STAGING_DIR === undefined ||
     process.env.PR_NUMBER === undefined
   ) {
     throw new Error("APP STAGING environment variables not set")
   }
-
+  console.log("Moving app to PR staging directory")
   const appDir = path.join(
     process.env.APP_STAGING_DIR,
     `pr-${process.env.PR_NUMBER}`,
   )
-  await ensureDir(appDir)
+  await fsExtra.remove(appDir)
+  await fsExtra.ensureDir(appDir)
 
   return appDir
 }
@@ -35,8 +36,8 @@ const run = async () => {
       path.join(stagedAppDirectory, ".babelrc"),
     )
     await fsExtra.copy(
-      path.join(distAppDir, "app.router"),
-      path.join(stagedAppDirectory, "app.router"),
+      path.join(distAppDir, "server"),
+      path.join(stagedAppDirectory, "server"),
     )
     await fsExtra.copy(
       path.join(distAppDir, "public"),
@@ -52,7 +53,4 @@ const run = async () => {
   }
 }
 
-if (require.main === module) {
-  run()
-}
-export default run
+module.exports = run

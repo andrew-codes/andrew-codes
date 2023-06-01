@@ -1,9 +1,12 @@
-import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import styled from "styled-components"
 import Link from "~/components/Link"
-import PageMeta from "~/components/PageMeta"
 import Paper from "~/components/Paper"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
@@ -19,6 +22,10 @@ import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 import { getServerTimeHeader } from "~/libs/timing.server"
 import { useLoaderHeaders } from "~/libs/utils"
 import type { Category } from "~/types"
+
+const meta: V2_MetaFunction = () => {
+  return [{ title: "Andrew Smith | Home" }]
+}
 
 const loader = async ({ request, params }: LoaderArgs) => {
   const timings = {}
@@ -211,7 +218,6 @@ const HomeRoute = () => {
 
   return (
     <>
-      <PageMeta title="Home - Andrew Smith" description="" />
       <Hero as="section">
         <h1>Hi, &#x1f44b;!</h1>
         <Blockquote>
@@ -251,7 +257,7 @@ const HomeRoute = () => {
                   </li>
                 ))}
             </Posts>
-            <Link to={`category/${category}`}>See more...</Link>
+            <Link to={`/category/${category}`}>See more...</Link>
           </PostCategory>
         ))}
       </PostCategories>
@@ -260,4 +266,4 @@ const HomeRoute = () => {
 }
 
 export default HomeRoute
-export { headers, loader }
+export { headers, loader, meta }

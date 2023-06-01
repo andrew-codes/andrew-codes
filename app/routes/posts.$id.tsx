@@ -1,4 +1,8 @@
-import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
@@ -7,7 +11,6 @@ import * as styled from "styled-components"
 import { Header } from "~/components/Category"
 import getCodePostAssetComponent from "~/components/CodePostAsset"
 import Link from "~/components/Link"
-import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
 import Tags from "~/components/Tags"
@@ -25,6 +28,10 @@ const handle: Handle = {
       return { route: `/${page.slug}`, priority: 0.6 }
     })
   },
+}
+
+const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+  return [{ title: `${data.frontmatter?.title ?? "Article"} | Andrew Smith` }]
 }
 
 const loader = async ({ params, request }: LoaderArgs) => {
@@ -106,10 +113,6 @@ const PostRoute = () => {
 
   return (
     <>
-      <PageMeta
-        title={frontmatter.title ?? "Post - Andrew Smith"}
-        description={frontmatter.description ?? ""}
-      />
       <Post as="article">
         <Header category={frontmatter.category}>
           <h1>{frontmatter.title}</h1>
@@ -145,4 +148,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { handle, headers, loader }
+export { handle, headers, loader, meta }

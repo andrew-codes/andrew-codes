@@ -15,20 +15,17 @@ const GlobalStyles = createGlobalStyle`
 
   @font-face {
     font-display:swap;
-    font-family: "Lato-Thin";
-    src: url("/fonts/Lato-Thin.ttf") format("truetype");
+    font-family: "Lato-Thin";src: url("/fonts/Lato-Thin.ttf") format("truetype");
   }
 
   @font-face {
     font-display:swap;
-    font-family: "Lato-Black";
-    src: url("/fonts/Lato-Black.ttf") format("truetype");
+    font-family: "Lato-Black";src: url("/fonts/Lato-Black.ttf") format("truetype");
   }
 
   @font-face {
     font-display:swap;
-    font-family: "Lato-Light";
-    src: url("/fonts/Lato-Light.ttf") format("truetype");
+    font-family: "Lato-Light";src: url("/fonts/Lato-Light.ttf") format("truetype");
   }
 
   * {

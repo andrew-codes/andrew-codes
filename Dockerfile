@@ -6,7 +6,8 @@ RUN yarn set version 3.5.0
 LABEL fly_launch_runtime="Remix"
 
 FROM base as build
-ENV NODE_ENV="production"
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 RUN apt-get update -qq && apt-get install -y python-is-python3 pkg-config build-essential
 WORKDIR /app
 COPY . .
@@ -15,7 +16,8 @@ RUN yarn run build
 
 # Final stage for app image
 FROM base
-ENV NODE_ENV="production"
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 ENV INTERNAL_PORT="8080"
 ENV PRIMARY_REGION="iad"
 ENV FLY="true"
@@ -41,12 +43,7 @@ RUN yarn install
 
 COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
 ADD ./litefs.yml /etc/litefs.yml
-RUN mkdir -p /data ${LITEFS_DIR} ${APP_STAGING_DIR}
-
-ARG PR_NUMBER
-ENV PR_NUMBER=${PR_NUMBER}
-ENV APP_STAGING_DIR="/data/litefs/apps"
-COPY --from=build /app/scripts/stage-app.ts /app/scripts/stage-app.ts
+RUN mkdir -p /data ${LITEFS_DIR}
 
 # Start the server by default, this can be overwritten at runtime
 CMD ["yarn", "node", "start.js" ]

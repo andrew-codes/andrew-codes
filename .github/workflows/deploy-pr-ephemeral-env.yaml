@@ -4,6 +4,8 @@ on:
     types:
       - opened
       - reopened
+      - edited
+      - synchronize
     branches:
       - main
 
@@ -11,10 +13,10 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: andrew-codes/andrew.codes
   PR_NUMBER: ${{ github.event.number }}
-  DEPLOYMENT_ENV: "staging"
 
 jobs:
   build:
+    if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && github.event.pull_request.head.repo.full_name != 'your/full_repo_name' }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andrew-codes/gh-action-runner:latest
@@ -25,6 +27,6 @@ jobs:
       - name: 🚀 Deploy emphemeral environment for pull request
         uses: superfly/flyctl-actions@1.3
         with:
-          args: "deploy --config fly.staging.toml --remote-only"
+          args: "deploy --config fly.staging.toml --remote-only --build-arg PR_NUMBER=${{ env.PR_NUMBER }} --build-arg DEPLOYMENT_ENV=staging"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

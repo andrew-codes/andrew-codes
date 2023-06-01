@@ -1,10 +1,13 @@
-import type { HeadersFunction, LoaderArgs } from "@remix-run/node"
+import type {
+  HeadersFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
 import styled from "styled-components"
 import { Header } from "~/components/Category"
 import Link from "~/components/Link"
-import PageMeta from "~/components/PageMeta"
 import PageWithHeader from "~/components/PageWithHeader"
 import { Posts } from "~/components/Post"
 import Tags from "~/components/Tags"
@@ -15,6 +18,7 @@ import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
 import type { Category, Handle, MdxPage } from "~/types"
 import { getCategories } from "~/libs/categories"
 import { getServerTimeHeader } from "~/libs/timing.server"
+import { startCase } from "lodash"
 
 const handle: Handle = {
   getSitemapEntries: async () => {
@@ -22,6 +26,10 @@ const handle: Handle = {
       return { route: `/${category}`, priority: 0.2 }
     })
   },
+}
+
+const meta: V2_MetaFunction<typeof loader> = ({ params }) => {
+  return [{ title: `${startCase(params.id)} Articles | Andrew Smith` }]
 }
 
 const onlyForCategory = (category: Category) => (posts: MdxPage[]) =>
@@ -96,7 +104,6 @@ const CategoryRoute = () => {
 
   return (
     <>
-      <PageMeta title="Home - Andrew Smith" description="" />
       <Page as="article">
         <Header category={id as Category}>
           <h1>{id}</h1>
@@ -135,4 +142,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { handle, headers, loader }
+export { handle, headers, loader, meta }

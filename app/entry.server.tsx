@@ -2,7 +2,6 @@ import { Response } from "@remix-run/node"
 import { RemixServer } from "@remix-run/react"
 import { PassThrough } from "node:stream"
 import { renderToPipeableStream } from "react-dom/server"
-import { Helmet } from "react-helmet"
 import { ServerStyleSheet } from "styled-components"
 import type { HandleDocumentRequestFunction } from "@remix-run/node"
 import isbot from "isbot"
@@ -10,6 +9,7 @@ import { ensurePrimary } from "litefs-js/remix"
 import { routes as otherRoutes } from "./other-routes.server"
 import { getEnv } from "./libs/env.server"
 import { NonceProvider } from "./libs/NonceProvider"
+import WritableWithStyles from "./libs/WriteableWithStyles"
 
 const ABORT_DELAY = 5_000
 global.ENV = getEnv()
@@ -94,14 +94,10 @@ function serveTheBots(...args: DocRequestArgs) {
           responseHeaders.set("Content-Type", "text/html")
           const body = new PassThrough()
 
-          const helmet = Helmet.renderStatic()
+          const streamWithStyles = new WritableWithStyles(body, sheet)
+
           body.write("<!DOCTYPE html>", "utf-8")
-          body.write(
-            `<html lang="en"><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${helmet.style.toString()}${helmet.script.toString()}${sheet.getStyleTags()}</head><body>`,
-            "utf-8",
-          )
-          stream.pipe(body)
-          body.write(`</body></html>`, "utf-8")
+          stream.pipe(streamWithStyles)
           resolve(
             new Response(body, {
               status: responseStatusCode,
@@ -128,8 +124,10 @@ function serveBrowsers(...args: DocRequestArgs) {
   ] = args
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
   const sheet = new ServerStyleSheet()
+
   return new Promise((resolve, reject) => {
     let didError = false
+
     const stream = renderToPipeableStream(
       sheet.collectStyles(
         <NonceProvider value={nonce}>
@@ -146,14 +144,10 @@ function serveBrowsers(...args: DocRequestArgs) {
           responseHeaders.set("Content-Type", "text/html")
           const body = new PassThrough()
 
-          const helmet = Helmet.renderStatic()
+          const streamWithStyles = new WritableWithStyles(body, sheet)
+
           body.write("<!DOCTYPE html>", "utf-8")
-          body.write(
-            `<html lang="en"><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${helmet.style.toString()}${helmet.script.toString()}${sheet.getStyleTags()}</head><body>`,
-            "utf-8",
-          )
-          stream.pipe(body)
-          body.write(`</body></html>`, "utf-8")
+          stream.pipe(streamWithStyles)
 
           resolve(
             new Response(body, {
