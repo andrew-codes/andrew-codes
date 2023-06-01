@@ -80,8 +80,9 @@ location /${prNumber} {
           proxy_set_header Connection "upgrade";
           client_max_body_size 0;
           rewrite ^/${prNumber}(.*)$ $1 break;
-          sub_filter 'href="/' 'href="/${prNumber}/';
-          sub_filter 'src="/' 'src="/${prNumber}/';
+          sub_filter '"/' '"/${prNumber}/';
+          sub_filter "'/" "'/${prNumber}/";
+          sub_filter_types *;
           sub_filter_once off;
         }`,
           )
