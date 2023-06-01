@@ -68,6 +68,7 @@ async function run() {
             ([prNumber, port]) => `
 location /${prNumber} {
           proxy_pass http://localhost:${port};
+          proxy_redirect http://staging.andrew.codes/ http://staging.andrew.codes/${prNumber}/;
           proxy_pass_header Authorization;
           proxy_set_header Host $host;
           proxy_set_header Upgrade $http_upgrade;
