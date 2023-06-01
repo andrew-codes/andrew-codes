@@ -30,7 +30,8 @@ async function run() {
         if (!fsEntryStat.isDirectory() && !fsPath.startsWith("pr-")) {
           continue
         }
-        ports[prNumber] = port
+        const otherPrNumber = fsPath.replace("pr-", "")
+        ports[otherPrNumber] = port
         console.log(
           `Starting staged app for PR ${prNumber}, located at ${fsEntryPath}, on port ${port}...`,
         )
