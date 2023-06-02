@@ -36,7 +36,6 @@ const run = async (
       req.headers.authorization !==
         `Bearer ${Buffer.from(authToken).toString("base64")}`
     ) {
-      console.log(req.headers.authorization)
       return res.status(401).send("Unauthorized")
     }
     if (!req.params.prId) {
@@ -46,7 +45,7 @@ const run = async (
       return res.status(405).send("Method Not Allowed")
     }
 
-    const { process } = stagedAppProcesses[req.body.prId]
+    const { process } = stagedAppProcesses[req.params.prId]
     process.on("close", (code) => {
       if (code !== 200) {
         console.error(`App exited with unexpected code ${code}`)
