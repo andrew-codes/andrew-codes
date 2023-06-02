@@ -1,4 +1,4 @@
-name: Deploy PR ephemeral environment
+name: Remove Ephemeral Environment
 on:
   pull_request:
     types:
