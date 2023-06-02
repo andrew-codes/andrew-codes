@@ -29,17 +29,12 @@ const run = async (
   }
   const stagedAppsDir = process.env.APP_STAGING_DIR ?? ""
   const apps = await getApps(stagedAppsDir)
-  app.use("/", (req, res) => {
-    const html = renderToString(<LandingPage apps={apps} />)
-
-    res.status(200).send(html)
-  })
 
   app.use("/app/:prId", (req, res) => {
     if (!authToken || req.body.authToken !== authToken) {
       return res.status(401).send("Unauthorized")
     }
-    if (!req.query.prId) {
+    if (!req.params.prId) {
       return res.status(400).send("Bad Request")
     }
     if (req.method !== "DELETE") {
@@ -65,6 +60,12 @@ const run = async (
       }
     })
     process.kill(200)
+  })
+
+  app.use("/", (req, res) => {
+    const html = renderToString(<LandingPage apps={apps} />)
+
+    res.status(200).send(html)
   })
 
   app.use(catchAllErrors)
