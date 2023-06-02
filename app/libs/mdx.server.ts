@@ -14,21 +14,10 @@ import type { MdxPage, MdxPageFile } from "../types"
 
 const mdx = async (
   mdxFile: MdxPageFile,
+  fileContents: Record<string, string> = {},
 ): Promise<{ code: string; frontmatter: Record<string, any> }> => {
   const source = await fs.readFile(mdxFile.filePath, "utf8")
-  const componentsDir = path.join(
-    path.join(__dirname, "..", "app", "components"),
-  )
-  const allComponentFiles = await readDirFiles(componentsDir)
-  const files = allComponentFiles
-    .filter(([filePath]) => !/GlobalStyles\.tsx/.test(filePath))
-    .map(([filePath, contents]) => [
-      `../${filePath.replace(/\\/g, "/")}`,
-      contents,
-    ])
-    .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
 
-  const postDir = path.join(__dirname, "..", "app", "posts")
   const { default: remarkMdxImages } = await import("remark-mdx-images")
   const { default: remarkGfm } = await import("remark-gfm")
   const { default: rehypeHighlight } = await import("rehype-highlight")
@@ -37,8 +26,8 @@ const mdx = async (
 
   const { code, frontmatter } = await bundleMDX({
     source: source.trim(),
-    cwd: path.resolve(postDir),
-    files,
+    cwd: path.resolve(mdxFile.filePath),
+    files: fileContents,
     globals: { "styled-components": "styled" },
     mdxOptions: (options) => {
       options.remarkPlugins = [
@@ -55,7 +44,7 @@ const mdx = async (
 
     esbuildOptions(options, frontmatter) {
       options.minify = true
-      options.outdir = path.resolve(postDir, "..", "public", "files")
+      options.outdir = path.resolve(mdxFile.filePath, "..", "public", "files")
       options.loader = {
         ...options.loader,
         ".png": "file",
@@ -75,10 +64,9 @@ const mdx = async (
 
 const getMdxFiles = async (
   options: CachifiedOptions,
+  fileDirPath: string,
 ): Promise<Record<string, MdxPageFile>> => {
-  const allFilesInPostsDirectory = await readDir(
-    path.join(__dirname, "..", "app", "posts"),
-  )
+  const allFilesInPostsDirectory = await readDir(fileDirPath)
   return allFilesInPostsDirectory
     .filter((filePath) => /^.*\.mdx?$/.test(filePath))
 
@@ -124,6 +112,8 @@ const checkCompiledValue = (value: unknown) =>
 const getMdxPage = async (
   slug: string,
   options: CachifiedOptions,
+  fileDirPath: string,
+  filesContents: Record<string, string> = {},
 ): Promise<MdxPage> => {
   const { forceFresh, ttl = defaultTtl, request, timings } = options
   const key = `mdx-page:${slug}:compiled`
@@ -139,9 +129,9 @@ const getMdxPage = async (
     forceFresh,
     checkValue: checkCompiledValue,
     getFreshValue: async () => {
-      const mdxFiles = await getMdxFiles(options)
+      const mdxFiles = await getMdxFiles(options, fileDirPath)
       const mdxFile = mdxFiles[slug]
-      const transformedMdx = await mdx(mdxFile)
+      const transformedMdx = await mdx(mdxFile, filesContents)
 
       const codeAssets = await getCodeAssets(mdxFile, options)
 
@@ -161,11 +151,31 @@ const getMdxPage = async (
   return page as unknown as MdxPage
 }
 
-const getMdxPages = async (options: CachifiedOptions): Promise<MdxPage[]> => {
-  const mdxFiles = await getMdxFiles(options)
+const getMdxPages = async (
+  options: CachifiedOptions,
+  fileDirPath: string = path.join(__dirname, "..", "app", "posts"),
+  extraFilesPath: string = path.join(__dirname, "..", "app", "components"),
+): Promise<MdxPage[]> => {
+  const mdxFiles = await getMdxFiles(options, fileDirPath)
+
+  const componentsDir = path.join(extraFilesPath)
+  const allComponentFiles = await readDirFiles(componentsDir)
+  const fileContents = allComponentFiles
+    .filter(([filePath]) => !/GlobalStyles\.tsx/.test(filePath))
+    .map(([filePath, contents]) => [
+      `../${filePath.replace(/\\/g, "/")}`,
+      contents,
+    ])
+    .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
+
   let pages = []
   for (const mdxFile of Object.values(mdxFiles)) {
-    const page = await getMdxPage(mdxFile.slug, options)
+    const page = await getMdxPage(
+      mdxFile.slug,
+      options,
+      fileDirPath,
+      fileContents,
+    )
     pages.push(page)
   }
 
