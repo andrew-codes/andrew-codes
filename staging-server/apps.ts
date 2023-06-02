@@ -2,7 +2,10 @@ import fs from "fs/promises"
 import fsExtra from "fs-extra"
 import path from "path"
 import { exec } from "../runtime-utils/process"
-import { StagedApp } from "./types"
+import type { StagedApp } from "./types"
+import run from "./index"
+import { ChildProcess, spawn } from "child_process"
+import { keyBy } from "lodash"
 
 const ensureStagedAppDirectory = async (
   prId: string,
@@ -156,27 +159,28 @@ location /${prId} {
 
 const start = async (stagingDirectory: string): Promise<Promise<void>[]> => {
   let processes: Promise<void>[] = []
-  console.log("Starting staging server...")
-  processes.push(
-    exec(`yarn node --require esbuild-register staging-server/index.tsx`, {
-      env: process.env,
-      PORT: "3001",
-    }),
-  )
   console.log("Starting staged apps...")
   const apps = await getApps(stagingDirectory)
-  processes = processes.concat(
-    apps.map((app) => {
-      console.log(
-        `Starting staged app for PR ${app.prId}, located at ${app.appDirectory}, on port ${app.port}...`,
-      )
-      return exec(`yarn node ${app.appDirectory}/server/index.js`, {
+  const stagedAppProcesses = apps.map((app) => {
+    console.log(
+      `Starting staged app for PR ${app.prId}, located at ${app.appDirectory}, on port ${app.port}...`,
+    )
+    return {
+      prId: app.prId,
+      process: spawn(`yarn node ${app.appDirectory}/server/index.js`, {
         env: { ...process.env, PORT: app.port.toString() },
-      })
-    }),
-  )
+        shell: true,
+        stdio: "inherit",
+      }),
+    }
+  })
 
   processes.push(startReverseProxy(apps))
+  require("esbuild-register")
+  console.log("Starting staging server...")
+  processes.push(
+    run(process.env.AUTH_TOKEN ?? null, keyBy(stagedAppProcesses, "prId")),
+  )
 
   return processes
 }
