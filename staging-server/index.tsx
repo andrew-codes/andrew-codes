@@ -36,6 +36,7 @@ const run = async (
       req.headers.authorization !==
         `Bearer ${Buffer.from(authToken).toString("base64")}`
     ) {
+      console.log(req.headers.authorization)
       return res.status(401).send("Unauthorized")
     }
     if (!req.params.prId) {
