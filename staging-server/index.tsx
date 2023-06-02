@@ -46,10 +46,11 @@ const run = async (
     }
 
     const { process } = stagedAppProcesses[req.params.prId]
-    process.on("close", (code) => {
+    process.on("exit", (code) => {
       console.log(`Child process exited with code ${code}`)
       try {
         fsExtra.removeSync(`${stagedAppsDir}/pr-${req.body.prId}`)
+        console.log(`Deleted app for PR ${req.body.prId}`)
         res.status(200).send("OK")
       } catch (err) {
         console.error(err)
