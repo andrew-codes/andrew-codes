@@ -30,7 +30,7 @@ const LandingPage: FC<{ apps: StagedApp[] }> = ({ apps }) => {
                       #{app.prId}
                     </a>
                   </td>
-                  <td>{app.name}</td>
+                  <td>{app.title}</td>
                   <td>
                     <a href={`https://staging.andrew.codes/${app.prId}/`}>
                       Staged app
