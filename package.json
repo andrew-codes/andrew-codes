@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
+    "@octokit/request-error": "^4.0.0",
     "@parcel/css": "^1.10.1",
     "@remix-run/dev": "1.15.0",
     "@remix-run/eslint-config": "1.15.0",
