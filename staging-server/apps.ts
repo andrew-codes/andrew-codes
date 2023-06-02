@@ -173,7 +173,7 @@ const start = async (stagingDirectory: string): Promise<Promise<void>[]> => {
         stdio: "inherit",
       }),
     }
-    console.log(appProcess.process.pid)
+
     return appProcess
   })
 
