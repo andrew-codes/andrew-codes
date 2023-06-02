@@ -47,6 +47,7 @@ const run = async (
 
     const { process } = stagedAppProcesses[req.params.prId]
     process.on("close", (code) => {
+      console.log(`Child process exited with code ${code}`)
       try {
         fsExtra.removeSync(`${stagedAppsDir}/pr-${req.body.prId}`)
         res.status(200).send("OK")
@@ -55,7 +56,8 @@ const run = async (
         res.status(500).send("Error deleting app")
       }
     })
-    process.kill()
+    console.log(`Killing process for ${req.params.prId}'`)
+    process.kill("SIGINT")
   })
 
   app.use("/", (req, res) => {
