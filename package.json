@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
+    "@octokit/request-error": "^4.0.0",
     "@parcel/css": "^1.10.1",
     "@remix-run/dev": "1.15.0",
     "@remix-run/eslint-config": "1.15.0",
@@ -88,6 +89,7 @@
     "eslint-config-prettier": "^8.5.0",
     "fs-extra": "^11.1.1",
     "glob": "^10.2.6",
+    "octokit": "^2.0.19",
     "prettier": "^2.8.7",
     "remix-esbuild-override": "^3.1.0",
     "remix-mount-routes": "^0.1.3",

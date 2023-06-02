@@ -21,8 +21,9 @@ jobs:
 
       - name: 🚀 Deploy production
         if: ${{ github.ref == 'refs/heads/main' }}
-        uses: superfly/flyctl-actions@1.3
+        uses: superfly/flyctl-actions@1.4
         with:
+          version: "0.1.26"
           args: "deploy --remote-only"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

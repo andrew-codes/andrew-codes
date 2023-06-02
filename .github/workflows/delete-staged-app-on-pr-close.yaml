@@ -1,0 +1,20 @@
+name: Deploy PR ephemeral environment
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+env:
+  PR_NUMBER: ${{ github.event.number }}
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/andrew-codes/gh-action-runner:latest
+    steps:
+      - name: Delete staged app
+        run: >-
+          curl -X DELETE -H "Authorization: token ${{ secrets.AUTH_TOKEN }}" https://staging.andrew.codes/app/${{ env.PR_NUMBER }}

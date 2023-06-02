@@ -1,6 +1,6 @@
 {
   "exclude": ["./cypress"],
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "staging-server/index.js"],
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "runtime-utils/*.js"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019", "ES2021"],
     "types": ["@types/react", "@types/node", "@types/react-dom", "@types/styled-components", "@types/sha1", "@types/lodash"],

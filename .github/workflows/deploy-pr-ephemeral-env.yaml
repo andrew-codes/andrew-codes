@@ -15,7 +15,6 @@ env:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && github.event.pull_request.head.repo.full_name != 'your/full_repo_name' }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andrew-codes/gh-action-runner:latest
@@ -24,8 +23,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: 🚀 Deploy emphemeral environment for pull request
-        uses: superfly/flyctl-actions@1.3
+        uses: superfly/flyctl-actions@1.4
         with:
+          version: "0.1.26"
           args: "deploy --config fly.staging.toml --remote-only --build-arg PR_NUMBER=${{ env.PR_NUMBER }} --build-arg DEPLOYMENT_ENV=staging"
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
