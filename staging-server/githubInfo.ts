@@ -23,10 +23,10 @@ const withGitHubInfo = (
 
     return apps.map((app) =>
       merge(app, {
-        title: prs[app.prId].title,
-        description: prs[app.prId].body,
-        state: prs[app.prId].state,
-        url: prs[app.prId].html_url,
+        title: prs[app.prId]?.title,
+        description: prs[app.prId]?.body,
+        state: prs[app.prId]?.state,
+        url: prs[app.prId]?.html_url,
       }),
     )
   }
