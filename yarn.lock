@@ -3419,6 +3419,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/request-error@npm:*":
+  version: 4.0.0
+  resolution: "@octokit/request-error@npm:4.0.0"
+  dependencies:
+    "@octokit/types": ^9.0.0
+    deprecation: ^2.0.0
+    once: ^1.4.0
+  checksum: 7215691c350208520d4c7a5de9e4889905a6931be87fcb122d5058dbdcd197949e7c5c4008a7cd539e4ab207857746b5f2114519fd8d47c137de05de38b58a6e
+  languageName: node
+  linkType: hard
+
 "@octokit/request-error@npm:^3.0.0, @octokit/request-error@npm:^3.0.3":
   version: 3.0.3
   resolution: "@octokit/request-error@npm:3.0.3"
