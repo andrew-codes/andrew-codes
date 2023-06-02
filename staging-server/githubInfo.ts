@@ -16,20 +16,19 @@ const withGitHubInfo = (
       headers: {
         "X-GitHub-Api-Version": "2022-11-28",
       },
-      state: "open",
     })
 
     const prs = keyBy(data, (pr) => pr.number.toString())
     const apps = await getApps(stagingDirectory)
 
-    return apps
-      .filter((app) => !!prs[app.prId])
-      .map((app) =>
-        merge(app, {
-          title: prs[app.prId].title,
-          description: prs[app.prId].body,
-        }),
-      )
+    return apps.map((app) =>
+      merge(app, {
+        title: prs[app.prId].title,
+        description: prs[app.prId].body,
+        state: prs[app.prId].state,
+        url: prs[app.prId].html_url,
+      }),
+    )
   }
 }
 

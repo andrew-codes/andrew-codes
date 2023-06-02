@@ -4,6 +4,8 @@ type StagedApp = {
   port: number
   title?: string
   description?: string
+  state?: string
+  url?: string
 }
 
 export type { StagedApp }

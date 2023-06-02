@@ -15,6 +15,7 @@ const LandingPage: FC<{ apps: StagedApp[] }> = ({ apps }) => {
             <thead>
               <tr>
                 <th>PR ID</th>
+                <th>State</th>
                 <th>PR Name</th>
                 <th>Staged App Link</th>
                 <th>Description</th>
@@ -24,12 +25,9 @@ const LandingPage: FC<{ apps: StagedApp[] }> = ({ apps }) => {
               {apps.map((app) => (
                 <tr key={app.prId}>
                   <td>
-                    <a
-                      href={`https://github.com/andrew-codes/andrew-codes/pull/${app.prId}`}
-                    >
-                      #{app.prId}
-                    </a>
+                    <a href={app.url}>#{app.prId}</a>
                   </td>
+                  <td>{app.state}</td>
                   <td>{app.title}</td>
                   <td>
                     <a href={`https://staging.andrew.codes/${app.prId}/`}>
