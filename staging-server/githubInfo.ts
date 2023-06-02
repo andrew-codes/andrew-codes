@@ -21,7 +21,7 @@ const withGitHubInfo = (
 
     const prs = keyBy(data, (pr) => pr.id.toString())
     const apps = await getApps(stagingDirectory)
-
+    console.dir(prs, apps)
     return apps
       .filter((app) => !!prs[app.prId])
       .map((app) =>

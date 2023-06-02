@@ -165,7 +165,7 @@ const start = async (stagingDirectory: string): Promise<Promise<void>[]> => {
     console.log(
       `Starting staged app for PR ${app.prId}, located at ${app.appDirectory}, on port ${app.port}...`,
     )
-    return {
+    const appProcess = {
       prId: app.prId,
       process: spawn(`yarn node ${app.appDirectory}/server/index.js`, {
         env: { ...process.env, PORT: app.port.toString() },
@@ -173,6 +173,8 @@ const start = async (stagingDirectory: string): Promise<Promise<void>[]> => {
         stdio: "inherit",
       }),
     }
+    console.log(appProcess.process.pid)
+    return appProcess
   })
 
   processes.push(startReverseProxy(apps))
