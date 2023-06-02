@@ -48,8 +48,8 @@ const run = async (
     process.on("exit", (code) => {
       console.log(`Child process exited with code ${code}`)
       try {
-        fsExtra.removeSync(`${stagedAppsDir}/pr-${req.body.prId}`)
-        console.log(`Deleted app for PR ${req.body.prId}`)
+        fsExtra.removeSync(`${stagedAppsDir}/pr-${req.params.prId}`)
+        console.log(`Deleted app for PR ${req.params.prId}`)
         res.status(200).send("OK")
       } catch (err) {
         console.error(err)
@@ -58,8 +58,8 @@ const run = async (
     })
     console.log(`Killing process for ${req.params.prId}`)
     process.kill("SIGINT")
-    fsExtra.removeSync(`${stagedAppsDir}/pr-${req.body.prId}`)
-    console.log(`Deleted app for PR ${req.body.prId}`)
+    fsExtra.removeSync(`${stagedAppsDir}/pr-${req.params.prId}`)
+    console.log(`Deleted app for PR ${req.params.prId}`)
     res.status(200).send("OK")
   })
 
