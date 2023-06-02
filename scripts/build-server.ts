@@ -34,6 +34,15 @@ building app router...`)
       format: "cjs",
       logLevel: "info",
     })
+
+    await require("esbuild").build({
+      entryPoints: sync("app/libs/**/*.ts"),
+      outdir: here("../dist/app/libs"),
+      target: [`node${pkg.engines.node}`],
+      platform: "node",
+      format: "cjs",
+      logLevel: "info",
+    })
   } catch (error: any) {
     console.error(error)
     process.exit(1)
