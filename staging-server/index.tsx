@@ -31,7 +31,11 @@ const run = async (
   const apps = await getApps(stagedAppsDir)
 
   app.use("/app/:prId", (req, res) => {
-    if (!authToken || req.body.authToken !== authToken) {
+    if (
+      !authToken ||
+      req.headers.authorization !==
+        `Bearer ${Buffer.from(authToken).toString("base64")}`
+    ) {
       return res.status(401).send("Unauthorized")
     }
     if (!req.params.prId) {
