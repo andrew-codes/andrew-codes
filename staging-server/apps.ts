@@ -56,7 +56,12 @@ const stagePr = async (
   }
 }
 
-const getApps = async (stagingDirectory: string): Promise<StagedApp[]> => {
+interface GetStagedApps {
+  (stagingDirectory: string): Promise<StagedApp[]>
+}
+const getApps: GetStagedApps = async (
+  stagingDirectory: string,
+): Promise<StagedApp[]> => {
   let port = 3002
   const apps: StagedApp[] = []
   const fsPaths = await fs.readdir(stagingDirectory)
@@ -177,3 +182,4 @@ const start = async (stagingDirectory: string): Promise<Promise<void>[]> => {
 }
 
 export { getApps, stagePr, start }
+export type { GetStagedApps }
