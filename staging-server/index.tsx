@@ -47,14 +47,6 @@ const run = async (
 
     const { process } = stagedAppProcesses[req.params.prId]
     process.on("close", (code) => {
-      if (code !== 200) {
-        console.error(`App exited with unexpected code ${code}`)
-        res
-          .status(500)
-          .send(`App exited for unexpected reason. The app was not deleted.`)
-
-        return
-      }
       try {
         fsExtra.removeSync(`${stagedAppsDir}/pr-${req.body.prId}`)
         res.status(200).send("OK")
@@ -63,7 +55,7 @@ const run = async (
         res.status(500).send("Error deleting app")
       }
     })
-    process.kill(200)
+    process.kill()
   })
 
   app.use("/", (req, res) => {
@@ -78,10 +70,6 @@ const run = async (
   app.listen(port, () => {
     console.log(`Staging express server listening on port ${port}`)
   })
-}
-
-if (require.main === module) {
-  run()
 }
 
 export default run
