@@ -15,7 +15,7 @@ const catchAllErrors: ErrorRequestHandler = (err, req, res, next) => {
 
 const run = async (
   authToken: string | null,
-  stagedAppProcesses: Record<string, ChildProcess>,
+  stagedAppProcesses: Record<string, { prId: string; process: ChildProcess }>,
 ) => {
   const app = express()
   app.use(express.json())
@@ -35,14 +35,18 @@ const run = async (
     res.status(200).send(html)
   })
 
-  app.use("/app/delete", (req, res) => {
+  app.use("/app/:prId", (req, res) => {
     if (!authToken || req.body.authToken !== authToken) {
       return res.status(401).send("Unauthorized")
     }
-    if (!req.body.prId) {
+    if (!req.query.prId) {
       return res.status(400).send("Bad Request")
     }
-    const process = stagedAppProcesses[req.body.prId]
+    if (req.method !== "DELETE") {
+      return res.status(405).send("Method Not Allowed")
+    }
+
+    const { process } = stagedAppProcesses[req.body.prId]
     process.on("close", (code) => {
       if (code !== 200) {
         console.error(`App exited with unexpected code ${code}`)

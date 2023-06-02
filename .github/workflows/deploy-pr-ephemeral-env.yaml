@@ -15,7 +15,6 @@ env:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' && github.event.pull_request.head.repo.full_name != 'your/full_repo_name' }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/andrew-codes/gh-action-runner:latest
