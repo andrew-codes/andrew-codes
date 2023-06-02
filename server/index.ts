@@ -20,6 +20,7 @@ import { getInstanceInfo } from "litefs-js"
 import { getRedirectsMiddleware } from "./redirects"
 import { installGlobals } from "@remix-run/node/dist/globals"
 import "dotenv/config"
+import { getMdxPages } from "../app/libs/mdx.server"
 
 installGlobals()
 
@@ -242,14 +243,19 @@ app.use((err: any, req: any, res: any, next: any) => {
 })
 
 const port = process.env.PORT ?? 3000
-app.listen(port, () => {
-  if (MODE === "production" && process.env.DEPLOYMENT_ENV !== "staging") {
-    require("../build")
-  }
+getMdxPages(
+  { forceFresh: true, timings: {} },
+  path.join(__dirname, "..", "app", "posts"),
+  path.join(__dirname, "..", "app", "components"),
+).then((pages) => {
+  app.listen(port, () => {
+    if (MODE === "production" && process.env.DEPLOYMENT_ENV !== "staging") {
+      require("../build")
+    }
 
-  console.log(`Production express server listening on port ${port}`)
+    console.log(`Production express server listening on port ${port}`)
+  })
 })
-
 ////////////////////////////////////////////////////////////////////////////////
 function purgeRequireCache() {
   for (const key in require.cache) {

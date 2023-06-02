@@ -12,6 +12,7 @@ const run = async () => {
     path.join(appDir, "app", "components"),
   )
   await fsExtra.copy(here("../app/posts"), path.join(appDir, "app", "posts"))
+  await fsExtra.copy(here("../app/libs"), path.join(appDir, "app", "libs"))
   await fsExtra.copy(here("../public"), path.join(appDir, "public"))
   await fsExtra.copy(here("../server-build"), path.join(appDir, "server"))
   await fsExtra.copy(here("../config/app"), path.join(appDir, "config", "app"))
