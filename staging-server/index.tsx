@@ -28,7 +28,6 @@ const run = async (
     getApps = withGitHubInfo(ghToken, getApps)
   }
   const stagedAppsDir = process.env.APP_STAGING_DIR ?? ""
-  const apps = await getApps(stagedAppsDir)
 
   app.use("/app/:prId", (req, res) => {
     if (
@@ -64,7 +63,8 @@ const run = async (
     res.status(200).send("OK")
   })
 
-  app.use("/", (req, res) => {
+  app.use("/", async (req, res) => {
+    const apps = await getApps(stagedAppsDir)
     const html = renderToString(<LandingPage apps={apps} />)
 
     res.status(200).send(html)
