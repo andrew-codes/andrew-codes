@@ -36,8 +36,8 @@ building app router...`)
     })
 
     await require("esbuild").build({
-      entryPoints: sync("app/libs/**/*.ts"),
-      outdir: here("../dist/app/libs"),
+      entryPoints: sync("app/**/*.ts").concat(sync("app/**/*.tsx")),
+      outdir: here("../dist/app"),
       target: [`node${pkg.engines.node}`],
       platform: "node",
       format: "cjs",

@@ -11,10 +11,9 @@ import fs from "fs"
 import { getInstanceInfo, getInstanceInfoSync } from "litefs-js"
 import { LRUCache } from "lru-cache"
 import configuration from "./configuration.server"
-import { updatePrimaryCacheValue } from "~/routes/resources/cache.sqlite"
+import { updatePrimaryCacheValue } from "../routes/resources/cache.sqlite"
 import { time, type Timings } from "./timing.server"
 import singleton from "./singleton.server"
-import { type } from "os"
 
 type CachifiedOptions = {
   forceFresh?: boolean | string
