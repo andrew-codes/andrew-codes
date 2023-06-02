@@ -1,4 +1,4 @@
-name: Deploy PR ephemeral environment
+name: Remove Ephemeral Environment
 on:
   pull_request:
     types:
@@ -17,4 +17,4 @@ jobs:
     steps:
       - name: Delete staged app
         run: >-
-          curl -X DELETE -H "Authorization: token ${{ secrets.AUTH_TOKEN }}" https://staging.andrew.codes/app/${{ env.PR_NUMBER }}
+          curl -X DELETE -H "Authorization: Bearer ${{ secrets.AUTH_TOKEN }}" https://staging.andrew.codes/app/${{ env.PR_NUMBER }}
