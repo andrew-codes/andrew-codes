@@ -57,8 +57,11 @@ const run = async (
         res.status(500).send("Error deleting app")
       }
     })
-    console.log(`Killing process for ${req.params.prId}'`)
+    console.log(`Killing process for ${req.params.prId}`)
     process.kill("SIGINT")
+    fsExtra.removeSync(`${stagedAppsDir}/pr-${req.body.prId}`)
+    console.log(`Deleted app for PR ${req.body.prId}`)
+    res.status(200).send("OK")
   })
 
   app.use("/", (req, res) => {
