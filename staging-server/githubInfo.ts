@@ -20,15 +20,16 @@ const withGitHubInfo = (
     })
 
     const prs = keyBy(data, (pr) => pr.id.toString())
-
     const apps = await getApps(stagingDirectory)
 
-    return apps.map((app) =>
-      merge(app, {
-        title: prs[app.prId].title,
-        description: prs[app.prId].body,
-      }),
-    )
+    return apps
+      .filter((app) => !!prs[app.prId])
+      .map((app) =>
+        merge(app, {
+          title: prs[app.prId].title,
+          description: prs[app.prId].body,
+        }),
+      )
   }
 }
 
