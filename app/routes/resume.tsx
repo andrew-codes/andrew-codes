@@ -107,6 +107,10 @@ const Note = styled.div`
       text-decoration: underline;
     }
   }
+
+  @media print {
+    display: none;
+  }
 `
 
 const ResumeRoute: FC<{}> = () => {
