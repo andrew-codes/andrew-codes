@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "yarn node index.js",
-    "start/dev": "pm2-dev ./config/pm2.config.js",
+    "start/dev": "remix-esbuild-override && pm2-dev ./config/pm2.config.js",
     "start/dev/remix": "remix watch",
     "clean/build": "rimraf  ./build ./public/build ./server-build",
     "clean/dist": "rimraf ./dist",
