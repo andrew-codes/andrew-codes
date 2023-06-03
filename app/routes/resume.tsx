@@ -213,7 +213,7 @@ const ResumeRoute: FC<{}> = () => {
                 </Paragraph>
                 <List>
                   <li>
-                    Achieved 49% reduction in key user-facing performance
+                    Achieved 90% reduction in key user-facing performance
                     metrics through design and execution of{" "}
                     <ResumeAbbr title="Command Query Responsibility Segregation">
                       CQRS
