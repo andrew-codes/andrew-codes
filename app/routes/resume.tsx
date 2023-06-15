@@ -33,7 +33,6 @@ import {
   ResumeLink,
   ResumeNotes,
   Section,
-  Strong,
   SummarizedItem,
   SummarizedItems,
   WorkExperience,
@@ -161,38 +160,15 @@ const ResumeRoute: FC<{}> = () => {
             </ContactInformation>
             <Notes as={ResumeNotes}>
               <Paragraph>
-                Senior software engineer with {yearsOfExperience} years of
-                experience in full-stack development, mentorship, and technical
-                leadership. Seeking opportunities to leverage my expertise in
-                React, TypeScript, and system languages, as a principal software
-                engineer.
+                Senior Software engineer with {yearsOfExperience} years of
+                experience in full-stack development, technical leadership, and
+                unique insights into delivering and scaling software. Proven
+                experience with React/TypeScript, various system languages, and
+                associated principles. Direct impact and technical influence on
+                organizations ranging from 3 to 50+ engineers.
               </Paragraph>
-              <Paragraph>
-                Additionally, working in a wide variety of industries and
-                company sizes gives unique insights into successfully delivering
-                and scaling software. This includes highly practical experience
-                enabling agility, long-term maintainability of systems, and
-                focusing on the right value in a timely manner.
-              </Paragraph>
-              <Paragraph>
-                Finally, embracing a growth mindset, actively pursing new skills
-                as a polyglot developer in Elixir.
-              </Paragraph>
-              <Section title="Recent Highlights">
+              <Section title="Skills">
                 <List>
-                  <li>
-                    OSS tool leveraging AI to forecast timelines for completion
-                    of work, using historical item completion dates; no
-                    estimates needed;{" "}
-                    <ResumeLink href="https://github.com/andrew-codes/forecast-work-oss">
-                      github.com/andrew-codes/forecast-work-oss
-                    </ResumeLink>
-                  </li>
-                  <li>
-                    Extensive experience with Kanban, Scrum,{" "}
-                    <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
-                    other techniques enabling agility
-                  </li>
                   <li>
                     Focusing on front-end, but with equally vast depth of
                     knowledge in back-end, infrastructure, and cloud providers;
@@ -208,10 +184,15 @@ const ResumeRoute: FC<{}> = () => {
                     <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>
                   </li>
                   <li>
-                    Active community member through speaking, mentorship, and
-                    OSS contributions; including Gatsby, Cypress, Glamorous, VS
-                    Code Grammarly, VersionOne SDKs and component library, Coder
-                    Dojo lessons, Hacktoberfest
+                    Active community member through speaking and OSS
+                    contributions; including Gatsby, Cypress, Glamorous, VS Code
+                    Grammarly, VersionOne SDKs and component library, Coder Dojo
+                    lessons, Hacktoberfest
+                  </li>
+                  <li>
+                    Experience with Kanban, Scrum,{" "}
+                    <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
+                    other techniques enabling agility
                   </li>
                 </List>
               </Section>
@@ -240,7 +221,7 @@ const ResumeRoute: FC<{}> = () => {
                   ,{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
                   and microservices; advocating quality, performance, and
-                  delightful customer experiences.
+                  enjoyable customer experiences.
                 </>
               }
             >
@@ -251,34 +232,33 @@ const ResumeRoute: FC<{}> = () => {
                   <ResumeAbbr title="Command Query Responsibility Segregation">
                     CQRS
                   </ResumeAbbr>{" "}
-                  with federated{" "}
+                  and federated{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>;
                   leadership to plan and deliver across 3 teams
                 </li>
                 <li>
-                  Technical leadership in React, TypeScript, Redux, Node.js,{" "}
+                  Scale technical leadership to 3 teams and mentor 5 engineers;
+                  including concrete applications of SOLID, React ecosystem,{" "}
                   <ResumeAbbr title="C sharp programming language">
                     C#
                   </ResumeAbbr>
                   , federated{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>,
-                  Microservice architecture,{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                  and pair-programming practices
+                  and microservice architecture
                 </li>
                 <li>
-                  Scaling mentorship of 2 teams and direct impact for 5
-                  engineers; including concrete applications of SOLID principles
-                  and patterns, mob and pair programming, and technical talks
-                </li>
-                <li>
-                  Increase test coverage from 0% to 52% though institution of
-                  unit and component testing via Jest and Cypress; advocate and
-                  mentor for pragmatic{" "}
+                  Increase test coverage from 0% to 52% through institution of
+                  unit and component testing via Jest and Cypress; advocate
+                  practitioner for pragmatic{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
                 </li>
                 <li>
-                  Significantly reduce{" "}
+                  Reduce time creating and communicating project timelines to
+                  leadership by ~80% by engineering forecasting tool, leveraging
+                  AI and historical data without requiring estimates
+                </li>
+                <li>
+                  Reduce{" "}
                   <ResumeAbbr title="Continuous integration automation">
                     CI
                   </ResumeAbbr>{" "}
@@ -298,33 +278,28 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2020-12">Dec 2020</time>}
               description={
                 <>
-                  Managed and guided all aspects of front-end development for
-                  teams, communicated with stakeholders and executive
-                  leadership, ensured experiences that delight customers.
+                  Guided all aspects of front-end development for teams,
+                  communicated with stakeholders and executive leadership,
+                  ensured experiences that delight customers.
                 </>
               }
             >
               <List>
                 <li>
-                  Leveraged data science team and feedback to improve customer
-                  experience via creating{" "}
-                  <ResumeAbbr title="User experience">UX</ResumeAbbr> design
-                  language backed by React component library{" "}
-                  <ResumeAbbr title="Node.js package management">
-                    NPM
-                  </ResumeAbbr>{" "}
-                  packages
+                  Leveraged data science and customer feedback to accelerate
+                  delivery of consistent user experiences by introduced design
+                  language and React component library
                 </li>
                 <li>
-                  Increased teams' delivery speed and reduce requirements churn
-                  to ensure the right value is delivered through institution of
-                  "Three Amigos"
+                  Established "Three Amigos" process drove improved alignment of
+                  delivered value with 75% reduction of engineering time
+                  investment, increasing the team velocity by 20%
                 </li>
                 <li>
-                  Mentored and guided teams of engineers; React, Redux,
-                  TypeScript,{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>;
-                  introduced Cypress{" "}
+                  Guided teams of engineers; React, Redux, TypeScript, innovated
+                  usage of{" "}
+                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
+                  and Cypress{" "}
                   <ResumeAbbr title="end-to-end tests">E2E</ResumeAbbr> testing
                   and automation
                 </li>
@@ -338,7 +313,7 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2019-06">June 2019</time>}
               description={
                 <>
-                  Feature lead for high-profile features on flagship{" "}
+                  Technical lead for high-profile features on flagship{" "}
                   <ResumeAbbr title="Agile Lifecycle Management">
                     ALM
                   </ResumeAbbr>{" "}
@@ -387,32 +362,34 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2014">2014</time>}
               description={
                 <>
-                  Engineer and mentor of Agile teams for major clients as a
-                  consultant engineer; focused on full-stack development in{" "}
+                  Engineer and coach, focused on full-stack development in{" "}
                   <ResumeAbbr title="C sharp programming language">
                     C#
                   </ResumeAbbr>
                   , JavaScript, React, and{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>;
-                  for both front-end and back-end stacks.
+                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
+                  working with major clients.
                 </>
               }
             >
               <List>
                 <li>
-                  Founded company craftsman fellowship program and its
-                  curriculum; technical mentorship on engineering patterns, best
-                  practices and technologies; including React and other
-                  front-end frameworks
+                  Delivered redesigned checkout process for a major e-commerce
+                  store; increasing sales by an undisclosed amount
                 </li>
                 <li>
-                  Technical leadership in JavaScript, Node.js, Knockout.js,
-                  gulp, grunt, and test frameworks: jasmine, mocha, chai, sinon,
-                  karma
+                  Reduced defects in new features by ~60% through of testing
+                  mechanisms, including jasmine, mocha, chai, sinon, and karma,
+                  and CI automation via gulp and grunt
                 </li>
                 <li>
-                  React early adopter; pioneered its usage and incorporation
-                  into company's core competencies
+                  React early adopter; pioneered usage and incorporation into
+                  company's core competencies; including training of 7+
+                  engineers
+                </li>
+                <li>
+                  Founded company craftsman fellowship program and curriculum;
+                  onboarding 2 new hires into the program
                 </li>
               </List>
             </WorkExperience>
