@@ -161,52 +161,60 @@ const ResumeRoute: FC<{}> = () => {
             </ContactInformation>
             <Notes as={ResumeNotes}>
               <Paragraph>
-                Senior software engineer with{" "}
-                <Strong>{yearsOfExperience} years</Strong> of experience in
-                full-stack development, mentorship, and technical leadership.
-                Seeking opportunities to leverage my expertise in React,
-                TypeScript, and system languages, as a principal software
+                Senior software engineer with {yearsOfExperience} years of
+                experience in full-stack development, mentorship, and technical
+                leadership. Seeking opportunities to leverage my expertise in
+                React, TypeScript, and system languages, as a principal software
                 engineer.
               </Paragraph>
               <Paragraph>
                 Additionally, working in a wide variety of industries and
-                company sizes has given unique insights into successfully
-                delivering and scaling software. This includes highly practical
-                experience enabling agility, long-term maintainability of
-                systems, and focusing on the right value in a timely manner.
+                company sizes gives unique insights into successfully delivering
+                and scaling software. This includes highly practical experience
+                enabling agility, long-term maintainability of systems, and
+                focusing on the right value in a timely manner.
               </Paragraph>
               <Paragraph>
                 Finally, embracing a growth mindset, actively pursing new skills
-                as polygot developer in Elixir.
+                as a polyglot developer in Elixir.
               </Paragraph>
-              {/* <List>
-                <li>
-                  Data-driven forecasting of timelines using only historical
-                  item completion dates; no estimates needed, only story count;{" "}
-                  <ResumeLink href="https://github.com/andrew-codes/forecast-work">
-                    github.com/andrew-codes/forecast-work
-                  </ResumeLink>
-                </li>
-                <li>
-                  Worked in wide variety of industries and company sizes;
-                  exposed to many processes and tools aimed to enable agility,
-                  including Kanban, Scrum, and{" "}
-                  <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>
-                </li>
-                <li>
-                  Passion for front-end, but with equally vast depth of
-                  knowledge in back-end, infrastructure, and cloud technologies;
-                  including git, shell, Node.js, C#, SQL,{" "}
-                  <ResumeAbbr title="Kubernetes">k8s</ResumeAbbr>, Docker/
-                  <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>
-                </li>
-                <li>
-                  Speaker and community mentor; contributed to OSS projects
-                  including Gatsby, Cypress, Glamorous, VS Code Grammarly,
-                  VersionOne SDKs and component library, Coder Dojo lessons,
-                  Hacktoberfest
-                </li>
-              </List> */}
+              <Section title="Recent Highlights">
+                <List>
+                  <li>
+                    OSS tool leveraging AI to forecast timelines for completion
+                    of work, using historical item completion dates; no
+                    estimates needed;{" "}
+                    <ResumeLink href="https://github.com/andrew-codes/forecast-work-oss">
+                      github.com/andrew-codes/forecast-work-oss
+                    </ResumeLink>
+                  </li>
+                  <li>
+                    Extensive experience with Kanban, Scrum,{" "}
+                    <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
+                    other techniques enabling agility
+                  </li>
+                  <li>
+                    Focusing on front-end, but with equally vast depth of
+                    knowledge in back-end, infrastructure, and cloud providers;
+                    including git, bash, Node.js,{" "}
+                    <ResumeAbbr title="C sharp programming language">
+                      C#
+                    </ResumeAbbr>
+                    ,{" "}
+                    <ResumeAbbr title="Structured Query Language">
+                      SQL
+                    </ResumeAbbr>
+                    , Kubernetes, Docker/
+                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>
+                  </li>
+                  <li>
+                    Active community member through speaking, mentorship, and
+                    OSS contributions; including Gatsby, Cypress, Glamorous, VS
+                    Code Grammarly, VersionOne SDKs and component library, Coder
+                    Dojo lessons, Hacktoberfest
+                  </li>
+                </List>
+              </Section>
             </Notes>
           </ContactCard>
           <Section title="Work Experience">
@@ -225,9 +233,14 @@ const ResumeRoute: FC<{}> = () => {
               description={
                 <>
                   Influential technical leader, mentor, overseeing delivery of
-                  high profile projects, with a focus on React, C#, GraphQL and
-                  microservices; advocating quality, performance, and enjoyable
-                  customer experiences.
+                  high profile projects, with a focus on React,{" "}
+                  <ResumeAbbr title="C sharp programming language">
+                    C#
+                  </ResumeAbbr>
+                  ,{" "}
+                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
+                  and microservices; advocating quality, performance, and
+                  delightful customer experiences.
                 </>
               }
             >
@@ -238,37 +251,40 @@ const ResumeRoute: FC<{}> = () => {
                   <ResumeAbbr title="Command Query Responsibility Segregation">
                     CQRS
                   </ResumeAbbr>{" "}
-                  with GraphQL; exhibited leadership to plan and execute across
-                  3 teams
+                  with federated{" "}
+                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>;
+                  leadership to plan and deliver across 3 teams
                 </li>
                 <li>
                   Technical leadership in React, TypeScript, Redux, Node.js,{" "}
                   <ResumeAbbr title="C sharp programming language">
                     C#
                   </ResumeAbbr>
-                  , federated GraphQL, Microservice architecture,{" "}
+                  , federated{" "}
+                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>,
+                  Microservice architecture,{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                  and pair-programming practices; direct mentorship of 5
-                  engineers
+                  and pair-programming practices
                 </li>
                 <li>
-                  Instill a culture of quality by introducing React/TypeScript
-                  testing via Jest and Cypress; advocate for pragmatic{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>;
-                  increasing test coverage from 0% to 52%
+                  Scaling mentorship of 2 teams and direct impact for 5
+                  engineers; including concrete applications of SOLID principles
+                  and patterns, mob and pair programming, and technical talks
                 </li>
                 <li>
-                  Improve reliability, reduce complexity, and times for{" "}
+                  Increase test coverage from 0% to 52% though institution of
+                  unit and component testing via Jest and Cypress; advocate and
+                  mentor for pragmatic{" "}
+                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
+                </li>
+                <li>
+                  Significantly reduce{" "}
                   <ResumeAbbr title="Continuous integration automation">
                     CI
                   </ResumeAbbr>{" "}
-                  in mono-repo from hours to minutes; implementing Nx, upgrading
-                  to Yarn with{" "}
-                  <ResumeAbbr title="Plug and play">PnP</ResumeAbbr>; breaking
-                  monolith into small{" "}
-                  <ResumeAbbr title="Node.js package management">
-                    NPM
-                  </ResumeAbbr>{" "}
+                  times by 83% via improving reliability with Yarn{" "}
+                  <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>, reducing
+                  complexity with Nx, and breaking monolithic apps into small
                   packages
                 </li>
               </List>
@@ -407,7 +423,7 @@ const ResumeRoute: FC<{}> = () => {
                 on={<time dateTime="2012">2013</time>}
               />
               <SummarizedItem
-                role="Software Engineer"
+                role="Web Application Developer"
                 name="Response Mine Interactive"
                 note="moved to Atlanta"
                 on={
@@ -418,7 +434,7 @@ const ResumeRoute: FC<{}> = () => {
                 }
               />
               <SummarizedItem
-                role="Senior .NET Engineer"
+                role="Senior Software Engineer"
                 name="DAXKO"
                 on={
                   <>
@@ -428,7 +444,7 @@ const ResumeRoute: FC<{}> = () => {
                 }
               />
               <SummarizedItem
-                role="Software Engineer"
+                role="Software Engineer 3"
                 name="Medseek"
                 on={<time dateTime="2011">2011</time>}
               />
@@ -439,6 +455,16 @@ const ResumeRoute: FC<{}> = () => {
                   <>
                     <time dateTime="2009">2009</time> -{" "}
                     <time dateTime="2011">2011</time>
+                  </>
+                }
+              />
+              <SummarizedItem
+                role="Adjunct Faculty"
+                name="Columbus Technical College"
+                on={
+                  <>
+                    <time dateTime="2009">2008</time> -{" "}
+                    <time dateTime="2011">2009</time>
                   </>
                 }
               />
