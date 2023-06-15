@@ -1,6 +1,7 @@
 import type { FC, ReactNode } from "react"
 import styled from "styled-components"
 import Paper from "../Paper"
+import { PrintTogether } from "../print"
 
 const Resume = styled.div`
   position: relative;
@@ -78,6 +79,11 @@ const WorkExperienceRoot = styled.div`
   width: 100%;
   flex-wrap: wrap;
 `
+const WorkExperienceOverview = styled(PrintTogether)`
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+`
 const JobTitle = styled.h3`
   display: inline-block;
   flex: 1;
@@ -99,27 +105,35 @@ const OrgName = styled.span`
 const Location = styled.span`
   display: inline-block;
 `
+const Description = styled.p`
+  margin-top: 8pt;
+  width: 100%;
+`
 const KeyResults = styled.div`
   margin-top: 8pt;
   width: 100%;
 `
 const WorkExperience: FC<{
   children: ReactNode | ReactNode[]
+  description: string | ReactNode
   from: string | ReactNode
   role: string
   location: string | ReactNode
   note?: string | ReactNode
   orgName: string
   to: string | ReactNode
-}> = ({ children, role, location, note, orgName, from, to }) => {
+}> = ({ children, role, location, note, orgName, from, to, description }) => {
   return (
     <WorkExperienceRoot>
-      <JobTitle>{role}</JobTitle>
-      <TimeFrame>
-        {!!note && <Note>({note})</Note>} {from} - {to}
-      </TimeFrame>
-      <OrgName>{orgName}</OrgName>
-      <Location>{location}</Location>
+      <WorkExperienceOverview>
+        <JobTitle>{role}</JobTitle>
+        <TimeFrame>
+          {!!note && <Note>({note})</Note>} {from} - {to}
+        </TimeFrame>
+        <OrgName>{orgName}</OrgName>
+        <Location>{location}</Location>
+        <Description>{description}</Description>
+      </WorkExperienceOverview>
       <KeyResults>{children}</KeyResults>
     </WorkExperienceRoot>
   )
@@ -224,30 +238,21 @@ const ToDo = styled.div`
   position: relative;
 
   ::after {
+    border: 2px solid red;
     content: "";
     height: 100%;
     left: -2px;
     position: absolute;
     top: -2px;
     width: 100%;
-    border: 2px solid red;
   }
 `
 
-const PaginatedResume = styled(Resume)`
-  > * {
-    page-break-before: always;
-  }
-
-  > * :last-child {
-    page-break-before: unset;
-  }
-`
 const Page = styled(Paper)`
-  height: 11in;
-  padding: 0.5in;
-  width: 8.5in;
   border-radius: 0;
+  padding: 0.5in;
+  position: relative;
+  width: 8.5in;
 
   > section {
     margin-top: 16pt;
@@ -271,7 +276,6 @@ export {
   Education,
   List,
   Page,
-  PaginatedResume,
   Paragraph,
   Resume,
   Section,

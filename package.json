@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "yarn node index.js",
-    "start/dev": "pm2-dev ./config/pm2.config.js",
+    "start/dev": "remix-esbuild-override && pm2-dev ./config/pm2.config.js",
     "start/dev/remix": "remix watch",
     "clean/build": "rimraf  ./build ./public/build ./server-build",
     "clean/dist": "rimraf ./dist",
@@ -98,7 +98,7 @@
     "tslib": "^2.5.2",
     "typescript": "^4.9.4"
   },
-  "packageManager": "yarn@3.5.0",
+  "packageManager": "yarn@3.6.0",
   "resolutions": {
     "@remix-run/react@1.15.0": "patch:@remix-run/react@npm%3A1.15.0#./.yarn/patches/@remix-run-react-npm-1.15.0-1ca4393b10.patch",
     "@remix-run/react@>=1.10.0": "patch:@remix-run/react@npm%3A1.15.0#./.yarn/patches/@remix-run-react-npm-1.15.0-1ca4393b10.patch",
