@@ -17,6 +17,10 @@ const PageWithHeader = styled(Paper)`
       padding: 0;
     }
   }
+
+  ${Header} + *:last-child {
+    padding-bottom: 0;
+  }
 `
 
 export default PageWithHeader
