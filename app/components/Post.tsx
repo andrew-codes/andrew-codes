@@ -1,4 +1,10 @@
+import type { FC } from "react"
 import styled from "styled-components"
+import StyledLink from "./Link"
+
+const Link: FC<{ href: string }> = ({ href, ...props }) => (
+  <StyledLink to={href} {...props} />
+)
 
 const H2 = styled.h2``
 const H3 = styled.h3`
@@ -67,4 +73,4 @@ const Posts = styled.ol`
   padding: 0;
 `
 
-export { Blockquote, H2, H3, H4, Paragraph, Posts, Table }
+export { Blockquote, H2, H3, H4, Link, Paragraph, Posts, Table }
