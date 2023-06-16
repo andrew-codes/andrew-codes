@@ -112,7 +112,7 @@ const checkCompiledValue = (value: unknown) =>
 const getMdxPage = async (
   slug: string,
   options: CachifiedOptions,
-  fileDirPath: string,
+  fileDirPath?: string,
   filesContents: Record<string, string> = {},
 ): Promise<MdxPage> => {
   const { forceFresh, ttl = defaultTtl, request, timings } = options
@@ -129,10 +129,14 @@ const getMdxPage = async (
     forceFresh,
     checkValue: checkCompiledValue,
     getFreshValue: async () => {
+      if (!fileDirPath) {
+        const pages = await getMdxPages(options)
+        return pages.find((page) => page.slug === slug)
+      }
+
       const mdxFiles = await getMdxFiles(options, fileDirPath)
       const mdxFile = mdxFiles[slug]
       const transformedMdx = await mdx(mdxFile, filesContents)
-
       const codeAssets = await getCodeAssets(mdxFile, options)
 
       const output = { ...transformedMdx, slug, codeAssets }
