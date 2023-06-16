@@ -29,6 +29,9 @@ const ResumeContactInformation = styled.div`
     font-size: 9pt;
     font-style: normal;
     font-weight: 550;
+
+    @media (max-width: 640px) {
+      display: inline-block;
   }
 `
 

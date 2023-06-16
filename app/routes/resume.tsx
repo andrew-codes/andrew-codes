@@ -67,7 +67,16 @@ const loader = async (args: LoaderArgs) => {
 const headers: HeadersFunction = useLoaderHeaders()
 
 const Main = styled.main`
-  margin: 2rem auto;
+  background-color: rgb(249, 251, 253) !important;
+  border-radius: 1rem;
+  margin: 0 2rem;
+  padding-top: 1rem;
+
+  @media (max-width: 640px) {
+    border-radius: 1rem 1rem 0 0;
+    margin: 0;
+    padding-top: 0.25rem;
+  }
 
   > * {
     margin: 0 auto;
@@ -76,8 +85,6 @@ const Main = styled.main`
 
 const GlobalStyles = createGlobalStyle`
     body {
-        background-color: rgb(249,251,253) !important;
-
         @media print {
             background-color: transparent !important;
             padding: 0 !important;
@@ -91,23 +98,21 @@ const GlobalStyles = createGlobalStyle`
     }
 `
 const Note = styled.div`
-  display: none;
+  background-color: rgba(223, 201, 138, 1);
+  border: 4px solid rgba(223, 184, 90, 1);
+  color: rgb(0, 0, 0);
+  display: block;
+  font-size: 1.25rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 8.5in;
 
-  @media (max-width: 600px) {
-    background: rgba(198, 75, 87, 0.75);
-    border: 4px solid rgba(196, 75, 120);
-    color: rgb(0, 0, 0);
-    display: block;
-    font-size: 1.25rem;
-    margin: 0 auto;
+  @media (max-width: 640px) {
+    border-radius: 1rem;
+    width: unset;
     margin: 0.5rem;
-    padding: 0.5rem;
-
-    strong {
-      color: rgb(0, 0, 0);
-      font-size: 1.25rem;
-      text-decoration: underline;
-    }
   }
 
   @media print {
@@ -126,9 +131,9 @@ const ResumeRoute: FC<{}> = () => {
       <GlobalStyles />
       <Main>
         <Note>
-          Please note: this resume is optimized for <strong>print</strong> and{" "}
-          <strong>desktop</strong> media. Try printing the page (without headers
-          and footers) or view on your desktop.
+          Need a printed or PDF version? This resume is optimized for print.
+          Simply print this page (without headers and footers) to a printer or
+          to PDF.
         </Note>
         <Page>
           <ContactCard as={ResumeContactCard}>

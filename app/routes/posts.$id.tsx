@@ -58,10 +58,6 @@ const loader = async ({ params, request }: LoaderArgs) => {
 const headers: HeadersFunction = useLoaderHeaders()
 
 const Post = styled.default(PageWithHeader)`
-@media (max-width: 600px) {
-margin: 0;
-}
-
   ${Header} {
     time {
       align-self: end;
@@ -77,7 +73,7 @@ margin: 0;
   section {
     padding: 0 1.5rem 1.5rem;
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
     padding: 0 0.75rem;
     }
 

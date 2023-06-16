@@ -40,6 +40,10 @@ const List = styled.ul`
   > li:first-child {
     margin-top: 0;
   }
+
+  @media (max-width: 640px) {
+    padding-left: 2rem !important;
+  }
 `
 const Note = styled.span`
   font-size: 9pt;
@@ -261,11 +265,15 @@ const Page = styled(Paper)`
     margin-top: 0;
   }
 
-  @media print {
+  @media (print) or (max-width: 640px) {
     border: none;
     height: unset;
     padding: 0;
     width: unset;
+  }
+
+  @media (max-width: 640px) {
+    padding: 1rem;
   }
 `
 

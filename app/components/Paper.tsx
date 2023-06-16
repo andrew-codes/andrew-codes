@@ -6,6 +6,11 @@ const Paper = styled.div`
   border-radius: 1rem;
   padding: 1.5rem;
 
+  @media (max-width: 640px) {
+    margin: 0;
+    padding-bottom: 0.5rem !important;
+  }
+
   @media print {
     border: none;
     padding: 0;
