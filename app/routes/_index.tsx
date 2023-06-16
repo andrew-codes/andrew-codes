@@ -60,7 +60,7 @@ const Blockquote = styled.blockquote`
 const Hero = styled(Paper)`
   padding: 1rem 1.5rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     border-radius: 1rem 1rem 0 0;
     margin: 0;
     position: relative;
@@ -84,7 +84,7 @@ const Hero = styled(Paper)`
   ${Blockquote} {
     margin-bottom: 0;
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       margin: 0 0.5rem;
     }
   }
@@ -100,7 +100,7 @@ const PostCategory = styled(Paper)<{ name: Category }>`
   padding: 1rem 1.25rem;
   width: calc(50% - 0.5rem);
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     border-radius: 1rem 1rem 0 0;
     margin: 0;
     min-height: unset !important;
@@ -177,7 +177,7 @@ const PostCategories = styled.main`
   flex-wrap: wrap;
   margin-top: 0.5rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     margin: 0;
   }
 
@@ -187,7 +187,7 @@ const PostCategories = styled.main`
     position: relative;
     padding-bottom: 3rem;
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       height: unset !important;
       margin: 0 !important;
     }

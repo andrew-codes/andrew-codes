@@ -23,7 +23,7 @@ const Root = styled.div`
     margin: 0 2rem;
     text-size-adjust: 100%;
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       margin: 0 0.5rem;
     }
   }

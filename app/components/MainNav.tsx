@@ -17,7 +17,7 @@ const Image = styled.img`
   max-height: 7rem;
   min-height: 3rem;
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     margin-left: 0.25rem;
   }
 `
@@ -29,7 +29,7 @@ const ProfileInformation = styled.div`
 
 const ProfileName = styled.h1`
   margin: 0;
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     font-size: 1.5rem;
   }
 `
@@ -46,7 +46,7 @@ const HeaderBoundary = styled.div`
   > * {
     margin: 0 4rem;
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       margin: 0 0.5rem;
     }
   }
