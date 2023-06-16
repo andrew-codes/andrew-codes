@@ -9,31 +9,27 @@ const H3 = styled.h3`
 const H4 = styled.h4``
 
 const Table = styled.table`
+  border-collapse: collapse;
   margin: 0 auto;
-  width: 95%;
-
+  width: 100%;
 
   thead tr {
-    position: relative;
-
-    :after {
-      border-bottom: 1px solid black;
-      bottom: 0;
-      content: "";
-      left: -2%;
-      right: -2%;
-      position: absolute;
-      width: 104%;
-    }
+    border-bottom: 1px solid black;
   }
-    
-  thead th {
+
+  th {
     font-variant: all-small-caps;
     padding: 0 1rem;
   }
 
-  td {
-    padding 0 1rem;
+ th, td {
+    padding: 0.25rem 0;
+    &:first-child {
+      padding-left: 2rem;
+    }
+    &:last-child {
+      padding-right: 2rem;
+    }
   }
 `
 
@@ -50,7 +46,7 @@ const Blockquote = styled.blockquote`
     margin-bottom: 0 !important;
   }
 
-  :before {
+  &::before {
     content: "";
     left: 0rem;
     position: absolute;

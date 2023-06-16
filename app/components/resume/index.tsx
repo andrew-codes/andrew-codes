@@ -157,15 +157,12 @@ const EducationRoot = styled.div`
     text-align: right;
     margin-right: 2pt;
   }
-  > *:nth-child(n + 3) {
-    :after {
-      content: ", ";
-    }
+  > *:nth-child(n + 4)::after {
+    content: ", ";
   }
-  > *:last-child {
-    :after {
-      content: "";
-    }
+
+  > *:last-child::after {
+    content: "";
   }
 `
 const Degree = styled.h3`
