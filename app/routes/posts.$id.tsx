@@ -10,9 +10,16 @@ import { useMemo } from "react"
 import * as styled from "styled-components"
 import { Header } from "~/components/Category"
 import getCodePostAssetComponent from "~/components/CodePostAsset"
-import Link from "~/components/Link"
 import PageWithHeader from "~/components/PageWithHeader"
-import { Blockquote, H2, H3, H4, Paragraph, Table } from "~/components/Post"
+import {
+  Blockquote,
+  H2,
+  H3,
+  H4,
+  Link,
+  Paragraph,
+  Table,
+} from "~/components/Post"
 import Tags from "~/components/Tags"
 import { getHash } from "~/libs/hash.server"
 import { getMdxPage, getMdxPages } from "~/libs/mdx.server"
