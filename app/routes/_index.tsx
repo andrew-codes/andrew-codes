@@ -126,7 +126,7 @@ const PostCategory = styled(Paper)<{ name: Category }>`
     line-height: 2rem;
     margin: 0;
 
-    :after {
+    &::after {
       content: "";
       display: block;
       margin: 0.5rem 0;

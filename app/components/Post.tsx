@@ -12,22 +12,21 @@ const Table = styled.table`
   margin: 0 auto;
   width: 95%;
 
-
-  thead tr {
+  thead {
     position: relative;
-
-    :after {
-      border-bottom: 1px solid black;
-      bottom: 0;
-      content: "";
-      left: -2%;
-      right: -2%;
-      position: absolute;
-      width: 104%;
-    }
   }
-    
-  thead th {
+
+  thead::after {
+    border-bottom: 1px solid black;
+    bottom: 0;
+    content: "";
+    left: -2%;
+    right: -2%;
+    position: absolute;
+    width: 104%;
+  }
+  
+  th {
     font-variant: all-small-caps;
     padding: 0 1rem;
   }
@@ -50,7 +49,7 @@ const Blockquote = styled.blockquote`
     margin-bottom: 0 !important;
   }
 
-  :before {
+  &::before {
     content: "";
     left: 0rem;
     position: absolute;
