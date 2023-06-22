@@ -58,7 +58,7 @@
     "remix": "1.15.0",
     "server-timing": "^3.3.3",
     "sha1": "^1.1.1",
-    "styled-components": "^6.0.0-rc.2"
+    "styled-components": "^6.0.0-rc.3"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",

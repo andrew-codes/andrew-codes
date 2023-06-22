@@ -31,11 +31,12 @@ const Root = styled.div`
 
 const App: FC<{}> = () => {
   const nonce = useNonce()
+  console.log(nonce)
 
   return (
     <html lang="en">
       <head>
-        <meta charSet="utf-8" />
+        {/* <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link
           crossOrigin="anonymous"
@@ -76,19 +77,19 @@ const App: FC<{}> = () => {
           rel="stylesheet"
           type="text/css"
           href={`/css/dracula.css`}
-        />
+        /> */}
       </head>
       <body>
-        <MetronomeLinks nonce={nonce} />
+        <MetronomeLinks />
         <Links />
         <GlobalStyles />
         <GlobalNav />
         <Root>
           <Outlet />
         </Root>
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-        <LiveReload nonce={nonce} />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   )

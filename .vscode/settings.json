@@ -12,7 +12,7 @@
   "editor.formatOnSave": true,
   "githubIssues.queries": [
     {
-      "label": "Release",
+      "label": "Upcoming Release",
       "query": "milestone:v2.0.0 state:open repo:${owner}/${repository} sort:updated-desc"
     },
     {

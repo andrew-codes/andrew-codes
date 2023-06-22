@@ -89,7 +89,7 @@ __metadata:
     rimraf: ^5.0.1
     server-timing: ^3.3.3
     sha1: ^1.1.1
-    styled-components: ^6.0.0-rc.2
+    styled-components: ^6.0.0-rc.3
     tsc: ^2.0.4
     tslib: ^2.5.2
     typescript: ^4.9.4
@@ -13830,7 +13830,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.0.0-rc.2":
+"styled-components@npm:^6.0.0-rc.3":
   version: 6.0.0-rc.2-4007
   resolution: "styled-components@npm:6.0.0-rc.2-4007"
   dependencies:

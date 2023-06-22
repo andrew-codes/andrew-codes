@@ -4,7 +4,7 @@ import { RemixBrowser } from "@remix-run/react"
 
 function hydrateApp() {
   startTransition(() => {
-    hydrateRoot(document.body, <RemixBrowser />)
+    hydrateRoot(document, <RemixBrowser />)
   })
 }
 

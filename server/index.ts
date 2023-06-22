@@ -188,11 +188,12 @@ app.use(
         "img-src": ["'self'", "data:"],
         "media-src": ["'self'", "data:", "blob:", "https://www.youtube.com"],
         "script-src": [
-          "'strict-dynamic'",
+          // "'strict-dynamic'",
           "'unsafe-eval'",
           "'self'",
+          "'unsafe-inline'",
           /* // @ts-expect-error*/
-          (req, res) => `'nonce-${res.locals.cspNonce}'`,
+          // (req, res) => `'nonce-${res.locals.cspNonce}'`,
         ],
         "script-src-attr": ["'unsafe-inline'"],
         "upgrade-insecure-requests": null,

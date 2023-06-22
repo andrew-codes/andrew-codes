@@ -1,7 +1,12 @@
 import { Response } from "@remix-run/node"
 import { RemixServer } from "@remix-run/react"
-import { PassThrough } from "node:stream"
-import { renderToPipeableStream } from "react-dom/server"
+import { PassThrough, Readable } from "node:stream"
+import {
+  renderToNodeStream,
+  renderToPipeableStream,
+  renderToReadableStream,
+  renderToStaticNodeStream,
+} from "react-dom/server"
 import { ServerStyleSheet } from "styled-components"
 import type { HandleDocumentRequestFunction } from "@remix-run/node"
 import isbot from "isbot"
@@ -125,46 +130,56 @@ function serveBrowsers(...args: DocRequestArgs) {
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
   const sheet = new ServerStyleSheet()
 
+  const jsx = sheet.collectStyles(
+    <RemixServer
+      context={remixContext}
+      url={request.url}
+      abortDelay={ABORT_DELAY}
+    />,
+  )
+  const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
   return new Promise((resolve, reject) => {
     let didError = false
-
-    const stream = renderToPipeableStream(
+    console.log(nonce)
+    const reactStream = renderToNodeStream(
       sheet.collectStyles(
-        <NonceProvider value={nonce}>
-          <RemixServer
-            context={remixContext}
-            url={request.url}
-            abortDelay={ABORT_DELAY}
-          />
-        </NonceProvider>,
+        // <NonceProvider value={nonce}>
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />,
+        // </NonceProvider>,
       ),
       {
         nonce,
-        onShellReady() {
-          responseHeaders.set("Content-Type", "text/html")
-          const body = new PassThrough()
+        //   onShellReady() {
+        //     responseHeaders.set("Content-Type", "text/html")
+        //     const body = new PassThrough()
+        //     const responseStream = sheet.interleaveWithNodeStream(body)
 
-          const streamWithStyles = new WritableWithStyles(body, sheet)
+        //     body.write("<!DOCTYPE html>", "utf-8")
+        //     stream.pipe(body)
 
-          body.write("<!DOCTYPE html>", "utf-8")
-          stream.pipe(streamWithStyles)
-
-          resolve(
-            new Response(body, {
-              status: didError ? 500 : responseStatusCode,
-              headers: responseHeaders,
-            }),
-          )
-        },
-        onShellError(err: unknown) {
-          reject(err)
-        },
-        onError(err: unknown) {
-          didError = true
-          console.error(err)
-        },
+        //     resolve(
+        //       new Response(responseStream, {
+        //         status: didError ? 500 : responseStatusCode,
+        //         headers: responseHeaders,
+        //       }),
+        //     )
+        //   },
+        //   onShellError(err: unknown) {
+        //     reject(err)
+        //   },
+        //   onError(err: unknown) {
+        //     didError = true
+        //     console.error(err)
+        //   },
       },
     )
+
+    const responseStream = sheet.interleaveWithNodeStream(reactStream)
+
     setTimeout(() => stream.abort(), ABORT_DELAY)
   })
 }
