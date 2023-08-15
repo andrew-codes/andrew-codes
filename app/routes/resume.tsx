@@ -177,16 +177,17 @@ const ResumeRoute: FC<{}> = () => {
                   <li>
                     Focusing on front-end, but with equally vast depth of
                     knowledge in back-end, infrastructure, and cloud providers;
-                    including git, bash, Node.js,{" "}
+                    including{" "}
                     <ResumeAbbr title="C sharp programming language">
                       C#
                     </ResumeAbbr>
-                    ,{" "}
+                    , Node.js,{" "}
                     <ResumeAbbr title="Structured Query Language">
                       SQL
                     </ResumeAbbr>
                     , Kubernetes, Docker/
-                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>
+                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>, git,
+                    and bash
                   </li>
                   <li>
                     Active community member through speaking and OSS
@@ -198,6 +199,10 @@ const ResumeRoute: FC<{}> = () => {
                     Experience with Kanban, Scrum,{" "}
                     <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
                     other techniques enabling agility
+                  </li>
+                  <li>
+                    Polyglot programmer with interest in Python, Elixir, and
+                    Rust
                   </li>
                 </List>
               </Section>
@@ -225,9 +230,13 @@ const ResumeRoute: FC<{}> = () => {
                   </ResumeAbbr>
                   ,{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
-                  and microservices; advocating quality, performance, and
-                  enjoyable customer experiences.
+                  and microservices working within a highly distributed system;
+                  advocating quality, performance, and enjoyable customer
+                  experiences.
                 </>
+              }
+              keyTechnologies={
+                "C#, MVC.NET, TypeScript, Node.js, React, Redux, GraphQL, Azure, TDD, XP, nUnit, Cypress, Jest, microservices, distributed systems design"
               }
             >
               <List>
@@ -238,8 +247,9 @@ const ResumeRoute: FC<{}> = () => {
                     CQRS
                   </ResumeAbbr>{" "}
                   and federated{" "}
-                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>;
-                  leadership to plan and deliver across 3 teams
+                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
+                  in a distributed application architecture; leadership to plan
+                  and deliver across 3 teams
                 </li>
                 <li>
                   Scale technical leadership to 3 teams and mentor 5 engineers;
@@ -288,11 +298,14 @@ const ResumeRoute: FC<{}> = () => {
                   ensured experiences that delight customers.
                 </>
               }
+              keyTechnologies={
+                "Java, Groovy, Grails, TypeScript, Node.js, React, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, SCRUM, git"
+              }
             >
               <List>
                 <li>
                   Leveraged data science and customer feedback to accelerate
-                  delivery of consistent user experiences by introduced design
+                  delivery of consistent user experiences with introduced design
                   language and React component library
                 </li>
                 <li>
@@ -326,10 +339,14 @@ const ResumeRoute: FC<{}> = () => {
                   query filters in an{" "}
                   <ResumeAbbr title="Extreme programming">XP</ResumeAbbr> and{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                  environment. Established{" "}
-                  <ResumeAbbr title="Open source software">OSS</ResumeAbbr>{" "}
-                  component library package.
+                  environment. Established adoption of React as primary
+                  front-end technology stack used by 5 teams across 2 products;
+                  systematically replacing fragmented framework usages of
+                  jQuery, AngularJS, and Backbone.JS.
                 </>
+              }
+              keyTechnologies={
+                "C#, MVC.NET, Node.js, JavaScript, React, Redux, jQuery, AngularJS, Backbone.JS, TDD, XP, Kanban, gulp, git"
               }
             >
               <List>
@@ -363,8 +380,8 @@ const ResumeRoute: FC<{}> = () => {
               role="Senior Software Engineer"
               orgName="MATRIX Professional Services"
               location="Atlanta, GA (Hybrid)"
-              from={<time dateTime="2013">2013</time>}
-              to={<time dateTime="2014">2014</time>}
+              from={<time dateTime="2013-02">Feb 2013</time>}
+              to={<time dateTime="2014-09">Sept 2014</time>}
               description={
                 <>
                   Engineer and coach, focused on full-stack development in{" "}
@@ -375,6 +392,9 @@ const ResumeRoute: FC<{}> = () => {
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
                   working with major clients.
                 </>
+              }
+              keyTechnologies={
+                "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, SCRUM, grunt, git"
               }
             >
               <List>
@@ -398,59 +418,114 @@ const ResumeRoute: FC<{}> = () => {
                 </li>
               </List>
             </WorkExperience>
-            <SummarizedItems>
-              <SummarizedItem
-                role="Software Engineer"
-                name="M*Modal"
-                on={<time dateTime="2012">2013</time>}
-              />
-              <SummarizedItem
-                role="Web Application Developer"
-                name="Response Mine Interactive"
-                note="moved to Atlanta"
-                on={
-                  <>
-                    <time dateTime="2012">2012</time> -{" "}
-                    <time dateTime="2013">2013</time>
-                  </>
-                }
-              />
-              <SummarizedItem
-                role="Senior Software Engineer"
-                name="DAXKO"
-                on={
-                  <>
-                    <time dateTime="2011">2011</time> -{" "}
-                    <time dateTime="2012">2012</time>
-                  </>
-                }
-              />
-              <SummarizedItem
-                role="Software Engineer 3"
-                name="Medseek"
-                on={<time dateTime="2011">2011</time>}
-              />
-              <SummarizedItem
-                role="Software Engineer 3"
-                name="Intermark Interactive"
-                on={
-                  <>
-                    <time dateTime="2009">2009</time> -{" "}
-                    <time dateTime="2011">2011</time>
-                  </>
-                }
-              />
-              <SummarizedItem
-                role="Adjunct Faculty"
-                name="Columbus Technical College"
-                on={
-                  <>
-                    <time dateTime="2009">2008</time> -{" "}
-                    <time dateTime="2011">2009</time>
-                  </>
-                }
-              />
-            </SummarizedItems>
+            <WorkExperience
+              role="Software Engineer"
+              orgName="MModal"
+              location="Atlanta, GA"
+              from={<time dateTime="2012-09">Sept 2012</time>}
+              to={<time dateTime="2013-02">Feb 2013</time>}
+              description={
+                <>
+                  Excelled in a position focused on delivering Fluency for
+                  Coding, a medical coding and billing web application. Drove
+                  unit testing practices, coordinated with technical and
+                  business teams, and ensured the timely delivery of features.
+                </>
+              }
+              keyTechnologies={
+                "C#, ASP.NET, JavaScript, SQL, jQuery, Mercurial"
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Web Application Developer"
+              orgName="Response Mine Interactive"
+              location="Atlanta, GA"
+              from={<time dateTime="2012-03">Mar 2012</time>}
+              to={<time dateTime="2013-09">Sept 2013</time>}
+              description={
+                <>
+                  Lead developer and aided design of custom content management
+                  system used to manage content across all web properties.
+                  Additionally, delivered web properties for clients with both
+                  desktop and mobile experiences.
+                </>
+              }
+              keyTechnologies={"C#, MVC.NET, JavaScript, jQuery, git"}
+            ></WorkExperience>
+            <WorkExperience
+              role="Senior Software Engineer"
+              orgName="DAXKO"
+              location="Birmingham, AL"
+              from={<time dateTime="2011-08">Aug 2011</time>}
+              to={<time dateTime="2012-03">Mar 2012</time>}
+              description={
+                <>
+                  Worked on cross-functional SCRUM team to delivery operational
+                  and membership management software for progressive
+                  non-profits. Drove MVC.NET adoption by enabling MVC.NET and
+                  ASP.NET to coexist side-by-side until full migration was
+                  completed.
+                </>
+              }
+              keyTechnologies={
+                "C#, ASP.NET, MVC.NET, JavaScript, jQuery, TDD, SCRUM, git"
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Software Engineer 3"
+              orgName="MedSEEK"
+              location="Birmingham, AL"
+              from={<time dateTime="2011-02">Feb 2011</time>}
+              to={<time dateTime="2011-08">Aug 2011</time>}
+              description={
+                <>
+                  Worked within one of many SCRUM development teams to deliver
+                  an on-premise application, Coldstone; an e-healthcare platform
+                  providing a better healthcare experience for patients and
+                  providers.
+                </>
+              }
+              keyTechnologies={
+                "C#, ASP.NET, JavaScript, jQuery, Event Bus, SCRUM, Subversion"
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Software Engineer 3"
+              orgName="Intermark Interactive"
+              location="Birmingham, AL"
+              from={<time dateTime="2010-01">Jan 2010</time>}
+              to={<time dateTime="2011-02">Feb 2011</time>}
+              description={
+                <>
+                  Worked within team of developers to deliver high-profile
+                  BuyAToyota.com; a site handling all of Toyota's third tier
+                  marketing. Led feature development for user impersonation for
+                  administration site. Introduced Model, View, Presenter pattern
+                  for use with ASP.NET WebForms.
+                </>
+              }
+              keyTechnologies={
+                "C#, ASP.NET, MVP, JavaScript, jQuery, SQL, SCRUM, Subversion"
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Adjunct Faculty"
+              orgName="Columbus Technical College"
+              location="Columbus, GA"
+              from={<time dateTime="2008">2008</time>}
+              to={<time dateTime="2009">2009</time>}
+              description={
+                <>
+                  Taught introductory web development and general computing
+                  courses. Worked closely with faculty and local businesses to
+                  aid in development of department's curriculum to ensure
+                  graduating students were prepared for the workforce.
+                </>
+              }
+              keyTechnologies={
+                "HTML, CSS, JavaScript, PHP, MySQL, Microsoft Office"
+              }
+            ></WorkExperience>
           </Section>
           <Section title="Community">
             <SummarizedItems>
