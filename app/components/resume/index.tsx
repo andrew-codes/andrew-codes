@@ -127,7 +127,7 @@ const KeyResults = styled.div`
 const WorkExperience: FC<{
   children?: ReactNode | ReactNode[]
   description: string | ReactNode
-  keyTechnologies: string | ReactNode
+  keyTechnologies?: string | ReactNode
   from: string | ReactNode
   role: string
   location: string | ReactNode
@@ -155,7 +155,9 @@ const WorkExperience: FC<{
         <OrgName>{orgName}</OrgName>
         <Location>{location}</Location>
         <Description>{description}</Description>
-        <KeyTechnologies>{keyTechnologies}</KeyTechnologies>
+        {!!keyTechnologies && (
+          <KeyTechnologies>{keyTechnologies}</KeyTechnologies>
+        )}
       </WorkExperienceOverview>
       {!!children && <KeyResults>{children}</KeyResults>}
     </WorkExperienceRoot>

@@ -168,7 +168,7 @@ const ResumeRoute: FC<{}> = () => {
                 Senior Software engineer with {yearsOfExperience} years of
                 experience in full-stack development, technical leadership, and
                 unique insights into delivering and scaling software. Proven
-                experience with React/TypeScript, various system languages, and
+                experience with React/TypeScript, system languages, and
                 associated principles. Direct impact and technical influence on
                 organizations ranging from 3 to 50+ engineers.
               </Paragraph>
@@ -224,15 +224,15 @@ const ResumeRoute: FC<{}> = () => {
               description={
                 <>
                   Influential technical leader, mentor, overseeing delivery of
-                  high profile projects, with a focus on React,{" "}
+                  high profile projects coordinated across 4 teams, with a focus
+                  on React,{" "}
                   <ResumeAbbr title="C sharp programming language">
                     C#
                   </ResumeAbbr>
                   ,{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
-                  and microservices working within a highly distributed system;
-                  advocating quality, performance, and enjoyable customer
-                  experiences.
+                  and microservices operating CMS driving all content for
+                  support.microsoft.com, Office applications, and Windows.
                 </>
               }
               keyTechnologies={
@@ -288,12 +288,11 @@ const ResumeRoute: FC<{}> = () => {
               role="Lead Front-End Engineer"
               orgName="Experience, LLC"
               location="Remote"
-              note="closed due to COVID-19"
-              from={<time dateTime="2019-06">June 2019</time>}
+              from={<time dateTime="2019-06">Jun 2019</time>}
               to={<time dateTime="2020-12">Dec 2020</time>}
               description={
                 <>
-                  Guided all aspects of front-end development for teams,
+                  Guided all aspects of front-end development for 2 teams,
                   communicated with stakeholders and executive leadership,
                   ensured experiences that delight customers.
                 </>
@@ -314,8 +313,8 @@ const ResumeRoute: FC<{}> = () => {
                   investment, increasing the team velocity by 20%
                 </li>
                 <li>
-                  Guided teams of engineers; React, Redux, TypeScript, innovated
-                  usage of{" "}
+                  Guided 3 teams of engineers; React, Redux, TypeScript,
+                  innovated usage of{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
                   and Cypress{" "}
                   <ResumeAbbr title="end-to-end tests">E2E</ResumeAbbr> testing
@@ -328,21 +327,18 @@ const ResumeRoute: FC<{}> = () => {
               orgName="VersionOne, CollabNet"
               location="Atlanta, GA (Hybrid)"
               from={<time dateTime="2014-09">Sept 2014</time>}
-              to={<time dateTime="2019-06">June 2019</time>}
+              to={<time dateTime="2019-06">Jun 2019</time>}
               description={
                 <>
-                  Technical lead for high-profile features on flagship{" "}
+                  Technical lead for over 3 high-profile features on flagship{" "}
                   <ResumeAbbr title="Agile Lifecycle Management">
                     ALM
                   </ResumeAbbr>{" "}
-                  product; including road map visualization, time sheets, UI
-                  query filters in an{" "}
-                  <ResumeAbbr title="Extreme programming">XP</ResumeAbbr> and{" "}
+                  product; including road mapping, time sheets, UI query filters
+                  in an <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>{" "}
+                  and{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                  environment. Established adoption of React as primary
-                  front-end technology stack used by 5 teams across 2 products;
-                  systematically replacing fragmented framework usages of
-                  jQuery, AngularJS, and Backbone.JS.
+                  environment.
                 </>
               }
               keyTechnologies={
@@ -361,6 +357,12 @@ const ResumeRoute: FC<{}> = () => {
                     ES6
                   </ResumeAbbr>{" "}
                   and reduction of technology stacks
+                </li>
+                <li>
+                  Established adoption of React as primary front-end technology
+                  stack used by 5 teams across 2 products; systematically
+                  replacing fragmented framework usages of jQuery, AngularJS,
+                  and Backbone.JS
                 </li>
                 <li>
                   Streamlined processes between UX and Engineering through the
@@ -390,7 +392,10 @@ const ResumeRoute: FC<{}> = () => {
                   </ResumeAbbr>
                   , JavaScript, React, and{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
-                  working with major clients.
+                  for major clients. Presented a total of over 6 workshops;
+                  topics ranging from{" "}
+                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
+                  SOLID principles, and git.
                 </>
               }
               keyTechnologies={
@@ -399,8 +404,9 @@ const ResumeRoute: FC<{}> = () => {
             >
               <List>
                 <li>
-                  Delivered redesigned checkout process for a major e-commerce
-                  store; increasing sales by an undisclosed amount
+                  Prepared redesigned checkout process for a major e-commerce
+                  store; reducing steps to action by 50% and increasing sales by
+                  an undisclosed amount
                 </li>
                 <li>
                   Reduced defects in new features by ~60% through of testing
@@ -426,14 +432,9 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2013-02">Feb 2013</time>}
               description={
                 <>
-                  Excelled in a position focused on delivering Fluency for
-                  Coding, a medical coding and billing web application. Drove
-                  unit testing practices, coordinated with technical and
-                  business teams, and ensured the timely delivery of features.
+                  Excelled in an position focused on Fluency for Coding, a
+                  medical coding and billing web application.
                 </>
-              }
-              keyTechnologies={
-                "C#, ASP.NET, JavaScript, SQL, jQuery, Mercurial"
               }
             ></WorkExperience>
             <WorkExperience
@@ -444,13 +445,10 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2013-09">Sept 2013</time>}
               description={
                 <>
-                  Lead developer and aided design of custom content management
-                  system used to manage content across all web properties.
-                  Additionally, delivered web properties for clients with both
-                  desktop and mobile experiences.
+                  Guided design of custom CMS to manage content across over 10
+                  web properties.
                 </>
               }
-              keyTechnologies={"C#, MVC.NET, JavaScript, jQuery, git"}
             ></WorkExperience>
             <WorkExperience
               role="Senior Software Engineer"
@@ -460,15 +458,9 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2012-03">Mar 2012</time>}
               description={
                 <>
-                  Worked on cross-functional SCRUM team to delivery operational
-                  and membership management software for progressive
-                  non-profits. Drove MVC.NET adoption by enabling MVC.NET and
-                  ASP.NET to coexist side-by-side until full migration was
-                  completed.
+                  SCRUM team, produced operational and membership management
+                  software for non-profits.
                 </>
-              }
-              keyTechnologies={
-                "C#, ASP.NET, MVC.NET, JavaScript, jQuery, TDD, SCRUM, git"
               }
             ></WorkExperience>
             <WorkExperience
@@ -479,14 +471,9 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2011-08">Aug 2011</time>}
               description={
                 <>
-                  Worked within one of many SCRUM development teams to deliver
-                  an on-premise application, Coldstone; an e-healthcare platform
-                  providing a better healthcare experience for patients and
-                  providers.
+                  Improved e-healthcare platform, Coldstone; leveraged by
+                  hospitals and healthcare providers.
                 </>
-              }
-              keyTechnologies={
-                "C#, ASP.NET, JavaScript, jQuery, Event Bus, SCRUM, Subversion"
               }
             ></WorkExperience>
             <WorkExperience
@@ -497,33 +484,22 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2011-02">Feb 2011</time>}
               description={
                 <>
-                  Worked within team of developers to deliver high-profile
-                  BuyAToyota.com; a site handling all of Toyota's third tier
-                  marketing. Led feature development for user impersonation for
-                  administration site. Introduced Model, View, Presenter pattern
-                  for use with ASP.NET WebForms.
+                  Delivered features for high-profile BuyAToyota.com; handling
+                  Toyota's third tier marketing.
                 </>
-              }
-              keyTechnologies={
-                "C#, ASP.NET, MVP, JavaScript, jQuery, SQL, SCRUM, Subversion"
               }
             ></WorkExperience>
             <WorkExperience
               role="Adjunct Faculty"
               orgName="Columbus Technical College"
               location="Columbus, GA"
-              from={<time dateTime="2008">2008</time>}
-              to={<time dateTime="2009">2009</time>}
+              from={<time dateTime="2008-06">Jun 2008</time>}
+              to={<time dateTime="2009-12">Dec 2009</time>}
               description={
                 <>
-                  Taught introductory web development and general computing
-                  courses. Worked closely with faculty and local businesses to
-                  aid in development of department's curriculum to ensure
-                  graduating students were prepared for the workforce.
+                  Taught web development and general computing courses; ensuring
+                  student preparedness for workforce.
                 </>
-              }
-              keyTechnologies={
-                "HTML, CSS, JavaScript, PHP, MySQL, Microsoft Office"
               }
             ></WorkExperience>
           </Section>
