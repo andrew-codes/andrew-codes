@@ -172,7 +172,7 @@ const ResumeRoute: FC<{}> = () => {
                 associated principles. Direct impact and technical influence on
                 organizations ranging from 3 to 50+ engineers.
               </Paragraph>
-              <Section title="Skills">
+              <Section title="Highlights">
                 <List>
                   <li>
                     Focusing on front-end, but with equally vast depth of
@@ -252,7 +252,7 @@ const ResumeRoute: FC<{}> = () => {
                   and deliver across 3 teams
                 </li>
                 <li>
-                  Scale technical leadership to 3 teams and mentor 5 engineers;
+                  Expand technical leadership to 3 teams and mentor 5 engineers;
                   including concrete applications of SOLID, React ecosystem,{" "}
                   <ResumeAbbr title="C sharp programming language">
                     C#
