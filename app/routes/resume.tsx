@@ -442,7 +442,7 @@ const ResumeRoute: FC<{}> = () => {
               orgName="Response Mine Interactive"
               location="Atlanta, GA"
               from={<time dateTime="2012-03">Mar 2012</time>}
-              to={<time dateTime="2013-09">Sept 2013</time>}
+              to={<time dateTime="2012-09">Sept 2012</time>}
               description={
                 <>
                   Guided design of custom CMS to manage content across over 10
