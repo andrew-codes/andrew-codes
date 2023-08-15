@@ -236,7 +236,7 @@ const ResumeRoute: FC<{}> = () => {
                 </>
               }
               keyTechnologies={
-                "C#, MVC.NET, TypeScript, Node.js, React, Redux, GraphQL, Azure, TDD, XP, nUnit, Cypress, Jest, microservices, distributed systems design"
+                "C#, TypeScript, Node.js, React, Redux, GraphQL, Azure, TDD, XP, microservices, distributed systems design"
               }
             >
               <List>
