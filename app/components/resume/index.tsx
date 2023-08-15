@@ -113,20 +113,38 @@ const Description = styled.p`
   margin-top: 8pt;
   width: 100%;
 `
+const KeyTechnologies = styled.p`
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-top: 8pt;
+  text-align: right;
+  width: 100%;
+`
 const KeyResults = styled.div`
   margin-top: 8pt;
   width: 100%;
 `
 const WorkExperience: FC<{
-  children: ReactNode | ReactNode[]
+  children?: ReactNode | ReactNode[]
   description: string | ReactNode
+  keyTechnologies?: string | ReactNode
   from: string | ReactNode
   role: string
   location: string | ReactNode
   note?: string | ReactNode
   orgName: string
   to: string | ReactNode
-}> = ({ children, role, location, note, orgName, from, to, description }) => {
+}> = ({
+  children,
+  role,
+  location,
+  note,
+  orgName,
+  from,
+  to,
+  description,
+  keyTechnologies,
+}) => {
   return (
     <WorkExperienceRoot>
       <WorkExperienceOverview>
@@ -137,8 +155,11 @@ const WorkExperience: FC<{
         <OrgName>{orgName}</OrgName>
         <Location>{location}</Location>
         <Description>{description}</Description>
+        {!!keyTechnologies && (
+          <KeyTechnologies>{keyTechnologies}</KeyTechnologies>
+        )}
       </WorkExperienceOverview>
-      <KeyResults>{children}</KeyResults>
+      {!!children && <KeyResults>{children}</KeyResults>}
     </WorkExperienceRoot>
   )
 }

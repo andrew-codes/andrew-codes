@@ -168,7 +168,7 @@ const ResumeRoute: FC<{}> = () => {
                 Senior Software engineer with {yearsOfExperience} years of
                 experience in full-stack development, technical leadership, and
                 unique insights into delivering and scaling software. Proven
-                experience with React/TypeScript, various system languages, and
+                experience with React/TypeScript, system languages, and
                 associated principles. Direct impact and technical influence on
                 organizations ranging from 3 to 50+ engineers.
               </Paragraph>
@@ -177,16 +177,17 @@ const ResumeRoute: FC<{}> = () => {
                   <li>
                     Focusing on front-end, but with equally vast depth of
                     knowledge in back-end, infrastructure, and cloud providers;
-                    including git, bash, Node.js,{" "}
+                    including{" "}
                     <ResumeAbbr title="C sharp programming language">
                       C#
                     </ResumeAbbr>
-                    ,{" "}
+                    , Node.js,{" "}
                     <ResumeAbbr title="Structured Query Language">
                       SQL
                     </ResumeAbbr>
                     , Kubernetes, Docker/
-                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>
+                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>, git,
+                    and bash
                   </li>
                   <li>
                     Active community member through speaking and OSS
@@ -198,6 +199,10 @@ const ResumeRoute: FC<{}> = () => {
                     Experience with Kanban, Scrum,{" "}
                     <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
                     other techniques enabling agility
+                  </li>
+                  <li>
+                    Polyglot programmer with interest in Python, Elixir, and
+                    Rust
                   </li>
                 </List>
               </Section>
@@ -219,15 +224,19 @@ const ResumeRoute: FC<{}> = () => {
               description={
                 <>
                   Influential technical leader, mentor, overseeing delivery of
-                  high profile projects, with a focus on React,{" "}
+                  high profile projects coordinated across 4 teams, with a focus
+                  on React,{" "}
                   <ResumeAbbr title="C sharp programming language">
                     C#
                   </ResumeAbbr>
                   ,{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
-                  and microservices; advocating quality, performance, and
-                  enjoyable customer experiences.
+                  and microservices operating CMS driving all content for
+                  support.microsoft.com, Office applications, and Windows.
                 </>
+              }
+              keyTechnologies={
+                "C#, MVC.NET, TypeScript, Node.js, React, Redux, GraphQL, Azure, TDD, XP, nUnit, Cypress, Jest, microservices, distributed systems design"
               }
             >
               <List>
@@ -238,8 +247,9 @@ const ResumeRoute: FC<{}> = () => {
                     CQRS
                   </ResumeAbbr>{" "}
                   and federated{" "}
-                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>;
-                  leadership to plan and deliver across 3 teams
+                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
+                  in a distributed application architecture; leadership to plan
+                  and deliver across 3 teams
                 </li>
                 <li>
                   Scale technical leadership to 3 teams and mentor 5 engineers;
@@ -278,21 +288,23 @@ const ResumeRoute: FC<{}> = () => {
               role="Lead Front-End Engineer"
               orgName="Experience, LLC"
               location="Remote"
-              note="closed due to COVID-19"
-              from={<time dateTime="2019-06">June 2019</time>}
+              from={<time dateTime="2019-06">Jun 2019</time>}
               to={<time dateTime="2020-12">Dec 2020</time>}
               description={
                 <>
-                  Guided all aspects of front-end development for teams,
+                  Guided all aspects of front-end development for 2 teams,
                   communicated with stakeholders and executive leadership,
                   ensured experiences that delight customers.
                 </>
+              }
+              keyTechnologies={
+                "Java, Groovy, Grails, TypeScript, Node.js, React, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, SCRUM, git"
               }
             >
               <List>
                 <li>
                   Leveraged data science and customer feedback to accelerate
-                  delivery of consistent user experiences by introduced design
+                  delivery of consistent user experiences with introduced design
                   language and React component library
                 </li>
                 <li>
@@ -301,8 +313,8 @@ const ResumeRoute: FC<{}> = () => {
                   investment, increasing the team velocity by 20%
                 </li>
                 <li>
-                  Guided teams of engineers; React, Redux, TypeScript, innovated
-                  usage of{" "}
+                  Guided 3 teams of engineers; React, Redux, TypeScript,
+                  innovated usage of{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
                   and Cypress{" "}
                   <ResumeAbbr title="end-to-end tests">E2E</ResumeAbbr> testing
@@ -315,21 +327,22 @@ const ResumeRoute: FC<{}> = () => {
               orgName="VersionOne, CollabNet"
               location="Atlanta, GA (Hybrid)"
               from={<time dateTime="2014-09">Sept 2014</time>}
-              to={<time dateTime="2019-06">June 2019</time>}
+              to={<time dateTime="2019-06">Jun 2019</time>}
               description={
                 <>
-                  Technical lead for high-profile features on flagship{" "}
+                  Technical lead for over 3 high-profile features on flagship{" "}
                   <ResumeAbbr title="Agile Lifecycle Management">
                     ALM
                   </ResumeAbbr>{" "}
-                  product; including road map visualization, time sheets, UI
-                  query filters in an{" "}
-                  <ResumeAbbr title="Extreme programming">XP</ResumeAbbr> and{" "}
+                  product; including road mapping, time sheets, UI query filters
+                  in an <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>{" "}
+                  and{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                  environment. Established{" "}
-                  <ResumeAbbr title="Open source software">OSS</ResumeAbbr>{" "}
-                  component library package.
+                  environment.
                 </>
+              }
+              keyTechnologies={
+                "C#, MVC.NET, Node.js, JavaScript, React, Redux, jQuery, AngularJS, Backbone.JS, TDD, XP, Kanban, gulp, git"
               }
             >
               <List>
@@ -344,6 +357,12 @@ const ResumeRoute: FC<{}> = () => {
                     ES6
                   </ResumeAbbr>{" "}
                   and reduction of technology stacks
+                </li>
+                <li>
+                  Established adoption of React as primary front-end technology
+                  stack used by 5 teams across 2 products; systematically
+                  replacing fragmented framework usages of jQuery, AngularJS,
+                  and Backbone.JS
                 </li>
                 <li>
                   Streamlined processes between UX and Engineering through the
@@ -363,8 +382,8 @@ const ResumeRoute: FC<{}> = () => {
               role="Senior Software Engineer"
               orgName="MATRIX Professional Services"
               location="Atlanta, GA (Hybrid)"
-              from={<time dateTime="2013">2013</time>}
-              to={<time dateTime="2014">2014</time>}
+              from={<time dateTime="2013-02">Feb 2013</time>}
+              to={<time dateTime="2014-09">Sept 2014</time>}
               description={
                 <>
                   Engineer and coach, focused on full-stack development in{" "}
@@ -373,14 +392,21 @@ const ResumeRoute: FC<{}> = () => {
                   </ResumeAbbr>
                   , JavaScript, React, and{" "}
                   <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
-                  working with major clients.
+                  for major clients. Presented a total of over 6 workshops;
+                  topics ranging from{" "}
+                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
+                  SOLID principles, and git.
                 </>
+              }
+              keyTechnologies={
+                "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, SCRUM, grunt, git"
               }
             >
               <List>
                 <li>
-                  Delivered redesigned checkout process for a major e-commerce
-                  store; increasing sales by an undisclosed amount
+                  Prepared redesigned checkout process for a major e-commerce
+                  store; reducing steps to action by 50% and increasing sales by
+                  an undisclosed amount
                 </li>
                 <li>
                   Reduced defects in new features by ~60% through of testing
@@ -398,59 +424,84 @@ const ResumeRoute: FC<{}> = () => {
                 </li>
               </List>
             </WorkExperience>
-            <SummarizedItems>
-              <SummarizedItem
-                role="Software Engineer"
-                name="M*Modal"
-                on={<time dateTime="2012">2013</time>}
-              />
-              <SummarizedItem
-                role="Web Application Developer"
-                name="Response Mine Interactive"
-                note="moved to Atlanta"
-                on={
-                  <>
-                    <time dateTime="2012">2012</time> -{" "}
-                    <time dateTime="2013">2013</time>
-                  </>
-                }
-              />
-              <SummarizedItem
-                role="Senior Software Engineer"
-                name="DAXKO"
-                on={
-                  <>
-                    <time dateTime="2011">2011</time> -{" "}
-                    <time dateTime="2012">2012</time>
-                  </>
-                }
-              />
-              <SummarizedItem
-                role="Software Engineer 3"
-                name="Medseek"
-                on={<time dateTime="2011">2011</time>}
-              />
-              <SummarizedItem
-                role="Software Engineer 3"
-                name="Intermark Interactive"
-                on={
-                  <>
-                    <time dateTime="2009">2009</time> -{" "}
-                    <time dateTime="2011">2011</time>
-                  </>
-                }
-              />
-              <SummarizedItem
-                role="Adjunct Faculty"
-                name="Columbus Technical College"
-                on={
-                  <>
-                    <time dateTime="2009">2008</time> -{" "}
-                    <time dateTime="2011">2009</time>
-                  </>
-                }
-              />
-            </SummarizedItems>
+            <WorkExperience
+              role="Software Engineer"
+              orgName="MModal"
+              location="Atlanta, GA"
+              from={<time dateTime="2012-09">Sept 2012</time>}
+              to={<time dateTime="2013-02">Feb 2013</time>}
+              description={
+                <>
+                  Excelled in an position focused on Fluency for Coding, a
+                  medical coding and billing web application.
+                </>
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Web Application Developer"
+              orgName="Response Mine Interactive"
+              location="Atlanta, GA"
+              from={<time dateTime="2012-03">Mar 2012</time>}
+              to={<time dateTime="2013-09">Sept 2013</time>}
+              description={
+                <>
+                  Guided design of custom CMS to manage content across over 10
+                  web properties.
+                </>
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Senior Software Engineer"
+              orgName="DAXKO"
+              location="Birmingham, AL"
+              from={<time dateTime="2011-08">Aug 2011</time>}
+              to={<time dateTime="2012-03">Mar 2012</time>}
+              description={
+                <>
+                  SCRUM team, produced operational and membership management
+                  software for non-profits.
+                </>
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Software Engineer 3"
+              orgName="MedSEEK"
+              location="Birmingham, AL"
+              from={<time dateTime="2011-02">Feb 2011</time>}
+              to={<time dateTime="2011-08">Aug 2011</time>}
+              description={
+                <>
+                  Improved e-healthcare platform, Coldstone; leveraged by
+                  hospitals and healthcare providers.
+                </>
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Software Engineer 3"
+              orgName="Intermark Interactive"
+              location="Birmingham, AL"
+              from={<time dateTime="2010-01">Jan 2010</time>}
+              to={<time dateTime="2011-02">Feb 2011</time>}
+              description={
+                <>
+                  Delivered features for high-profile BuyAToyota.com; handling
+                  Toyota's third tier marketing.
+                </>
+              }
+            ></WorkExperience>
+            <WorkExperience
+              role="Adjunct Faculty"
+              orgName="Columbus Technical College"
+              location="Columbus, GA"
+              from={<time dateTime="2008-06">Jun 2008</time>}
+              to={<time dateTime="2009-12">Dec 2009</time>}
+              description={
+                <>
+                  Taught web development and general computing courses; ensuring
+                  student preparedness for workforce.
+                </>
+              }
+            ></WorkExperience>
           </Section>
           <Section title="Community">
             <SummarizedItems>
