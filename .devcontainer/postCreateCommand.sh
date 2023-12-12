@@ -1,7 +1,5 @@
 corepack enable
-corepack prepare yarn@stable --activate
-yarn set version stable
+corepack prepare yarn@3.6.0 --activate
+yarn set version 3.6.0
 
 curl -L https://fly.io/install.sh | sh
-export FLYCTL_INSTALL="/home/codespace/.fly"
-export PATH="$FLYCTL_INSTALL/bin:$PATH"

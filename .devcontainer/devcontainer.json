@@ -3,12 +3,16 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "dockerDashComposeVersion":"v2"
+      "dockerDashComposeVersion": "v2"
     },
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18.15.0"
     },
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "2.43.0",
+      "ppa": true
+    }
   },
   "customizations": {
     "vscode": {
@@ -47,5 +51,6 @@
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": ".devcontainer/postCreateCommand.sh"
+  "postCreateCommand": ".devcontainer/postCreateCommand.sh",
+  "postStartCommand": ".devcontainer/postStartCommand.sh"
 }
