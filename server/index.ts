@@ -15,12 +15,12 @@ import {
   createMetronomeGetLoadContext,
   registerMetronome,
 } from "@metronome-sh/express"
-import helmet from "helmet"
-import { getInstanceInfo } from "litefs-js"
-import { getRedirectsMiddleware } from "./redirects"
 import { installGlobals } from "@remix-run/node/dist/globals"
 import "dotenv/config"
+import helmet from "helmet"
+import { getInstanceInfo } from "litefs-js"
 import { getMdxPages } from "../app/libs/mdx.server"
+import { getRedirectsMiddleware } from "./redirects"
 
 installGlobals()
 
@@ -85,11 +85,6 @@ app.use(
 )
 
 app.use((req, res, next) => {
-  if (deploymentEnv === "staging") {
-    next()
-    return
-  }
-
   const proto = req.get("X-Forwarded-Proto")
   const host = getHost(req)
   if (proto === "http") {
@@ -249,7 +244,7 @@ getMdxPages(
   path.join(__dirname, "..", "app", "components"),
 ).then((pages) => {
   app.listen(port, () => {
-    if (MODE === "production" && process.env.DEPLOYMENT_ENV !== "staging") {
+    if (MODE === "production") {
       require("../build")
     }
 
