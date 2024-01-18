@@ -33,7 +33,6 @@ WORKDIR /app
 # Copy built application
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/index.js /app/index.js
-COPY --from=build /app/start.js /app/start.js
 COPY --from=build /app/.yarn /app/.yarn
 COPY --from=build /app/.pnp.cjs /app/.pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs /app/.pnp.loader.mjs
@@ -47,4 +46,4 @@ ADD ./litefs.yml /etc/litefs.yml
 RUN mkdir -p /data ${LITEFS_DIR}
 
 # Start the server by default, this can be overwritten at runtime
-CMD ["yarn", "node", "start.js" ]
+CMD ["yarn", "node", "index.js" ]
