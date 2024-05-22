@@ -15,6 +15,9 @@
     }
   },
   "customizations": {
+    "devpod": {
+      "prebuildRepository": "ghcr.io/andrew-codes/andrew-codes"
+    },
     "vscode": {
       "settings": {},
       "extensions": [
