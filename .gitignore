@@ -18,3 +18,5 @@ data/cache.db
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.devcontainer/.devpod-internal/
