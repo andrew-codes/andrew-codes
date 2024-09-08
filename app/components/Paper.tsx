@@ -14,6 +14,8 @@ const Paper = styled.div`
   @media print {
     border: none;
     padding: 0;
+    background-color: transparent;
+    width: 8.5in;
   }
 `
 

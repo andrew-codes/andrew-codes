@@ -1,6 +1,5 @@
 import type { FC } from "react"
 import styled from "styled-components"
-import Link from "./Link"
 import avatar from "../images/Profile400px.png"
 import {
   ContactCard,
@@ -9,13 +8,14 @@ import {
   JobTitle,
   Url,
 } from "./ContactCard"
+import Link from "./Link"
 
 const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);
   border-radius: 50%;
   margin: 1rem;
-  max-height: 7rem;
-  min-height: 3rem;
+  max-height: 5rem;
+  min-height: 2rem;
 
   @media (max-width: 640px) {
     margin-left: 0.25rem;

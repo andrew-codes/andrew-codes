@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from "react"
+import type { FC, PropsWithChildren, ReactNode } from "react"
 import styled from "styled-components"
 import Paper from "../Paper"
 import { PrintTogether } from "../print"
@@ -124,17 +124,19 @@ const KeyResults = styled.div`
   margin-top: 8pt;
   width: 100%;
 `
-const WorkExperience: FC<{
-  children?: ReactNode | ReactNode[]
-  description: string | ReactNode
-  keyTechnologies?: string | ReactNode
-  from: string | ReactNode
-  role: string
-  location: string | ReactNode
-  note?: string | ReactNode
-  orgName: string
-  to: string | ReactNode
-}> = ({
+const WorkExperience: FC<
+  PropsWithChildren<{
+    description: string | ReactNode
+    keyTechnologies?: string | ReactNode
+    from: string | ReactNode
+    role: string
+    location: string | ReactNode
+    note?: string | ReactNode | undefined
+    orgName: string
+    summarized?: boolean | undefined
+    to: string | ReactNode
+  }>
+> = ({
   children,
   role,
   location,
@@ -144,22 +146,54 @@ const WorkExperience: FC<{
   to,
   description,
   keyTechnologies,
-}) => {
-  return (
+  summarized,
+}) =>
+  !summarized ? (
     <WorkExperienceRoot>
       <WorkExperienceOverview>
         <JobTitle>{role}</JobTitle>
         <TimeFrame>
-          {!!note && <Note>({note})</Note>} {from} - {to}
+          {note && <Note>({note})</Note>} {from} - {to}
         </TimeFrame>
         <OrgName>{orgName}</OrgName>
         <Location>{location}</Location>
         <Description>{description}</Description>
-        {!!keyTechnologies && (
+        {keyTechnologies && (
           <KeyTechnologies>{keyTechnologies}</KeyTechnologies>
         )}
       </WorkExperienceOverview>
-      {!!children && <KeyResults>{children}</KeyResults>}
+      {children && <KeyResults>{children}</KeyResults>}
+    </WorkExperienceRoot>
+  ) : (
+    <SummarizedWorkExperienceRoot role={role} orgName={orgName}>
+      <TimeFrame>
+        {note && <Note>({note})</Note>} {from} - {to}
+      </TimeFrame>
+    </SummarizedWorkExperienceRoot>
+  )
+
+const SummarizedTechnologies = styled(KeyTechnologies)`
+  display: inline-block !important;
+  width: unset !important;
+  margin: 0;
+`
+
+const SummarizedWorkExperienceRoot: FC<
+  PropsWithChildren<{
+    role: string | ReactNode
+    orgName: string | ReactNode
+  }>
+> = ({ children, role, orgName }) => {
+  return (
+    <WorkExperienceRoot>
+      <WorkExperienceOverview>
+        <SummarizedItemRoot>
+          <SummarizedItemName>
+            {role} - {orgName}
+          </SummarizedItemName>
+          <SummarizedTechnologies>{children}</SummarizedTechnologies>
+        </SummarizedItemRoot>
+      </WorkExperienceOverview>
     </WorkExperienceRoot>
   )
 }
@@ -215,6 +249,7 @@ const Education: FC<{
 const SummarizedItemRoot = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   > *:nth-child(1) {
     flex: 1;
   }
@@ -272,26 +307,26 @@ const ToDo = styled.div`
 
 const Page = styled(Paper)`
   border-radius: 0;
-  padding: 0.5in;
   position: relative;
   width: 8.5in;
 
   > section {
     margin-top: 16pt;
   }
+
   > section:first-child {
     margin-top: 0;
   }
 
-  @media (print) or (max-width: 640px) {
-    border: none;
-    height: unset;
-    padding: 0;
-    width: unset;
-  }
-
   @media (max-width: 640px) {
     padding: 1rem;
+    border: none;
+    height: unset;
+  }
+
+  @media (max-width: 890px) {
+    width: 100%;
+    border: none;
   }
 `
 

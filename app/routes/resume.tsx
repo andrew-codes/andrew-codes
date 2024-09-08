@@ -67,7 +67,7 @@ const loader = async (args: LoaderArgs) => {
 const headers: HeadersFunction = useLoaderHeaders()
 
 const Main = styled.main`
-  background-color: rgb(249, 251, 253) !important;
+  background-color: rgb(249, 251, 253);
   border-radius: 1rem;
   margin: 0 2rem;
   padding-top: 1rem;
@@ -81,12 +81,18 @@ const Main = styled.main`
   > * {
     margin: 0 auto;
   }
+
+  @media print {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+  }
 `
 
 const GlobalStyles = createGlobalStyle`
     body {
         @media print {
-            background-color: transparent !important;
+            background-color: white !important;
             padding: 0 !important;
         }
     }
@@ -165,19 +171,16 @@ const ResumeRoute: FC<{}> = () => {
             </ContactInformation>
             <Notes as={ResumeNotes}>
               <Paragraph>
-                Senior Software engineer with {yearsOfExperience} years of
-                experience in full-stack development, technical leadership, and
-                unique insights into delivering and scaling software. Proven
-                experience with React/TypeScript, system languages, and
-                associated principles. Direct impact and technical influence on
-                organizations ranging from 3 to 50+ engineers.
+                Senior engineer with {yearsOfExperience} years of experience
+                scaling and delivering software, providing direct impact and
+                influence to organizations ranging from 3 to 100+ engineers.
               </Paragraph>
               <Section title="Highlights">
                 <List>
+                  <li>Specializing in front-end technologies</li>
                   <li>
-                    Focusing on front-end, but with equally vast depth of
-                    knowledge in back-end, infrastructure, and cloud providers;
-                    including{" "}
+                    Equally vast depth of knowledge in back-end, infrastructure,
+                    and cloud providers; including{" "}
                     <ResumeAbbr title="C sharp programming language">
                       C#
                     </ResumeAbbr>
@@ -185,20 +188,18 @@ const ResumeRoute: FC<{}> = () => {
                     <ResumeAbbr title="Structured Query Language">
                       SQL
                     </ResumeAbbr>
-                    , Kubernetes, Docker/
-                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>, git,
-                    and bash
+                    , Kubernetes, containerization, git, and bash
                   </li>
                   <li>
-                    Active community member through speaking and OSS
-                    contributions; including Gatsby, Cypress, Glamorous, VS Code
-                    Grammarly, VersionOne SDKs and component library, Coder Dojo
-                    lessons, Hacktoberfest
+                    Active community member through delivery of talks,
+                    workshops, and OSS contributions; including Gatsby, Cypress,
+                    Glamorous, VS Code Grammarly, VersionOne SDKs and component
+                    library, Coder Dojo lessons, Hacktoberfest
                   </li>
                   <li>
                     Experience with Kanban, Scrum,{" "}
                     <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
-                    other techniques enabling agility
+                    other techniques unlocking agility
                   </li>
                   <li>
                     Polyglot programmer with interest in Python, Elixir, and
@@ -208,7 +209,7 @@ const ResumeRoute: FC<{}> = () => {
               </Section>
             </Notes>
           </ContactCard>
-          <Section title="Work Experience">
+          <Section title="Recent Professional Experience">
             <WorkExperience
               role="Senior Software Engineer (64)"
               orgName="Microsoft"
@@ -378,130 +379,153 @@ const ResumeRoute: FC<{}> = () => {
                 </li>
               </List>
             </WorkExperience>
-            <WorkExperience
-              role="Senior Software Engineer"
-              orgName="MATRIX Professional Services"
-              location="Atlanta, GA (Hybrid)"
-              from={<time dateTime="2013-02">Feb 2013</time>}
-              to={<time dateTime="2014-09">Sept 2014</time>}
-              description={
-                <>
-                  Engineer and coach, focused on full-stack development in{" "}
-                  <ResumeAbbr title="C sharp programming language">
-                    C#
-                  </ResumeAbbr>
-                  , JavaScript, React, and{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
-                  for major clients. Presented a total of over 6 workshops;
-                  topics ranging from{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>,
-                  SOLID principles, and git.
-                </>
-              }
-              keyTechnologies={
-                "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, SCRUM, grunt, git"
-              }
-            >
-              <List>
-                <li>
-                  Prepared redesigned checkout process for a major e-commerce
-                  store; reducing steps to action by 50% and increasing sales by
-                  an undisclosed amount
-                </li>
-                <li>
-                  Reduced defects in new features by ~60% through of testing
-                  mechanisms, including jasmine, mocha, chai, sinon, and karma,
-                  and CI automation via gulp and grunt
-                </li>
-                <li>
-                  React early adopter; pioneered usage and incorporation into
-                  company's core competencies; including training of 7+
-                  engineers
-                </li>
-                <li>
-                  Founded company craftsman fellowship program and curriculum;
-                  onboarding 2 new hires into the program
-                </li>
-              </List>
-            </WorkExperience>
-            <WorkExperience
-              role="Software Engineer"
-              orgName="MModal"
-              location="Atlanta, GA"
-              from={<time dateTime="2012-09">Sept 2012</time>}
-              to={<time dateTime="2013-02">Feb 2013</time>}
-              description={
-                <>
-                  Excelled in an position focused on Fluency for Coding, a
-                  medical coding and billing web application.
-                </>
-              }
-            ></WorkExperience>
-            <WorkExperience
-              role="Web Application Developer"
-              orgName="Response Mine Interactive"
-              location="Atlanta, GA"
-              from={<time dateTime="2012-03">Mar 2012</time>}
-              to={<time dateTime="2012-09">Sept 2012</time>}
-              description={
-                <>
-                  Guided design of custom CMS to manage content across over 10
-                  web properties.
-                </>
-              }
-            ></WorkExperience>
-            <WorkExperience
-              role="Senior Software Engineer"
-              orgName="DAXKO"
-              location="Birmingham, AL"
-              from={<time dateTime="2011-08">Aug 2011</time>}
-              to={<time dateTime="2012-03">Mar 2012</time>}
-              description={
-                <>
-                  SCRUM team, produced operational and membership management
-                  software for non-profits.
-                </>
-              }
-            ></WorkExperience>
-            <WorkExperience
-              role="Software Engineer 3"
-              orgName="MedSEEK"
-              location="Birmingham, AL"
-              from={<time dateTime="2011-02">Feb 2011</time>}
-              to={<time dateTime="2011-08">Aug 2011</time>}
-              description={
-                <>
-                  Improved e-healthcare platform, Coldstone; leveraged by
-                  hospitals and healthcare providers.
-                </>
-              }
-            ></WorkExperience>
-            <WorkExperience
-              role="Software Engineer 3"
-              orgName="Intermark Interactive"
-              location="Birmingham, AL"
-              from={<time dateTime="2010-01">Jan 2010</time>}
-              to={<time dateTime="2011-02">Feb 2011</time>}
-              description={
-                <>
-                  Delivered features for high-profile BuyAToyota.com; handling
-                  Toyota's third tier marketing.
-                </>
-              }
-            ></WorkExperience>
-            <WorkExperience
-              role="Adjunct Faculty"
-              orgName="Columbus Technical College"
-              location="Columbus, GA"
-              from={<time dateTime="2008-06">Jun 2008</time>}
-              to={<time dateTime="2009-12">Dec 2009</time>}
-              description={
-                <>
-                  Taught web development and general computing courses; ensuring
-                  student preparedness for workforce.
-                </>
-              }
-            ></WorkExperience>
+          </Section>
+          <Section title="Additional Professional Experience">
+            <div>
+              <WorkExperience
+                summarized
+                role="Senior Software Engineer"
+                orgName="MATRIX Professional Services"
+                location="Atlanta, GA (Hybrid)"
+                from={<time dateTime="2013-02">Feb 2013</time>}
+                to={<time dateTime="2014-09">Sept 2014</time>}
+                description={
+                  <>
+                    Engineer and coach, focused on full-stack development in{" "}
+                    <ResumeAbbr title="C sharp programming language">
+                      C#
+                    </ResumeAbbr>
+                    , JavaScript, React, and{" "}
+                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
+                    , for major clients. Presented a total of over 6 workshops;
+                    topics ranging from{" "}
+                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
+                    , SOLID principles, and git.
+                  </>
+                }
+                keyTechnologies={
+                  "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, SCRUM, grunt, git"
+                }
+              >
+                <List>
+                  <li>
+                    Prepared redesigned checkout process for a major e-commerce
+                    store; reducing steps to action by 50% and increasing sales
+                    by an undisclosed amount
+                  </li>
+                  <li>
+                    Reduced defects in new features by ~60% through of testing
+                    mechanisms, including jasmine, mocha, chai, sinon, and
+                    karma, and CI automation via gulp and grunt
+                  </li>
+                  <li>
+                    React early adopter; pioneered usage and incorporation into
+                    company's core competencies; including training of 7+
+                    engineers
+                  </li>
+                  <li>
+                    Founded company craftsman fellowship program and curriculum;
+                    onboarding 2 new hires into the program
+                  </li>
+                </List>
+              </WorkExperience>
+              <WorkExperience
+                summarized
+                role="Software Engineer"
+                orgName="MModal"
+                location="Atlanta, GA"
+                from={<time dateTime="2012-09">Sept 2012</time>}
+                to={<time dateTime="2013-02">Feb 2013</time>}
+                description={
+                  <>
+                    Excelled in an position focused on Fluency for Coding, a
+                    medical coding and billing web application.
+                  </>
+                }
+                keyTechnologies={
+                  "C#, ASP.NET, JavaScript, jQuery, TDD, Mercurial"
+                }
+              ></WorkExperience>
+              <WorkExperience
+                summarized
+                role="Software Engineer"
+                orgName="Response Mine Interactive"
+                location="Atlanta, GA"
+                from={<time dateTime="2012-03">Mar 2012</time>}
+                to={<time dateTime="2012-09">Sept 2012</time>}
+                description={
+                  <>
+                    Guided design of custom CMS to manage content across over 10
+                    web properties.
+                  </>
+                }
+                keyTechnologies={"C#, MVC.NET, JavaScript, jQuery, git"}
+              ></WorkExperience>
+              <WorkExperience
+                summarized
+                role="Senior Software Engineer"
+                orgName="DAXKO"
+                location="Birmingham, AL"
+                from={<time dateTime="2011-08">Aug 2011</time>}
+                to={<time dateTime="2012-03">Mar 2012</time>}
+                description={
+                  <>
+                    SCRUM team, produced operational and membership management
+                    software for non-profits.
+                  </>
+                }
+                keyTechnologies={
+                  "C#, ASP.NET, MVC.NET, JavaScript, jQuery, git"
+                }
+              ></WorkExperience>
+              <WorkExperience
+                summarized
+                role="Software Engineer 3"
+                orgName="MedSEEK"
+                location="Birmingham, AL"
+                from={<time dateTime="2011-02">Feb 2011</time>}
+                to={<time dateTime="2011-08">Aug 2011</time>}
+                keyTechnologies={"C#, ASP.NET, JavaScript, jQuery, Subversion"}
+                description={
+                  <>
+                    Improved e-healthcare platform, Coldstone; leveraged by
+                    hospitals and healthcare providers.
+                  </>
+                }
+              ></WorkExperience>
+              <WorkExperience
+                summarized
+                role="Software Engineer 3"
+                orgName="Intermark Interactive"
+                location="Birmingham, AL"
+                from={<time dateTime="2010-01">Jan 2010</time>}
+                to={<time dateTime="2011-02">Feb 2011</time>}
+                description={
+                  <>
+                    Delivered features for high-profile BuyAToyota.com; handling
+                    Toyota's third tier marketing.
+                  </>
+                }
+                keyTechnologies={"C#, ASP.NET, JavaScript, jQuery, Subversion"}
+              ></WorkExperience>
+              <WorkExperience
+                summarized
+                role="Adjunct Faculty"
+                orgName="Columbus Technical College"
+                location="Columbus, GA"
+                from={<time dateTime="2008-06">Jun 2008</time>}
+                to={<time dateTime="2009-12">Dec 2009</time>}
+                description={
+                  <>
+                    Taught web development and general computing courses;
+                    ensuring student preparedness for workforce.
+                  </>
+                }
+                keyTechnologies={
+                  "C#, ASP.NET, JavaScript, jQuery, HTML, CSS, Subversion"
+                }
+              ></WorkExperience>
+            </div>
           </Section>
           <Section title="Community">
             <SummarizedItems>
@@ -527,7 +551,7 @@ const ResumeRoute: FC<{}> = () => {
               />
               <SummarizedItem
                 role="Workshop Host"
-                name="Learn Redux by Building It"
+                name="Learn Redux by Building Redux"
                 on={<time dateTime="2017">2017</time>}
               />
               <SummarizedItem
