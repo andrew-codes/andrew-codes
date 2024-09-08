@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18.15.0
+ARG NODE_VERSION=22.5.0
 FROM node:${NODE_VERSION}-slim as base
 RUN corepack enable
 RUN corepack prepare yarn@3.5.0 --activate

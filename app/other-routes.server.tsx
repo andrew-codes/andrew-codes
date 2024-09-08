@@ -1,22 +1,11 @@
 import { type EntryContext } from "@remix-run/node"
-import { getSitemapXml } from "./libs/sitemap.server"
 
 type Handler = (
   request: Request,
   remixContext: EntryContext,
 ) => Promise<Response | null> | null
 
-const pathedRoutes: Record<string, Handler> = {
-  "/sitemap.xml": async (request, remixContext) => {
-    const sitemap = await getSitemapXml(request, remixContext)
-    return new Response(sitemap, {
-      headers: {
-        "Content-Type": "application/xml",
-        "Content-Length": String(Buffer.byteLength(sitemap)),
-      },
-    })
-  },
-}
+const pathedRoutes: Record<string, Handler> = {}
 
 const routes: Array<Handler> = [
   ...Object.entries(pathedRoutes).map(([path, handler]) => {
@@ -28,4 +17,4 @@ const routes: Array<Handler> = [
   }),
 ]
 
-export { routes, pathedRoutes }
+export { pathedRoutes, routes }

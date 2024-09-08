@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
-import type { Category } from "~/types"
-import { categories } from "~/types"
+import type { Category } from "../types"
+import { categories } from "../types"
 
 const getCategories = (): readonly Category[] => categories
 
@@ -43,14 +43,14 @@ const descriptions: Record<Category, string | ReactNode> = {
   "not categorized": <>Posts that have not been categorized.</>,
 }
 const getBackgroundGradient = (name: Category | undefined | null): string => {
-  return name ? colorGradient[name] ?? "rgb(255,255,255)" : "rgb(255,255,255)"
+  return name ? (colorGradient[name] ?? "rgb(255,255,255)") : "rgb(255,255,255)"
 }
 
 const getColors = (name: Category | undefined | null): string[] =>
-  name ? colors[name] ?? [] : []
+  name ? (colors[name] ?? []) : []
 
 const getDescription = (
   name: Category | undefined | null,
-): string | ReactNode => (name ? descriptions[name] ?? "" : "")
+): string | ReactNode => (name ? (descriptions[name] ?? "") : "")
 
-export { getCategories, getDescription, getBackgroundGradient, getColors }
+export { getBackgroundGradient, getCategories, getColors, getDescription }

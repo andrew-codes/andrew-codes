@@ -1,26 +1,20 @@
 import { createRequestHandler } from "@remix-run/express"
+import { installGlobals } from "@remix-run/node"
 import compression from "compression"
 import crypto from "crypto"
-import type { RequestHandler } from "express"
-import express from "express"
-import "express-async-errors"
-import fs from "fs"
-import morgan from "morgan"
-import onFinished from "on-finished"
-import path from "path"
-import serverTiming from "server-timing"
-// eslint-disable-next-line import/no-extraneous-dependencies
-import {
-  combineGetLoadContexts,
-  createMetronomeGetLoadContext,
-  registerMetronome,
-} from "@metronome-sh/express"
-import { installGlobals } from "@remix-run/node/dist/globals"
 import "dotenv/config"
+import express from "express"
+import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
+import morgan from "morgan"
+import path from "path"
+import serverTiming from "server-timing"
+import configuration from "../app/libs/configuration.server"
 import { getMdxPages } from "../app/libs/mdx.server"
 import { getRedirectsMiddleware } from "./redirects"
+
+const __dirname = import.meta.dirname
 
 installGlobals()
 
@@ -29,60 +23,42 @@ const primaryHost = "andrew.codes"
 const getHost = (req: { get: (key: string) => string | undefined }) =>
   req.get("X-Forwarded-Host") ?? req.get("host") ?? ""
 
-const MODE = process.env.NODE_ENV
-const BUILD_DIR = path.join(process.cwd(), "build")
-const deploymentEnv = process.env.DEPLOYMENT_ENV ?? "production"
-
-const asyncHandler =
-  (fn: RequestHandler): RequestHandler =>
-  (req, res, next) => {
-    return Promise.resolve(fn(req, res, next)).catch(next)
-  }
+const MODE = configuration.getValue("nodeEnv").value
 
 const app = express()
+
 app.use(serverTiming())
 
-if (process.env.DISABLE_METRONOME) {
-  app.post("/__metronome", (req, res) => {
-    res.status(503)
-    return res.send("Metronome is disabled")
-  })
-}
+app.use(async (req, res, next) => {
+  const { currentInstance, primaryInstance } = await getInstanceInfo()
+  res.set("X-Fly-Region", process.env.FLY_REGION ?? "unknown")
+  res.set("X-Fly-App", process.env.FLY_APP_NAME ?? "unknown")
+  res.set("X-Fly-Instance", currentInstance)
+  res.set("X-Fly-Primary-Instance", primaryInstance)
+  res.set("X-Frame-Options", "SAMEORIGIN")
 
-app.use(
-  asyncHandler(async (req, res, next) => {
-    const { currentInstance, primaryInstance } = await getInstanceInfo()
-    res.set("X-Fly-Region", process.env.FLY_REGION ?? "unknown")
-    res.set("X-Fly-App", process.env.FLY_APP_NAME ?? "unknown")
-    res.set("X-Fly-Instance", currentInstance)
-    res.set("X-Fly-Primary-Instance", primaryInstance)
-    res.set("X-Frame-Options", "SAMEORIGIN")
+  const host = getHost(req)
+  if (!host.endsWith(primaryHost)) {
+    res.set("X-Robots-Tag", "noindex")
+  }
+  res.set("Access-Control-Allow-Origin", `https://${host}`)
 
-    const host = getHost(req)
-    if (!host.endsWith(primaryHost)) {
-      res.set("X-Robots-Tag", "noindex")
-    }
-    res.set("Access-Control-Allow-Origin", `https://${host}`)
+  res.set("Strict-Transport-Security", `max-age=${60 * 60 * 24 * 365 * 100}`)
+  next()
+})
 
-    res.set("Strict-Transport-Security", `max-age=${60 * 60 * 24 * 365 * 100}`)
-    next()
-  }),
-)
-
-app.use(
-  asyncHandler(async (req, res, next) => {
-    if (req.get("cf-visitor")) {
-      // console.log(`👺 disallowed cf-visitor`, req.headers)
-      // Make them wait for it...
-      await new Promise((resolve) => setTimeout(resolve, 90_000))
-      return res.send(
-        `Please go to https://${primaryHost} instead! Ping Andrew if you think you should not be seeing this...`,
-      )
-    } else {
-      return next()
-    }
-  }),
-)
+app.use(async (req, res, next) => {
+  if (req.get("cf-visitor")) {
+    // console.log(`👺 disallowed cf-visitor`, req.headers)
+    // Make them wait for it...
+    await new Promise((resolve) => setTimeout(resolve, 90_000))
+    return res.send(
+      `Please go to https://${primaryHost} instead! Ping Andrew if you think you should not be seeing this...`,
+    )
+  } else {
+    return next()
+  }
+})
 
 app.use((req, res, next) => {
   const proto = req.get("X-Forwarded-Proto")
@@ -110,46 +86,6 @@ app.use((req, res, next) => {
   } else {
     next()
   }
-})
-
-app.use(compression())
-
-const publicAbsolutePath = here("../public")
-
-app.use(
-  express.static(publicAbsolutePath, {
-    maxAge: "1w",
-    setHeaders(res, resourcePath) {
-      const relativePath = resourcePath.replace(`${publicAbsolutePath}/`, "")
-      if (relativePath.startsWith("build/info.json")) {
-        res.setHeader("cache-control", "no-cache")
-        return
-      }
-      // If we ever change our font (which we quite possibly never will)
-      // then we'll just want to change the filename or something...
-      // Remix fingerprints its assets so we can cache forever
-      if (
-        relativePath.startsWith("fonts") ||
-        relativePath.startsWith("build") ||
-        relativePath.startsWith("css")
-      ) {
-        res.setHeader("cache-control", "public, max-age=31536000, immutable")
-      }
-    },
-  }),
-)
-
-// log the referrer for 404s
-app.use((req, res, next) => {
-  onFinished(res, () => {
-    const referrer = req.get("referer")
-    if (res.statusCode === 404 && referrer) {
-      console.info(
-        `👻 404 on ${req.method} ${req.path} referred by: ${referrer}`,
-      )
-    }
-  })
-  next()
 })
 
 app.use(
@@ -196,41 +132,27 @@ app.use(
   }),
 )
 
-function getRequestHandlerOptions(): Parameters<
-  typeof createRequestHandler
->[0] {
-  const build = require("../build")
-  function getLoadContext(req: any, res: any) {
-    return { cspNonce: res.locals.cspNonce }
-  }
-  if (MODE === "production" && !process.env.DISABLE_METRONOME) {
-    const buildWithMetronome = registerMetronome(build)
-    const metronomeGetLoadContext = createMetronomeGetLoadContext(
-      buildWithMetronome,
-      require("../config/app/metronome.config.js"),
-    )
-    return {
-      build: buildWithMetronome,
-      getLoadContext: combineGetLoadContexts(
-        getLoadContext,
-        // @ts-expect-error huh... metronome isn't happy with itself.
-        metronomeGetLoadContext,
-      ),
-      mode: MODE,
-    }
-  }
+app.use(compression())
 
-  return { build, mode: MODE, getLoadContext }
-}
+const viteDevServer =
+  MODE === "production"
+    ? null
+    : await import("vite").then((vite) =>
+        vite.createServer({
+          server: { middlewareMode: true },
+        }),
+      )
+app.use(
+  viteDevServer ? viteDevServer.middlewares : express.static("build/client"),
+)
 
-if (MODE === "production") {
-  app.all("*", createRequestHandler(getRequestHandlerOptions()))
-} else {
-  app.all("*", (req, res, next) => {
-    purgeRequireCache()
-    return createRequestHandler(getRequestHandlerOptions())(req, res, next)
-  })
-}
+app.use(express.static("./app/public", { maxAge: "1y" }))
+
+const build = viteDevServer
+  ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
+  : await import("./build/server/index.js")
+
+app.all("*", createRequestHandler(getRequestHandlerOptions()))
 
 app.use((err: any, req: any, res: any, next: any) => {
   console.error(err.stack)
@@ -242,26 +164,18 @@ getMdxPages(
   { forceFresh: true, timings: {} },
   path.join(__dirname, "..", "app", "posts"),
   path.join(__dirname, "..", "app", "components"),
-).then((pages) => {
+).then(() => {
   app.listen(port, () => {
-    if (MODE === "production") {
-      require("../build")
-    }
-
     console.log(`Production express server listening on port ${port}`)
   })
 })
-////////////////////////////////////////////////////////////////////////////////
-function purgeRequireCache() {
-  for (const key in require.cache) {
-    if (key.startsWith(BUILD_DIR)) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      delete require.cache[key]
-    }
-  }
-}
 
-/*
-eslint
-  @typescript-eslint/no-var-requires: "off",
-*/
+function getRequestHandlerOptions(): Parameters<
+  typeof createRequestHandler
+>[0] {
+  function getLoadContext(req: any, res: any) {
+    return { cspNonce: res.locals.cspNonce }
+  }
+
+  return { build, mode: MODE, getLoadContext }
+}

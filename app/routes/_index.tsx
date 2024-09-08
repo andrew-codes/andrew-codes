@@ -1,36 +1,34 @@
-import type {
-  HeadersFunction,
-  LoaderArgs,
-  V2_MetaFunction,
-} from "@remix-run/node"
+import styled from "@emotion/styled"
+import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
-import { useLoaderData } from "@remix-run/react"
-import styled from "styled-components"
-import Link from "~/components/Link"
-import Paper from "~/components/Paper"
-import { Posts } from "~/components/Post"
-import Tags from "~/components/Tags"
+import { Link, useLoaderData } from "@remix-run/react"
+import { Helmet } from "react-helmet"
+import { fileURLToPath } from "url"
+import Paper from "../components/Paper"
+import { Posts } from "../components/Post"
+import Tags from "../components/Tags"
 import {
   getBackgroundGradient,
   getColors,
   getDescription,
-} from "~/libs/categories"
-import { getHash, getFilePartsToHash } from "~/libs/hash.server"
-import { getMdxPages } from "~/libs/mdx.server"
-import postsByCategory from "~/libs/posts/categorize"
-import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import { getServerTimeHeader } from "~/libs/timing.server"
-import { useLoaderHeaders } from "~/libs/utils"
-import type { Category } from "~/types"
+} from "../libs/categories"
+import { getFilePartsToHash, getHash } from "../libs/hash.server"
+import { getMdxPages } from "../libs/mdx.server"
+import postsByCategory from "../libs/posts/categorize"
+import {
+  alphabetically,
+  newestFirst,
+  sortByMany,
+} from "../libs/posts/sortPosts"
+import { getServerTimeHeader } from "../libs/timing.server"
+import { useLoaderHeaders } from "../libs/utils"
+import type { Category } from "../types"
 
-const meta: V2_MetaFunction = () => {
-  return [{ title: "Andrew Smith | Home" }]
-}
-
-const loader = async ({ request, params }: LoaderArgs) => {
+const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const timings = {}
   const posts = await getMdxPages({ request, timings })
 
+  const __filename = fileURLToPath(import.meta.url)
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
 
   return json(
@@ -81,7 +79,7 @@ const Hero = styled(Paper)`
     margin-top: 0;
   }
 
-  ${Blockquote} {
+  blockquote {
     margin-bottom: 0;
 
     @media (max-width: 640px) {
@@ -140,7 +138,7 @@ const PostCategory = styled(Paper)<{ name: Category }>`
     min-height: 2.5rem;
   }
 
-  ${Posts} > li {
+  ol > li {
     display: flex;
     flex-direction: column;
     margin-top: 1.5rem;
@@ -165,9 +163,8 @@ const PostCategory = styled(Paper)<{ name: Category }>`
     margin: 0;
   }
 
-  ${Link} {
+  a {
     color: rgb(255, 255, 255);
-    text-decoration: none;
   }
 `
 
@@ -181,7 +178,7 @@ const PostCategories = styled.main`
     margin: 0;
   }
 
-  > ${PostCategory} {
+  > section {
     margin: 0.5rem;
     height: 466px;
     position: relative;
@@ -192,19 +189,20 @@ const PostCategories = styled.main`
       margin: 0 !important;
     }
 
-    > ${Link} {
+    &:nth-child(odd) {
+      margin-left: 0;
+    }
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+
+    > a {
       bottom: 1rem;
       display: block;
       position: absolute;
       right: 1rem;
       text-align: right;
     }
-  }
-  > ${PostCategory}:nth-child(odd) {
-    margin-left: 0;
-  }
-  > ${PostCategory}:nth-child(even) {
-    margin-right: 0;
   }
 `
 
@@ -218,17 +216,28 @@ const HomeRoute = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Home | Andrew Smith</title>
+      </Helmet>
       <Hero as="section">
         <h1>Hi, &#x1f44b;!</h1>
         <Blockquote>
-          I'm Andrew and I <strong>empower</strong> others through{" "}
+          <span>I'm Andrew and I </span>
+          <strong>empower</strong>
+          <span> others through </span>
           <strong>quality</strong> software.
           <br />
-          <br />I aim to make software development more accessible to a wider
-          audience. I accomplish this through mentorship,{" "}
-          <abbr title="Open source software">OSS</abbr>, and sharing my
-          experiences. This site is my professional profile, resume, and some
-          learnings over my {yearsOfExperience} year career.
+          <br />
+          <span>
+            I aim to make software development more accessible to a wider
+            audience. I accomplish this through mentorship,
+          </span>{" "}
+          <abbr title="Open source software">OSS</abbr>
+          <span>
+            , and sharing my experiences. This site is my professional profile,
+            resume, and some learnings over my
+          </span>{" "}
+          <span>{yearsOfExperience}</span> <span>year career.</span>
         </Blockquote>
       </Hero>
       <PostCategories>
@@ -265,5 +274,9 @@ const HomeRoute = () => {
   )
 }
 
+const ErrorBoundary = () => {
+  return <span>Yay!</span>
+}
+
 export default HomeRoute
-export { headers, loader, meta }
+export { ErrorBoundary, headers, loader }

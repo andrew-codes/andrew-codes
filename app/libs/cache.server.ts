@@ -1,19 +1,16 @@
+import * as C from "@epic-web/cachified"
+import {
+  verboseReporter,
+  type Cache as CachifiedCache,
+} from "@epic-web/cachified"
 import type BetterSqlite3 from "better-sqlite3"
 import Database from "better-sqlite3"
-import * as C from "cachified"
-import {
-  lruCacheAdapter,
-  verboseReporter,
-  type CacheEntry,
-  type Cache as CachifiedCache,
-} from "cachified"
 import fs from "fs"
 import { getInstanceInfo, getInstanceInfoSync } from "litefs-js"
-import { LRUCache } from "lru-cache"
+import { updatePrimaryCacheValue } from "../routes/resources.cache.sqlite"
 import configuration from "./configuration.server"
-import { updatePrimaryCacheValue } from "../routes/resources/cache.sqlite"
-import { time, type Timings } from "./timing.server"
 import singleton from "./singleton.server"
+import { time, type Timings } from "./timing.server"
 
 type CachifiedOptions = {
   forceFresh?: boolean | string
@@ -124,15 +121,6 @@ const getCache = async (): Promise<CachifiedCache> => {
   }
 }
 
-const lru = singleton(
-  "lru-cache",
-  () => new LRUCache<string, CacheEntry<unknown>>({ max: 5000 }),
-)
-const getLruCache = async () => {
-  const cache = await lru
-  return lruCacheAdapter(cache)
-}
-
 const shouldForceFresh = async ({
   forceFresh,
   request,
@@ -192,17 +180,12 @@ const cachified = async <Value>({
     desc: `${options.key} cache retrieval`,
   })
   cachifiedResolved = true
+
   return result
 }
 
 const defaultTtl = 1000 * 60 * 60 * 24 * 14
 const defaultStaleWhileRevalidate = 1000 * 60 * 60 * 24 * 30
 
-export {
-  defaultTtl,
-  defaultStaleWhileRevalidate,
-  cachified,
-  getCache,
-  getLruCache,
-}
+export { cachified, defaultStaleWhileRevalidate, defaultTtl, getCache }
 export type { CachifiedOptions }

@@ -1,5 +1,5 @@
+import styled from "@emotion/styled"
 import type { FC, ReactNode } from "react"
-import styled from "styled-components"
 import Paper from "../Paper"
 import { PrintTogether } from "../print"
 
@@ -297,8 +297,6 @@ const Page = styled(Paper)`
 
 export * from "./ContactInformation"
 export {
-  SummarizedItem,
-  SummarizedItems,
   Education,
   List,
   Page,
@@ -306,6 +304,8 @@ export {
   Resume,
   Section,
   Strong,
+  SummarizedItem,
+  SummarizedItems,
   ToDo,
   WorkExperience,
 }

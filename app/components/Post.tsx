@@ -1,5 +1,5 @@
+import styled from "@emotion/styled"
 import type { FC } from "react"
-import styled from "styled-components"
 import StyledLink from "./Link"
 
 const Link: FC<{ href: string }> = ({ href, ...props }) => (
@@ -28,7 +28,8 @@ const Table = styled.table`
     padding: 0 1rem;
   }
 
- th, td {
+  th,
+  td {
     padding: 0.25rem 0;
     &:first-child {
       padding-left: 2rem;

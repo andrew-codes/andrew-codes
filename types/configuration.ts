@@ -13,12 +13,12 @@ type ConfigurationResolver<
   getValue: (
     key: keyof DataSourceAccessorNamesByResolverKeys,
     options?: ResolverOptions<ReturnType<ResolverOptions["parser"]>>,
-  ) => Promise<{
+  ) => {
     key: keyof DataSourceAccessorNamesByResolverKeys
     name: DataSourceAccessorNamesByResolverKeys[keyof DataSourceAccessorNamesByResolverKeys]
     value: ReturnType<ResolverOptions["parser"]>
     originalValue: string
-  }>
+  }
 }
 
 type CombinedResolverKeys<
@@ -38,6 +38,6 @@ type CombineResolvers<
 export type {
   CombineResolvers,
   ConfigurationResolver,
-  ResolverOptions,
   ParserFunction,
+  ResolverOptions,
 }

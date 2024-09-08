@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "@emotion/styled"
 
 const ResumeContactCard = styled.header`
   > .note {
@@ -64,12 +64,12 @@ const ResumeNotes = styled.div`
 `
 
 export {
+  ResumeAbbr,
   ResumeAddress,
   ResumeContactCard,
   ResumeContactInformation,
   ResumeFullName,
   ResumeJobTitle,
-  ResumeNotes,
   ResumeLink,
-  ResumeAbbr,
+  ResumeNotes,
 }

@@ -1,5 +1,5 @@
+import styled from "@emotion/styled"
 import { Link as RemixLink } from "@remix-run/react"
-import styled from "styled-components"
 
 const StyledLink = styled(RemixLink)`
   text-decoration: underline !important;

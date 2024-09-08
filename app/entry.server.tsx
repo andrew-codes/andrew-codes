@@ -1,22 +1,20 @@
-import { Response } from "@remix-run/node"
-import { RemixServer } from "@remix-run/react"
-import { PassThrough } from "node:stream"
-import { renderToPipeableStream } from "react-dom/server"
-import { ServerStyleSheet } from "styled-components"
+import { CacheProvider } from "@emotion/react"
 import type { HandleDocumentRequestFunction } from "@remix-run/node"
-import isbot from "isbot"
+import { RemixServer } from "@remix-run/react"
+import { isbot } from "isbot"
 import { ensurePrimary } from "litefs-js/remix"
-import { routes as otherRoutes } from "./other-routes.server"
+import { renderToStaticMarkup } from "react-dom/server"
+import { Helmet } from "react-helmet"
+import { renderHeadToString } from "remix-island"
+import createEmotionCache from "./createEmotionCache"
+import configuration from "./libs/configuration.server"
 import { getEnv } from "./libs/env.server"
 import { NonceProvider } from "./libs/NonceProvider"
-import WritableWithStyles from "./libs/WriteableWithStyles"
-
+import { routes as otherRoutes } from "./other-routes.server"
+import { Head } from "./root"
 const ABORT_DELAY = 5_000
 global.ENV = getEnv()
 
-// NOTE: we've got a patch-package on Remix that adds the loadContext argument
-// so we can access the cspNonce in the entry. Hopefully this gets supported:
-// https://github.com/remix-run/remix/discussions/4603
 type DocRequestArgs = Parameters<HandleDocumentRequestFunction>
 
 async function handleDocumentRequest(...args: DocRequestArgs) {
@@ -34,12 +32,12 @@ async function handleDocumentRequest(...args: DocRequestArgs) {
   }
 
   for (const handler of otherRoutes) {
-    // eslint-disable-next-line no-await-in-loop
     const otherRouteResponse = await handler(request, remixContext)
     if (otherRouteResponse) return otherRouteResponse
   }
 
-  if (process.env.NODE_ENV !== "production") {
+  const env = configuration.getValue("nodeEnv").value
+  if (env !== "production") {
     responseHeaders.set("Cache-Control", "no-store")
   }
 
@@ -74,43 +72,34 @@ function serveTheBots(...args: DocRequestArgs) {
     loadContext,
   ] = args
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
-  const sheet = new ServerStyleSheet()
 
   return new Promise((resolve, reject) => {
-    const stream = renderToPipeableStream(
-      sheet.collectStyles(
-        <NonceProvider value={nonce}>
+    const clientSideCache = createEmotionCache()
+    const renderedOutput = renderToStaticMarkup(
+      <>
+        <CacheProvider value={clientSideCache}>
           <RemixServer
             context={remixContext}
             url={request.url}
             abortDelay={ABORT_DELAY}
           />
-        </NonceProvider>,
-      ),
-      {
-        nonce,
-        // Use onAllReady to wait for the entire document to be ready
-        onAllReady() {
-          responseHeaders.set("Content-Type", "text/html")
-          const body = new PassThrough()
-
-          const streamWithStyles = new WritableWithStyles(body, sheet)
-
-          body.write("<!DOCTYPE html>", "utf-8")
-          stream.pipe(streamWithStyles)
-          resolve(
-            new Response(body, {
-              status: responseStatusCode,
-              headers: responseHeaders,
-            }),
-          )
-        },
-        onShellError(err: unknown) {
-          reject(err)
-        },
-      },
+        </CacheProvider>
+      </>,
     )
-    setTimeout(() => stream.abort(), ABORT_DELAY)
+
+    const head = renderHeadToString({ request, remixContext, Head })
+    const helmet = Helmet.renderStatic()
+
+    responseHeaders.set("Content-Type", "text/html; charset=utf-8")
+    resolve(
+      new Response(
+        `<!DOCTYPE html><html lang="en-US"><head>${head}${helmet.link.toString()}</head><body><div id="root">${renderedOutput}</div></body></html>`,
+        {
+          headers: responseHeaders,
+          status: responseStatusCode,
+        },
+      ),
+    )
   })
 }
 
@@ -123,49 +112,36 @@ function serveBrowsers(...args: DocRequestArgs) {
     loadContext,
   ] = args
   const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
-  const sheet = new ServerStyleSheet()
 
   return new Promise((resolve, reject) => {
-    let didError = false
-
-    const stream = renderToPipeableStream(
-      sheet.collectStyles(
-        <NonceProvider value={nonce}>
-          <RemixServer
-            context={remixContext}
-            url={request.url}
-            abortDelay={ABORT_DELAY}
-          />
-        </NonceProvider>,
-      ),
-      {
-        nonce,
-        onShellReady() {
-          responseHeaders.set("Content-Type", "text/html")
-          const body = new PassThrough()
-
-          const streamWithStyles = new WritableWithStyles(body, sheet)
-
-          body.write("<!DOCTYPE html>", "utf-8")
-          stream.pipe(streamWithStyles)
-
-          resolve(
-            new Response(body, {
-              status: didError ? 500 : responseStatusCode,
-              headers: responseHeaders,
-            }),
-          )
-        },
-        onShellError(err: unknown) {
-          reject(err)
-        },
-        onError(err: unknown) {
-          didError = true
-          console.error(err)
-        },
-      },
+    const clientSideCache = createEmotionCache()
+    const renderedOutput = renderToStaticMarkup(
+      <>
+        <CacheProvider value={clientSideCache}>
+          <NonceProvider value={nonce}>
+            <RemixServer
+              context={remixContext}
+              url={request.url}
+              abortDelay={ABORT_DELAY}
+            />
+          </NonceProvider>
+        </CacheProvider>
+      </>,
     )
-    setTimeout(() => stream.abort(), ABORT_DELAY)
+
+    const head = renderHeadToString({ request, remixContext, Head })
+    const helmet = Helmet.renderStatic()
+
+    responseHeaders.set("Content-Type", "text/html; charset=utf-8")
+    resolve(
+      new Response(
+        `<!DOCTYPE html><html lang="en-US"><head>${head}${helmet.link.toString()}</head><body><div id="root">${renderedOutput}</div></body></html>`,
+        {
+          headers: responseHeaders,
+          status: responseStatusCode,
+        },
+      ),
+    )
   })
 }
 

@@ -1,31 +1,34 @@
-import { createGlobalStyle } from "styled-components"
+import { css, Global } from "@emotion/react"
 
-const GlobalStyles = createGlobalStyle`
+const globalStyles = css`
   @font-face {
-    font-display:swap;
+    font-display: swap;
     font-family: "Lato-Regular";
     src: url("/fonts/Lato-Regular.ttf") format("truetype");
   }
 
   @font-face {
-    font-display:swap;
+    font-display: swap;
     font-family: "Lato-Bold";
     src: url("/fonts/Lato-Bold.ttf") format("truetype");
   }
 
   @font-face {
-    font-display:swap;
-    font-family: "Lato-Thin";src: url("/fonts/Lato-Thin.ttf") format("truetype");
+    font-display: swap;
+    font-family: "Lato-Thin";
+    src: url("/fonts/Lato-Thin.ttf") format("truetype");
   }
 
   @font-face {
-    font-display:swap;
-    font-family: "Lato-Black";src: url("/fonts/Lato-Black.ttf") format("truetype");
+    font-display: swap;
+    font-family: "Lato-Black";
+    src: url("/fonts/Lato-Black.ttf") format("truetype");
   }
 
   @font-face {
-    font-display:swap;
-    font-family: "Lato-Light";src: url("/fonts/Lato-Light.ttf") format("truetype");
+    font-display: swap;
+    font-family: "Lato-Light";
+    src: url("/fonts/Lato-Light.ttf") format("truetype");
   }
 
   * {
@@ -35,7 +38,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     margin: 0 !important;
-    background: rgb(34,35,39);
+    background: rgb(34, 35, 39);
     font-size: 16px;
   }
 
@@ -47,5 +50,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 `
+
+const GlobalStyles = () => <Global styles={globalStyles} />
 
 export default GlobalStyles

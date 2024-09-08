@@ -1,12 +1,11 @@
-import styled from "styled-components"
+import styled from "@emotion/styled"
 import Paper from "./Paper"
-import { Header } from "./Category"
 
 const PageWithHeader = styled(Paper)`
   border: none;
   padding: 0;
 
-  ${Header} {
+  header {
     padding: 1.5rem;
     position: relative;
     border-radius: 1rem 1rem 0 0;
@@ -18,7 +17,7 @@ const PageWithHeader = styled(Paper)`
     }
   }
 
-  ${Header} + *:last-child {
+  header + *:last-child {
     padding-bottom: 0;
   }
 `

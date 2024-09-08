@@ -20,3 +20,4 @@ data/cache.db
 !.yarn/versions
 
 .devcontainer/.devpod-internal/
+vite.config.js*

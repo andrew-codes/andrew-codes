@@ -1,11 +1,10 @@
-import type {
-  HeadersFunction,
-  LoaderArgs,
-  V2_MetaFunction,
-} from "@remix-run/node"
+import { css, Global } from "@emotion/react"
+import styled from "@emotion/styled"
+import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import type { FC } from "react"
-import styled, { createGlobalStyle } from "styled-components"
+import { Helmet } from "react-helmet"
+import { fileURLToPath } from "url"
 import {
   Address,
   ContactCard,
@@ -18,7 +17,7 @@ import {
   Region,
   Telephone,
   Url,
-} from "~/components/ContactCard"
+} from "../components/ContactCard"
 import {
   Education,
   List,
@@ -36,16 +35,13 @@ import {
   SummarizedItem,
   SummarizedItems,
   WorkExperience,
-} from "~/components/resume"
-import { getFilePartsToHash, getHash } from "~/libs/hash.server"
-import { getServerTimeHeader } from "~/libs/timing.server"
-import { useLoaderHeaders } from "~/libs/utils"
+} from "../components/resume"
+import { getFilePartsToHash, getHash } from "../libs/hash.server"
+import { getServerTimeHeader } from "../libs/timing.server"
+import { useLoaderHeaders } from "../libs/utils"
 
-const meta: V2_MetaFunction = () => {
-  return [{ title: "Andrew Smith | Resume" }]
-}
-
-const loader = async (args: LoaderArgs) => {
+const loader = async (args: LoaderFunctionArgs) => {
+  const __filename = fileURLToPath(import.meta.url)
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
   const timings = {}
 
@@ -83,19 +79,19 @@ const Main = styled.main`
   }
 `
 
-const GlobalStyles = createGlobalStyle`
-    body {
-        @media print {
-            background-color: transparent !important;
-            padding: 0 !important;
-        }
+const globalStyles = css`
+  body {
+    @media print {
+      background-color: transparent !important;
+      padding: 0 !important;
     }
+  }
 
-    * {
-        color: rgb(80,80,80);
-        font-family: 'Lato-Regular';
-        font-size: 12pt;
-    }
+  * {
+    color: rgb(80, 80, 80);
+    font-family: "Lato-Regular";
+    font-size: 12pt;
+  }
 `
 const Note = styled.div`
   background-color: rgba(223, 201, 138, 1);
@@ -128,7 +124,10 @@ const ResumeRoute: FC<{}> = () => {
 
   return (
     <>
-      <GlobalStyles />
+      <Helmet>
+        <title>Resume | Andrew Smiith</title>
+      </Helmet>
+      <Global styles={globalStyles} />
       <Main>
         <Note>
           Need a printed or PDF version? This resume is optimized for print.

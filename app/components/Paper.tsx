@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "@emotion/styled"
 
 const Paper = styled.div`
   background-color: rgb(249, 251, 253);

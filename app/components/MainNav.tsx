@@ -1,7 +1,6 @@
+import styled from "@emotion/styled"
 import type { FC } from "react"
-import styled from "styled-components"
-import Link from "./Link"
-import avatar from "../images/Profile400px.png"
+import avatar from "../public/images/Profile400px.png"
 import {
   ContactCard,
   ContactInformation,
@@ -9,6 +8,7 @@ import {
   JobTitle,
   Url,
 } from "./ContactCard"
+import Link from "./Link"
 
 const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);
@@ -76,7 +76,7 @@ const Nav = styled.nav`
   flex: 1;
   justify-content: flex-end;
 
-  > ${NavLink} {
+  > a {
     font-size: 1.5rem;
     font-variant: all-small-caps;
     margin: 0 1.5rem 1.5rem;

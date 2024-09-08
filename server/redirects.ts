@@ -1,9 +1,7 @@
 import { type RequestHandler } from "express"
-import {
-  compile as compileRedirectPath,
-  pathToRegexp,
-  type Key,
-} from "path-to-regexp"
+import * as pathToRegExpImport from "path-to-regexp"
+
+const { compile, match, parse } = pathToRegExpImport
 
 function typedBoolean<T>(
   value: T,
@@ -44,7 +42,7 @@ function getRedirectsMiddleware({
         console.error(`Invalid redirect on line ${lineNumber + 1}: "${line}"`)
         return null
       }
-      const keys: Array<Key> = []
+      const keys: Array<pathToRegExpImport.Key> = []
 
       const toUrl = to.includes("//")
         ? new URL(to)
@@ -52,11 +50,8 @@ function getRedirectsMiddleware({
       try {
         return {
           methods,
-          from: pathToRegexp(from, keys),
+          from: match(from),
           keys,
-          toPathname: compileRedirectPath(toUrl.pathname, {
-            encode: encodeURIComponent,
-          }),
           toUrl,
         }
       } catch (error: unknown) {
@@ -64,6 +59,7 @@ function getRedirectsMiddleware({
         console.error(
           `Failed to parse redirect on line ${lineNumber}: "${line}"`,
         )
+        console.error(error)
         return null
       }
     })
@@ -88,11 +84,11 @@ function getRedirectsMiddleware({
         ) {
           continue
         }
-        const match = req.path.match(redirect.from)
-        if (!match) continue
+        const matched = redirect.from(req.url)
+        if (!matched) continue
 
         const params: Record<string, string> = {}
-        const paramValues = match.slice(1)
+        const paramValues = matched.params
         for (
           let paramIndex = 0;
           paramIndex < paramValues.length;
@@ -112,7 +108,6 @@ function getRedirectsMiddleware({
         for (const [key, value] of reqUrl.searchParams.entries()) {
           toUrl.searchParams.append(key, value)
         }
-        toUrl.pathname = redirect.toPathname(params)
         res.redirect(307, toUrl.toString())
         return
       } catch (error: unknown) {

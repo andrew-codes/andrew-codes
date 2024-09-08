@@ -1,4 +1,4 @@
-import type { MdxPage } from "~/types"
+import type { MdxPage } from "../../types"
 
 type PostSort = (a: MdxPage, b: MdxPage) => 0 | 1 | -1
 

@@ -1,0 +1,16 @@
+{
+  "ext": "ts tsx js jsx json env",
+  "execMap": {
+    "js": "yarn node --import=@nitrogql/esbuild-register",
+    "ts": "yarn node --import=@nitrogql/esbuild-register"
+  },
+  "watch": [
+    "./server/*.*",
+    "./app/**/*.server.ts",
+    "./app/**/server/*.ts",
+    "./*.ts"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

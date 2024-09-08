@@ -20,7 +20,7 @@ const createEnvConfigResolver = <T extends Record<string, string>>(
   configDefinition: T,
 ): ConfigurationResolver<T> =>
   ({
-    getValue: async (
+    getValue: (
       key: string,
       options: ResolverOptions = {
         parser: defaultParsers.returnTypeString,
@@ -36,7 +36,7 @@ const createEnvConfigResolver = <T extends Record<string, string>>(
         originalValue: originalValue,
       }
     },
-  } as ConfigurationResolver<T>)
+  }) as ConfigurationResolver<T>
 
 const envConfigurationDefintion = {
   internalPort: "INTERNAL_PORT",

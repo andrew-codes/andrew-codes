@@ -1,5 +1,5 @@
+import styled from "@emotion/styled"
 import type { FC } from "react"
-import styled from "styled-components"
 
 const SmallContentDividerRoot = styled.span`
   margin: 0 8px;
