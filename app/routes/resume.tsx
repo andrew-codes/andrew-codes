@@ -63,7 +63,7 @@ const loader = async (args: LoaderFunctionArgs) => {
 const headers: HeadersFunction = useLoaderHeaders()
 
 const Main = styled.main`
-  background-color: rgb(249, 251, 253) !important;
+  background-color: rgb(249, 251, 253);
   border-radius: 1rem;
   margin: 0 2rem;
   padding-top: 1rem;
@@ -72,6 +72,12 @@ const Main = styled.main`
     border-radius: 1rem 1rem 0 0;
     margin: 0;
     padding-top: 0.25rem;
+  }
+
+  @media print {
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
   }
 
   > * {
@@ -100,7 +106,7 @@ const Note = styled.div`
   display: block;
   font-size: 1.25rem;
   margin: 0 auto;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
   padding: 1rem;
   box-sizing: border-box;
   width: 8.5in;
@@ -125,7 +131,7 @@ const ResumeRoute: FC<{}> = () => {
   return (
     <>
       <Helmet>
-        <title>Resume | Andrew Smiith</title>
+        <title>Resume | Andrew Smith</title>
       </Helmet>
       <Global styles={globalStyles} />
       <Main>
@@ -164,12 +170,9 @@ const ResumeRoute: FC<{}> = () => {
             </ContactInformation>
             <Notes as={ResumeNotes}>
               <Paragraph>
-                Senior Software engineer with {yearsOfExperience} years of
-                experience in full-stack development, technical leadership, and
-                unique insights into delivering and scaling software. Proven
-                experience with React/TypeScript, system languages, and
-                associated principles. Direct impact and technical influence on
-                organizations ranging from 3 to 50+ engineers.
+                Senior engineer with {yearsOfExperience} years of experience
+                scaling and delivering software, providing direct impact and
+                influence to organizations ranging from 3 to 100+ engineers.
               </Paragraph>
               <Section title="Highlights">
                 <List>
@@ -189,10 +192,9 @@ const ResumeRoute: FC<{}> = () => {
                     and bash
                   </li>
                   <li>
-                    Active community member through speaking and OSS
-                    contributions; including Gatsby, Cypress, Glamorous, VS Code
-                    Grammarly, VersionOne SDKs and component library, Coder Dojo
-                    lessons, Hacktoberfest
+                    Speaker and OSS contributions; including Gatsby, Cypress,
+                    Glamorous, VS Code Grammarly, VersionOne SDKs and component
+                    library, Coder Dojo lessons, Hacktoberfest
                   </li>
                   <li>
                     Experience with Kanban, Scrum,{" "}
@@ -207,7 +209,7 @@ const ResumeRoute: FC<{}> = () => {
               </Section>
             </Notes>
           </ContactCard>
-          <Section title="Work Experience">
+          <Section title="Recent Professional Experience">
             <WorkExperience
               role="Senior Software Engineer (64)"
               orgName="Microsoft"
@@ -377,7 +379,10 @@ const ResumeRoute: FC<{}> = () => {
                 </li>
               </List>
             </WorkExperience>
+          </Section>
+          <Section title="Professional Experience (continued)">
             <WorkExperience
+              summarized
               role="Senior Software Engineer"
               orgName="MATRIX Professional Services"
               location="Atlanta, GA (Hybrid)"
@@ -424,6 +429,7 @@ const ResumeRoute: FC<{}> = () => {
               </List>
             </WorkExperience>
             <WorkExperience
+              summarized
               role="Software Engineer"
               orgName="MModal"
               location="Atlanta, GA"
@@ -437,6 +443,7 @@ const ResumeRoute: FC<{}> = () => {
               }
             ></WorkExperience>
             <WorkExperience
+              summarized
               role="Web Application Developer"
               orgName="Response Mine Interactive"
               location="Atlanta, GA"
@@ -450,6 +457,7 @@ const ResumeRoute: FC<{}> = () => {
               }
             ></WorkExperience>
             <WorkExperience
+              summarized
               role="Senior Software Engineer"
               orgName="DAXKO"
               location="Birmingham, AL"
@@ -463,6 +471,7 @@ const ResumeRoute: FC<{}> = () => {
               }
             ></WorkExperience>
             <WorkExperience
+              summarized
               role="Software Engineer 3"
               orgName="MedSEEK"
               location="Birmingham, AL"
@@ -476,6 +485,7 @@ const ResumeRoute: FC<{}> = () => {
               }
             ></WorkExperience>
             <WorkExperience
+              summarized
               role="Software Engineer 3"
               orgName="Intermark Interactive"
               location="Birmingham, AL"
@@ -489,6 +499,7 @@ const ResumeRoute: FC<{}> = () => {
               }
             ></WorkExperience>
             <WorkExperience
+              summarized
               role="Adjunct Faculty"
               orgName="Columbus Technical College"
               location="Columbus, GA"
@@ -510,7 +521,7 @@ const ResumeRoute: FC<{}> = () => {
                 on={
                   <>
                     <time dateTime="2012">2012</time> -{" "}
-                    <time dateTime="2021">2021</time>
+                    <time dateTime="2021">2024</time>
                   </>
                 }
               />
@@ -526,17 +537,17 @@ const ResumeRoute: FC<{}> = () => {
               />
               <SummarizedItem
                 role="Workshop Host"
-                name="Learn Redux by Building It"
+                name="Learn Redux by Building Redux"
                 on={<time dateTime="2017">2017</time>}
               />
               <SummarizedItem
                 role="Workshop Host"
-                name="Connect.Tech Conference - React"
+                name="Intro to React"
                 on={<time dateTime="2016">2016</time>}
               />
               <SummarizedItem
                 role="Speaker"
-                name="Connect.Tech Conference - Intro to React"
+                name="Intro to React"
                 on={<time dateTime="2016">2016</time>}
               />
               <SummarizedItem
@@ -546,12 +557,12 @@ const ResumeRoute: FC<{}> = () => {
               />
               <SummarizedItem
                 role="Speaker"
-                name="Connect.Tech Conference - Let's Talk about Flux"
+                name="Let's Talk about Flux"
                 on={<time dateTime="2015">2015</time>}
               />
               <SummarizedItem
                 role="Speaker"
-                name="Meetup - Let's Talk about Flux"
+                name="Let's Talk about Flux"
                 on={<time dateTime="2015">2015</time>}
               />
             </SummarizedItems>

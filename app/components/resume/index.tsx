@@ -63,8 +63,8 @@ const SectionTitle = styled.h2`
   font-size: 14pt;
   font-variant: all-small-caps;
   margin: 0;
-  margin-bottom: 8pt;
-  padding-bottom: 8pt;
+  margin-bottom: 4pt;
+  padding-bottom: 4pt;
 `
 const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   children,
@@ -124,6 +124,13 @@ const KeyResults = styled.div`
   margin-top: 8pt;
   width: 100%;
 `
+const WorkExperienceSummaryRoot = styled(WorkExperienceRoot)`
+  margin: 0 !important;
+
+  h3 {
+    font-size: 12pt;
+  }
+`
 const WorkExperience: FC<{
   children?: ReactNode | ReactNode[]
   description: string | ReactNode
@@ -133,19 +140,21 @@ const WorkExperience: FC<{
   location: string | ReactNode
   note?: string | ReactNode
   orgName: string
+  summarized?: boolean | undefined
   to: string | ReactNode
 }> = ({
   children,
-  role,
+  description,
+  from,
+  keyTechnologies,
   location,
   note,
   orgName,
-  from,
+  role,
+  summarized,
   to,
-  description,
-  keyTechnologies,
 }) => {
-  return (
+  return !summarized ? (
     <WorkExperienceRoot>
       <WorkExperienceOverview>
         <JobTitle>{role}</JobTitle>
@@ -161,6 +170,15 @@ const WorkExperience: FC<{
       </WorkExperienceOverview>
       {!!children && <KeyResults>{children}</KeyResults>}
     </WorkExperienceRoot>
+  ) : (
+    <WorkExperienceSummaryRoot>
+      <WorkExperienceOverview>
+        <JobTitle>{role}</JobTitle>
+        <TimeFrame>
+          {!!note && <Note>({note})</Note>} {from} - {to}
+        </TimeFrame>
+      </WorkExperienceOverview>
+    </WorkExperienceSummaryRoot>
   )
 }
 
@@ -283,7 +301,8 @@ const Page = styled(Paper)`
     margin-top: 0;
   }
 
-  @media (print) or (max-width: 640px) {
+  @media print {
+    background-color: transparent !important;
     border: none;
     height: unset;
     padding: 0;
@@ -291,7 +310,10 @@ const Page = styled(Paper)`
   }
 
   @media (max-width: 640px) {
-    padding: 1rem;
+    border: none;
+    height: unset;
+    padding: 0;
+    width: unset;
   }
 `
 
