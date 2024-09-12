@@ -32,8 +32,6 @@ import {
   ResumeLink,
   ResumeNotes,
   Section,
-  SummarizedItem,
-  SummarizedItems,
   WorkExperience,
 } from "../components/resume"
 import { getFilePartsToHash, getHash } from "../libs/hash.server"
@@ -158,8 +156,8 @@ const ResumeRoute: FC<{}> = () => {
               >
                 +1.470.535.9093
               </Telephone>
-              <Email as={ResumeLink} href="mailto:andrew@andrew.codes">
-                andrew@andrew.codes
+              <Email as={ResumeLink} href="mailto:jas@andrew.codes">
+                jas@andrew.codes
               </Email>
               <Url
                 as={ResumeLink}
@@ -170,15 +168,24 @@ const ResumeRoute: FC<{}> = () => {
             </ContactInformation>
             <Notes as={ResumeNotes}>
               <Paragraph>
-                Senior engineer with {yearsOfExperience} years of experience
-                scaling and delivering software, providing direct impact and
-                influence to organizations ranging from 3 to 100+ engineers.
+                Empathetic software craftsmen engineering scalable software
+                solutions for {yearsOfExperience}, delivering impactful customer
+                experiences and mentoring teams of 3 to 50+ engineers.
               </Paragraph>
               <Section title="Highlights">
                 <List>
                   <li>
-                    Focusing on front-end, but with equally vast depth of
-                    knowledge in back-end, infrastructure, and cloud providers;
+                    Deep knowledge on the React ecosystem and delivering
+                    high-quality experiences that delight customers; with a
+                    focus on performance, accessibility and usability
+                  </li>
+                  <li>
+                    Crafts comprehensive reports and visual presentations for
+                    leadership translating technical terms, enabling informed
+                    decision-making and strategic planning
+                  </li>
+                  <li>
+                    Proficient with system languages and infrastructure;
                     including{" "}
                     <ResumeAbbr title="C sharp programming language">
                       C#
@@ -187,23 +194,14 @@ const ResumeRoute: FC<{}> = () => {
                     <ResumeAbbr title="Structured Query Language">
                       SQL
                     </ResumeAbbr>
-                    , Kubernetes, Docker/
-                    <ResumeAbbr title="Linux containers">LXC</ResumeAbbr>, git,
-                    and bash
+                    , Kubernetes, containerization, git, Azure, bash and
+                    PowerShell
                   </li>
                   <li>
-                    Speaker and OSS contributions; including Gatsby, Cypress,
-                    Glamorous, VS Code Grammarly, VersionOne SDKs and component
-                    library, Coder Dojo lessons, Hacktoberfest
-                  </li>
-                  <li>
-                    Experience with Kanban, Scrum,{" "}
-                    <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>, and
-                    other techniques enabling agility
-                  </li>
-                  <li>
-                    Polyglot programmer with interest in Python, Elixir, and
-                    Rust
+                    Empower others by speaking, organizing, mentoring, and
+                    contributing to OSS; including Gatsby, Cypress, Glamorous,
+                    VS Code Grammarly, VersionOne SDKs, ReactATL and
+                    Hacktoberfest events
                   </li>
                 </List>
               </Section>
@@ -224,64 +222,51 @@ const ResumeRoute: FC<{}> = () => {
               }
               description={
                 <>
-                  Influential technical leader, mentor, overseeing delivery of
-                  high profile projects coordinated across 4 teams, with a focus
-                  on React,{" "}
-                  <ResumeAbbr title="C sharp programming language">
-                    C#
-                  </ResumeAbbr>
-                  ,{" "}
-                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
-                  and microservices operating CMS driving all content for
+                  Develop authoring tooling and content delivery for
                   support.microsoft.com, Office applications, and Windows.
+                  Influential technical leadership and mentorship across 5
+                  teams.
                 </>
               }
               keyTechnologies={
-                "C#, TypeScript, Node.js, React, Redux, GraphQL, Azure, TDD, XP, microservices, distributed systems design"
+                "TypeScript, React, Node.js, Next.js, Redux, GraphQL, Nx, C#, Azure, TDD, XP, git, Kanban"
               }
             >
               <List>
                 <li>
-                  Achieved 90% reduction in key user-facing performance metrics
-                  through design and execution of{" "}
-                  <ResumeAbbr title="Command Query Responsibility Segregation">
-                    CQRS
-                  </ResumeAbbr>{" "}
-                  and federated{" "}
-                  <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>{" "}
-                  in a distributed application architecture; leadership to plan
-                  and deliver across 3 teams
+                  Revamped the front-end architecture using React best
+                  practices, leading to improved maintainability and scalability
+                  for the application, supporting 2 billion users without
+                  performance degradation
                 </li>
                 <li>
-                  Expand technical leadership to 3 teams and mentor 5 engineers;
-                  including concrete applications of SOLID, React ecosystem,{" "}
-                  <ResumeAbbr title="C sharp programming language">
-                    C#
-                  </ResumeAbbr>
-                  , federated{" "}
+                  Championed the optimization of existing React components and
+                  federated{" "}
                   <ResumeAbbr title="Graph Query Language">GraphQL</ResumeAbbr>,
-                  and microservice architecture
+                  resulting in a 90% reduction in key user-facing performance
+                  metrics, facilitating smoother navigation for users improving
+                  user satisfaction scores by 25%
                 </li>
                 <li>
-                  Increase test coverage from 0% to 52% through institution of
-                  unit and component testing via Jest and Cypress; advocate
-                  practitioner for pragmatic{" "}
-                  <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
+                  Initiated a quality culture shift within the organization by
+                  introducing TDD and XP principles with Jest and Cypress
+                  testing; this foundational change reduced support costs by 30%
                 </li>
                 <li>
-                  Reduce time creating and communicating project timelines to
-                  leadership by ~80% by engineering forecasting tool, leveraging
-                  AI and historical data without requiring estimates
+                  Reduce cost of creating and communicating project timelines to
+                  leadership by ~95% by engineering an open source forecasting
+                  tool, leveraging{" "}
+                  <ResumeAbbr title="Artificial Intelligence">AI</ResumeAbbr>{" "}
+                  and historical data without requiring estimates
                 </li>
                 <li>
                   Reduce{" "}
                   <ResumeAbbr title="Continuous integration automation">
                     CI
                   </ResumeAbbr>{" "}
-                  times by 83% via improving reliability with Yarn{" "}
+                  times by 80% by improving reliability with Yarn{" "}
                   <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>, reducing
-                  complexity with Nx, and breaking monolithic apps into small
-                  packages
+                  complexity via Nx, and consolidating into a mono-repository
                 </li>
               </List>
             </WorkExperience>
@@ -293,25 +278,26 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2020-12">Dec 2020</time>}
               description={
                 <>
-                  Guided all aspects of front-end development for 2 teams,
+                  Guided all aspects of front-end development for 3 teams,
                   communicated with stakeholders and executive leadership,
                   ensured experiences that delight customers.
                 </>
               }
               keyTechnologies={
-                "Java, Groovy, Grails, TypeScript, Node.js, React, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, SCRUM, git"
+                "TypeScript, React, Node.js, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, git, Scrum"
               }
             >
               <List>
                 <li>
-                  Leveraged data science and customer feedback to accelerate
-                  delivery of consistent user experiences with introduced design
-                  language and React component library
+                  Innovated a comprehensive design language for UI components in
+                  the React ecosystem, ensuring consistent design across the
+                  application and accelerate delivery of new features
                 </li>
                 <li>
-                  Established "Three Amigos" process drove improved alignment of
-                  delivered value with 75% reduction of engineering time
-                  investment, increasing the team velocity by 20%
+                  Established "Three Amigos" process driving improved alignment
+                  and visibility with product/leadership of delivered value;
+                  with 75% reduction of engineering time investment, increased
+                  team velocity by 20%
                 </li>
                 <li>
                   Guided 3 teams of engineers; React, Redux, TypeScript,
@@ -343,27 +329,24 @@ const ResumeRoute: FC<{}> = () => {
                 </>
               }
               keyTechnologies={
-                "C#, MVC.NET, Node.js, JavaScript, React, Redux, jQuery, AngularJS, Backbone.JS, TDD, XP, Kanban, gulp, git"
+                "JavaScript, React, Redux, AngularJs, Backbone.JS, jQuery, C#, MVC.NET, Node.js, TDD, XP, gulp, git, Kanban"
               }
             >
               <List>
                 <li>
-                  Modernized front-end by owning adoption of React, Redux stack
-                  across 4 teams; comprehensive refactor of custom{" "}
-                  <ResumeAbbr title="EcmaScript 5 (JavaScript version)">
-                    ES5
-                  </ResumeAbbr>{" "}
-                  modules to{" "}
+                  Led modernization effort of entire front-end codebase
+                  replacing proprietary JavaScript module format with{" "}
                   <ResumeAbbr title="EcmaScript 6 (JavaScript version)">
                     ES6
                   </ResumeAbbr>{" "}
-                  and reduction of technology stacks
+                  modules; enabled use of modern tooling and practices, adoption
+                  of React, significant reduction of technical debt and
+                  increased developer productivity
                 </li>
                 <li>
-                  Established adoption of React as primary front-end technology
-                  stack used by 5 teams across 2 products; systematically
-                  replacing fragmented framework usages of jQuery, AngularJS,
-                  and Backbone.JS
+                  Implemented a systematic migration to React, resulting in a
+                  streamlined development process adopted by 5 teams across 2
+                  key products, enhancing productivity and consistency
                 </li>
                 <li>
                   Streamlined processes between UX and Engineering through the
@@ -371,11 +354,16 @@ const ResumeRoute: FC<{}> = () => {
                   documentation; tested via Cypress and Storybook
                 </li>
                 <li>
-                  Owned{" "}
+                  Owned high-impact{" "}
                   <ResumeAbbr title="Open source software">OSS</ResumeAbbr>{" "}
-                  JavaScript SDK with high impact to third party integrations;
-                  driving many internal business processes of Fortune 500
-                  companies
+                  JavaScript SDK used by third party integrations; driving many
+                  internal business processes of Fortune 500 companies
+                </li>
+                <li>
+                  Led a series of workshops and presentations focused on the
+                  React ecosystem, delivered both internally and at major
+                  conferences, providing guidance and mentorship to engineers
+                  and leadership
                 </li>
               </List>
             </WorkExperience>
@@ -403,7 +391,7 @@ const ResumeRoute: FC<{}> = () => {
                 </>
               }
               keyTechnologies={
-                "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, SCRUM, grunt, git"
+                "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, Scrum, grunt, git"
               }
             >
               <List>
@@ -465,7 +453,7 @@ const ResumeRoute: FC<{}> = () => {
               to={<time dateTime="2012-03">Mar 2012</time>}
               description={
                 <>
-                  SCRUM team, produced operational and membership management
+                  Scrum team, produced operational and membership management
                   software for non-profits.
                 </>
               }
@@ -513,7 +501,7 @@ const ResumeRoute: FC<{}> = () => {
               }
             ></WorkExperience>
           </Section>
-          <Section title="Community">
+          {/* <Section title="Community">
             <SummarizedItems>
               <SummarizedItem
                 role="Mentor"
@@ -566,7 +554,7 @@ const ResumeRoute: FC<{}> = () => {
                 on={<time dateTime="2015">2015</time>}
               />
             </SummarizedItems>
-          </Section>
+          </Section> */}
           <Section title="Education">
             <Education
               degree="Bachelor of Science in Computer Science"
@@ -574,7 +562,7 @@ const ResumeRoute: FC<{}> = () => {
               locality="Columbus"
               obtainedOn={
                 <>
-                  <time dateTime="2008">2008</time>
+                  <time dateTime="2008-06">Jun 2008</time>
                 </>
               }
               region={<ResumeAbbr title="Georgia">GA</ResumeAbbr>}
@@ -587,4 +575,4 @@ const ResumeRoute: FC<{}> = () => {
 }
 
 export default ResumeRoute
-export { headers, loader, meta }
+export { headers, loader }

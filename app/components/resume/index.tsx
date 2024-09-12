@@ -78,12 +78,12 @@ const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   )
 }
 
-const WorkExperienceRoot = styled.div`
+const WorkExperienceRoot = styled(PrintTogether)`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 `
-const WorkExperienceOverview = styled(PrintTogether)`
+const WorkExperienceOverview = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -173,7 +173,9 @@ const WorkExperience: FC<{
   ) : (
     <WorkExperienceSummaryRoot>
       <WorkExperienceOverview>
-        <JobTitle>{role}</JobTitle>
+        <JobTitle>
+          {role} - {orgName}
+        </JobTitle>
         <TimeFrame>
           {!!note && <Note>({note})</Note>} {from} - {to}
         </TimeFrame>
@@ -290,7 +292,7 @@ const ToDo = styled.div`
 
 const Page = styled(Paper)`
   border-radius: 0;
-  padding: 0.5in;
+  padding: 0.38in;
   position: relative;
   width: 8.5in;
 
