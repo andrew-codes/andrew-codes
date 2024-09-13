@@ -2,9 +2,14 @@ import styled from "@emotion/styled"
 import { Links, Meta, MetaFunction, Outlet, Scripts } from "@remix-run/react"
 import { LinksFunction } from "@remix-run/server-runtime"
 import type { FC } from "react"
+import { Helmet } from "react-helmet"
 import { createHead } from "remix-island"
+import { Header } from "./components/Category"
 import GlobalStyles from "./components/GlobalStyles"
+import Link from "./components/Link"
 import GlobalNav from "./components/MainNav"
+import { Blockquote, Paragraph } from "./components/Post"
+import { Page } from "./components/resume"
 import { useNonce } from "./libs/NonceProvider"
 
 const meta: MetaFunction = () => {
@@ -119,6 +124,43 @@ const App: FC<{}> = () => {
       <GlobalNav />
       <Root>
         <Outlet />
+      </Root>
+      <Scripts nonce={nonce} />
+    </>
+  )
+}
+
+const ErrorBoundary: FC<{}> = () => {
+  const nonce = useNonce()
+
+  return (
+    <>
+      <Head />
+      <GlobalStyles />
+      <GlobalNav />
+      <Root>
+        <Helmet>
+          <title>Oops... | Andrew Smith</title>
+        </Helmet>
+        <Page>
+          <Header category={null}>
+            <h1>Oops...</h1>
+          </Header>
+          <section>
+            <Paragraph>
+              Well that's embarrassing! There's been an error, but don't worry,
+              you can use the main navigation to head back to the homepage.
+            </Paragraph>
+            <Blockquote>
+              If you feel you're seeing this message in error, please feel free
+              to contact me or open a{" "}
+              <Link to="https://github.com/andrew-codes/andrew-codes/issues/new">
+                GitHub issue
+              </Link>
+              . No pressure though!
+            </Blockquote>
+          </section>
+        </Page>
       </Root>
       <Scripts nonce={nonce} />
     </>

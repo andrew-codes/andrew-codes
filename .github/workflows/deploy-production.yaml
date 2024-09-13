@@ -11,8 +11,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/andrew-codes/gh-action-runner:latest
     steps:
       - name: ⬇️ Checkout source code
         uses: actions/checkout@v3

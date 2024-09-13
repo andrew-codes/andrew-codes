@@ -10,8 +10,6 @@ node_modules
 .DS_Store
 .env
 /.cache
-/public/build
-/build
 .eslintrc.js
 .prettierignore
 prettier.config.js

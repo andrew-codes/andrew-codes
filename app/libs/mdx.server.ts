@@ -157,8 +157,8 @@ const getMdxPage = async (
 
 const getMdxPages = async (
   options: CachifiedOptions,
-  fileDirPath: string = path.join(import.meta.dirname, "..", "posts"),
-  extraFilesPath: string = path.join(import.meta.dirname, "..", "components"),
+  fileDirPath: string = "app/posts",
+  extraFilesPath: string = "app/components",
 ): Promise<MdxPage[]> => {
   const mdxFiles = await getMdxFiles(options, fileDirPath)
 

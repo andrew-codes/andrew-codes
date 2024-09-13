@@ -1,7 +1,7 @@
 import { type RequestHandler } from "express"
 import * as pathToRegExpImport from "path-to-regexp"
 
-const { compile, match, parse } = pathToRegExpImport
+const { match } = pathToRegExpImport
 
 function typedBoolean<T>(
   value: T,
@@ -42,16 +42,14 @@ function getRedirectsMiddleware({
         console.error(`Invalid redirect on line ${lineNumber + 1}: "${line}"`)
         return null
       }
-      const keys: Array<pathToRegExpImport.Key> = []
-
       const toUrl = to.includes("//")
         ? new URL(to)
         : new URL(`https://same_host${to}`)
+
       try {
         return {
           methods,
           from: match(from),
-          keys,
           toUrl,
         }
       } catch (error: unknown) {
@@ -87,19 +85,6 @@ function getRedirectsMiddleware({
         const matched = redirect.from(req.url)
         if (!matched) continue
 
-        const params: Record<string, string> = {}
-        const paramValues = matched.params
-        for (
-          let paramIndex = 0;
-          paramIndex < paramValues.length;
-          paramIndex++
-        ) {
-          const paramValue = paramValues[paramIndex]
-          const key = redirect.keys[paramIndex]
-          if (key && paramValue) {
-            params[key.name] = paramValue
-          }
-        }
         const toUrl = new URL(redirect.toUrl)
 
         toUrl.protocol = protocol

@@ -274,9 +274,5 @@ const HomeRoute = () => {
   )
 }
 
-const ErrorBoundary = () => {
-  return <span>Yay!</span>
-}
-
 export default HomeRoute
-export { ErrorBoundary, headers, loader }
+export { headers, loader }

@@ -23,7 +23,7 @@ __metadata:
     "@emotion/babel-plugin": "npm:^11.12.0"
     "@emotion/cache": "npm:^11.12.0"
     "@emotion/react": "npm:^11.12.0"
-    "@emotion/styled": "npm:^11.12.0"
+    "@emotion/styled": "npm:11.13.0"
     "@epic-web/cachified": "npm:^5.2.0"
     "@metronome-sh/express": "npm:^8.1.0"
     "@nitrogql/esbuild-register": "npm:^1.7.0"
@@ -50,7 +50,7 @@ __metadata:
     "@types/sha1": "npm:^1.1.5"
     "@vitejs/plugin-react": "npm:^4.3.1"
     bcrypt: "npm:^5.1.1"
-    better-sqlite3: "npm:^11.2.1"
+    better-sqlite3: "npm:11.2.1"
     compression: "npm:^1.7.4"
     concurrently: "npm:^9.0.0"
     cross-env: "npm:^7.0.3"
@@ -1127,7 +1127,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.12.0":
+"@emotion/styled@npm:11.13.0":
   version: 11.13.0
   resolution: "@emotion/styled@npm:11.13.0"
   dependencies:
@@ -4515,7 +4515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:^11.2.1":
+"better-sqlite3@npm:11.2.1":
   version: 11.2.1
   resolution: "better-sqlite3@npm:11.2.1"
   dependencies:

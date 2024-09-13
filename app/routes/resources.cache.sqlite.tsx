@@ -1,5 +1,5 @@
 import { json, redirect, type DataFunctionArgs } from "@remix-run/node"
-import { getInstanceInfo, getInternalInstanceDomain } from "litefs-js"
+import { getInstanceInfo } from "litefs-js"
 import { getCache } from "../libs/cache.server"
 import configuration from "../libs/configuration.server"
 
@@ -32,29 +32,4 @@ const action = async ({ request }: DataFunctionArgs) => {
   return json({ success: true })
 }
 
-const updatePrimaryCacheValue = async ({
-  key,
-  cacheValue,
-}: {
-  key: string
-  cacheValue: any
-}) => {
-  const { currentIsPrimary, primaryInstance } = await getInstanceInfo()
-  if (currentIsPrimary) {
-    throw new Error(
-      `updatePrimaryCacheValue should not be called on the primary instance (${primaryInstance})}`,
-    )
-  }
-  const domain = getInternalInstanceDomain(primaryInstance)
-  const token = (await configuration.getValue("internalCommandToken")).value
-  return fetch(`${domain}/resources/cache/sqlite`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ key, cacheValue }),
-  })
-}
-
-export { action, updatePrimaryCacheValue }
+export { action }

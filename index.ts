@@ -1,24 +1,19 @@
 import { createRequestHandler } from "@remix-run/express"
 import { installGlobals } from "@remix-run/node"
 import compression from "compression"
-import crypto from "crypto"
 import "dotenv/config"
 import express from "express"
 import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
 import morgan from "morgan"
-import path from "path"
 import serverTiming from "server-timing"
-import configuration from "../app/libs/configuration.server"
-import { getMdxPages } from "../app/libs/mdx.server"
-import { getRedirectsMiddleware } from "./redirects"
-
-const __dirname = import.meta.dirname
+import configuration from "./app/libs/configuration.server.js"
+import { getMdxPages } from "./app/libs/mdx.server.js"
+import { getRedirectsMiddleware } from "./server/redirects.js"
 
 installGlobals()
 
-const here = (...d: Array<string>) => path.join(__dirname, ...d)
 const primaryHost = "andrew.codes"
 const getHost = (req: { get: (key: string) => string | undefined }) =>
   req.get("X-Forwarded-Host") ?? req.get("host") ?? ""
@@ -74,7 +69,7 @@ app.use((req, res, next) => {
 app.all(
   "*",
   getRedirectsMiddleware({
-    redirectsString: fs.readFileSync(here("./_redirects.txt"), "utf8"),
+    redirectsString: fs.readFileSync("server/_redirects.txt", "utf8"),
   }),
 )
 
@@ -103,7 +98,8 @@ app.use(
   }),
 )
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  const crypto = await import("crypto")
   res.locals.cspNonce = crypto.randomBytes(16).toString("hex")
   next()
 })
@@ -134,23 +130,28 @@ app.use(
 
 app.use(compression())
 
-const viteDevServer =
-  MODE === "production"
-    ? null
-    : await import("vite").then((vite) =>
-        vite.createServer({
-          server: { middlewareMode: true },
-        }),
-      )
+let viteDevServer: any = null
+if (process.env.NODE_ENV != "production") {
+  viteDevServer = await import("vite").then((vite) =>
+    vite.createServer({
+      server: { middlewareMode: true },
+    }),
+  )
+}
 app.use(
   viteDevServer ? viteDevServer.middlewares : express.static("build/client"),
 )
 
-app.use(express.static("./app/public", { maxAge: "1y" }))
+app.use(express.static("app/public", { maxAge: "1y" }))
 
-const build = viteDevServer
-  ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
-  : await import("./build/server/index.js")
+let build: any
+
+if (process.env.NODE_ENV === "production") {
+  build = await import("./build/server/index.js")
+}
+if (process.env.NODE_ENV !== "production") {
+  build = () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
+}
 
 app.all("*", createRequestHandler(getRequestHandlerOptions()))
 
@@ -162,8 +163,8 @@ app.use((err: any, req: any, res: any, next: any) => {
 const port = process.env.PORT ?? 3000
 getMdxPages(
   { forceFresh: true, timings: {} },
-  path.join(__dirname, "..", "app", "posts"),
-  path.join(__dirname, "..", "app", "components"),
+  "app/posts",
+  "app/components",
 ).then(() => {
   app.listen(port, () => {
     console.log(`Production express server listening on port ${port}`)
