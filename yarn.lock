@@ -88,7 +88,7 @@ __metadata:
     remark-mdx-images: "npm:^3.0.0"
     remark-parse: "npm:^11.0.0"
     remark-rehype: "npm:^11.1.0"
-    remix: "npm:2.11.2"
+    remix: "npm:2.12.0"
     remix-island: "npm:^0.2.0"
     remix-mount-routes: "npm:^0.1.3"
     rimraf: "npm:^6.0.1"
@@ -12700,10 +12700,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remix@npm:2.11.2":
-  version: 2.11.2
-  resolution: "remix@npm:2.11.2"
-  checksum: 10/ee59fc64787e494f6e3bb7206d9c97426b3b2a07522b3cf333b124fcac016c5edb798e62df039c8f0af79353430744b90c41b879c27b2600e2123e47d6fd3977
+"remix@npm:2.12.0":
+  version: 2.12.0
+  resolution: "remix@npm:2.12.0"
+  checksum: 10/62a40aab844e370581e56dbd56cc18848b85cc207736794696024525a60d7bd48d7e5edef2d5cb4eb9af3ac78da085220b367bf8f90dbbfb7944de5b1a45c61d
   languageName: node
   linkType: hard
 

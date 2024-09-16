@@ -96,7 +96,7 @@ const RAW_RUNTIME_STATE =
           ["remark-mdx-images", "npm:3.0.0"],\
           ["remark-parse", "npm:11.0.0"],\
           ["remark-rehype", "npm:11.1.0"],\
-          ["remix", "npm:2.11.2"],\
+          ["remix", "npm:2.12.0"],\
           ["remix-island", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:0.2.0"],\
           ["remix-mount-routes", "npm:0.1.3"],\
           ["rimraf", "npm:6.0.1"],\
@@ -196,7 +196,7 @@ const RAW_RUNTIME_STATE =
           ["remark-mdx-images", "npm:3.0.0"],\
           ["remark-parse", "npm:11.0.0"],\
           ["remark-rehype", "npm:11.1.0"],\
-          ["remix", "npm:2.11.2"],\
+          ["remix", "npm:2.12.0"],\
           ["remix-island", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:0.2.0"],\
           ["remix-mount-routes", "npm:0.1.3"],\
           ["rimraf", "npm:6.0.1"],\
@@ -14758,10 +14758,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["remix", [\
-      ["npm:2.11.2", {\
-        "packageLocation": "./.yarn/cache/remix-npm-2.11.2-749cfda080-ee59fc6478.zip/node_modules/remix/",\
+      ["npm:2.12.0", {\
+        "packageLocation": "./.yarn/cache/remix-npm-2.12.0-2612b4bd1f-62a40aab84.zip/node_modules/remix/",\
         "packageDependencies": [\
-          ["remix", "npm:2.11.2"]\
+          ["remix", "npm:2.12.0"]\
         ],\
         "linkType": "HARD"\
       }]\
