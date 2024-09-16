@@ -84,7 +84,7 @@ const RAW_RUNTIME_STATE =
           ["nodemon", "npm:3.1.4"],\
           ["octokit", "npm:4.0.2"],\
           ["on-finished", "npm:2.4.1"],\
-          ["path-to-regexp", "npm:8.0.0"],\
+          ["path-to-regexp", "npm:8.1.0"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:18.3.1"],\
@@ -184,7 +184,7 @@ const RAW_RUNTIME_STATE =
           ["nodemon", "npm:3.1.4"],\
           ["octokit", "npm:4.0.2"],\
           ["on-finished", "npm:2.4.1"],\
-          ["path-to-regexp", "npm:8.0.0"],\
+          ["path-to-regexp", "npm:8.1.0"],\
           ["prettier", "npm:3.3.3"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:18.3.1"],\
@@ -13615,10 +13615,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:8.0.0", {\
-        "packageLocation": "./.yarn/cache/path-to-regexp-npm-8.0.0-02cc6e0268-64a5f94604.zip/node_modules/path-to-regexp/",\
+      ["npm:8.1.0", {\
+        "packageLocation": "./.yarn/cache/path-to-regexp-npm-8.1.0-a82a7a7724-5016a27153.zip/node_modules/path-to-regexp/",\
         "packageDependencies": [\
-          ["path-to-regexp", "npm:8.0.0"]\
+          ["path-to-regexp", "npm:8.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
