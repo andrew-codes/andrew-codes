@@ -1,5 +1,5 @@
+import styled from "@emotion/styled"
 import type { FC, ReactNode } from "react"
-import styled from "styled-components"
 import Paper from "../Paper"
 import { PrintTogether } from "../print"
 
@@ -63,8 +63,8 @@ const SectionTitle = styled.h2`
   font-size: 14pt;
   font-variant: all-small-caps;
   margin: 0;
-  margin-bottom: 8pt;
-  padding-bottom: 8pt;
+  margin-bottom: 4pt;
+  padding-bottom: 4pt;
 `
 const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   children,
@@ -78,12 +78,12 @@ const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   )
 }
 
-const WorkExperienceRoot = styled.div`
+const WorkExperienceRoot = styled(PrintTogether)`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 `
-const WorkExperienceOverview = styled(PrintTogether)`
+const WorkExperienceOverview = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -124,6 +124,13 @@ const KeyResults = styled.div`
   margin-top: 8pt;
   width: 100%;
 `
+const WorkExperienceSummaryRoot = styled(WorkExperienceRoot)`
+  margin: 0 !important;
+
+  h3 {
+    font-size: 12pt;
+  }
+`
 const WorkExperience: FC<{
   children?: ReactNode | ReactNode[]
   description: string | ReactNode
@@ -133,19 +140,21 @@ const WorkExperience: FC<{
   location: string | ReactNode
   note?: string | ReactNode
   orgName: string
+  summarized?: boolean | undefined
   to: string | ReactNode
 }> = ({
   children,
-  role,
+  description,
+  from,
+  keyTechnologies,
   location,
   note,
   orgName,
-  from,
+  role,
+  summarized,
   to,
-  description,
-  keyTechnologies,
 }) => {
-  return (
+  return !summarized ? (
     <WorkExperienceRoot>
       <WorkExperienceOverview>
         <JobTitle>{role}</JobTitle>
@@ -161,6 +170,17 @@ const WorkExperience: FC<{
       </WorkExperienceOverview>
       {!!children && <KeyResults>{children}</KeyResults>}
     </WorkExperienceRoot>
+  ) : (
+    <WorkExperienceSummaryRoot>
+      <WorkExperienceOverview>
+        <JobTitle>
+          {role} - {orgName}
+        </JobTitle>
+        <TimeFrame>
+          {!!note && <Note>({note})</Note>} {from} - {to}
+        </TimeFrame>
+      </WorkExperienceOverview>
+    </WorkExperienceSummaryRoot>
   )
 }
 
@@ -272,7 +292,7 @@ const ToDo = styled.div`
 
 const Page = styled(Paper)`
   border-radius: 0;
-  padding: 0.5in;
+  padding: 0.38in;
   position: relative;
   width: 8.5in;
 
@@ -283,7 +303,8 @@ const Page = styled(Paper)`
     margin-top: 0;
   }
 
-  @media (print) or (max-width: 640px) {
+  @media print {
+    background-color: transparent !important;
     border: none;
     height: unset;
     padding: 0;
@@ -291,14 +312,15 @@ const Page = styled(Paper)`
   }
 
   @media (max-width: 640px) {
-    padding: 1rem;
+    border: none;
+    height: unset;
+    padding: 0;
+    width: unset;
   }
 `
 
 export * from "./ContactInformation"
 export {
-  SummarizedItem,
-  SummarizedItems,
   Education,
   List,
   Page,
@@ -306,6 +328,8 @@ export {
   Resume,
   Section,
   Strong,
+  SummarizedItem,
+  SummarizedItems,
   ToDo,
   WorkExperience,
 }

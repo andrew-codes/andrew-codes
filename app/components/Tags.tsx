@@ -1,6 +1,6 @@
+import styled from "@emotion/styled"
 import type { FC } from "react"
 import { Fragment } from "react"
-import styled from "styled-components"
 import Link from "./Link"
 import SmallContentDivider from "./SmallContentDivider"
 

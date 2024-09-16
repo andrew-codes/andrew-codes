@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import { getBackgroundGradient } from "~/libs/categories"
-import type { Category } from "~/types"
+import styled from "@emotion/styled"
+import { getBackgroundGradient } from "../libs/categories"
+import type { Category } from "../types"
 
 const Header = styled.header<{ category: Category | undefined | null }>`
   background: ${({ category }) => getBackgroundGradient(category)};

@@ -1,48 +1,33 @@
-import type {
-  HeadersFunction,
-  LoaderArgs,
-  V2_MetaFunction,
-} from "@remix-run/node"
+import styled from "@emotion/styled"
+import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
-import { startCase, uniq } from "lodash"
-import styled from "styled-components"
-import { Header } from "~/components/Category"
-import Link from "~/components/Link"
-import PageWithHeader from "~/components/PageWithHeader"
-import { Posts } from "~/components/Post"
-import Tags from "~/components/Tags"
-import { getHash } from "~/libs/hash.server"
-import { getMdxPages } from "~/libs/mdx.server"
-import { alphabetically, newestFirst, sortByMany } from "~/libs/posts/sortPosts"
-import { getServerTimeHeader } from "~/libs/timing.server"
-import { tryFormatDate, useLoaderHeaders } from "~/libs/utils"
-import type { Handle, MdxPage } from "~/types"
-
-const handle: Handle = {
-  getSitemapEntries: async (request) => {
-    const timings = {}
-    const posts = await getMdxPages({ request, timings })
-
-    const tags = uniq(posts.flatMap((post) => post.frontmatter.tags ?? []))
-
-    return tags.map((tag) => {
-      return { route: `/tags/${tag}`, priority: 0.4 }
-    })
-  },
-}
-
-const meta: V2_MetaFunction<typeof loader> = ({ params }) => {
-  return [{ title: `${startCase(params.id)} tagged Articles | Andrew Smith` }]
-}
+import { startCase } from "lodash-es"
+import { Helmet } from "react-helmet"
+import { Header } from "../components/Category"
+import Link from "../components/Link"
+import PageWithHeader from "../components/PageWithHeader"
+import { Posts } from "../components/Post"
+import Tags from "../components/Tags"
+import { getHash } from "../libs/hash.server"
+import { getMdxPages } from "../libs/mdx.server"
+import {
+  alphabetically,
+  newestFirst,
+  sortByMany,
+} from "../libs/posts/sortPosts"
+import { getServerTimeHeader } from "../libs/timing.server"
+import { tryFormatDate, useLoaderHeaders } from "../libs/utils"
+import type { MdxPage } from "../types"
 
 const onlyForTag = (tag: string) => (posts: MdxPage[]) =>
   posts.filter((post) => post.frontmatter.tags?.includes(tag))
 
-const loader = async ({ request, params }: LoaderArgs) => {
+const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const timings = {}
   const posts = await getMdxPages({ request, timings })
   const postsForTag = onlyForTag(params.id ?? "")(posts)
+
   return json(
     {
       posts: postsForTag,
@@ -70,7 +55,7 @@ const headers: HeadersFunction = useLoaderHeaders()
 const Page = styled(PageWithHeader)`
   padding-bottom: 2rem;
 
-  ${Header} {
+  header {
     color: rgb(0, 0, 0);
     margin-bottom: 2rem;
   }
@@ -78,7 +63,7 @@ const Page = styled(PageWithHeader)`
     margin: 0 1rem;
   }
 
-  ${Posts} > li {
+  ol > li {
     margin-top: 1.5rem;
     position: relative;
 
@@ -96,7 +81,7 @@ const Page = styled(PageWithHeader)`
     margin: 0;
   }
 
-  ul ${Link} {
+  ul a {
     color: rgb(0, 0, 0);
   }
 `
@@ -107,6 +92,9 @@ const CategoryRoute = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{startCase(id)} Tagged Articles | Andrew Smith</title>
+      </Helmet>
       <Page as="article">
         <Header category={null}>
           <h1>{id}</h1>
@@ -144,4 +132,4 @@ const CategoryRoute = () => {
 }
 
 export default CategoryRoute
-export { handle, headers, loader, meta }
+export { headers, loader, meta }

@@ -1,16 +1,16 @@
 import fs from "fs/promises"
+import { merge } from "lodash-es"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
-import { merge } from "lodash"
-import { readDir, readDirFiles } from "./fs.server"
+import type { MdxPage, MdxPageFile } from "../types"
 import type { CachifiedOptions } from "./cache.server"
 import {
   cachified,
-  defaultTtl,
   defaultStaleWhileRevalidate,
+  defaultTtl,
   getCache,
 } from "./cache.server"
-import type { MdxPage, MdxPageFile } from "../types"
+import { readDir, readDirFiles } from "./fs.server"
 
 const mdx = async (
   mdxFile: MdxPageFile,
@@ -28,7 +28,7 @@ const mdx = async (
     source: source.trim(),
     cwd: path.resolve(mdxFile.filePath),
     files: fileContents,
-    globals: { "styled-components": "styled" },
+    globals: { "@emotion/styled": "styled" },
     mdxOptions: (options) => {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
@@ -157,8 +157,8 @@ const getMdxPage = async (
 
 const getMdxPages = async (
   options: CachifiedOptions,
-  fileDirPath: string = path.join(__dirname, "..", "app", "posts"),
-  extraFilesPath: string = path.join(__dirname, "..", "app", "components"),
+  fileDirPath: string = "app/posts",
+  extraFilesPath: string = "app/components",
 ): Promise<MdxPage[]> => {
   const mdxFiles = await getMdxFiles(options, fileDirPath)
 

@@ -1,16 +1,13 @@
-import type {
-  HeadersFunction,
-  LoaderArgs,
-  V2_MetaFunction,
-} from "@remix-run/node"
+import styled from "@emotion/styled"
+import type { LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
-import * as styled from "styled-components"
-import { Header } from "~/components/Category"
-import getCodePostAssetComponent from "~/components/CodePostAsset"
-import PageWithHeader from "~/components/PageWithHeader"
+import { Helmet } from "react-helmet"
+import { Header } from "../components/Category"
+import getCodePostAssetComponent from "../components/CodePostAsset"
+import PageWithHeader from "../components/PageWithHeader"
 import {
   Blockquote,
   H2,
@@ -19,29 +16,14 @@ import {
   Link,
   Paragraph,
   Table,
-} from "~/components/Post"
-import Tags from "~/components/Tags"
-import { getHash } from "~/libs/hash.server"
-import { getMdxPage, getMdxPages } from "~/libs/mdx.server"
-import { getServerTimeHeader } from "~/libs/timing.server"
-import { tryFormatDate, useLoaderHeaders } from "~/libs/utils"
-import type { Handle } from "~/types"
+} from "../components/Post"
+import Tags from "../components/Tags"
+import { getHash } from "../libs/hash.server"
+import { getMdxPage } from "../libs/mdx.server"
+import { getServerTimeHeader } from "../libs/timing.server"
+import { tryFormatDate } from "../libs/utils"
 
-const handle: Handle = {
-  getSitemapEntries: async (request) => {
-    const timings = {}
-    const pages = await getMdxPages({ request, timings })
-    return pages.map((page) => {
-      return { route: `/${page.slug}`, priority: 0.6 }
-    })
-  },
-}
-
-const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
-  return [{ title: `${data.frontmatter?.title ?? "Article"} | Andrew Smith` }]
-}
-
-const loader = async ({ params, request }: LoaderArgs) => {
+const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { id } = params
   if (!id) {
     throw new Error("Missing id")
@@ -62,13 +44,13 @@ const loader = async ({ params, request }: LoaderArgs) => {
 }
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-const headers: HeadersFunction = useLoaderHeaders()
+// const headers: HeadersFunction = useLoaderHeaders()
 
-const Post = styled.default(PageWithHeader)`
-  ${Header} {
+const Post = styled(PageWithHeader)`
+  header {
     time {
       align-self: end;
-      color: rgb(80,80,80);
+      color: rgb(80, 80, 80);
       font-size: 1.125rem;
       position: absolute;
       right: 1.5rem;
@@ -81,22 +63,22 @@ const Post = styled.default(PageWithHeader)`
     padding: 0 1.5rem 1.5rem;
 
     @media (max-width: 640px) {
-    padding: 0 0.75rem;
+      padding: 0 0.75rem;
     }
 
-    ${H2} {
+    h2 {
       margin: 1.5rem 0;
     }
-    
-    ${H3} {
+
+    h3 {
       margin-bottom: 0.5rem;
     }
 
-    ${H4} {
+    h4 {
       margin-bottom: 0.5rem;
     }
 
-    > ${Paragraph} {
+    p {
       margin-bottom: 1.125rem;
     }
 
@@ -116,6 +98,9 @@ const PostRoute = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{frontmatter.title ?? "Article"} | Andrew Smith</title>
+      </Helmet>
       <Post as="article">
         <Header category={frontmatter.category}>
           <h1>{frontmatter.title}</h1>
@@ -151,4 +136,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { handle, headers, loader, meta }
+export { loader }

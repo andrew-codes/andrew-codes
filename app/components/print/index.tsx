@@ -1,4 +1,4 @@
-import { styled } from "styled-components"
+import styled from "@emotion/styled"
 
 const PrintTogether = styled.div`
   page-break-inside: avoid;

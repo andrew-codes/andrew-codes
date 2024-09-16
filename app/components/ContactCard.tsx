@@ -1,6 +1,6 @@
+import styled from "@emotion/styled"
 import type { FC, HTMLProps, ReactNode } from "react"
 import { Children } from "react"
-import styled from "styled-components"
 import SmallContentDivider from "./SmallContentDivider"
 
 type WrappedStyledComponent<Props = {}> = FC<

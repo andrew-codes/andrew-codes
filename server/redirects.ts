@@ -1,9 +1,7 @@
 import { type RequestHandler } from "express"
-import {
-  compile as compileRedirectPath,
-  pathToRegexp,
-  type Key,
-} from "path-to-regexp"
+import * as pathToRegExpImport from "path-to-regexp"
+
+const { match } = pathToRegExpImport
 
 function typedBoolean<T>(
   value: T,
@@ -44,19 +42,14 @@ function getRedirectsMiddleware({
         console.error(`Invalid redirect on line ${lineNumber + 1}: "${line}"`)
         return null
       }
-      const keys: Array<Key> = []
-
       const toUrl = to.includes("//")
         ? new URL(to)
         : new URL(`https://same_host${to}`)
+
       try {
         return {
           methods,
-          from: pathToRegexp(from, keys),
-          keys,
-          toPathname: compileRedirectPath(toUrl.pathname, {
-            encode: encodeURIComponent,
-          }),
+          from: match(from),
           toUrl,
         }
       } catch (error: unknown) {
@@ -64,6 +57,7 @@ function getRedirectsMiddleware({
         console.error(
           `Failed to parse redirect on line ${lineNumber}: "${line}"`,
         )
+        console.error(error)
         return null
       }
     })
@@ -88,22 +82,9 @@ function getRedirectsMiddleware({
         ) {
           continue
         }
-        const match = req.path.match(redirect.from)
-        if (!match) continue
+        const matched = redirect.from(req.url)
+        if (!matched) continue
 
-        const params: Record<string, string> = {}
-        const paramValues = match.slice(1)
-        for (
-          let paramIndex = 0;
-          paramIndex < paramValues.length;
-          paramIndex++
-        ) {
-          const paramValue = paramValues[paramIndex]
-          const key = redirect.keys[paramIndex]
-          if (key && paramValue) {
-            params[key.name] = paramValue
-          }
-        }
         const toUrl = new URL(redirect.toUrl)
 
         toUrl.protocol = protocol
@@ -112,7 +93,6 @@ function getRedirectsMiddleware({
         for (const [key, value] of reqUrl.searchParams.entries()) {
           toUrl.searchParams.append(key, value)
         }
-        toUrl.pathname = redirect.toPathname(params)
         res.redirect(307, toUrl.toString())
         return
       } catch (error: unknown) {

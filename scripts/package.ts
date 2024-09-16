@@ -1,28 +1,23 @@
 import fsExtra from "fs-extra"
 import path from "path"
 
-const here = (...s: string[]) => path.join(__dirname, ...s)
+const here = (...s: string[]) => path.join(import.meta.dirname, ...s)
 
-const run = async () => {
-  const appDir = path.join(__dirname, "..", "dist")
-  await fsExtra.ensureDir(path.join(appDir))
-  await fsExtra.copy(here("../build"), path.join(appDir, "build"))
-  await fsExtra.copy(
-    here("../app/components"),
-    path.join(appDir, "app", "components"),
-  )
-  await fsExtra.copy(here("../app/posts"), path.join(appDir, "app", "posts"))
-  await fsExtra.copy(here("../public"), path.join(appDir, "public"))
-  await fsExtra.copy(here("../server-build"), path.join(appDir, "server"))
-  await fsExtra.copy(here("../config/app"), path.join(appDir, "config", "app"))
-  await fsExtra.copy(here("../.babelrc"), path.join(appDir, ".babelrc"))
-  await fsExtra.copy(
-    here("../tsconfig.json"),
-    path.join(appDir, "tsconfig.json"),
-  )
-}
+const dist = here("..", "dist")
 
-if (require.main === module) {
-  run()
-}
-export default run
+await fsExtra.ensureDir(path.join(dist))
+
+await fsExtra.copy(here("..", "build"), path.join(dist, "build"))
+await fsExtra.copy(here("..", "app", "posts"), path.join(dist, "app", "posts"))
+await fsExtra.copy(
+  here("..", "app", "public"),
+  path.join(dist, "app", "public"),
+)
+await fsExtra.copy(
+  here("..", "server-build", "index.js"),
+  path.join(dist, "index.js"),
+)
+await fsExtra.copy(
+  here("..", "server-build", "_redirects.txt"),
+  path.join(dist, "server", "_redirects.txt"),
+)

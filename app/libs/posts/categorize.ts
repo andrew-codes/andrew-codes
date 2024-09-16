@@ -1,4 +1,4 @@
-import type { Category, MdxPage } from "~/types"
+import type { Category, MdxPage } from "../../types"
 import { getCategories } from "../categories"
 
 const postsByCategory = (posts: MdxPage[]): [Category, MdxPage[]][] => {

@@ -1,12 +1,11 @@
+import styled from "@emotion/styled"
 import { Links, LiveReload, Scripts, ScrollRestoration } from "@remix-run/react"
 import type { FC, PropsWithChildren } from "react"
-import { MetronomeLinks } from "@metronome-sh/react"
-import styled from "styled-components"
+import favicon1024 from "../images/favicon-1024.png"
+import favicon from "../images/favicon-48.png"
+import { useNonce } from "../libs/NonceProvider"
 import GlobalStyles from "./GlobalStyles"
 import GlobalNav from "./MainNav"
-import { useNonce } from "../libs/NonceProvider"
-import favicon from "../images/favicon-48.png"
-import favicon1024 from "../images/favicon-1024.png"
 
 const Root = styled.div`
   max-width: 1200px;
@@ -73,7 +72,6 @@ const App: FC<PropsWithChildren<{}>> = ({ children }) => {
         />
       </head>
       <body>
-        <MetronomeLinks nonce={nonce} />
         <Links />
         <GlobalStyles />
         <GlobalNav />
