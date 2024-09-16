@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import type { FC } from "react"
-import avatar from "../public/images/Profile400px.png"
+import avatar from "../public/images/Profile.webp"
 import {
   ContactCard,
   ContactInformation,
@@ -97,7 +97,12 @@ const GlobalNavImpl: FC<{}> = (props) => (
             </Url>
           </ContactInformation>
         </ProfileInformation>
-        <Image src={avatar} alt="Profile of Andrew Smith" />
+        <Image
+          src={avatar}
+          alt="Profile of Andrew Smith"
+          width={112}
+          height={112}
+        />
       </ContactCard>
       <Nav>
         <NavLink to="/">Home</NavLink>

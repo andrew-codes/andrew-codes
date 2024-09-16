@@ -127,8 +127,19 @@ const KeyResults = styled.div`
 const WorkExperienceSummaryRoot = styled(WorkExperienceRoot)`
   margin: 0 !important;
 
+  > div {
+    margin-bottom: 0.5rem;
+  }
+
   h3 {
     font-size: 12pt;
+    max-width: 50%;
+    min-width: unset;
+  }
+
+  h3 + span {
+    flex: 1;
+    text-align: right;
   }
 `
 const WorkExperience: FC<{
@@ -316,6 +327,10 @@ const Page = styled(Paper)`
     height: unset;
     padding: 0;
     width: unset;
+  }
+
+  @media (max-width: 390px) {
+    padding: 1rem;
   }
 `
 
