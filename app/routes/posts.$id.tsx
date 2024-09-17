@@ -84,6 +84,12 @@ const Post = styled(PageWithHeader)`
 
     dt {
       font-weight: bold;
+      font-family: "Lato-Black", sans-serif;
+    }
+
+    strong {
+      font-weight: bold;
+      font-family: "Lato-Black", sans-serif;
     }
   }
 `
