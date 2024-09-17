@@ -5,23 +5,23 @@ import { categories } from "../types"
 const getCategories = (): readonly Category[] => categories
 
 const colors: Record<Category, string[]> = {
-  explanation: ["rgba(174, 64, 202)", "rgba(180, 66, 201)"] as string[],
+  engineering: ["rgba(174, 64, 202)", "rgba(180, 66, 201)"] as string[],
   presentation: ["rgba(49, 163, 86)", "rgba(58, 178, 123)"] as string[],
-  tutorial: ["rgba(196, 75, 120)", "rgba(198, 75, 87)"] as string[],
-  reference: ["rgba(59, 119, 188)", "rgba(82, 152, 197)"] as string[],
+  agility: ["rgba(196, 75, 120)", "rgba(198, 75, 87)"] as string[],
+  "home automation": ["rgba(59, 119, 188)", "rgba(82, 152, 197)"] as string[],
   "not categorized": [],
 }
 
 const colorGradient: Record<Category, string> = {
-  explanation: `linear-gradient(45deg, ${colors["explanation"].join(", ")})`,
+  engineering: `linear-gradient(45deg, ${colors["engineering"].join(", ")})`,
   presentation: `linear-gradient(45deg, ${colors["presentation"].join(", ")})`,
-  tutorial: `linear-gradient(45deg, ${colors["tutorial"].join(", ")})`,
-  reference: `linear-gradient(45deg, ${colors["reference"].join(", ")})`,
+  agility: `linear-gradient(45deg, ${colors["agility"].join(", ")})`,
+  "home automation": `linear-gradient(45deg, ${colors["home automation"].join(", ")})`,
   "not categorized": "rgb(255,255,255)",
 }
 
 const descriptions: Record<Category, string | ReactNode> = {
-  explanation: (
+  engineering: (
     <>
       Attempt to document my learnings throughout my career; coalescing into
       articles that predominately explain concepts and technologies.
@@ -33,13 +33,13 @@ const descriptions: Record<Category, string | ReactNode> = {
       freely available.
     </>
   ),
-  tutorial: (
+  agility: (
     <>
       Articles that are focused steps detailing how to accomplish specific
       goals.
     </>
   ),
-  reference: <>Evaluation or comparison of technologies.</>,
+  "home automation": <>Evaluation or comparison of technologies.</>,
   "not categorized": <>Posts that have not been categorized.</>,
 }
 const getBackgroundGradient = (name: Category | undefined | null): string => {

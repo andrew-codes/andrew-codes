@@ -1,8 +1,8 @@
 const categories = [
-  "explanation",
+  "engineering",
+  "agility",
   "presentation",
-  "tutorial",
-  "reference",
+  "home automation",
 ] as const
 type Category = (typeof categories)[number] | "not categorized"
 
