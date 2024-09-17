@@ -11,11 +11,7 @@ import { Posts } from "../components/Post"
 import Tags from "../components/Tags"
 import { getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
-import {
-  alphabetically,
-  newestFirst,
-  sortByMany,
-} from "../libs/posts/sortPosts"
+import { order } from "../libs/posts/sortPosts"
 import { getServerTimeHeader } from "../libs/timing.server"
 import { tryFormatDate, useLoaderHeaders } from "../libs/utils"
 import type { Category, MdxPage } from "../types"
@@ -87,7 +83,6 @@ const Page = styled(PageWithHeader)`
 
 const CategoryRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
-  const categoryPosts = posts.sort(sortByMany(newestFirst, alphabetically))
   const { id } = useParams()
 
   return (
@@ -101,30 +96,32 @@ const CategoryRoute = () => {
         </Header>
         <section>
           <Posts>
-            {categoryPosts.map((post) => (
-              <li key={post.slug}>
-                <h3>
-                  <Link to={`/posts/${post.slug}`}>
-                    {post.frontmatter.title}
-                  </Link>
-                </h3>
-                {!!post.frontmatter.description && (
-                  <p>{post.frontmatter.description}</p>
-                )}
-                {!!post.frontmatter.date && (
-                  <time dateTime={tryFormatDate(post.frontmatter.date)}>
-                    {tryFormatDate(post.frontmatter.date, {
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </time>
-                )}
-                {!!post.frontmatter.tags &&
-                  post.frontmatter.tags.length > 0 && (
-                    <Tags tags={post.frontmatter.tags} />
+            {order(posts).map((post) => {
+              return (
+                <li key={post.slug}>
+                  <h3>
+                    <Link to={`/posts/${post.slug}`}>
+                      {post.frontmatter.title}
+                    </Link>
+                  </h3>
+                  {!!post.frontmatter.description && (
+                    <p>{post.frontmatter.description}</p>
                   )}
-              </li>
-            ))}
+                  {!!post.frontmatter.date && (
+                    <time dateTime={tryFormatDate(post.frontmatter.date)}>
+                      {tryFormatDate(post.frontmatter.date, {
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </time>
+                  )}
+                  {!!post.frontmatter.tags &&
+                    post.frontmatter.tags.length > 0 && (
+                      <Tags tags={post.frontmatter.tags} />
+                    )}
+                </li>
+              )
+            })}
           </Posts>
         </section>
       </Page>

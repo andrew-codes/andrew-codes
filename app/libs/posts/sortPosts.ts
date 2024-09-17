@@ -1,10 +1,12 @@
+import { flow, partialRight, sortBy } from "lodash-es"
 import type { MdxPage } from "../../types"
 
 type PostSort = (a: MdxPage, b: MdxPage) => 0 | 1 | -1
 
 const newestFirst: PostSort = (a, b) => {
-  const aDate = new Date(a.frontmatter?.date ?? 0)
-  const bDate = new Date(b.frontmatter?.date ?? 0)
+  console.log(a?.frontmatter.title, b?.frontmatter.title)
+  const aDate = new Date(a?.frontmatter?.date ?? 0)
+  const bDate = new Date(b?.frontmatter?.date ?? 0)
 
   if (aDate.getTime() ?? 0 > (bDate.getTime() ?? 0)) {
     return -1
@@ -17,8 +19,8 @@ const newestFirst: PostSort = (a, b) => {
 }
 
 const alphabetically: PostSort = (a, b) => {
-  const aTitle = a.frontmatter?.title ?? ""
-  const bTitle = b.frontmatter?.title ?? ""
+  const aTitle = a?.frontmatter?.title ?? ""
+  const bTitle = b?.frontmatter?.title ?? ""
   if (aTitle > bTitle) {
     return 1
   }
@@ -29,18 +31,12 @@ const alphabetically: PostSort = (a, b) => {
   return 0
 }
 
-const sortByMany =
-  (...sortFuncs: PostSort[]): PostSort =>
-  (a, b): 0 | -1 | 1 => {
-    let order: 0 | 1 | -1 = 0
-    for (let sortFunc of sortFuncs) {
-      order = sortFunc(a, b)
-      if (order !== 0) {
-        break
-      }
-    }
+const order = flow(
+  partialRight(sortBy, (post: MdxPage) => post.frontmatter.title),
+  partialRight(
+    sortBy,
+    (post: MdxPage) => new Date(post.frontmatter.date ?? "").getTime() * -1,
+  ),
+) as (posts: MdxPage[]) => MdxPage[]
 
-    return order
-  }
-
-export { alphabetically, newestFirst, sortByMany }
+export { alphabetically, newestFirst, order }

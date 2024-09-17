@@ -11,11 +11,7 @@ import { Posts } from "../components/Post"
 import Tags from "../components/Tags"
 import { getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
-import {
-  alphabetically,
-  newestFirst,
-  sortByMany,
-} from "../libs/posts/sortPosts"
+import { order } from "../libs/posts/sortPosts"
 import { getServerTimeHeader } from "../libs/timing.server"
 import { tryFormatDate, useLoaderHeaders } from "../libs/utils"
 import type { MdxPage } from "../types"
@@ -87,7 +83,6 @@ const Page = styled(PageWithHeader)`
 `
 const CategoryRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
-  const tagPosts = posts.sort(sortByMany(newestFirst, alphabetically))
   const { id } = useParams()
 
   return (
@@ -101,7 +96,7 @@ const CategoryRoute = () => {
         </Header>
         <section>
           <Posts>
-            {tagPosts.map((post) => (
+            {order(posts).map((post) => (
               <li key={post.slug}>
                 <h3>
                   <Link to={`/posts/${post.slug}`}>

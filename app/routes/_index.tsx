@@ -15,11 +15,7 @@ import {
 import { getFilePartsToHash, getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
 import postsByCategory from "../libs/posts/categorize"
-import {
-  alphabetically,
-  newestFirst,
-  sortByMany,
-} from "../libs/posts/sortPosts"
+import { order } from "../libs/posts/sortPosts"
 import { getServerTimeHeader } from "../libs/timing.server"
 import { useLoaderHeaders } from "../libs/utils"
 import type { Category } from "../types"
@@ -246,9 +242,8 @@ const HomeRoute = () => {
             <h2>{category}</h2>
             <p>{getDescription(category)}</p>
             <Posts>
-              {posts
+              {order(posts)
                 .slice(0, 3)
-                .sort(sortByMany(newestFirst, alphabetically))
                 .map((post) => (
                   <li key={post.slug}>
                     <h3>

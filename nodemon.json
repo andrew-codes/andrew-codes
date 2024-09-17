@@ -5,11 +5,13 @@
     "ts": "yarn node --import=@nitrogql/esbuild-register"
   },
   "watch": [
+    "nodemon.json",
     "./index.ts",
     "./server/*.*",
     "./app/**/*.server.ts",
     "./app/**/server/*.ts",
-    "./*.ts"
+    "./*.ts",
+    "./app/posts/**/*.*"
   ],
   "env": {
     "NODE_ENV": "development"
