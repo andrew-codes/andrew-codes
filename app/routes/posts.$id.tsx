@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import type { LoaderFunctionArgs } from "@remix-run/node"
+import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
@@ -21,7 +21,7 @@ import Tags from "../components/Tags"
 import { getHash } from "../libs/hash.server"
 import { getMdxPage } from "../libs/mdx.server"
 import { getServerTimeHeader } from "../libs/timing.server"
-import { tryFormatDate } from "../libs/utils"
+import { tryFormatDate, useLoaderHeaders } from "../libs/utils"
 
 const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { id } = params
@@ -44,7 +44,7 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
 }
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-// const headers: HeadersFunction = useLoaderHeaders()
+const headers: HeadersFunction = useLoaderHeaders()
 
 const Post = styled(PageWithHeader)`
   header {
@@ -134,4 +134,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { loader }
+export { headers, loader }
