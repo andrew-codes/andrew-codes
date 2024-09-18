@@ -79,6 +79,10 @@ const Post = styled(PageWithHeader)`
     li {
       margin-bottom: 0.5rem;
     }
+
+    img {
+      max-width: 100%;
+    }
   }
 `
 
