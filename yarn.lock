@@ -99,6 +99,9 @@ __metadata:
     typescript: "npm:^5.6.2"
     vite: "npm:^5.4.5"
     vite-plugin-babel: "npm:^1.2.0"
+  dependenciesMeta:
+    metronome-sh@8.5.2:
+      unplugged: true
   languageName: unknown
   linkType: soft
 

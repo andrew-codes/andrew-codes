@@ -11976,14 +11976,14 @@ const RAW_RUNTIME_STATE =
     ]],\
     ["metronome-sh", [\
       ["npm:8.5.2", {\
-        "packageLocation": "./.yarn/cache/metronome-sh-npm-8.5.2-4c3d42888c-57d86c2406.zip/node_modules/metronome-sh/",\
+        "packageLocation": "./.yarn/unplugged/metronome-sh-virtual-d966fe7c2a/node_modules/metronome-sh/",\
         "packageDependencies": [\
           ["metronome-sh", "npm:8.5.2"]\
         ],\
         "linkType": "SOFT"\
       }],\
       ["virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.5.2", {\
-        "packageLocation": "./.yarn/__virtual__/metronome-sh-virtual-d966fe7c2a/0/cache/metronome-sh-npm-8.5.2-4c3d42888c-57d86c2406.zip/node_modules/metronome-sh/",\
+        "packageLocation": "./.yarn/unplugged/metronome-sh-virtual-d966fe7c2a/node_modules/metronome-sh/",\
         "packageDependencies": [\
           ["metronome-sh", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.5.2"],\
           ["@remix-run/cloudflare-pages", null],\

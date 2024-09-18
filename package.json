@@ -127,5 +127,10 @@
     "follow-redirects": "^1.15.6",
     "axios": "^0.28.0",
     "postcss": "^8.4.31"
+  },
+  "dependenciesMeta": {
+    "metronome-sh@8.5.2": {
+      "unplugged": true
+    }
   }
 }
