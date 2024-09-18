@@ -66,24 +66,18 @@ const Post = styled(PageWithHeader)`
       padding: 0 0.75rem;
     }
 
-    h2 {
-      margin: 1.5rem 0;
-    }
-
-    h3 {
-      margin-bottom: 0.5rem;
-    }
-
-    h4 {
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      margin-bottom: 1.125rem;
-    }
-
     dt {
       font-weight: bold;
+      font-family: "Lato-Black", sans-serif;
+    }
+
+    strong {
+      font-weight: bold;
+      font-family: "Lato-Black", sans-serif;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
     }
   }
 `

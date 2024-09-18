@@ -6,13 +6,18 @@ const Link: FC<{ href: string }> = ({ href, ...props }) => (
   <StyledLink to={href} {...props} />
 )
 
-const H2 = styled.h2``
+const H2 = styled.h2`
+  margin: 1.5rem 0 0.5rem;
+`
 const H3 = styled.h3`
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
 `
 
-const H4 = styled.h4``
+const H4 = styled.h4`
+  margin-bottom: 0.5rem;
+`
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -40,7 +45,10 @@ const Table = styled.table`
   }
 `
 
-const Paragraph = styled.p``
+const Paragraph = styled.p`
+  line-height: 1.25;
+  margin-bottom: 1.125rem;
+`
 const Blockquote = styled.blockquote`
   color: rgb(80, 80, 80);
   background-color: rgb(218, 218, 218);
