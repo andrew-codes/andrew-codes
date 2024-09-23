@@ -85,7 +85,7 @@
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3",
     "cypress": "^13.14.2",
-    "esbuild": "^0.23.1",
+    "esbuild": "^0.24.0",
     "esbuild-register": "^3.6.0",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
