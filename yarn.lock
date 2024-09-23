@@ -30,7 +30,7 @@ __metadata:
     "@octokit/request-error": "npm:^6.1.4"
     "@parcel/css": "npm:^1.14.0"
     "@remix-run/dev": "npm:2.12.0"
-    "@remix-run/eslint-config": "npm:2.12.0"
+    "@remix-run/eslint-config": "npm:2.12.1"
     "@remix-run/express": "npm:2.12.0"
     "@remix-run/node": "npm:2.12.0"
     "@remix-run/react": "npm:2.12.0"
@@ -2820,9 +2820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/eslint-config@npm:2.12.0":
-  version: 2.12.0
-  resolution: "@remix-run/eslint-config@npm:2.12.0"
+"@remix-run/eslint-config@npm:2.12.1":
+  version: 2.12.1
+  resolution: "@remix-run/eslint-config@npm:2.12.1"
   dependencies:
     "@babel/core": "npm:^7.21.8"
     "@babel/eslint-parser": "npm:^7.21.8"
@@ -2847,7 +2847,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10/4eea232756147867955a3381429b0cc2d733c1e6056ba9007b39f9ed3d2f2d008efd49d988811558fab04b0c5dc926386b797c3b5aff4834f8e39aceba9ba768
+  checksum: 10/a6fc40947353dccabc9eb429ea2c0aae018cf32431dd1f880e911c6ed91232341aea0a76efcb11223a94b32ac78368237d45a6f3f6a7925feeffc80d38cf8a20
   languageName: node
   linkType: hard
 
