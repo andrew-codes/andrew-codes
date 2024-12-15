@@ -71,7 +71,10 @@ const Root = styled.div`
 const Main = styled.main`
   background-color: rgb(249, 251, 253);
   border-radius: 1rem;
-  padding-top: 1rem;
+
+  > *:nth-child(1) {
+    border-radius: 1rem 1rem 0 0;
+  }
 
   @media (max-width: 640px) {
     border-radius: 1rem 1rem 0 0;
@@ -103,15 +106,12 @@ const globalStyles = css`
 `
 const Note = styled.div`
   background-color: rgba(223, 201, 138, 1);
-  border: 4px solid rgba(223, 184, 90, 1);
   color: rgb(0, 0, 0);
   display: block;
   font-size: 1.25rem;
-  margin: 0 auto;
-  margin-bottom: 1.5rem !important;
   padding: 1rem;
   box-sizing: border-box;
-  width: 8.5in;
+  width: 100%;
 
   @media (max-width: 640px) {
     border-radius: 1rem;
@@ -174,14 +174,14 @@ const ResumeRoute: FC<{}> = () => {
               <Notes as={ResumeNotes}>
                 <Paragraph>
                   Empathetic software craftsmen engineering scalable software
-                  solutions for {yearsOfExperience}, delivering impactful
+                  solutions for {yearsOfExperience} years, delivering impactful
                   customer experiences and mentoring teams of 3 to 50+
                   engineers.
                 </Paragraph>
                 <Section title="Highlights">
                   <List>
                     <li>
-                      Deep knowledge on the React ecosystem and delivering
+                      Deep knowledge on the React.js ecosystem and delivering
                       high-quality experiences that delight customers; with a
                       focus on performance, accessibility and usability
                     </li>
@@ -200,8 +200,7 @@ const ResumeRoute: FC<{}> = () => {
                       <ResumeAbbr title="Structured Query Language">
                         SQL
                       </ResumeAbbr>
-                      , Kubernetes, containerization, git, Azure, bash and
-                      PowerShell
+                      , Kubernetes, docker, git, Azure, and bash
                     </li>
                     <li>
                       Empower others by speaking, organizing, mentoring, and
@@ -235,19 +234,19 @@ const ResumeRoute: FC<{}> = () => {
                   </>
                 }
                 keyTechnologies={
-                  "TypeScript, React, Node.js, Next.js, Redux, GraphQL, Nx, C#, Azure, TDD, XP, git, Kanban"
+                  "TypeScript, React.js, Node.js, Next.js, Redux, GraphQL, Nx, C#, Azure, TDD, XP, git, Kanban"
                 }
               >
                 <List>
                   <li>
-                    Revamped the front-end architecture using React best
+                    Revamped the front-end architecture using React.js best
                     practices, leading to improved maintainability and
                     scalability for the application, supporting 2 billion users
                     without performance degradation
                   </li>
                   <li>
-                    Championed the optimization of existing React components and
-                    federated{" "}
+                    Championed the optimization of existing React.js components
+                    and federated{" "}
                     <ResumeAbbr title="Graph Query Language">
                       GraphQL
                     </ResumeAbbr>
@@ -293,13 +292,13 @@ const ResumeRoute: FC<{}> = () => {
                   </>
                 }
                 keyTechnologies={
-                  "TypeScript, React, Node.js, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, git, Scrum"
+                  "TypeScript, React.js, Node.js, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, git, Scrum"
                 }
               >
                 <List>
                   <li>
                     Innovated a comprehensive design language for UI components
-                    in the React ecosystem, ensuring consistent design across
+                    in the React.js ecosystem, ensuring consistent design across
                     the application and accelerate delivery of new features
                   </li>
                   <li>
@@ -309,7 +308,7 @@ const ResumeRoute: FC<{}> = () => {
                     investment, increased team velocity by 20%
                   </li>
                   <li>
-                    Guided 3 teams of engineers; React, Redux, TypeScript,
+                    Guided 3 teams of engineers; React.js, Redux, TypeScript,
                     innovated usage of{" "}
                     <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
                     and Cypress{" "}
@@ -338,7 +337,7 @@ const ResumeRoute: FC<{}> = () => {
                   </>
                 }
                 keyTechnologies={
-                  "JavaScript, React, Redux, AngularJs, Backbone.JS, jQuery, C#, MVC.NET, Node.js, TDD, XP, gulp, git, Kanban"
+                  "JavaScript, React.js, Redux, AngularJs, Backbone.JS, jQuery, C#, MVC.NET, Node.js, TDD, XP, gulp, git, Kanban"
                 }
               >
                 <List>
@@ -349,17 +348,17 @@ const ResumeRoute: FC<{}> = () => {
                       ES6
                     </ResumeAbbr>{" "}
                     modules; enabled use of modern tooling and practices,
-                    adoption of React, significant reduction of technical debt
-                    and increased developer productivity
+                    adoption of React.js, significant reduction of technical
+                    debt and increased developer productivity
                   </li>
                   <li>
-                    Implemented a systematic migration to React, resulting in a
-                    streamlined development process adopted by 5 teams across 2
-                    key products, enhancing productivity and consistency
+                    Implemented a systematic migration to React.js, resulting in
+                    a streamlined development process adopted by 5 teams across
+                    2 key products, enhancing productivity and consistency
                   </li>
                   <li>
                     Streamlined processes between UX and Engineering through the
-                    creation of React based component library and design
+                    creation of React.js based component library and design
                     language documentation; tested via Cypress and Storybook
                   </li>
                   <li>
@@ -370,7 +369,7 @@ const ResumeRoute: FC<{}> = () => {
                   </li>
                   <li>
                     Led a series of workshops and presentations focused on the
-                    React ecosystem, delivered both internally and at major
+                    React.js ecosystem, delivered both internally and at major
                     conferences, providing guidance and mentorship to engineers
                     and leadership
                   </li>
@@ -400,7 +399,7 @@ const ResumeRoute: FC<{}> = () => {
                   </>
                 }
                 keyTechnologies={
-                  "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, Scrum, grunt, git"
+                  "C#, MVC.NET, PHP, Node.js, JavaScript, React.js, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, Scrum, grunt, git"
                 }
               >
                 <List>
@@ -415,8 +414,8 @@ const ResumeRoute: FC<{}> = () => {
                     karma, and CI automation via gulp and grunt
                   </li>
                   <li>
-                    React early adopter; pioneered usage and incorporation into
-                    company's core competencies; including training of 7+
+                    React.js early adopter; pioneered usage and incorporation
+                    into company's core competencies; including training of 7+
                     engineers
                   </li>
                   <li>
