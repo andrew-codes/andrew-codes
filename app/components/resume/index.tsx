@@ -326,7 +326,7 @@ const Page = styled(Paper)`
   @media (max-width: 640px) {
     border: none;
     height: unset;
-    padding: 0;
+    padding: 1rem;
     width: unset;
   }
 
