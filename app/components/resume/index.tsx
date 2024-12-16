@@ -75,12 +75,12 @@ const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   )
 }
 
-const WorkExperienceRoot = styled(PrintTogether)`
+const WorkExperienceRoot = styled.div`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 `
-const WorkExperienceOverview = styled.div`
+const WorkExperienceOverview = styled(PrintTogether)`
   display: flex;
   flex-wrap: wrap;
   flex: 1;
