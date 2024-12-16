@@ -45,10 +45,7 @@ const List = styled.ul`
     padding-left: 2rem !important;
   }
 `
-const Note = styled.span`
-  font-size: 9pt;
-  font-style: italic;
-`
+
 const SectionRoot = styled.section`
   > *:nth-child(n + 2) {
     margin-top: 15pt;
@@ -78,12 +75,12 @@ const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   )
 }
 
-const WorkExperienceRoot = styled(PrintTogether)`
+const WorkExperienceRoot = styled.div`
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 `
-const WorkExperienceOverview = styled.div`
+const WorkExperienceOverview = styled(PrintTogether)`
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -127,21 +124,33 @@ const KeyResults = styled.div`
 const WorkExperienceSummaryRoot = styled(WorkExperienceRoot)`
   margin: 0 !important;
 
-  > div {
-    margin-bottom: 0.5rem;
-  }
-
   h3 {
     font-size: 12pt;
-    max-width: 50%;
+    max-width: calc(100% - 160px);
     min-width: unset;
+    width: 100%;
+    flex: unset;
   }
 
   h3 + span {
-    flex: 1;
     text-align: right;
+    flex: 1;
+    display: inline-flex;
+
+    time {
+      flex: 1;
+      text-align: left;
+    }
+
+    time:nth-child(1) {
+    }
+
+    time + time {
+      text-align: right;
+    }
   }
 `
+
 const WorkExperience: FC<{
   children?: ReactNode | ReactNode[]
   description: string | ReactNode
@@ -149,7 +158,6 @@ const WorkExperience: FC<{
   from: string | ReactNode
   role: string
   location: string | ReactNode
-  note?: string | ReactNode
   orgName: string
   summarized?: boolean | undefined
   to: string | ReactNode
@@ -159,7 +167,6 @@ const WorkExperience: FC<{
   from,
   keyTechnologies,
   location,
-  note,
   orgName,
   role,
   summarized,
@@ -170,7 +177,7 @@ const WorkExperience: FC<{
       <WorkExperienceOverview>
         <JobTitle>{role}</JobTitle>
         <TimeFrame>
-          {!!note && <Note>({note})</Note>} {from} - {to}
+          {from} - {to}
         </TimeFrame>
         <OrgName>{orgName}</OrgName>
         <Location>{location}</Location>
@@ -183,14 +190,12 @@ const WorkExperience: FC<{
     </WorkExperienceRoot>
   ) : (
     <WorkExperienceSummaryRoot>
-      <WorkExperienceOverview>
-        <JobTitle>
-          {role} - {orgName}
-        </JobTitle>
-        <TimeFrame>
-          {!!note && <Note>({note})</Note>} {from} - {to}
-        </TimeFrame>
-      </WorkExperienceOverview>
+      <JobTitle>
+        {role} - {orgName}
+      </JobTitle>
+      <TimeFrame>
+        {from} - {to}
+      </TimeFrame>
     </WorkExperienceSummaryRoot>
   )
 }
@@ -268,11 +273,7 @@ const SummarizedItem: FC<{
       <SummarizedItemName>
         {role} - {name}
       </SummarizedItemName>
-      {!!on && (
-        <span>
-          {!!note && <Note>({note})</Note>} {on}
-        </span>
-      )}
+      {!!on && <span>{on}</span>}
     </SummarizedItemRoot>
   )
 }
@@ -303,9 +304,9 @@ const ToDo = styled.div`
 
 const Page = styled(Paper)`
   border-radius: 0;
-  padding: 0.38in;
+  padding: 1.5rem;
   position: relative;
-  width: 8.5in;
+  width: 100%;
 
   > section {
     margin-top: 16pt;
@@ -325,7 +326,7 @@ const Page = styled(Paper)`
   @media (max-width: 640px) {
     border: none;
     height: unset;
-    padding: 0;
+    padding: 1rem;
     width: unset;
   }
 

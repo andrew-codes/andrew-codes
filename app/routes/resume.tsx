@@ -71,7 +71,10 @@ const Root = styled.div`
 const Main = styled.main`
   background-color: rgb(249, 251, 253);
   border-radius: 1rem;
-  padding-top: 1rem;
+
+  > *:nth-child(1) {
+    border-radius: 1rem 1rem 0 0;
+  }
 
   @media (max-width: 640px) {
     border-radius: 1rem 1rem 0 0;
@@ -103,15 +106,12 @@ const globalStyles = css`
 `
 const Note = styled.div`
   background-color: rgba(223, 201, 138, 1);
-  border: 4px solid rgba(223, 184, 90, 1);
   color: rgb(0, 0, 0);
   display: block;
   font-size: 1.25rem;
-  margin: 0 auto;
-  margin-bottom: 1.5rem !important;
   padding: 1rem;
   box-sizing: border-box;
-  width: 8.5in;
+  width: 100%;
 
   @media (max-width: 640px) {
     border-radius: 1rem;
@@ -174,43 +174,32 @@ const ResumeRoute: FC<{}> = () => {
               <Notes as={ResumeNotes}>
                 <Paragraph>
                   Empathetic software craftsmen engineering scalable software
-                  solutions for {yearsOfExperience}, delivering impactful
-                  customer experiences and mentoring teams of 3 to 50+
-                  engineers.
+                  solutions for {yearsOfExperience} years, delivering impactful
+                  customer experiences and mentoring teams of engineers.
                 </Paragraph>
-                <Section title="Highlights">
-                  <List>
-                    <li>
-                      Deep knowledge on the React ecosystem and delivering
-                      high-quality experiences that delight customers; with a
-                      focus on performance, accessibility and usability
-                    </li>
-                    <li>
-                      Crafts comprehensive reports and visual presentations for
-                      leadership translating technical terms, enabling informed
-                      decision-making and strategic planning
-                    </li>
-                    <li>
-                      Proficient with system languages and infrastructure;
-                      including{" "}
-                      <ResumeAbbr title="C sharp programming language">
-                        C#
-                      </ResumeAbbr>
-                      , Node.js,{" "}
-                      <ResumeAbbr title="Structured Query Language">
-                        SQL
-                      </ResumeAbbr>
-                      , Kubernetes, containerization, git, Azure, bash and
-                      PowerShell
-                    </li>
-                    <li>
-                      Empower others by speaking, organizing, mentoring, and
-                      contributing to OSS; including Gatsby, Cypress, Glamorous,
-                      VS Code Grammarly, VersionOne SDKs, ReactATL and
-                      Hacktoberfest events
-                    </li>
-                  </List>
-                </Section>
+                <List>
+                  <li>
+                    Specializes in front-end architecture, performance, and
+                    developer experience; using React.js, TypeScript, and
+                    GraphQL
+                  </li>
+                  <li>
+                    Enjoys mentoring and contributing to open source; including
+                    contributions to Gatsby and Cypress
+                  </li>
+                  <li>
+                    Delivered 7 workshops and presentations at major
+                    conferences; focused on React.js, Redux, and GraphQL
+                  </li>
+                  <li>
+                    Uses system languages{" "}
+                    <ResumeAbbr title="C sharp programming language">
+                      C#
+                    </ResumeAbbr>{" "}
+                    and Node.js to build scalable, distributed systems deployed
+                    with Kubernetes, docker, and native cloud solutions
+                  </li>
+                </List>
               </Notes>
             </ContactCard>
             <Section title="Recent Professional Experience">
@@ -228,43 +217,54 @@ const ResumeRoute: FC<{}> = () => {
                 }
                 description={
                   <>
-                    Develop authoring tooling and content delivery for
+                    Develop distributed{" "}
+                    <ResumeAbbr title="content management system">
+                      CMS
+                    </ResumeAbbr>{" "}
+                    , focusing on authoring tooling and content delivery, for
                     support.microsoft.com, Office applications, and Windows.
                     Influential technical leadership and mentorship across 5
                     teams.
                   </>
                 }
                 keyTechnologies={
-                  "TypeScript, React, Node.js, Next.js, Redux, GraphQL, Nx, C#, Azure, TDD, XP, git, Kanban"
+                  "TypeScript, React.js, Node.js, Next.js, Redux, GraphQL, Nx, C#, microservices, Azure, TDD, XP, git, Kanban"
                 }
               >
                 <List>
                   <li>
-                    Revamped the front-end architecture using React best
-                    practices, leading to improved maintainability and
-                    scalability for the application, supporting 2 billion users
-                    without performance degradation
+                    Revamped the front-end architecture using React.js and
+                    Next.js, leading to improved maintainability and scalability
+                    for the application, supporting over 2 billion users with
+                    nearly 500 million requests per month without performance
+                    degradation
                   </li>
                   <li>
-                    Championed the optimization of existing React components and
-                    federated{" "}
+                    Lead 3 engineering teams, aligning product vision, and
+                    executive leadership to build a federated{" "}
                     <ResumeAbbr title="Graph Query Language">
                       GraphQL
-                    </ResumeAbbr>
+                    </ResumeAbbr>{" "}
+                    <ResumeAbbr title="application programming interface">
+                      API
+                    </ResumeAbbr>{" "}
                     , resulting in a 90% reduction in key user-facing
                     performance metrics, facilitating smoother navigation for
-                    users improving user satisfaction scores by 25%
+                    users and improving user satisfaction scores by 25%
                   </li>
                   <li>
-                    Initiated a quality culture shift within the organization by
-                    introducing TDD and XP principles with Jest and Cypress
-                    testing; this foundational change reduced support costs by
+                    Instill a quality culture shift within the organization,
+                    introducing{" "}
+                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
+                    and <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>{" "}
+                    principles, <ResumeAbbr title="end-to-end">E2E</ResumeAbbr>{" "}
+                    and component Cypress test suites; reducing support costs by
                     30%
                   </li>
                   <li>
                     Reduce cost of creating and communicating project timelines
-                    to leadership by ~95% by engineering an open source
-                    forecasting tool, leveraging{" "}
+                    to leadership by ~95% by creating an open source forecasting
+                    tool, leveraging{" "}
                     <ResumeAbbr title="Artificial Intelligence">AI</ResumeAbbr>{" "}
                     and historical data without requiring estimates
                   </li>
@@ -293,28 +293,25 @@ const ResumeRoute: FC<{}> = () => {
                   </>
                 }
                 keyTechnologies={
-                  "TypeScript, React, Node.js, Redux, TDD, Jest, Cypress, Docker, AWS, microservices, git, Scrum"
+                  "TypeScript, React.js, Node.js, Redux, TDD, Jest, Cypress, Docker, microservices, AWS, git, Scrum"
                 }
               >
                 <List>
                   <li>
                     Innovated a comprehensive design language for UI components
-                    in the React ecosystem, ensuring consistent design across
-                    the application and accelerate delivery of new features
+                    in the React.js ecosystem, ensuring consistent design across
+                    3 applications and accelerate delivery of new features
+                  </li>
+                  <li>
+                    Guided and mentored 3 teams on React.js, Redux, TypeScript,
+                    Cypress and usage of{" "}
+                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
                   </li>
                   <li>
                     Established "Three Amigos" process driving improved
                     alignment and visibility with product/leadership of
                     delivered value; with 75% reduction of engineering time
                     investment, increased team velocity by 20%
-                  </li>
-                  <li>
-                    Guided 3 teams of engineers; React, Redux, TypeScript,
-                    innovated usage of{" "}
-                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                    and Cypress{" "}
-                    <ResumeAbbr title="end-to-end tests">E2E</ResumeAbbr>{" "}
-                    testing and automation
                   </li>
                 </List>
               </WorkExperience>
@@ -330,15 +327,15 @@ const ResumeRoute: FC<{}> = () => {
                     <ResumeAbbr title="Agile Lifecycle Management">
                       ALM
                     </ResumeAbbr>{" "}
-                    product; including road mapping, time sheets, UI query
-                    filters in an{" "}
+                    product; including road mapping, time sheets and UI for
+                    domain-level filtering in an{" "}
                     <ResumeAbbr title="Extreme programming">XP</ResumeAbbr> and{" "}
                     <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
                     environment.
                   </>
                 }
                 keyTechnologies={
-                  "JavaScript, React, Redux, AngularJs, Backbone.JS, jQuery, C#, MVC.NET, Node.js, TDD, XP, gulp, git, Kanban"
+                  "JavaScript, React.js, Redux, AngularJs, Backbone.JS, jQuery, C#, MVC.NET, Node.js, TDD, XP, gulp, git, Kanban"
                 }
               >
                 <List>
@@ -349,18 +346,20 @@ const ResumeRoute: FC<{}> = () => {
                       ES6
                     </ResumeAbbr>{" "}
                     modules; enabled use of modern tooling and practices,
-                    adoption of React, significant reduction of technical debt
-                    and increased developer productivity
+                    adoption of React.js, significant reduction of technical
+                    debt and increased developer productivity
                   </li>
                   <li>
-                    Implemented a systematic migration to React, resulting in a
-                    streamlined development process adopted by 5 teams across 2
-                    key products, enhancing productivity and consistency
+                    Aligned engineering organization to adopt React.js for new
+                    major features, resulting in a streamlined development
+                    process adopted by 5 teams across 2 key products, enhancing
+                    productivity and consistency
                   </li>
                   <li>
                     Streamlined processes between UX and Engineering through the
-                    creation of React based component library and design
-                    language documentation; tested via Cypress and Storybook
+                    creation of React.js based component library and design
+                    language documentation; used by 4 teams and tested via
+                    Cypress and Storybook
                   </li>
                   <li>
                     Owned high-impact{" "}
@@ -368,18 +367,9 @@ const ResumeRoute: FC<{}> = () => {
                     JavaScript SDK used by third party integrations; driving
                     many internal business processes of Fortune 500 companies
                   </li>
-                  <li>
-                    Led a series of workshops and presentations focused on the
-                    React ecosystem, delivered both internally and at major
-                    conferences, providing guidance and mentorship to engineers
-                    and leadership
-                  </li>
                 </List>
               </WorkExperience>
-            </Section>
-            <Section title="Professional Experience (continued)">
               <WorkExperience
-                summarized
                 role="Senior Software Engineer"
                 orgName="MATRIX Professional Services"
                 location="Atlanta, GA (Hybrid)"
@@ -387,20 +377,17 @@ const ResumeRoute: FC<{}> = () => {
                 to={<time dateTime="2014-09">Sept 2014</time>}
                 description={
                   <>
-                    Engineer and coach, focused on full-stack development in{" "}
+                    Focused on full-stack development using{" "}
                     <ResumeAbbr title="C sharp programming language">
                       C#
                     </ResumeAbbr>
                     , JavaScript, React, and{" "}
-                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
-                    , for major clients. Presented a total of over 6 workshops;
-                    topics ranging from{" "}
-                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
-                    , SOLID principles, and git.
+                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
+                    for major clients.
                   </>
                 }
                 keyTechnologies={
-                  "C#, MVC.NET, PHP, Node.js, JavaScript, React, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, Scrum, grunt, git"
+                  "C#, MVC.NET, Node.js, JavaScript, React.js, jQuery, KnockoutJS, TDD, Jasmine, Karma, MSTest, Scrum, grunt, git"
                 }
               >
                 <List>
@@ -410,21 +397,14 @@ const ResumeRoute: FC<{}> = () => {
                     by an undisclosed amount
                   </li>
                   <li>
-                    Reduced defects in new features by ~60% through of testing
-                    mechanisms, including jasmine, mocha, chai, sinon, and
-                    karma, and CI automation via gulp and grunt
-                  </li>
-                  <li>
-                    React early adopter; pioneered usage and incorporation into
-                    company's core competencies; including training of 7+
-                    engineers
-                  </li>
-                  <li>
-                    Founded company craftsman fellowship program and curriculum;
-                    onboarding 2 new hires into the program
+                    Reduced defects in new features by ~60% through testing
+                    mechanisms, including jasmine, mocha and karma with CI
+                    automation via gulp and grunt
                   </li>
                 </List>
               </WorkExperience>
+            </Section>
+            <Section title="Professional Experience (continued)">
               <WorkExperience
                 summarized
                 role="Software Engineer"
