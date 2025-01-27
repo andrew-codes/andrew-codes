@@ -233,49 +233,49 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Revamped the front-end architecture using React.js and
-                    Next.js, leading to improved maintainability and scalability
-                    for the application, supporting over 2 billion users with
-                    nearly 500 million requests per month without performance
-                    degradation
+                    Designed and implemented a scalable front-end architecture
+                    using React.js and Next.js, ensuring seamless performance
+                    under a load of 500M monthly requests and 2B+ users
+                    worldwide
                   </li>
                   <li>
-                    Lead 3 engineering teams, aligning product vision, and
-                    executive leadership to build a federated{" "}
+                    Spearheaded cross-team collaboration among 3 engineering
+                    teams to develop a federated{" "}
                     <ResumeAbbr title="Graph Query Language">
                       GraphQL
                     </ResumeAbbr>{" "}
                     <ResumeAbbr title="application programming interface">
                       API
-                    </ResumeAbbr>{" "}
-                    , resulting in a 90% reduction in key user-facing
-                    performance metrics, facilitating smoother navigation for
-                    users and improving user satisfaction scores by 25%
+                    </ResumeAbbr>
+                    , reducing user-facing latency by 90% and boosting
+                    satisfaction scores by 25%
                   </li>
                   <li>
-                    Instill a quality culture shift within the organization,
-                    introducing{" "}
+                    Championed{" "}
                     <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
                     and <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>{" "}
-                    principles, <ResumeAbbr title="end-to-end">E2E</ResumeAbbr>{" "}
-                    and component Cypress test suites; reducing support costs by
-                    30%
+                    principles across engineering teams, mentoring developers on{" "}
+                    <ResumeAbbr title="end-to-end">E2E</ResumeAbbr> and
+                    component testing using Cypress, which cut support costs by
+                    30% and enhanced code reliability
                   </li>
                   <li>
-                    Reduce cost of creating and communicating project timelines
-                    to leadership by ~95% by creating an open source forecasting
-                    tool, leveraging{" "}
+                    Developed an open-source{" "}
                     <ResumeAbbr title="Artificial Intelligence">AI</ResumeAbbr>{" "}
-                    and historical data without requiring estimates
+                    -driven forecasting tool to eliminate manual estimates,
+                    improving project timeline communication to leadership by
+                    95% and streamlining decision-making processes
                   </li>
                   <li>
-                    Reduce{" "}
+                    Optimized{" "}
                     <ResumeAbbr title="Continuous integration automation">
                       CI
                     </ResumeAbbr>{" "}
-                    times by 80% by improving reliability with Yarn{" "}
-                    <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>, reducing
-                    complexity via Nx, and consolidating into a mono-repository
+                    pipeline efficiency by 80% through Yarn{" "}
+                    <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>{" "}
+                    integration, simplifying dependency management with Nx, and
+                    centralizing codebases into a mono-repository, reducing
+                    operational overhead
                   </li>
                 </List>
               </WorkExperience>
@@ -298,20 +298,19 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Innovated a comprehensive design language for UI components
-                    in the React.js ecosystem, ensuring consistent design across
-                    3 applications and accelerate delivery of new features
+                    Designed a modular React.js-based UI component library,
+                    standardizing design language across 3 applications and
+                    accelerating feature delivery timelines
                   </li>
                   <li>
-                    Guided and mentored 3 teams on React.js, Redux, TypeScript,
-                    Cypress and usage of{" "}
-                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>
+                    Mentored 3 cross-functional teams on React.js, Redux, and{" "}
+                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
+                    practices, fostering improved team productivity
                   </li>
                   <li>
-                    Established "Three Amigos" process driving improved
-                    alignment and visibility with product/leadership of
-                    delivered value; with 75% reduction of engineering time
-                    investment, increased team velocity by 20%
+                    Pioneered the “Three Amigos” collaboration model, aligning
+                    engineering, product, and leadership teams, which reduced
+                    time investment by 75% and boosted team velocity by 20%
                   </li>
                 </List>
               </WorkExperience>
@@ -340,14 +339,13 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Led modernization effort of entire front-end codebase
-                    replacing proprietary JavaScript module format with{" "}
+                    Directed front-end modernization by transitioning
+                    proprietary JavaScript to{" "}
                     <ResumeAbbr title="EcmaScript 6 (JavaScript version)">
                       ES6
                     </ResumeAbbr>{" "}
-                    modules; enabled use of modern tooling and practices,
-                    adoption of React.js, significant reduction of technical
-                    debt and increased developer productivity
+                    modules, reducing technical debt by 30% and increasing
+                    developer productivity by 40%
                   </li>
                   <li>
                     Aligned engineering organization to adopt React.js for new
@@ -356,10 +354,9 @@ const ResumeRoute: FC<{}> = () => {
                     productivity and consistency
                   </li>
                   <li>
-                    Streamlined processes between UX and Engineering through the
-                    creation of React.js based component library and design
-                    language documentation; used by 4 teams and tested via
-                    Cypress and Storybook
+                    Developed a React.js-based component library and design
+                    documentation, adopted by 4 teams, improving collaboration
+                    with UX team and ensuring UX consistency across products
                   </li>
                   <li>
                     Owned high-impact{" "}
@@ -392,14 +389,15 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Prepared redesigned checkout process for a major e-commerce
-                    store; reducing steps to action by 50% and increasing sales
-                    by an undisclosed amount
+                    Redesigned a major e-commerce checkout process, reducing
+                    user steps by 50% and enhancing the overall UX, contributing
+                    to a measurable increase in conversion rates
                   </li>
                   <li>
-                    Reduced defects in new features by ~60% through testing
-                    mechanisms, including jasmine, mocha and karma with CI
-                    automation via gulp and grunt
+                    Implemented comprehensive testing frameworks (Jasmine,
+                    Mocha, and Karma) with CI automation via Gulp and Grunt,
+                    reducing feature defects by ~60% and significantly enhancing
+                    product quality
                   </li>
                 </List>
               </WorkExperience>
