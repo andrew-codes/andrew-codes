@@ -95,7 +95,7 @@ const RAW_RUNTIME_STATE =
           ["remark-gfm", "npm:4.0.0"],\
           ["remark-mdx-images", "npm:3.0.0"],\
           ["remark-parse", "npm:11.0.0"],\
-          ["remark-rehype", "npm:11.1.0"],\
+          ["remark-rehype", "npm:11.1.1"],\
           ["remix", "npm:2.12.0"],\
           ["remix-island", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:0.2.0"],\
           ["remix-mount-routes", "npm:0.1.3"],\
@@ -195,7 +195,7 @@ const RAW_RUNTIME_STATE =
           ["remark-gfm", "npm:4.0.0"],\
           ["remark-mdx-images", "npm:3.0.0"],\
           ["remark-parse", "npm:11.0.0"],\
-          ["remark-rehype", "npm:11.1.0"],\
+          ["remark-rehype", "npm:11.1.1"],\
           ["remix", "npm:2.12.0"],\
           ["remix-island", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:0.2.0"],\
           ["remix-mount-routes", "npm:0.1.3"],\
@@ -14965,6 +14965,18 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/remark-rehype-npm-11.1.0-52f1fb906c-945a10ed91.zip/node_modules/remark-rehype/",\
         "packageDependencies": [\
           ["remark-rehype", "npm:11.1.0"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["@types/mdast", "npm:4.0.4"],\
+          ["mdast-util-to-hast", "npm:13.2.0"],\
+          ["unified", "npm:11.0.5"],\
+          ["vfile", "npm:6.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:11.1.1", {\
+        "packageLocation": "./.yarn/cache/remark-rehype-npm-11.1.1-b682bb669b-39404bd19c.zip/node_modules/remark-rehype/",\
+        "packageDependencies": [\
+          ["remark-rehype", "npm:11.1.1"],\
           ["@types/hast", "npm:3.0.4"],\
           ["@types/mdast", "npm:4.0.4"],\
           ["mdast-util-to-hast", "npm:13.2.0"],\
