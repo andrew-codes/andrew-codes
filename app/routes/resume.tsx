@@ -235,7 +235,7 @@ const ResumeRoute: FC<{}> = () => {
                   <li>
                     Designed and implemented a scalable front-end architecture
                     using React.js and Next.js, ensuring seamless performance
-                    under a load of 500M monthly requests and 2B+ users
+                    under a load of 1B monthly requests and 2B+ users
                     worldwide
                   </li>
                   <li>
