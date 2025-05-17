@@ -26,12 +26,14 @@ const Resume = styled.div`
 `
 
 const Paragraph = styled.p`
+  margin-bottom: 8pt;
+
   @media print {
   }
 `
 const List = styled.ul`
-  margin: 8pt 16pt 0 0 !important;
-  padding: 0 0 0 32pt !important;
+  margin: 0 16pt 0 0 !important;
+  padding: 0 0 0 18pt !important;
 
   > li {
     margin-top: 4pt;
@@ -122,32 +124,52 @@ const KeyResults = styled.div`
   width: 100%;
 `
 const WorkExperienceSummaryRoot = styled(WorkExperienceRoot)`
-  margin: 0 !important;
+  align-items: baseline;
+  display: flex;
+  flex: unset;
+  margin-top: 0 !important;
+  padding: 0;
+  width: 100%;
+
+  @media screen and (max-width: 960px) {
+    margin-top: 8pt !important;
+  }
 
   h3 {
     font-size: 12pt;
-    max-width: calc(100% - 160px);
-    min-width: unset;
-    width: 100%;
-    flex: unset;
+    padding-right: 0.25rem;
+    flex: 1;
+
+    @media screen and (max-width: 960px) {
+      flex: 1;
+    }
   }
 
   h3 + span {
     text-align: right;
-    flex: 1;
     display: inline-flex;
-
-    time {
-      flex: 1;
-      text-align: left;
+    > time {
+      padding-right: 0.25rem;
     }
-
-    time:nth-child(1) {
+    > time + time {
+      padding-right: 0;
+      padding-left: 0.25rem;
     }
+  }
+`
 
-    time + time {
-      text-align: right;
-    }
+const Summary = styled.span`
+  font-size: 8pt;
+  font-style: italic;
+  flex: 1;
+  line-height: 8px;
+
+  @media screen and (max-width: 960px) {
+    flex: unset;
+    order: 3;
+    width: 100%;
+    line-height: 16px;
+    font-size: 12px;
   }
 `
 
@@ -189,14 +211,16 @@ const WorkExperience: FC<{
       {!!children && <KeyResults>{children}</KeyResults>}
     </WorkExperienceRoot>
   ) : (
-    <WorkExperienceSummaryRoot>
-      <JobTitle>
-        {role} - {orgName}
-      </JobTitle>
-      <TimeFrame>
-        {from} - {to}
-      </TimeFrame>
-    </WorkExperienceSummaryRoot>
+    <>
+      <WorkExperienceSummaryRoot>
+        <JobTitle>
+          {role} - {orgName}
+        </JobTitle>
+        <TimeFrame>
+          {from} - {to}
+        </TimeFrame>
+      </WorkExperienceSummaryRoot>
+    </>
   )
 }
 

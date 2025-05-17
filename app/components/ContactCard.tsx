@@ -34,22 +34,7 @@ const JobTitle: WrappedStyledComponent = ({ as, children }) => (
 const ContactInformationStyled = styled.div``
 
 const ContactInformation: WrappedStyledComponent = ({ as, children }) => (
-  <ContactInformationStyled as={as}>
-    <>
-      {Children.map(children, (child, index) => {
-        if (index === 0) {
-          return child
-        }
-
-        return (
-          <>
-            <SmallContentDivider />
-            {child}
-          </>
-        )
-      })}
-    </>
-  </ContactInformationStyled>
+  <ContactInformationStyled as={as}>{children}</ContactInformationStyled>
 )
 
 const AddressStyled = styled.address``
@@ -112,8 +97,39 @@ const Notes: WrappedStyledComponent = ({ as, children }) => (
   </NotesStyled>
 )
 
+const ConnectionOrderedList = styled.ol`
+  padding: 0;
+  margin: 0;
+  display: block;
+`
+const ConnectionListItem = styled.li`
+  padding: 0;
+  margin: 0;
+  display: inline;
+`
+
+const ConnectionList: WrappedStyledComponent = ({ children }) => (
+  <ConnectionOrderedList>
+    <ConnectionListItem>
+      {Children.map(children, (child, index) => {
+        if (index === 0) {
+          return child
+        }
+
+        return (
+          <>
+            <SmallContentDivider />
+            {child}
+          </>
+        )
+      })}
+    </ConnectionListItem>
+  </ConnectionOrderedList>
+)
+
 export {
   Address,
+  ConnectionList,
   ContactCard,
   ContactInformation,
   Email,

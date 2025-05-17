@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet"
 import { fileURLToPath } from "url"
 import {
   Address,
+  ConnectionList,
   ContactCard,
   ContactInformation,
   Email,
@@ -148,34 +149,48 @@ const ResumeRoute: FC<{}> = () => {
               <FullName as={ResumeFullName}>James Andrew Smith</FullName>
               <JobTitle as={ResumeJobTitle}>Senior Software Engineer</JobTitle>
               <ContactInformation as={ResumeContactInformation}>
-                <Address as={ResumeAddress}>
-                  <Locality>Atlanta</Locality>,{" "}
-                  <Region as={ResumeAbbr} title="Georgia">
-                    GA
-                  </Region>
-                </Address>
-                <Telephone
-                  as={ResumeLink}
-                  href="tel:4705359093"
-                  title="Mobile number"
-                >
-                  +1.470.535.9093
-                </Telephone>
-                <Email as={ResumeLink} href="mailto:jas@andrew.codes">
-                  jas@andrew.codes
-                </Email>
-                <Url
-                  as={ResumeLink}
-                  href="https://linkedin.com/in/JamesAndrewSmith"
-                >
-                  linkedin.com/in/jamesandrewsmith
-                </Url>
+                <ConnectionList>
+                  <Address as={ResumeAddress}>
+                    <Locality>Atlanta</Locality>,{" "}
+                    <Region as={ResumeAbbr} title="Georgia">
+                      GA
+                    </Region>
+                  </Address>
+                  <Telephone
+                    as={ResumeLink}
+                    href="tel:4705359093"
+                    title="Mobile number"
+                  >
+                    +1.470.535.9093
+                  </Telephone>
+                  <Email as={ResumeLink} href="mailto:jas@andrew.codes">
+                    jas@andrew.codes
+                  </Email>
+                </ConnectionList>
+                <ConnectionList>
+                  <Url
+                    as={ResumeLink}
+                    href="https://linkedin.com/in/JamesAndrewSmith"
+                  >
+                    linkedin.com/in/jamesandrewsmith
+                  </Url>
+                  <Url as={ResumeLink} href="https://andrew.codes">
+                    andrew.codes
+                  </Url>
+                  <Url as={ResumeLink} href="https://github.com/andrew-codes">
+                    github.com/andrew-codes
+                  </Url>
+                </ConnectionList>
               </ContactInformation>
               <Notes as={ResumeNotes}>
                 <Paragraph>
-                  Empathetic software craftsmen engineering scalable software
-                  solutions for {yearsOfExperience} years, delivering impactful
-                  customer experiences and mentoring teams of engineers.
+                  Staff-level software engineer with {yearsOfExperience} years
+                  of experience designing scalable, high-impact front-end
+                  systems at enterprise scale. Proven leader in front-end
+                  architecture, developer experience, and testing strategy.
+                  Trusted mentor across teams for building sustainable
+                  engineering practices. Speaker and contributor to the React
+                  and GraphQL communities.
                 </Paragraph>
                 <List>
                   <li>
@@ -186,6 +201,16 @@ const ResumeRoute: FC<{}> = () => {
                   <li>
                     Enjoys mentoring and contributing to open source; including
                     contributions to Gatsby and Cypress
+                  </li>
+                  <li>
+                    Co-founder of{" "}
+                    <ResumeLink
+                      href="https://www.meetup.com/react-atl/"
+                      title="ReactATL meetup"
+                    >
+                      ReactATL
+                    </ResumeLink>
+                    ; meetup of over 4K engineers and community members
                   </li>
                   <li>
                     Delivered 7 workshops and presentations at major
@@ -204,7 +229,7 @@ const ResumeRoute: FC<{}> = () => {
             </ContactCard>
             <Section title="Recent Professional Experience">
               <WorkExperience
-                role="Senior Software Engineer (64)"
+                role="Staff-level Software Engineer (L64)"
                 orgName="Microsoft"
                 location="Remote"
                 from={<time dateTime="2020-12">Dec 2020</time>}
@@ -233,63 +258,57 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Designed and implemented a scalable front-end architecture
-                    using React.js and Next.js, ensuring seamless performance
-                    under a load of 1B monthly requests and 2B+ users
-                    worldwide
-                  </li>
-                  <li>
-                    Spearheaded cross-team collaboration among 3 engineering
-                    teams to develop a federated{" "}
-                    <ResumeAbbr title="Graph Query Language">
-                      GraphQL
+                    Architected front-end platform powering{" "}
+                    <ResumeAbbr title="Content management system">
+                      CMS
                     </ResumeAbbr>{" "}
-                    <ResumeAbbr title="application programming interface">
-                      API
-                    </ResumeAbbr>
-                    , reducing user-facing latency by 90% and boosting
-                    satisfaction scores by 25%
+                    systems for support.microsoft.com, Office, and Windows;
+                    serving 2B+ users and handling 1B+ requests monthly.
                   </li>
                   <li>
-                    Championed{" "}
-                    <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                    and <ResumeAbbr title="Extreme programming">XP</ResumeAbbr>{" "}
-                    principles across engineering teams, mentoring developers on{" "}
-                    <ResumeAbbr title="end-to-end">E2E</ResumeAbbr> and
-                    component testing using Cypress, which cut support costs by
-                    30% and enhanced code reliability
-                  </li>
-                  <li>
-                    Developed an open-source{" "}
+                    Designed a scalable authoring tool to enable content
+                    onboarding for Co-pilot Labs and partner teams, accelerating
+                    Microsoft's generative{" "}
                     <ResumeAbbr title="Artificial Intelligence">AI</ResumeAbbr>{" "}
-                    -driven forecasting tool to eliminate manual estimates,
-                    improving project timeline communication to leadership by
-                    95% and streamlining decision-making processes
+                    initiative.
                   </li>
                   <li>
-                    Optimized{" "}
-                    <ResumeAbbr title="Continuous integration automation">
-                      CI
-                    </ResumeAbbr>{" "}
-                    pipeline efficiency by 80% through Yarn{" "}
-                    <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>{" "}
-                    integration, simplifying dependency management with Nx, and
-                    centralizing codebases into a mono-repository, reducing
-                    operational overhead
+                    Led strategic adoption of Jest and Cypress across 8 teams,
+                    increasing test coverage from 0% to 60% and cutting
+                    regression support costs by 30%.
+                  </li>
+                  <li>
+                    Consolidated microservices into a monorepo with Nx and Yarn
+                    <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>,
+                    improving{" "}
+                    <ResumeAbbr title="Continuous integration">CI</ResumeAbbr>{" "}
+                    cycle time by 95% and enhancing developer workflows.
+                  </li>
+                  <li>
+                    Created and open-sourced an{" "}
+                    <ResumeAbbr title="Artificial Intelligence">AI</ResumeAbbr>
+                    -driven project forecasting tool, improving timeline
+                    communication to leadership by 80%.
+                  </li>
+                  <li>
+                    Championed the adoption of Extreme Programming (XP)
+                    methodologies across five teams, mentoring 20+ engineers and
+                    elevating code quality measured by a reduction in support
+                    cost.
                   </li>
                 </List>
               </WorkExperience>
               <WorkExperience
-                role="Lead Front-End Engineer"
+                role="Lead Front-End Engineer (Staff-level)"
                 orgName="Experience, LLC"
                 location="Remote"
                 from={<time dateTime="2019-06">Jun 2019</time>}
                 to={<time dateTime="2020-12">Dec 2020</time>}
                 description={
                   <>
-                    Guided all aspects of front-end development for 3 teams,
-                    communicated with stakeholders and executive leadership,
-                    ensured experiences that delight customers.
+                    Owned front-end architecture across 3 cross-functional
+                    teams. Partnered with leadership to deliver scalable
+                    user-facing platforms aligned with business goals.
                   </>
                 }
                 keyTechnologies={
@@ -298,31 +317,37 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Designed a modular React.js-based UI component library,
-                    standardizing design language across 3 applications and
-                    accelerating feature delivery timelines
+                    Developed a React.js component library adopted by all
+                    applications, improving design consistency and feature
+                    velocity.
+                  </li>
+                  <li>
+                    Instituted 'Three Amigos' model to align product,
+                    engineering, and leadership vision; reducing planning time
+                    by 75%.
+                  </li>
+                  <li>
+                    Championed Cypress-based testing pipelines integrated with
+                    Docker-based ephemeral{" "}
+                    <ResumeAbbr title="Continuous integration">CI</ResumeAbbr>{" "}
+                    environments.
                   </li>
                   <li>
                     Mentored 3 cross-functional teams on React.js, Redux, and{" "}
                     <ResumeAbbr title="Test-driven development">TDD</ResumeAbbr>{" "}
-                    practices, fostering improved team productivity
-                  </li>
-                  <li>
-                    Pioneered the “Three Amigos” collaboration model, aligning
-                    engineering, product, and leadership teams, which reduced
-                    time investment by 75% and boosted team velocity by 20%
+                    practices, fostering enhanced team productivity
                   </li>
                 </List>
               </WorkExperience>
               <WorkExperience
-                role="Senior Software Engineer"
+                role="Senior Software Engineer (Staff-level)"
                 orgName="VersionOne, CollabNet"
                 location="Atlanta, GA (Hybrid)"
                 from={<time dateTime="2014-09">Sept 2014</time>}
                 to={<time dateTime="2019-06">Jun 2019</time>}
                 description={
                   <>
-                    Technical lead for over 3 high-profile features on flagship{" "}
+                    Technical lead for high-profile features on flagship{" "}
                     <ResumeAbbr title="Agile Lifecycle Management">
                       ALM
                     </ResumeAbbr>{" "}
@@ -339,30 +364,24 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Directed front-end modernization by transitioning
-                    proprietary JavaScript to{" "}
+                    Led modernization of a proprietary JavaScript front-end to
                     <ResumeAbbr title="EcmaScript 6 (JavaScript version)">
                       ES6
                     </ResumeAbbr>{" "}
-                    modules, reducing technical debt by 30% and increasing
-                    developer productivity by 40%
+                    and React.js across 5 teams, reducing tech debt by 30%.
                   </li>
                   <li>
-                    Aligned engineering organization to adopt React.js for new
-                    major features, resulting in a streamlined development
-                    process adopted by 5 teams across 2 key products, enhancing
-                    productivity and consistency
-                  </li>
-                  <li>
-                    Developed a React.js-based component library and design
-                    documentation, adopted by 4 teams, improving collaboration
-                    with UX team and ensuring UX consistency across products
-                  </li>
-                  <li>
-                    Owned high-impact{" "}
+                    Built and maintained an{" "}
                     <ResumeAbbr title="Open source software">OSS</ResumeAbbr>{" "}
-                    JavaScript SDK used by third party integrations; driving
-                    many internal business processes of Fortune 500 companies
+                    React component library and JavaScript{" "}
+                    <ResumeAbbr title="Software development kit">
+                      SDK
+                    </ResumeAbbr>{" "}
+                    used internally and by Fortune 500 customers.
+                  </li>
+                  <li>
+                    Served as technical advisor for front-end architecture and
+                    tooling strategy across 2 products and 5 teams.
                   </li>
                 </List>
               </WorkExperience>
@@ -389,20 +408,21 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Redesigned a major e-commerce checkout process, reducing
-                    user steps by 50% and enhancing the overall UX, contributing
-                    to a measurable increase in conversion rates
+                    Delivered a redesigned e-commerce checkout for a major
+                    client, reducing steps by 50% and improving conversion rates
                   </li>
                   <li>
-                    Implemented comprehensive testing frameworks (Jasmine,
-                    Mocha, and Karma) with CI automation via Gulp and Grunt,
-                    reducing feature defects by ~60% and significantly enhancing
-                    product quality
+                    Led React.js adoption across teams; created onboarding
+                    curriculum and mentored 7+ engineers
+                  </li>
+                  <li>
+                    Implemented CI-ready test frameworks (Jasmine, Mocha, Karma)
+                    integrated with Gulp/Grunt; reducing defects by ~60%.
                   </li>
                 </List>
               </WorkExperience>
             </Section>
-            <Section title="Professional Experience (continued)">
+            <Section title="Earlier Roles">
               <WorkExperience
                 summarized
                 role="Software Engineer"
@@ -412,8 +432,8 @@ const ResumeRoute: FC<{}> = () => {
                 to={<time dateTime="2013-02">Feb 2013</time>}
                 description={
                   <>
-                    Excelled in an position focused on Fluency for Coding, a
-                    medical coding and billing web application.
+                    built medical coding platform in a regulated healthcare
+                    environment
                   </>
                 }
               ></WorkExperience>
@@ -424,12 +444,7 @@ const ResumeRoute: FC<{}> = () => {
                 location="Atlanta, GA"
                 from={<time dateTime="2012-03">Mar 2012</time>}
                 to={<time dateTime="2012-09">Sept 2012</time>}
-                description={
-                  <>
-                    Guided design of custom CMS to manage content across over 10
-                    web properties.
-                  </>
-                }
+                description={<>high-scale marketing sites</>}
               ></WorkExperience>
               <WorkExperience
                 summarized
@@ -438,12 +453,7 @@ const ResumeRoute: FC<{}> = () => {
                 location="Birmingham, AL"
                 from={<time dateTime="2011-08">Aug 2011</time>}
                 to={<time dateTime="2012-03">Mar 2012</time>}
-                description={
-                  <>
-                    Scrum team, produced operational and membership management
-                    software for non-profits.
-                  </>
-                }
+                description={<>migrated legacy WebForms to MVC.NET</>}
               ></WorkExperience>
               <WorkExperience
                 summarized
@@ -452,12 +462,7 @@ const ResumeRoute: FC<{}> = () => {
                 location="Birmingham, AL"
                 from={<time dateTime="2011-02">Feb 2011</time>}
                 to={<time dateTime="2011-08">Aug 2011</time>}
-                description={
-                  <>
-                    Improved e-healthcare platform, Coldstone; leveraged by
-                    hospitals and healthcare providers.
-                  </>
-                }
+                description={<>improved e-healthcare platform, Coldstone</>}
               ></WorkExperience>
               <WorkExperience
                 summarized
@@ -467,10 +472,7 @@ const ResumeRoute: FC<{}> = () => {
                 from={<time dateTime="2010-01">Jan 2010</time>}
                 to={<time dateTime="2011-02">Feb 2011</time>}
                 description={
-                  <>
-                    Delivered features for high-profile BuyAToyota.com; handling
-                    Toyota's third tier marketing.
-                  </>
+                  <>delivered features for high-profile BuyAToyota.com</>
                 }
               ></WorkExperience>
               <WorkExperience
@@ -480,12 +482,7 @@ const ResumeRoute: FC<{}> = () => {
                 location="Columbus, GA"
                 from={<time dateTime="2008-06">Jun 2008</time>}
                 to={<time dateTime="2009-12">Dec 2009</time>}
-                description={
-                  <>
-                    Taught web development and general computing courses;
-                    ensuring student preparedness for workforce.
-                  </>
-                }
+                description={<>worked with business & developed curriculum</>}
               ></WorkExperience>
             </Section>
             {/* <Section title="Community">
