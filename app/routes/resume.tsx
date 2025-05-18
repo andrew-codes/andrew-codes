@@ -278,7 +278,7 @@ const ResumeRoute: FC<{}> = () => {
                     regression support costs by 30%.
                   </li>
                   <li>
-                    Consolidated microservices into a monorepo with Nx and Yarn
+                    Consolidated microservices into a monorepo with Nx and Yarn{" "}
                     <ResumeAbbr title="Plug and Play">PnP</ResumeAbbr>,
                     improving{" "}
                     <ResumeAbbr title="Continuous integration">CI</ResumeAbbr>{" "}
@@ -364,7 +364,7 @@ const ResumeRoute: FC<{}> = () => {
               >
                 <List>
                   <li>
-                    Led modernization of a proprietary JavaScript front-end to
+                    Led modernization of a proprietary JavaScript front-end to{" "}
                     <ResumeAbbr title="EcmaScript 6 (JavaScript version)">
                       ES6
                     </ResumeAbbr>{" "}
