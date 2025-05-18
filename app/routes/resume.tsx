@@ -134,7 +134,7 @@ const ResumeRoute: FC<{}> = () => {
   return (
     <>
       <Helmet>
-        <title>Resume | Andrew Smith</title>
+        <title>James Andrew Smith - Resume</title>
       </Helmet>
       <Global styles={globalStyles} />
       <Root>
@@ -147,7 +147,7 @@ const ResumeRoute: FC<{}> = () => {
           <Page>
             <ContactCard as={ResumeContactCard}>
               <FullName as={ResumeFullName}>James Andrew Smith</FullName>
-              <JobTitle as={ResumeJobTitle}>Senior Software Engineer</JobTitle>
+              <JobTitle as={ResumeJobTitle}>Staff Software Engineer</JobTitle>
               <ContactInformation as={ResumeContactInformation}>
                 <ConnectionList>
                   <Address as={ResumeAddress}>
