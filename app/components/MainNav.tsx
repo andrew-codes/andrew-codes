@@ -89,7 +89,7 @@ const GlobalNavImpl: FC<{}> = (props) => (
       <ContactCard as={ProfileSummary}>
         <ProfileInformation>
           <FullName as={ProfileName}>James Andrew Smith</FullName>
-          <JobTitle>Senior Software Engineer</JobTitle>
+          <JobTitle>Staff Software Engineer</JobTitle>
           <ContactInformation>
             <Url href="https://linkedin.com/in/JamesAndrewSmith">LinkedIn</Url>
             <Url href="https://github.com/andrew-codes">
