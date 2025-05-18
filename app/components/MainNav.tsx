@@ -2,8 +2,8 @@ import styled from "@emotion/styled"
 import type { FC } from "react"
 import avatar from "../public/images/Profile.webp"
 import {
+  ConnectionList,
   ContactCard,
-  ContactInformation,
   FullName,
   JobTitle,
   Url,
@@ -90,12 +90,12 @@ const GlobalNavImpl: FC<{}> = (props) => (
         <ProfileInformation>
           <FullName as={ProfileName}>James Andrew Smith</FullName>
           <JobTitle>Staff Software Engineer</JobTitle>
-          <ContactInformation>
+          <ConnectionList>
             <Url href="https://linkedin.com/in/JamesAndrewSmith">LinkedIn</Url>
             <Url href="https://github.com/andrew-codes">
               andrew-codes (github)
             </Url>
-          </ContactInformation>
+          </ConnectionList>
         </ProfileInformation>
         <Image
           src={avatar}
