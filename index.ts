@@ -160,7 +160,7 @@ app.use((err: any, req: any, res: any, next: any) => {
   res.status(500).send("Error")
 })
 
-const port = process.env.PORT ?? 3000
+const port = process.env.PORT ?? 8080
 getMdxPages(
   { forceFresh: true, timings: {} },
   "app/posts",

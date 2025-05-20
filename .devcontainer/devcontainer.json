@@ -6,7 +6,7 @@
       "dockerDashComposeVersion": "v2"
     },
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "22.5.0"
+      "version": "22.14.0"
     },
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/git:1": {
@@ -46,7 +46,7 @@
     }
   },
   "portsAttributes": {
-    "3000": {
+    "8080": {
       "label": "Local development site",
       "onAutoForward": "notify"
     }
