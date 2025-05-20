@@ -1,8 +1,6 @@
-ARG NODE_VERSION=22.5.0
+ARG NODE_VERSION=22.14.0
 FROM node:${NODE_VERSION}-slim AS base
 RUN corepack enable
-RUN corepack prepare yarn@4.4.1 --activate
-RUN yarn set version 4.4.1
 LABEL fly_launch_runtime="Remix"
 
 # Build stage for app

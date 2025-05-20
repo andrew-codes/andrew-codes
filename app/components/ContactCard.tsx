@@ -139,5 +139,6 @@ export {
   Notes,
   Region,
   Telephone,
-  Url,
+  Url
 }
+
