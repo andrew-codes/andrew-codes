@@ -1,0 +1,168 @@
+import Avatar from "@mui/joy/Avatar"
+import Box from "@mui/joy/Box"
+import Button from "@mui/joy/Button"
+import Card from "@mui/joy/Card"
+import Stack from "@mui/joy/Stack"
+import Typography from "@mui/joy/Typography"
+import { motion } from "motion/react"
+import {
+  Children,
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
+
+const overlayVariants = {
+  active: {
+    opacity: 1,
+  },
+  inactive: {
+    opacity: 0,
+    display: "none",
+  },
+}
+const Recommendation: FC<
+  PropsWithChildren<{
+    profileImage: string
+    name: string
+    title: string
+    summarized?: boolean
+  }>
+> = ({ profileImage, name, title, children, summarized }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleOpen = useCallback(() => {
+    setIsOpen((prev) => !prev)
+  }, [])
+
+  const handleKeyDown = (evt) => {
+    if (summarized && isOpen && evt.key === "Escape") {
+      toggleOpen()
+    }
+  }
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [handleKeyDown])
+
+  const scrollable = useRef<HTMLDivElement>()
+  useEffect(() => {
+    window.document.body.style.overflow = isOpen ? "hidden" : "unset"
+    if (!isOpen) {
+      scrollable.current?.scroll({ top: 0 })
+    }
+  }, [isOpen])
+
+  return (
+    <Box sx={{ minHeight: "191px" }}>
+      <motion.div
+        style={{
+          pointerEvents: "none",
+          willChange: "opacity",
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0, 0, 0, 0.8)",
+          zIndex: 100,
+        }}
+        variants={overlayVariants}
+        animate={isOpen ? "active" : "inactive"}
+        onClick={toggleOpen}
+      ></motion.div>
+      <Box
+        sx={(theme) => ({
+          margin: 0,
+          zIndex: isOpen ? 101 : 0,
+          position: isOpen ? "fixed" : "relative",
+          top: isOpen ? 0 : "unset",
+          left: isOpen ? 0 : "unset",
+          width: isOpen ? "100%" : "unset",
+          height: isOpen ? `calc(100vh - ${theme.spacing(2)})` : "unset",
+        })}
+      >
+        <Card sx={{ height: "100%", margin: summarized && isOpen ? 1 : 0 }}>
+          <Stack direction="row" spacing={2} sx={{ height: "100%" }}>
+            <Avatar
+              alt={name}
+              src={profileImage}
+              sx={(theme) => ({
+                width: 80,
+                height: 80,
+                [theme.breakpoints.down("sm")]: {
+                  width: 45,
+                  height: 45,
+                },
+              })}
+              variant="plain"
+            ></Avatar>
+            <Stack direction="column" sx={{ textAlign: "left" }}>
+              <Typography level="h3" fontSize="lg">
+                {name}
+              </Typography>
+              <Typography level="body-sm">{title}</Typography>
+              <Box
+                ref={scrollable}
+                sx={(theme) => ({
+                  maxHeight:
+                    !summarized || isOpen ? "unset" : "calc(1.5rem * 3)",
+                  overflowY: !summarized || isOpen ? "scroll" : "hidden",
+                  scrollbarWidth: "thin",
+                  scrollbarColor: `${theme.palette.text.tertiary} transparent`,
+                  "&::-webkit-scrollbar": {
+                    width: theme.spacing(0.5),
+                  },
+                  "&::--webkit-scrollbar-track": {
+                    background: "transparent",
+                  },
+                  textOverflow: !summarized || !isOpen ? "unset" : "ellipsis",
+                  width: "100%",
+                  height: summarized && isOpen ? "100vh" : "unset",
+                  [theme.breakpoints.down("sm")]: {
+                    width:
+                      summarized && isOpen
+                        ? `calc(100% + ${theme.spacing(12)})`
+                        : `calc(100% + ${theme.spacing(12)})`,
+                    marginLeft: `calc(-1 * ${theme.spacing(10)})`,
+                    marginTop: theme.spacing(1),
+                    "> * ": {
+                      padding:
+                        summarized && isOpen
+                          ? theme.spacing(0, 4)
+                          : theme.spacing(0, 2),
+                    },
+                  },
+                })}
+              >
+                {!summarized || isOpen
+                  ? children
+                  : Children.toArray(children)[0]}
+              </Box>
+
+              {summarized && (
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ marginTop: 1 }}
+                  justifyContent={"flex-end"}
+                >
+                  <Button
+                    variant="plain"
+                    color="primary"
+                    size="sm"
+                    onClick={toggleOpen}
+                  >
+                    {isOpen ? "Close" : "Read more"}
+                  </Button>
+                </Stack>
+              )}
+            </Stack>
+          </Stack>
+        </Card>
+      </Box>
+    </Box>
+  )
+}
+export default Recommendation

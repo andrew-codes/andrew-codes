@@ -1,24 +1,26 @@
-import styled from "@emotion/styled"
+import Box from "@mui/joy/Box"
+import Button from "@mui/joy/Button"
+import Card from "@mui/joy/Card"
+import Chip from "@mui/joy/Chip"
+import Link from "@mui/joy/Link"
+import Stack from "@mui/joy/Stack"
+import Typography from "@mui/joy/Typography"
 import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
-import { Link, useLoaderData } from "@remix-run/react"
-import { Helmet } from "react-helmet"
-import { fileURLToPath } from "url"
-import Paper from "../components/Paper"
-import { Posts } from "../components/Post"
-import Tags from "../components/Tags"
 import {
-  getBackgroundGradient,
-  getColors,
-  getDescription,
-} from "../libs/categories"
+  MetaFunction,
+  Link as RemixLink,
+  useLoaderData,
+} from "@remix-run/react"
+import { fileURLToPath } from "url"
+import Recommendation from "../components/Recommendation"
 import { getFilePartsToHash, getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
-import postsByCategory from "../libs/posts/categorize"
-import { order } from "../libs/posts/sortPosts"
 import { getServerTimeHeader } from "../libs/timing.server"
 import { useLoaderHeaders } from "../libs/utils"
-import type { Category } from "../types"
+import darnell from "../public/images/darnell.jpeg"
+import denise from "../public/images/denise.jpeg"
+import rick from "../public/images/rick-cabrera.jpeg"
 
 const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const timings = {}
@@ -48,226 +50,250 @@ const loader = async ({ request, params }: LoaderFunctionArgs) => {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const headers: HeadersFunction = useLoaderHeaders()
 
-const Blockquote = styled.blockquote`
-  font-size: 1.125rem;
-`
-const Hero = styled(Paper)`
-  padding: 1rem 1.5rem;
-
-  @media (max-width: 640px) {
-    border-radius: 1rem 1rem 0 0;
-    margin: 0;
-    position: relative;
-
-    ::after {
-      background-color: rgb(255, 255, 255);
-      bottom: -1rem;
-      content: "";
-      height: 1rem;
-      left: 0;
-      position: absolute;
-      right: 0;
-      z-index: 1;
-    }
-  }
-
-  h1 {
-    margin-top: 0;
-  }
-
-  blockquote {
-    margin-bottom: 0;
-
-    @media (max-width: 640px) {
-      margin: 0 0.5rem;
-    }
-  }
-`
-
-const PostCategory = styled(Paper)<{ name: Category }>`
-  background: ${({ name }) => {
-    return getBackgroundGradient(name)
-  }};
-  border: none;
-  color: rgb(255, 255, 255) !important;
-  min-height: 370px;
-  padding: 1rem 1.25rem;
-  width: calc(50% - 0.5rem);
-
-  @media (max-width: 640px) {
-    border-radius: 1rem 1rem 0 0;
-    margin: 0;
-    min-height: unset !important;
-    position: relative;
-    width: 100%;
-    z-index: 2;
-
-    ::after {
-      background-color: ${({ name }) => getColors(name)[0]};
-      bottom: -1rem;
-      content: "";
-      height: 1rem;
-      left: 0;
-      position: absolute;
-      right: 0;
-      z-index: 1;
-    }
-  }
-
-  h2 {
-    font-size: 1.75rem;
-    font-variant: small-caps;
-    line-height: 2rem;
-    margin: 0;
-
-    &::after {
-      content: "";
-      display: block;
-      margin: 0.5rem 0;
-      background-color: rgb(249, 251, 253);
-      height: 1px;
-    }
-  }
-
-  > p {
-    margin-bottom: 2rem;
-    min-height: 2.5rem;
-  }
-
-  ol > li {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1.5rem;
-
-    :first-child {
-      margin-top: 0;
-    }
-
-    p {
-      display: -webkit-box;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-  }
-
-  h3 {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  a {
-    color: rgb(255, 255, 255);
-  }
-`
-
-const PostCategories = styled.main`
-  display: flex;
-  flex-direction: rows;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-
-  @media (max-width: 640px) {
-    margin: 0;
-  }
-
-  > section {
-    margin: 0.5rem;
-    height: 466px;
-    position: relative;
-    padding-bottom: 3rem;
-
-    @media (max-width: 640px) {
-      height: unset !important;
-      margin: 0 !important;
-    }
-
-    &:nth-child(odd) {
-      margin-left: 0;
-    }
-    &:nth-child(even) {
-      margin-right: 0;
-    }
-
-    > a {
-      bottom: 1rem;
-      display: block;
-      position: absolute;
-      right: 1rem;
-      text-align: right;
-    }
-  }
-`
+const meta: MetaFunction = () => {
+  return [
+    {
+      title: "Andrew Smith | Home",
+      description:
+        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+    },
+    {
+      name: "description",
+      content:
+        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+    },
+    {
+      name: "og:title",
+      content: "Andrew Smith - Staff Software Engineer",
+    },
+    {
+      name: "og:description",
+      content:
+        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+    },
+  ]
+}
 
 const HomeRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
 
-  const today = new Date()
-  const yearsOfExperience =
-    new Date(today.getTime() - new Date(2008, 1, 1).getTime()).getFullYear() -
-    1970
-
   return (
     <>
-      <Helmet>
-        <title>Home | Andrew Smith</title>
-      </Helmet>
-      <Hero as="section">
-        <h1>Hi, &#x1f44b;!</h1>
-        <Blockquote>
-          <span>I'm Andrew and I </span>
-          <strong>empower</strong>
-          <span> others through </span>
-          <strong>quality</strong> software.
-          <br />
-          <br />
-          <span>
-            I aim to make software development more accessible to a wider
-            audience. I accomplish this through mentorship,
-          </span>{" "}
-          <abbr title="Open source software">OSS</abbr>
-          <span>
-            , and sharing my experiences. This site is my professional profile,
-            resume, and some learnings over my
-          </span>{" "}
-          <span>{yearsOfExperience}</span> <span>year career.</span>
-        </Blockquote>
-      </Hero>
-      <PostCategories>
-        {postsByCategory(posts).map(([category, posts]) => (
-          <PostCategory as="section" key={category} name={category}>
-            <h2>{category}</h2>
-            <p>{getDescription(category)}</p>
-            <Posts>
-              {order(posts)
-                .slice(0, 3)
-                .map((post) => (
-                  <li key={post.slug}>
-                    <h3>
-                      <Link to={`/posts/${post.slug}`}>
-                        {post.frontmatter.title}
-                      </Link>
-                    </h3>
-                    {post.frontmatter.description && (
-                      <p>{post.frontmatter.description}</p>
-                    )}
-                    {!!post.frontmatter.tags &&
-                      post.frontmatter.tags.length > 0 && (
-                        <Tags tags={post.frontmatter.tags} />
-                      )}
-                  </li>
-                ))}
-            </Posts>
-            <Link to={`/category/${category}`}>See more...</Link>
-          </PostCategory>
-        ))}
-      </PostCategories>
+      <Box
+        component="header"
+        sx={{
+          textAlign: "center",
+        }}
+      >
+        <Typography level="h1" fontSize="xl6" fontWeight={900}>
+          Andrew Smith
+        </Typography>
+        <Typography level="body-lg" fontSize="xl2">
+          Staff Software Engineer
+        </Typography>
+        <Typography level="body-md">
+          I create robust, scalable applications and drive engineering teams.
+        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          spacing={2}
+          sx={{ marginTop: 2 }}
+        >
+          <Button
+            color="primary"
+            variant="solid"
+            to="/resume"
+            component={RemixLink}
+          >
+            View My Resume
+          </Button>
+          <Button color="neutral" variant="outlined">
+            Read My Recommendations
+          </Button>
+        </Stack>
+        <Typography level="body-sm" sx={{ marginTop: 2 }}>
+          View my full experience and leadership impact in one place.
+        </Typography>
+      </Box>
+      <Box component="section">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: 4,
+            marginBottom: 2,
+          }}
+        >
+          <Typography level="h2" fontSize="xl2" fontWeight={700}>
+            Recommendations
+          </Typography>
+          <Button variant="plain" component={RemixLink} to="/recommendations">
+            View All
+          </Button>
+        </Box>
+        <Stack direction="column" spacing={2}>
+          <Recommendation
+            summarized
+            profileImage={denise}
+            name="Denise Architetto"
+            title="
+Principal Group Engineering Manager (Director) at Microsoft"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is a highly talented and passionate engineer who
+              consistently brings innovation, precision, and thoughtfulness to
+              everything he does. He's a true trailblazer—always exploring
+              modern technologies to solve complex legacy challenges and driving
+              engineering productivity and efficiency across the board. Within
+              the team,
+            </Typography>{" "}
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is often referred to as “the professor”—a well-earned
+              nickname that speaks to his natural ability to mentor and guide
+              others. He excels at helping early-in-career engineers grow,
+              teaching them solid engineering practices, design patterns, and
+              how to effectively break down complex problems into clear,
+              manageable solutions.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew takes great pride in his work and has been instrumental in
+              designing and implementing core engineering solutions for
+              Microsoft's Content Management System (CMS). His contributions
+              have been critical to ensuring the reliability and scalability of
+              a platform that handles over 15 billion requests per month.{" "}
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              He combines deep technical expertise with a passion for quality,
+              mentorship, and continuous improvement. I highly recommend Andrew
+              to any organization looking for a principled and forward-thinking
+              engineer who leads with both skill and generosity.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              He combines deep technical expertise with a passion for quality,
+              mentorship, and continuous improvement. I highly recommend Andrew
+              to any organization looking for a principled and forward-thinking
+              engineer who leads with both skill and generosity.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              He combines deep technical expertise with a passion for quality,
+              mentorship, and continuous improvement. I highly recommend Andrew
+              to any organization looking for a principled and forward-thinking
+              engineer who leads with both skill and generosity.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              He combines deep technical expertise with a passion for quality,
+              mentorship, and continuous improvement. I highly recommend Andrew
+              to any organization looking for a principled and forward-thinking
+              engineer who leads with both skill and generosity.
+            </Typography>
+          </Recommendation>
+          <Recommendation
+            summarized
+            profileImage={rick}
+            name="Rick Cabrera"
+            title="CTO at Experience"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is a fantastic software developer. He was hired on at
+              Experience to bring focus and leadership to our front-end
+              technology stack and his impact has been significant. His
+              technical acumen and ability to work extremely well with our
+              design team has brought beautiful and functional components, along
+              with consistency and improved development speed to our team.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              His commitment to personal growth and to his team is beyond
+              reproach. Aside from constantly learning new technologies and
+              building hobby projects, Andrew is a thoughtful developer and
+              leader that seeks and is very responsive to feedback from his
+              peers and managers. I'm excited for what the future holds for
+              Andrew and recommend him highly. While he'd be a significant asset
+              to any team looking for immediate technical implementation and
+              leadership, his potential is immense and very much worth
+              consideration for your team.
+            </Typography>
+          </Recommendation>
+          <Recommendation
+            summarized
+            profileImage={darnell}
+            name="Darnell Brown"
+            title="Principal Software Engineer at Microsoft"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Where do I start. Andrew's impact has been felt at all levels of
+              our team and he is as gifted and well seasoned of any engineer
+              that I have ever seen and witnessed firsthand. He flourishes in
+              ambiguity. He excels in the unknown. He leads when others are not
+              watching, and he priorities and commands engineering excellence
+              through his intentional actions of continuous improvement with a
+              strong affinity for effectively establishing unique and
+              collaborative mechanisms. His front end ability is unmatched, but
+              more than that, he has continuously elevated the engineers around
+              him to think and breath through a value driven lens of quality.
+              This is what sets Andrew apart. Andrew is the principal,
+              distinguished, staff engineer that could help lead any team to new
+              heights and achievements. Andrew's selfless and humble approach to
+              growth and improvement is one that I respect so much given his
+              tenure in the industry. He's a leader that isn't afraid to take
+              feedback. He simply receives and gives back a continuously
+              improved version of himself. Hire the man!!
+            </Typography>
+          </Recommendation>
+        </Stack>
+      </Box>
+      <Box component="section">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: 4,
+            marginBottom: 2,
+          }}
+        >
+          <Typography level="h2" fontSize="xl2" fontWeight={700}>
+            Featured Posts
+          </Typography>
+          <Button variant="plain" component={RemixLink} to="/posts">
+            View All
+          </Button>
+        </Box>
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          gap={2}
+          justifyContent="space-between"
+        >
+          {posts.slice(0, 3).map((post) => (
+            <Card
+              key={post.slug}
+              sx={(theme) => ({
+                maxWidth: `calc(33% - ${theme.spacing(2)})`,
+                [theme.breakpoints.down("md")]: {
+                  maxWidth: `calc(50% - ${theme.spacing(2)})`,
+                },
+                [theme.breakpoints.down("sm")]: {
+                  maxWidth: `100%`,
+                },
+              })}
+            >
+              <Chip>{post.frontmatter.category}</Chip>
+              <Link component={RemixLink} to={`/posts/${post.slug}`}>
+                <Typography level="h3" fontSize="lg">
+                  {post.frontmatter.title}
+                </Typography>
+              </Link>
+              <Typography level="body-md">
+                {post.frontmatter.description}
+              </Typography>
+            </Card>
+          ))}
+        </Stack>
+      </Box>
     </>
   )
 }
 
 export default HomeRoute
-export { headers, loader }
+export { headers, loader, meta }

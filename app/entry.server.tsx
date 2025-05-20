@@ -1,17 +1,17 @@
 import { CacheProvider } from "@emotion/react"
 import type { HandleDocumentRequestFunction } from "@remix-run/node"
+import { createReadableStreamFromReadable } from "@remix-run/node"
 import { RemixServer } from "@remix-run/react"
 import { isbot } from "isbot"
 import { ensurePrimary } from "litefs-js/remix"
-import { renderToStaticMarkup } from "react-dom/server"
+import { PassThrough } from "node:stream"
+import { renderToPipeableStream, renderToStaticMarkup } from "react-dom/server"
 import { Helmet } from "react-helmet"
-import { renderHeadToString } from "remix-island"
+import { StyleProvider } from "./components/StyleProvider"
 import createEmotionCache from "./createEmotionCache"
 import configuration from "./libs/configuration.server"
 import { getEnv } from "./libs/env.server"
-import { NonceProvider } from "./libs/NonceProvider"
 import { routes as otherRoutes } from "./other-routes.server"
-import { Head } from "./root"
 const ABORT_DELAY = 5_000
 global.ENV = getEnv()
 
@@ -41,9 +41,6 @@ async function handleDocumentRequest(...args: DocRequestArgs) {
     responseHeaders.set("Cache-Control", "no-store")
   }
 
-  // If the request is from a bot, we want to wait for the full
-  // response to render before sending it to the client. This
-  // ensures that bots can see the full page content.
   if (isbot(request.headers.get("user-agent"))) {
     return serveTheBots(
       request,
@@ -87,13 +84,12 @@ function serveTheBots(...args: DocRequestArgs) {
       </>,
     )
 
-    const head = renderHeadToString({ request, remixContext, Head })
     const helmet = Helmet.renderStatic()
 
     responseHeaders.set("Content-Type", "text/html; charset=utf-8")
     resolve(
       new Response(
-        `<!DOCTYPE html><html lang="en-US"><head>${head}${helmet.link.toString()}</head><body><div id="root">${renderedOutput}</div></body></html>`,
+        `<!DOCTYPE html><html lang="en-US"><head>${helmet.link.toString()}</head><body><div id="root">${renderedOutput}</div></body></html>`,
         {
           headers: responseHeaders,
           status: responseStatusCode,
@@ -104,44 +100,56 @@ function serveTheBots(...args: DocRequestArgs) {
 }
 
 function serveBrowsers(...args: DocRequestArgs) {
-  const [
+  let [
     request,
     responseStatusCode,
     responseHeaders,
     remixContext,
     loadContext,
   ] = args
-  const nonce = loadContext.cspNonce ? String(loadContext.cspNonce) : undefined
-
   return new Promise((resolve, reject) => {
-    const clientSideCache = createEmotionCache()
-    const renderedOutput = renderToStaticMarkup(
-      <>
-        <CacheProvider value={clientSideCache}>
-          <NonceProvider value={nonce}>
-            <RemixServer
-              context={remixContext}
-              url={request.url}
-              abortDelay={ABORT_DELAY}
-            />
-          </NonceProvider>
-        </CacheProvider>
-      </>,
-    )
+    let shellRendered = false
+    const { pipe, abort } = renderToPipeableStream(
+      <StyleProvider>
+        <RemixServer
+          context={remixContext}
+          url={request.url}
+          abortDelay={ABORT_DELAY}
+        />
+      </StyleProvider>,
+      {
+        onShellReady() {
+          shellRendered = true
+          const body = new PassThrough()
+          const stream = createReadableStreamFromReadable(body)
 
-    const head = renderHeadToString({ request, remixContext, Head })
-    const helmet = Helmet.renderStatic()
+          responseHeaders.set("Content-Type", "text/html")
 
-    responseHeaders.set("Content-Type", "text/html; charset=utf-8")
-    resolve(
-      new Response(
-        `<!DOCTYPE html><html lang="en-US"><head>${head}${helmet.link.toString()}</head><body><div id="root">${renderedOutput}</div></body></html>`,
-        {
-          headers: responseHeaders,
-          status: responseStatusCode,
+          resolve(
+            new Response(stream, {
+              headers: responseHeaders,
+              status: responseStatusCode,
+            }),
+          )
+
+          pipe(body)
         },
-      ),
+        onShellError(error: unknown) {
+          reject(error)
+        },
+        onError(error: unknown) {
+          responseStatusCode = 500
+          // Log streaming rendering errors from inside the shell.  Don't log
+          // errors encountered during initial shell rendering since they'll
+          // reject and get logged in handleDocumentRequest.
+          if (shellRendered) {
+            console.error(error)
+          }
+        },
+      },
     )
+
+    setTimeout(abort, ABORT_DELAY)
   })
 }
 

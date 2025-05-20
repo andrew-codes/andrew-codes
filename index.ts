@@ -98,12 +98,6 @@ app.use(
   }),
 )
 
-app.use(async (req, res, next) => {
-  const crypto = await import("crypto")
-  res.locals.cspNonce = crypto.randomBytes(16).toString("hex")
-  next()
-})
-
 app.use(
   helmet({
     crossOriginEmbedderPolicy: false,
@@ -114,13 +108,7 @@ app.use(
         "frame-src": ["'self'", "https://www.youtube.com"],
         "img-src": ["'self'", "data:"],
         "media-src": ["'self'", "data:", "blob:", "https://www.youtube.com"],
-        "script-src": [
-          "'strict-dynamic'",
-          "'unsafe-eval'",
-          "'self'",
-          /* // @ts-expect-error*/
-          (req, res) => `'nonce-${res.locals.cspNonce}'`,
-        ],
+        "script-src": ["'unsafe-inline'", "'unsafe-eval'", "'self'"],
         "script-src-attr": ["'unsafe-inline'"],
         "upgrade-insecure-requests": null,
       },
@@ -153,7 +141,7 @@ if (process.env.NODE_ENV !== "production") {
   build = () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
 }
 
-app.all("*", createRequestHandler(getRequestHandlerOptions()))
+app.all("*", createRequestHandler({ build, mode: MODE }))
 
 app.use((err: any, req: any, res: any, next: any) => {
   console.error(err.stack)
@@ -170,13 +158,3 @@ getMdxPages(
     console.log(`Production express server listening on port ${port}`)
   })
 })
-
-function getRequestHandlerOptions(): Parameters<
-  typeof createRequestHandler
->[0] {
-  function getLoadContext(req: any, res: any) {
-    return { cspNonce: res.locals.cspNonce }
-  }
-
-  return { build, mode: MODE, getLoadContext }
-}

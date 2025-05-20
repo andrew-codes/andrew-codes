@@ -1,44 +1,42 @@
 import { css, Global } from "@emotion/react"
 
 const globalStyles = css`
+  /* lato-latin-400-normal */
   @font-face {
-    font-display: swap;
-    font-family: "Lato-Regular";
-    src: url("/fonts/Lato-Regular.ttf") format("truetype");
+    font-family: "Lato";
+    font-style: normal;
+    font-display: block;
+    font-weight: 400;
+    src:
+      url(@fontsource/lato/files/lato-latin-400-normal.woff2) format("woff2"),
+      url(@fontsource/lato/files/lato-latin-400-normal.woff) format("woff");
+    unicode-range:
+      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+      U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
   @font-face {
-    font-display: swap;
     font-family: "Lato-Bold";
-    src: url("/fonts/Lato-Bold.ttf") format("truetype");
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: "Lato-Thin";
-    src: url("/fonts/Lato-Thin.ttf") format("truetype");
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: "Lato-Black";
-    src: url("/fonts/Lato-Black.ttf") format("truetype");
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: "Lato-Light";
-    src: url("/fonts/Lato-Light.ttf") format("truetype");
+    font-style: normal;
+    font-display: block;
+    font-weight: 900;
+    src:
+      url(@fontsource/lato/files/lato-latin-900-normal.woff2) format("woff2"),
+      url(@fontsource/lato/files/lato-latin-900-normal.woff) format("woff");
+    unicode-range:
+      U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+      U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+      U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
   * {
     box-sizing: border-box;
-    font-family: "Lato-Regular", sans-serif;
+    font-family: "Lato", sans-serif;
   }
 
   body {
     margin: 0 !important;
-    background: rgb(34, 35, 39);
     font-size: 16px;
   }
 

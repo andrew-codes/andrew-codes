@@ -14,4 +14,12 @@ export default defineConfig({
     }),
     metronome(),
   ],
+  ssr: {
+    noExternal: [
+      "@mui/*", // fix material-ui ES modules imported error.
+    ],
+  },
+  optimizeDeps: {
+    include: ['@mui/*'],
+  },
 })

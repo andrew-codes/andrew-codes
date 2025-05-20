@@ -92,7 +92,7 @@ const Main = styled.main`
   > * {
     margin: 0 auto;
     color: rgb(80, 80, 80);
-    font-family: "Lato-Regular";
+    font-family: "Lato";
     font-size: 12pt;
   }
 `
