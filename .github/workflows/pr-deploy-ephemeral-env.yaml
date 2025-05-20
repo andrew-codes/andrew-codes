@@ -11,7 +11,6 @@ permissions:
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-  FLY_REGION: sjc
   FLY_ORG: personal
 
 jobs:
@@ -43,5 +42,4 @@ jobs:
         with:
           name: andrew-codes-${{ github.event.number }}
           secrets: PORT=${{ secrets.PORT }} INTERNAL_COMMAND_TOKEN=${{ secrets.INTERNAL_COMMAND_TOKEN }} SESSION_SECRET=${{ secrets.SESSION_SECRET }}
-          region: sjc
           memory: 1024
