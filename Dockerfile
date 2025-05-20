@@ -1,8 +1,6 @@
 ARG NODE_VERSION=22.14.0
 FROM node:${NODE_VERSION}-slim AS base
 RUN corepack enable
-RUN corepack prepare yarn@4.4.1 --activate
-RUN yarn set version 4.4.1
 LABEL fly_launch_runtime="Remix"
 
 # Build stage for app
@@ -19,6 +17,8 @@ RUN yarn run build
 FROM base
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+ARG PR_NUMBER
+ENV PR_NUMBER=${PR_NUMBER}
 ENV INTERNAL_PORT="8080"
 ENV PRIMARY_REGION="iad"
 ENV FLY="true"

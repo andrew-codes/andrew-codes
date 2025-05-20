@@ -212,9 +212,7 @@ const HomeRoute = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Home | Andrew Smith</title>
-      </Helmet>
+      <Helmet title="Andrew Smith | Home" />
       <Hero as="section">
         <h1>Hi, &#x1f44b;!</h1>
         <Blockquote>

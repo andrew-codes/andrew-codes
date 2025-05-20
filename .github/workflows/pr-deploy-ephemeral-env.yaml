@@ -1,0 +1,27 @@
+name: Deploy PR ephemeral environment
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: andrew-codes/andrew.codes-pr-${{ github.event.number }}
+  PR_NUMBER: ${{ github.event.number }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout source code
+        uses: actions/checkout@v3
+      
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: 🚀 Deploy ephemeral environment for pull request
+        run: "flyctl deploy --config fly.staging.toml --remote-only"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
