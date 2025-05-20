@@ -40,3 +40,5 @@ jobs:
         with:
           name: andrew-codes-${{ github.event.number }}
           secrets: PORT=${{ secrets.PORT }} INTERNAL_COMMAND_TOKEN=${{ secrets.INTERNAL_COMMAND_TOKEN }} SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+          region: sjc
+          memory: 1024
