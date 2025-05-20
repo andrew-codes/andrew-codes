@@ -9,6 +9,7 @@ import {
   Url,
 } from "./ContactCard"
 import Link from "./Link"
+import { NotMobileOnly } from "./MediaQuery"
 
 const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);
@@ -83,34 +84,38 @@ const Nav = styled.nav`
   }
 `
 
-const GlobalNavImpl: FC<{}> = (props) => (
-  <Header {...props}>
-    <HeaderBoundary>
-      <ContactCard as={ProfileSummary}>
-        <ProfileInformation>
-          <FullName as={ProfileName}>James Andrew Smith</FullName>
-          <JobTitle>Staff Software Engineer</JobTitle>
-          <ConnectionList>
-            <Url href="https://linkedin.com/in/JamesAndrewSmith">LinkedIn</Url>
-            <Url href="https://github.com/andrew-codes">
-              andrew-codes (github)
-            </Url>
-          </ConnectionList>
-        </ProfileInformation>
-        <Image
-          src={avatar}
-          alt="Profile of Andrew Smith"
-          width={112}
-          height={112}
-        />
-      </ContactCard>
-      <Nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/resume">Resume</NavLink>
-      </Nav>
-    </HeaderBoundary>
-  </Header>
-)
+const GlobalNavImpl: FC<{}> = (props) => {
+  return (
+    <Header {...props}>
+      <HeaderBoundary>
+        <ContactCard as={ProfileSummary}>
+          <ProfileInformation>
+            <FullName as={ProfileName}>James Andrew Smith</FullName>
+            <JobTitle>Staff Software Engineer</JobTitle>
+            <ConnectionList>
+              <Url href="https://linkedin.com/in/JamesAndrewSmith">
+                LinkedIn
+              </Url>
+              <Url href="https://github.com/andrew-codes">
+                andrew-codes (github)
+              </Url>
+            </ConnectionList>
+          </ProfileInformation>
+          <Image
+            src={avatar}
+            alt="Profile of Andrew Smith"
+            width={112}
+            height={112}
+          />
+        </ContactCard>
+        <NotMobileOnly as={Nav}>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/resume">Resume</NavLink>
+        </NotMobileOnly>
+      </HeaderBoundary>
+    </Header>
+  )
+}
 
 const GlobalNav = styled(GlobalNavImpl)``
 
