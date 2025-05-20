@@ -133,9 +133,7 @@ const ResumeRoute: FC<{}> = () => {
 
   return (
     <>
-      <Helmet>
-        <title>James Andrew Smith - Resume</title>
-      </Helmet>
+      <Helmet title="James Andrew Smith - Resume" />
       <Global styles={globalStyles} />
       <Root>
         <Main>

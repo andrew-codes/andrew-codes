@@ -96,9 +96,7 @@ const PostRoute = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{frontmatter.title ?? "Article"} | Andrew Smith</title>
-      </Helmet>
+      <Helmet title={`${frontmatter.title ?? "Article"} | Andrew Smith`} />
       <Post as="article">
         <Header category={frontmatter.category}>
           <h1>{frontmatter.title}</h1>

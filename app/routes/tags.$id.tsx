@@ -87,9 +87,7 @@ const CategoryRoute = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{startCase(id)} Tagged Articles | Andrew Smith</title>
-      </Helmet>
+      <Helmet title={`${startCase(id)} Tagged Articles | Andrew Smith`} />
       <Page as="article">
         <Header category={null}>
           <h1>{id}</h1>

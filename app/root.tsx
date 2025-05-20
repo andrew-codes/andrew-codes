@@ -139,9 +139,7 @@ const ErrorBoundary: FC<{}> = () => {
       <GlobalStyles />
       <GlobalNav />
       <Root>
-        <Helmet>
-          <title>Oops... | Andrew Smith</title>
-        </Helmet>
+        <Helmet title="Oops... | Andrew Smith" />
         <Page>
           <Header category={null}>
             <h1>Oops...</h1>
