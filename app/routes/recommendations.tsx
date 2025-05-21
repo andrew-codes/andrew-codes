@@ -2,52 +2,17 @@ import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
-import { json } from "@remix-run/node"
-import {
-  MetaFunction,
-  Link as RemixLink,
-  useLoaderData,
-} from "@remix-run/react"
-import { fileURLToPath } from "url"
+import type { HeadersFunction } from "@remix-run/node"
+import { MetaFunction, Link as RemixLink } from "@remix-run/react"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
-import PostCard from "../components/PostCard"
 import Recommendation from "../components/Recommendation"
-import { getFilePartsToHash, getHash } from "../libs/hash.server"
-import { getMdxPages } from "../libs/mdx.server"
-import { getServerTimeHeader } from "../libs/timing.server"
 import { useLoaderHeaders } from "../libs/utils"
+import darnell from "../public/images/darnell.jpeg"
 import denise from "../public/images/denise.jpeg"
 import keith from "../public/images/keith.jpeg"
 import rick from "../public/images/rick-cabrera.jpeg"
 
-const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  const timings = {}
-  const posts = await getMdxPages({ request, timings })
-
-  const __filename = fileURLToPath(import.meta.url)
-  const selfFilePartsToHash = await getFilePartsToHash(__filename)
-
-  return json(
-    { posts: posts },
-    {
-      status: 200,
-      headers: {
-        "Cache-Control": "private, max-age=3600",
-        Vary: "Cookie",
-        "Server-Timing": getServerTimeHeader(timings),
-        ETag: getHash(
-          posts
-            .flatMap((post) => [post.code, JSON.stringify(post.frontmatter)])
-            .concat([selfFilePartsToHash]),
-        ),
-      },
-    },
-  )
-}
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
 const headers: HeadersFunction = useLoaderHeaders()
 
 const meta: MetaFunction = () => {
@@ -58,7 +23,7 @@ const meta: MetaFunction = () => {
     {
       name: "description",
       content:
-        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+        "Recommendations from my peers, managers, and leaders in the industry.",
     },
     {
       name: "og:title",
@@ -67,14 +32,12 @@ const meta: MetaFunction = () => {
     {
       name: "og:description",
       content:
-        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+        "Recommendations from my peers, managers, and leaders in the industry.",
     },
   ]
 }
 
 const HomeRoute = () => {
-  const { posts } = useLoaderData<typeof loader>()
-
   return (
     <>
       <PageHeader>
@@ -198,33 +161,32 @@ Principal Group Engineering Manager (Director) at Microsoft"
               shop.
             </Typography>
           </Recommendation>
-        </Stack>
-      </Box>
-      <Box component="section">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 4,
-            marginBottom: 2,
-          }}
-        >
-          <Typography level="h2" fontSize="xl2" fontWeight={700}>
-            Featured Posts
-          </Typography>
-          <Button variant="plain" component={RemixLink} to="/posts">
-            View All
-          </Button>
-        </Box>
-        <Stack
-          direction="row"
-          flexWrap="wrap"
-          gap={2}
-          justifyContent="space-between"
-        >
-          {posts.slice(0, 3).map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
+          <Recommendation
+            summarized
+            profileImage={darnell}
+            name="Darnell Brown"
+            title="Principal Software Engineer at Microsoft"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Where do I start. Andrew's impact has been felt at all levels of
+              our team and he is as gifted and well seasoned of any engineer
+              that I have ever seen and witnessed firsthand. He flourishes in
+              ambiguity. He excels in the unknown. He leads when others are not
+              watching, and he priorities and commands engineering excellence
+              through his intentional actions of continuous improvement with a
+              strong affinity for effectively establishing unique and
+              collaborative mechanisms. His front end ability is unmatched, but
+              more than that, he has continuously elevated the engineers around
+              him to think and breath through a value driven lens of quality.
+              This is what sets Andrew apart. Andrew is the principal,
+              distinguished, staff engineer that could help lead any team to new
+              heights and achievements. Andrew's selfless and humble approach to
+              growth and improvement is one that I respect so much given his
+              tenure in the industry. He's a leader that isn't afraid to take
+              feedback. He simply receives and gives back a continuously
+              improved version of himself. Hire the man!!
+            </Typography>
+          </Recommendation>
         </Stack>
       </Box>
     </>
@@ -232,4 +194,4 @@ Principal Group Engineering Manager (Director) at Microsoft"
 }
 
 export default HomeRoute
-export { headers, loader, meta }
+export { headers, meta }

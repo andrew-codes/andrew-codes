@@ -20,7 +20,12 @@ const CallToAction = () => {
         >
           View My Resume
         </Button>
-        <Button color="neutral" variant="outlined">
+        <Button
+          color="neutral"
+          variant="outlined"
+          component={RemixLink}
+          to="/recommendations"
+        >
           Read My Recommendations
         </Button>
       </Stack>
