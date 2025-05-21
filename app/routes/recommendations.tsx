@@ -12,6 +12,7 @@ import darnell from "../public/images/darnell.jpeg"
 import denise from "../public/images/denise.jpeg"
 import keith from "../public/images/keith.jpeg"
 import rick from "../public/images/rick-cabrera.jpeg"
+import walkerSmith from "../public/images/walker-smith.jpeg"
 
 const headers: HeadersFunction = useLoaderHeaders()
 
@@ -63,6 +64,85 @@ const HomeRoute = () => {
           </Button>
         </Box>
         <Stack direction="column" spacing={2}>
+          <Recommendation
+            summarized
+            profileImage={keith}
+            name="Keith Gargano"
+            title="Software Development Manager at Amazon Studios"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is a talented and passionate engineer whose architectural
+              and testing rigor consistently improves whatever application stack
+              he is engineering. He is collaborative by nature, happy to learn
+              the perspectives of others, and eager to delight the user.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is visionary in his approach towards software development.
+              When supported by the right team, capable of consuming or building
+              cutting edge frameworks. He is an advocate for developer best
+              practices, keenly aware of the importance of semantically
+              idiomatic code and the long term value of Test Driven Development.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              When I think back to working with Andrew, and consider what
+              'Archetype' he filled, he could best be described as the
+              Engineering Professor. Excited about both learning and teaching
+              others, well versed in theory and brimming at the chance to put
+              theory into practice.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              If you want to elevate your team by bring in techniques that will
+              enhance your quality, upgrade to the newest and most exciting
+              frameworks, and really raise the bar for an organization looking
+              for an engineer who can mentor and teach, Andrew is your one stop
+              shop.
+            </Typography>
+          </Recommendation>
+          <Recommendation
+            summarized
+            profileImage={walkerSmith}
+            name="Walker Smith"
+            title="Senior Software Engineer at Microsoft"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew stands out as the best I've ever worked with.
+            </Typography>
+
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              What sets him apart isn't just his undeniable technical
+              brilliance, it's his rare ability to consistently build the right
+              thing at exactly the right time. He does this while applying best
+              practices with a level of precision and ease that can only come
+              from years of deliberate skill-building. The result is work that
+              is not only high quality and reliable but deeply thoughtful and
+              impactful.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Beyond his technical excellence, Andrew is an organic leader in
+              the truest sense. He doesn't seek the spotlight, yet people
+              naturally look to him for direction. His approach is grounded in
+              servant leadership. He lifts others up, leads by example, and
+              creates space for collaboration and growth. His mentorship is
+              unmatched. Whether you're just getting started or deep into your
+              career, Andrew meets you where you are and helps you move the
+              needle forward in ways that feel both challenging and empowering.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              He is relentlessly curious and deeply committed to growth. He
+              embodies a true growth mindset—never static, always evolving.
+              Andrew is constantly expanding his technical skillset, not just to
+              keep pace, but to stay at the cutting edge of what's possible. He
+              seeks out emerging technologies, tools, and practices with the
+              same rigor he applies to mastering them. Whether it's diving into
+              new domains or developing his leadership capacity, Andrew pushes
+              boundaries—not only for himself, but for everyone around him.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Working with Andrew doesn't just elevate the product—it elevates
+              the people. His presence raises the bar for what great truly looks
+              like.
+            </Typography>
+          </Recommendation>
           <Recommendation
             summarized
             profileImage={denise}
@@ -123,41 +203,6 @@ Principal Group Engineering Manager (Director) at Microsoft"
               to any team looking for immediate technical implementation and
               leadership, his potential is immense and very much worth
               consideration for your team.
-            </Typography>
-          </Recommendation>
-
-          <Recommendation
-            summarized
-            profileImage={keith}
-            name="Keith Gargano"
-            title="Software Development Manager at Amazon Studios"
-          >
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              Andrew is a talented and passionate engineer whose architectural
-              and testing rigor consistently improves whatever application stack
-              he is engineering. He is collaborative by nature, happy to learn
-              the perspectives of others, and eager to delight the user.
-            </Typography>
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              Andrew is visionary in his approach towards software development.
-              When supported by the right team, capable of consuming or building
-              cutting edge frameworks. He is an advocate for developer best
-              practices, keenly aware of the importance of semantically
-              idiomatic code and the long term value of Test Driven Development.
-            </Typography>
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              When I think back to working with Andrew, and consider what
-              'Archetype' he filled, he could best be described as the
-              Engineering Professor. Excited about both learning and teaching
-              others, well versed in theory and brimming at the chance to put
-              theory into practice.
-            </Typography>
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              If you want to elevate your team by bring in techniques that will
-              enhance your quality, upgrade to the newest and most exciting
-              frameworks, and really raise the bar for an organization looking
-              for an engineer who can mentor and teach, Andrew is your one stop
-              shop.
             </Typography>
           </Recommendation>
           <Recommendation
