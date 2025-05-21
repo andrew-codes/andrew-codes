@@ -75,15 +75,14 @@ Principal Group Engineering Manager (Director) at Microsoft"
               consistently brings innovation, precision, and thoughtfulness to
               everything he does. He's a true trailblazer—always exploring
               modern technologies to solve complex legacy challenges and driving
-              engineering productivity and efficiency across the board. Within
-              the team,
-            </Typography>{" "}
+              engineering productivity and efficiency across the board.
+            </Typography>
             <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              Andrew is often referred to as “the professor”—a well-earned
-              nickname that speaks to his natural ability to mentor and guide
-              others. He excels at helping early-in-career engineers grow,
-              teaching them solid engineering practices, design patterns, and
-              how to effectively break down complex problems into clear,
+              Within the team, Andrew is often referred to as “the professor”—a
+              well-earned nickname that speaks to his natural ability to mentor
+              and guide others. He excels at helping early-in-career engineers
+              grow, teaching them solid engineering practices, design patterns,
+              and how to effectively break down complex problems into clear,
               manageable solutions.
             </Typography>
             <Typography level="body-md" sx={{ marginBottom: 2 }}>
