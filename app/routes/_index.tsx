@@ -136,24 +136,6 @@ Principal Group Engineering Manager (Director) at Microsoft"
               to any organization looking for a principled and forward-thinking
               engineer who leads with both skill and generosity.
             </Typography>
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              He combines deep technical expertise with a passion for quality,
-              mentorship, and continuous improvement. I highly recommend Andrew
-              to any organization looking for a principled and forward-thinking
-              engineer who leads with both skill and generosity.
-            </Typography>
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              He combines deep technical expertise with a passion for quality,
-              mentorship, and continuous improvement. I highly recommend Andrew
-              to any organization looking for a principled and forward-thinking
-              engineer who leads with both skill and generosity.
-            </Typography>
-            <Typography level="body-md" sx={{ marginBottom: 2 }}>
-              He combines deep technical expertise with a passion for quality,
-              mentorship, and continuous improvement. I highly recommend Andrew
-              to any organization looking for a principled and forward-thinking
-              engineer who leads with both skill and generosity.
-            </Typography>
           </Recommendation>
           <Recommendation
             summarized
