@@ -1,8 +1,5 @@
 import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
-import Card from "@mui/joy/Card"
-import Chip from "@mui/joy/Chip"
-import Link from "@mui/joy/Link"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
@@ -13,6 +10,9 @@ import {
   useLoaderData,
 } from "@remix-run/react"
 import { fileURLToPath } from "url"
+import CallToAction from "../components/CallToAction"
+import PageHeader from "../components/PageHeader"
+import PostCard from "../components/PostCard"
 import Recommendation from "../components/Recommendation"
 import { getFilePartsToHash, getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
@@ -54,8 +54,6 @@ const meta: MetaFunction = () => {
   return [
     {
       title: "Andrew Smith | Home",
-      description:
-        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
     },
     {
       name: "description",
@@ -79,44 +77,12 @@ const HomeRoute = () => {
 
   return (
     <>
-      <Box
-        component="header"
-        sx={{
-          textAlign: "center",
-        }}
-      >
-        <Typography level="h1" fontSize="xl6" fontWeight={900}>
-          Andrew Smith
-        </Typography>
-        <Typography level="body-lg" fontSize="xl2">
-          Staff Software Engineer
-        </Typography>
-        <Typography level="body-md">
-          I create robust, scalable applications and drive engineering teams.
-        </Typography>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          sx={{ marginTop: 2 }}
-        >
-          <Button
-            color="primary"
-            variant="solid"
-            to="/resume"
-            component={RemixLink}
-          >
-            View My Resume
-          </Button>
-          <Button color="neutral" variant="outlined">
-            Read My Recommendations
-          </Button>
-        </Stack>
+      <PageHeader>
+        <CallToAction />
         <Typography level="body-sm" sx={{ marginTop: 2 }}>
           View my full experience and leadership impact in one place.
         </Typography>
-      </Box>
+      </PageHeader>
       <Box component="section">
         <Box
           sx={{
@@ -266,28 +232,7 @@ Principal Group Engineering Manager (Director) at Microsoft"
           justifyContent="space-between"
         >
           {posts.slice(0, 3).map((post) => (
-            <Card
-              key={post.slug}
-              sx={(theme) => ({
-                maxWidth: `calc(33% - ${theme.spacing(2)})`,
-                [theme.breakpoints.down("md")]: {
-                  maxWidth: `calc(50% - ${theme.spacing(2)})`,
-                },
-                [theme.breakpoints.down("sm")]: {
-                  maxWidth: `100%`,
-                },
-              })}
-            >
-              <Chip>{post.frontmatter.category}</Chip>
-              <Link component={RemixLink} to={`/posts/${post.slug}`}>
-                <Typography level="h3" fontSize="lg">
-                  {post.frontmatter.title}
-                </Typography>
-              </Link>
-              <Typography level="body-md">
-                {post.frontmatter.description}
-              </Typography>
-            </Card>
+            <PostCard key={post.slug} post={post} />
           ))}
         </Stack>
       </Box>

@@ -78,7 +78,7 @@ const theme = extendTheme({
                 boxShadow: "none",
               },
               "&:hover": {
-                color: theme.palette.neutral.outlinedHoverColor,
+                color: `${theme.palette.neutral.outlinedHoverColor} !important`,
               },
             }),
         }),

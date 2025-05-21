@@ -1,10 +1,20 @@
 import styled from "@emotion/styled"
-import type { FC } from "react"
-import StyledLink from "./Link"
+import MuiLink from "@mui/joy/Link"
+import { Link as RemixLink } from "@remix-run/react"
+import { FC, PropsWithChildren } from "react"
 
-const Link: FC<{ href: string }> = ({ href, ...props }) => (
-  <StyledLink to={href} {...props} />
-)
+const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
+  return (
+    <MuiLink
+      component={RemixLink}
+      variant="plain"
+      color="neutral"
+      to={props.href}
+    >
+      {props.children}
+    </MuiLink>
+  )
+}
 
 const H2 = styled.h2`
   margin: 1.5rem 0 0.5rem;

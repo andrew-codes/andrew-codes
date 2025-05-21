@@ -1,5 +1,9 @@
 import styled from "@emotion/styled"
-import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
+import type {
+  HeadersFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
@@ -86,9 +90,22 @@ const Post = styled(PageWithHeader)`
   }
 `
 
+const meta: MetaFunction = () => {
+  return [
+    {
+      title: "Andrew Smith",
+    },
+    {
+      name: "og:title",
+      content: "Andrew Smith - Staff Software Engineer",
+    },
+  ]
+}
+
 const PostRoute = () => {
   const { code, frontmatter, codeAssets } = useLoaderData<typeof loader>()
-  const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
+  console.debug(code)
+  const Component = useMemo(() => getMDXComponent(code), [code])
   const PostCodeAsset = useMemo(
     () => getCodePostAssetComponent(codeAssets),
     [codeAssets],
@@ -96,9 +113,7 @@ const PostRoute = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{frontmatter.title ?? "Article"} | Andrew Smith</title>
-      </Helmet>
+      <Helmet title={`Andrew Smith | ${frontmatter.title}`} />
       <Post as="article">
         <Header category={frontmatter.category}>
           <h1>{frontmatter.title}</h1>
@@ -134,4 +149,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { headers, loader }
+export { headers, loader, meta }
