@@ -96,7 +96,7 @@ const App: FC<{}> = () => {
             padding: theme.spacing(4, 3),
           },
           [theme.breakpoints.up("lg")]: {
-            margin: theme.spacing(4, "auto"),
+            margin: theme.spacing(2, "auto"),
             maxWidth: "960px",
           },
         }}

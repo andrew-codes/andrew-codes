@@ -2,6 +2,7 @@ import Avatar from "@mui/joy/Avatar"
 import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Card from "@mui/joy/Card"
+import Chip from "@mui/joy/Chip"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { motion } from "motion/react"
@@ -29,9 +30,10 @@ const Recommendation: FC<
     profileImage: string
     name: string
     title: string
+    company: string
     summarized?: boolean
   }>
-> = ({ profileImage, name, title, children, summarized }) => {
+> = ({ profileImage, name, title, children, company, summarized }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev)
@@ -90,6 +92,7 @@ const Recommendation: FC<
           sx={(theme) => ({
             height: "100%",
             margin: summarized && isOpen ? 1 : 0,
+            minWidth: "100%",
             [theme.breakpoints.up("sm")]: {
               width: summarized && isOpen ? "80%" : "unset",
               maxWidth: "1200px",
@@ -101,6 +104,7 @@ const Recommendation: FC<
             direction="row"
             spacing={2}
             sx={(theme) => ({
+              width: "100%",
               [theme.breakpoints.down("sm")]: {
                 height: "100%",
               },
@@ -119,11 +123,24 @@ const Recommendation: FC<
               })}
               variant="plain"
             ></Avatar>
-            <Stack direction="column" sx={{ textAlign: "left" }}>
-              <Typography level="h3" fontSize="lg">
-                {name}
-              </Typography>
-              <Typography level="body-sm">{title}</Typography>
+            <Stack
+              direction="column"
+              sx={{ textAlign: "left", width: "100%" }}
+              spacing={1}
+            >
+              <Stack direction="column" spacing={0.25}>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  justifyContent="space-between"
+                >
+                  <Typography level="h3" fontSize="lg">
+                    {name}
+                  </Typography>
+                  <Chip>{company}</Chip>
+                </Stack>
+                <Typography level="body-sm">{title}</Typography>
+              </Stack>
               <Box
                 ref={scrollable}
                 sx={(theme) => ({
@@ -145,7 +162,7 @@ const Recommendation: FC<
                     width:
                       summarized && isOpen
                         ? `calc(100% + ${theme.spacing(12)})`
-                        : `calc(100% + ${theme.spacing(12)})`,
+                        : `unset`,
                     marginLeft: `calc(-1 * ${theme.spacing(10)})`,
                     marginTop: theme.spacing(1),
                     "> * ": {
@@ -164,7 +181,6 @@ const Recommendation: FC<
                   ? children
                   : Children.toArray(children)[0]}
               </Box>
-
               {summarized && (
                 <Stack
                   direction="row"

@@ -1,8 +1,15 @@
 import Button from "@mui/joy/Button"
 import Stack from "@mui/joy/Stack"
 import { Link as RemixLink } from "@remix-run/react"
+import { FC, MouseEventHandler } from "react"
 
-const CallToAction = () => {
+const CallToAction: FC<{
+  secondaryTitle: string
+  secondaryAction: string | MouseEventHandler
+}> = ({ secondaryAction, secondaryTitle }) => {
+  if (typeof secondaryAction === "string") {
+  }
+
   return (
     <>
       <Stack
@@ -17,17 +24,30 @@ const CallToAction = () => {
           variant="solid"
           to="/resume"
           component={RemixLink}
+          size="lg"
         >
           View My Resume
         </Button>
-        <Button
-          color="neutral"
-          variant="outlined"
-          component={RemixLink}
-          to="/recommendations"
-        >
-          Read My Recommendations
-        </Button>
+        {typeof secondaryAction === "string" ? (
+          <Button
+            color="neutral"
+            variant="outlined"
+            component={RemixLink}
+            to={secondaryAction}
+            size="lg"
+          >
+            {secondaryTitle}
+          </Button>
+        ) : (
+          <Button
+            color="neutral"
+            variant="outlined"
+            size="lg"
+            onClick={secondaryAction}
+          >
+            {secondaryTitle}
+          </Button>
+        )}
       </Stack>
     </>
   )

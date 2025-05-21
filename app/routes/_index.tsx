@@ -1,5 +1,5 @@
-import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
+import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
@@ -14,6 +14,7 @@ import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import Recommendation from "../components/Recommendation"
+import { Section, SectionHeader } from "../components/Section"
 import { getFilePartsToHash, getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
 import { getServerTimeHeader } from "../libs/timing.server"
@@ -76,36 +77,45 @@ const HomeRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
 
   return (
-    <>
+    <Stack direction="column" spacing={4}>
       <PageHeader>
-        <CallToAction />
-        <Typography level="body-sm" sx={{ marginTop: 2 }}>
-          View my full experience and leadership impact in one place.
-        </Typography>
-      </PageHeader>
-      <Box component="section">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 4,
-            marginBottom: 2,
-          }}
+        <Typography
+          level="body-md"
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: {
+              fontSize: "1.5rem",
+            },
+          })}
         >
-          <Typography level="h2" fontSize="xl2" fontWeight={700}>
-            Recommendations
-          </Typography>
-          <Button variant="plain" component={RemixLink} to="/recommendations">
+          I create robust, scalable applications and drive engineering teams.
+        </Typography>
+        <CallToAction
+          secondaryTitle="View Recommendations"
+          secondaryAction="/recommendations"
+        />
+      </PageHeader>
+      <Section>
+        <SectionHeader title="Recommendations">
+          <Button
+            variant="plain"
+            component={RemixLink}
+            to="/recommendations"
+            size="sm"
+            sx={(theme) => ({
+              height: "1rem",
+            })}
+          >
             View All
           </Button>
-        </Box>
+        </SectionHeader>
         <Stack direction="column" spacing={2}>
           <Recommendation
             summarized
             profileImage={denise}
             name="Denise Architetto"
+            company="Microsoft"
             title="
-Principal Group Engineering Manager (Director) at Microsoft"
+Principal Group Engineering Manager (Director)"
           >
             <Typography level="body-md" sx={{ marginBottom: 2 }}>
               Andrew is a highly talented and passionate engineer who
@@ -140,7 +150,8 @@ Principal Group Engineering Manager (Director) at Microsoft"
             summarized
             profileImage={rick}
             name="Rick Cabrera"
-            title="CTO at Experience"
+            company="Experience LLC."
+            title="Chief Technology Officer CTO"
           >
             <Typography level="body-md" sx={{ marginBottom: 2 }}>
               Andrew is a fantastic software developer. He was hired on at
@@ -167,7 +178,8 @@ Principal Group Engineering Manager (Director) at Microsoft"
             summarized
             profileImage={darnell}
             name="Darnell Brown"
-            title="Principal Software Engineer at Microsoft"
+            company="Microsoft"
+            title="Principal Software Engineer"
           >
             <Typography level="body-md" sx={{ marginBottom: 2 }}>
               Where do I start. Andrew's impact has been felt at all levels of
@@ -190,23 +202,22 @@ Principal Group Engineering Manager (Director) at Microsoft"
             </Typography>
           </Recommendation>
         </Stack>
-      </Box>
-      <Box component="section">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: 4,
-            marginBottom: 2,
-          }}
-        >
-          <Typography level="h2" fontSize="xl2" fontWeight={700}>
-            Featured Posts
-          </Typography>
-          <Button variant="plain" component={RemixLink} to="/posts">
+      </Section>
+      <Divider />
+      <Section>
+        <SectionHeader title="Featured Posts">
+          <Button
+            variant="plain"
+            component={RemixLink}
+            to="/posts"
+            size="sm"
+            sx={(theme) => ({
+              height: "1rem",
+            })}
+          >
             View All
           </Button>
-        </Box>
+        </SectionHeader>
         <Stack
           direction="row"
           flexWrap="wrap"
@@ -217,8 +228,8 @@ Principal Group Engineering Manager (Director) at Microsoft"
             <PostCard key={post.slug} post={post} />
           ))}
         </Stack>
-      </Box>
-    </>
+      </Section>
+    </Stack>
   )
 }
 

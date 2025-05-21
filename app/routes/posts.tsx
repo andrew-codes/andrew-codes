@@ -1,4 +1,4 @@
-import Box from "@mui/joy/Box"
+import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import type {
@@ -12,6 +12,7 @@ import { fileURLToPath } from "url"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
+import { Section, SectionHeader } from "../components/Section"
 import { getFilePartsToHash, getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
 import { getServerTimeHeader } from "../libs/timing.server"
@@ -79,29 +80,29 @@ const PostsRoute = () => {
   const isPostPage = /.*\/posts\/.+$/.test(location.pathname)
 
   return (
-    <>
+    <Stack direction="column" spacing={4}>
       <PageHeader>
-        <CallToAction />
-        <Typography level="body-sm" sx={{ marginTop: 2 }}>
-          View articles I've written on technology and software engineering.
+        <Typography
+          level="body-md"
+          sx={(theme) => ({
+            [theme.breakpoints.up("sm")]: {
+              fontSize: "1.5rem",
+            },
+          })}
+        >
+          Read about my experiences and thoughts on technology and software
+          engineering.
         </Typography>
+        <CallToAction
+          secondaryTitle="View Recommendations"
+          secondaryAction="/recommendations?priority=featured"
+        />
       </PageHeader>
 
       {!isPostPage && (
         <>
-          <Box component="section">
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 4,
-                marginBottom: 2,
-              }}
-            >
-              <Typography level="h2" fontSize="xl2" fontWeight={700}>
-                Featured
-              </Typography>
-            </Box>
+          <Section>
+            <SectionHeader title="Featured" />
             <Stack
               direction="row"
               flexWrap="wrap"
@@ -112,20 +113,10 @@ const PostsRoute = () => {
                 <PostCard key={post.slug} post={post} />
               ))}
             </Stack>
-          </Box>
-          <Box component="section">
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 4,
-                marginBottom: 2,
-              }}
-            >
-              <Typography level="h2" fontSize="xl2" fontWeight={700}>
-                All
-              </Typography>
-            </Box>
+          </Section>
+          <Divider />
+          <Section>
+            <SectionHeader title="All" />
             <Stack
               direction="row"
               flexWrap="wrap"
@@ -136,11 +127,11 @@ const PostsRoute = () => {
                 <PostCard key={post.slug} post={post} />
               ))}
             </Stack>
-          </Box>
+          </Section>
         </>
       )}
       <Outlet />
-    </>
+    </Stack>
   )
 }
 
