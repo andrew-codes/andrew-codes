@@ -21,3 +21,5 @@ data/cache.db
 
 .devcontainer/.devpod-internal/
 vite.config.js*
+
+*.log

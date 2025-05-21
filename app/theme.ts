@@ -9,6 +9,7 @@ const theme = extendTheme({
           solidBg: "#D24604",
           solidHoverBg: "#FF5520",
           solidActiveBg: "#FF5520",
+          mainChannel: "210 70 4",
         },
         background: {
           body: "#0F1214",

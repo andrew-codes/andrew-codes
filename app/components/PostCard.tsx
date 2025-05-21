@@ -1,6 +1,7 @@
 import Card from "@mui/joy/Card"
 import Chip from "@mui/joy/Chip"
 import Link from "@mui/joy/Link"
+import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "@remix-run/react"
 import { FC } from "react"
@@ -20,12 +21,14 @@ const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
         },
       })}
     >
-      <Chip>{post.frontmatter.category}</Chip>
-      {post.frontmatter.date && (
-        <Typography level="body-xs">
-          <time>{new Date(post.frontmatter?.date).toLocaleDateString()}</time>
-        </Typography>
-      )}
+      <Stack direction="row" justifyContent="space-between">
+        <Chip>{post.frontmatter.category}</Chip>
+        {post.frontmatter.date && (
+          <Typography level="body-xs">
+            <time>{new Date(post.frontmatter?.date).toLocaleDateString()}</time>
+          </Typography>
+        )}
+      </Stack>
       <Link component={RemixLink} to={`/posts/${post.slug}`}>
         <Typography level="h3" fontSize="lg">
           {post.frontmatter.title}

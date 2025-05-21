@@ -24,7 +24,9 @@ const mdx = async (
   const { default: remarkParse } = await import("remark-parse")
   const { default: remarkRehype } = await import("remark-rehype")
 
-  const { code, frontmatter } = await bundleMDX({
+  console.debug("mdxFile", mdxFile, fileContents, source)
+
+  const { code, frontmatter, errors } = await bundleMDX({
     source: source.trim(),
     cwd: path.resolve(mdxFile.filePath),
     files: fileContents,
@@ -35,7 +37,7 @@ const mdx = async (
         remarkParse,
         remarkMdxImages,
         remarkGfm,
-        remarkRehype,
+        // remarkRehype,
         rehypeHighlight,
       ] as unknown as any
 
@@ -59,6 +61,7 @@ const mdx = async (
     },
   })
 
+  console.debug(code, "errors", errors)
   return { code, frontmatter }
 }
 
@@ -165,7 +168,6 @@ const getMdxPages = async (
   const componentsDir = path.join(extraFilesPath)
   const allComponentFiles = await readDirFiles(componentsDir)
   const fileContents = allComponentFiles
-    .filter(([filePath]) => !/GlobalStyles\.tsx/.test(filePath))
     .map(([filePath, contents]) => [
       `../${filePath.replace(/\\/g, "/")}`,
       contents,

@@ -1,33 +1,35 @@
 import styled from "@emotion/styled"
 import MuiLink from "@mui/joy/Link"
+import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "@remix-run/react"
 import { FC, PropsWithChildren } from "react"
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
   return (
-    <MuiLink
-      component={RemixLink}
-      variant="plain"
-      color="neutral"
-      to={props.href}
-    >
+    <MuiLink {...props} component={RemixLink} color="primary" to={props.href}>
       {props.children}
     </MuiLink>
   )
 }
 
-const H2 = styled.h2`
-  margin: 1.5rem 0 0.5rem;
-`
-const H3 = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-`
+const H2: FC<PropsWithChildren<{}>> = (props) => {
+  return <Typography {...props} level="h2" fontSize="xl" fontWeight={700} />
+}
+const H3: FC<PropsWithChildren<{}>> = (props) => {
+  return <Typography {...props} level="h3" fontSize="lg" fontWeight={700} />
+}
 
-const H4 = styled.h4`
-  margin-bottom: 0.5rem;
-`
+const H4: FC<PropsWithChildren<{}>> = (props) => {
+  return (
+    <Typography
+      {...props}
+      level="h2"
+      fontSize="xl"
+      fontWeight={700}
+      sx={{ marginBottom: 1 }}
+    />
+  )
+}
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -55,10 +57,10 @@ const Table = styled.table`
   }
 `
 
-const Paragraph = styled.p`
-  line-height: 1.25;
-  margin-bottom: 1.125rem;
-`
+const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
+  return <Typography {...props} level="body-lg" sx={{ marginBottom: 3 }} />
+}
+
 const Blockquote = styled.blockquote`
   color: rgb(80, 80, 80);
   background-color: rgb(218, 218, 218);
@@ -82,10 +84,4 @@ const Blockquote = styled.blockquote`
   }
 `
 
-const Posts = styled.ol`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`
-
-export { Blockquote, H2, H3, H4, Link, Paragraph, Posts, Table }
+export { Blockquote, H2, H3, H4, Link, Paragraph, Table }

@@ -1,4 +1,8 @@
 import styled from "@emotion/styled"
+import Box from "@mui/joy/Box"
+import Card from "@mui/joy/Card"
+import Stack from "@mui/joy/Stack"
+import Typography from "@mui/joy/Typography"
 import type {
   HeadersFunction,
   LoaderFunctionArgs,
@@ -9,8 +13,9 @@ import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
 import { Helmet } from "react-helmet"
-import { Header } from "../components/Category"
-import getCodePostAssetComponent from "../components/CodePostAsset"
+import getCodePostAssetComponent, {
+  CodePostAsset,
+} from "../components/CodePostAsset"
 import PageWithHeader from "../components/PageWithHeader"
 import {
   Blockquote,
@@ -104,8 +109,10 @@ const meta: MetaFunction = () => {
 
 const PostRoute = () => {
   const { code, frontmatter, codeAssets } = useLoaderData<typeof loader>()
-  console.debug(code)
-  const Component = useMemo(() => getMDXComponent(code), [code])
+  const Component = useMemo(
+    () => getMDXComponent(code, { styled: styled }),
+    [code],
+  )
   const PostCodeAsset = useMemo(
     () => getCodePostAssetComponent(codeAssets),
     [codeAssets],
@@ -114,36 +121,51 @@ const PostRoute = () => {
   return (
     <>
       <Helmet title={`Andrew Smith | ${frontmatter.title}`} />
-      <Post as="article">
-        <Header category={frontmatter.category}>
-          <h1>{frontmatter.title}</h1>
-          {!!frontmatter.date && (
-            <time dateTime={tryFormatDate(frontmatter.date)}>
-              {tryFormatDate(frontmatter.date, {
-                month: "long",
-                year: "numeric",
-              })}
-            </time>
-          )}
-          {!!frontmatter.tags && frontmatter.tags.length > 0 && (
-            <Tags tags={frontmatter.tags} />
-          )}
-        </Header>
-        <section>
-          <Component
-            components={{
-              CodePostAsset: PostCodeAsset,
-              a: Link,
-              blockquote: Blockquote,
-              h2: H2,
-              h3: H3,
-              h4: H4,
-              p: Paragraph,
-              table: Table,
-            }}
-          />
-        </section>
-      </Post>
+      <Card component="article">
+        <Stack direction="column" spacing={4}>
+          <Stack component="header" direction="column" spacing={0.25}>
+            <Stack direction="row" justifyContent="space-between">
+              <Typography level="h2">{frontmatter.title}</Typography>
+              {!!frontmatter.date && (
+                <time dateTime={tryFormatDate(frontmatter.date)}>
+                  {tryFormatDate(frontmatter.date, {
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </time>
+              )}
+            </Stack>
+            {!!frontmatter.tags && frontmatter.tags.length > 0 && (
+              <Tags tags={frontmatter.tags} />
+            )}
+          </Stack>
+          <Box>
+            <Component
+              components={{
+                CodePostAsset: PostCodeAsset,
+                a: Link,
+                blockquote: Blockquote,
+                h2: H2,
+                h3: H3,
+                h4: H4,
+                p: Paragraph,
+                table: Table,
+                pre: (props: any) => {
+                  console.debug(props)
+                  if (props.children.type === "code") {
+                    return (
+                      <CodePostAsset
+                        language={props.children.props.className}
+                        code={props.children.props.children}
+                      />
+                    )
+                  }
+                },
+              }}
+            />
+          </Box>
+        </Stack>
+      </Card>
     </>
   )
 }
