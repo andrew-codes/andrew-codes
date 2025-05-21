@@ -20,6 +20,7 @@ import { getServerTimeHeader } from "../libs/timing.server"
 import { useLoaderHeaders } from "../libs/utils"
 import darnell from "../public/images/darnell.jpeg"
 import denise from "../public/images/denise.jpeg"
+import keith from "../public/images/keith.jpeg"
 import rick from "../public/images/rick-cabrera.jpeg"
 
 const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -161,6 +162,41 @@ Principal Group Engineering Manager (Director) at Microsoft"
               to any team looking for immediate technical implementation and
               leadership, his potential is immense and very much worth
               consideration for your team.
+            </Typography>
+          </Recommendation>
+
+          <Recommendation
+            summarized
+            profileImage={keith}
+            name="Keith Gargano"
+            title="Software Development Manager at Amazon Studios"
+          >
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is a talented and passionate engineer whose architectural
+              and testing rigor consistently improves whatever application stack
+              he is engineering. He is collaborative by nature, happy to learn
+              the perspectives of others, and eager to delight the user.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              Andrew is visionary in his approach towards software development.
+              When supported by the right team, capable of consuming or building
+              cutting edge frameworks. He is an advocate for developer best
+              practices, keenly aware of the importance of semantically
+              idiomatic code and the long term value of Test Driven Development.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              When I think back to working with Andrew, and consider what
+              'Archetype' he filled, he could best be described as the
+              Engineering Professor. Excited about both learning and teaching
+              others, well versed in theory and brimming at the chance to put
+              theory into practice.
+            </Typography>
+            <Typography level="body-md" sx={{ marginBottom: 2 }}>
+              If you want to elevate your team by bring in techniques that will
+              enhance your quality, upgrade to the newest and most exciting
+              frameworks, and really raise the bar for an organization looking
+              for an engineer who can mentor and teach, Andrew is your one stop
+              shop.
             </Typography>
           </Recommendation>
           <Recommendation

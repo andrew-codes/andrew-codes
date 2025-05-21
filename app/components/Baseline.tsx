@@ -17,8 +17,10 @@ const Baseline = ({ children }) => {
           },
           body: {
             margin: "0 auto",
+            minWidth: "390px",
           },
           html: {
+            minWidth: "390px",
             scrollbarWidth: "thin",
             scrollbarColor: `${theme.palette.text.tertiary} transparent`,
             "&::-webkit-scrollbar": {

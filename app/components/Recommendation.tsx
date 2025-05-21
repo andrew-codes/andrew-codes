@@ -81,10 +81,31 @@ const Recommendation: FC<
           left: isOpen ? 0 : "unset",
           width: isOpen ? "100%" : "unset",
           height: isOpen ? `calc(100vh - ${theme.spacing(2)})` : "unset",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         })}
       >
-        <Card sx={{ height: "100%", margin: summarized && isOpen ? 1 : 0 }}>
-          <Stack direction="row" spacing={2} sx={{ height: "100%" }}>
+        <Card
+          sx={(theme) => ({
+            height: "100%",
+            margin: summarized && isOpen ? 1 : 0,
+            [theme.breakpoints.up("sm")]: {
+              width: summarized && isOpen ? "80%" : "unset",
+              maxWidth: "1200px",
+              height: "unset",
+            },
+          })}
+        >
+          <Stack
+            direction="row"
+            spacing={2}
+            sx={(theme) => ({
+              [theme.breakpoints.down("sm")]: {
+                height: "100%",
+              },
+            })}
+          >
             <Avatar
               alt={name}
               src={profileImage}
@@ -107,7 +128,7 @@ const Recommendation: FC<
                 ref={scrollable}
                 sx={(theme) => ({
                   maxHeight:
-                    !summarized || isOpen ? "unset" : "calc(1.5rem * 3)",
+                    !summarized || isOpen ? "100%" : "calc(1.5rem * 3)",
                   overflowY: !summarized || isOpen ? "scroll" : "hidden",
                   scrollbarWidth: "thin",
                   scrollbarColor: `${theme.palette.text.tertiary} transparent`,
@@ -119,8 +140,8 @@ const Recommendation: FC<
                   },
                   textOverflow: !summarized || !isOpen ? "unset" : "ellipsis",
                   width: "100%",
-                  height: summarized && isOpen ? "100vh" : "unset",
                   [theme.breakpoints.down("sm")]: {
+                    height: summarized && isOpen ? `100%` : "unset",
                     width:
                       summarized && isOpen
                         ? `calc(100% + ${theme.spacing(12)})`
@@ -133,6 +154,9 @@ const Recommendation: FC<
                           ? theme.spacing(0, 4)
                           : theme.spacing(0, 2),
                     },
+                  },
+                  [theme.breakpoints.up("sm")]: {
+                    // height: summarized && isOpen ? "100vh" : "unset",
                   },
                 })}
               >
