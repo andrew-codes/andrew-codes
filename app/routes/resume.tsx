@@ -162,7 +162,7 @@ const ResumeRoute: FC<{}> = () => {
               <FullName
                 as={ResumeFullName}
                 sx={(theme) => ({
-                  color: theme.palette.primary.plainColor,
+                  color: theme.palette.common.black,
                 })}
               >
                 James Andrew Smith

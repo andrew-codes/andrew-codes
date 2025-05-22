@@ -5,10 +5,10 @@ const theme = extendTheme({
     dark: {
       palette: {
         primary: {
-          plainColor: "#D24604",
-          solidBg: "#D24604",
-          solidHoverBg: "#FF5520",
-          solidActiveBg: "#FF5520",
+          plainColor: "#6C63FF",
+          solidBg: "#6C63FF",
+          solidHoverBg: "#825CFF",
+          solidActiveBg: "#825CFF",
           mainChannel: "210 70 4",
         },
         background: {
@@ -33,10 +33,10 @@ const theme = extendTheme({
     light: {
       palette: {
         primary: {
-          plainColor: "#D24604",
-          solidBg: "#D24604",
-          solidHoverBg: "#FF5520",
-          solidActiveBg: "#FF5520",
+          plainColor: "#6C63FF",
+          solidBg: "#6C63FF",
+          solidHoverBg: "#825CFF",
+          solidActiveBg: "#825CFF",
         },
         background: {
           body: "#0F1214",
@@ -44,15 +44,17 @@ const theme = extendTheme({
           level1: "#0F1214",
         },
         neutral: {
+          plainColor: "#ffffff",
           outlinedColor: "#fff",
           outlinedHoverColor: "#0F1214",
           solidBg: "#1E1E1E",
           solidDisabledBg: "#B0B0B0",
+          outlinedBorder: "#b0b0b0",
         },
         text: {
           primary: "#ffffff",
-          secondary: "#b0b0b0",
-          tertiary: "#e8e2db",
+          secondary: "#e8e2db",
+          tertiary: "#b0b0b0",
         },
       },
     },
@@ -60,7 +62,7 @@ const theme = extendTheme({
   focus: {
     default: {
       outlineWidth: "3px",
-      outlineColor: "#D24604",
+      outlineColor: "#6C63FF",
     },
   },
   fontFamily: {

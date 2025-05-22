@@ -25,7 +25,13 @@ import rick from "../public/images/rick-cabrera.jpeg"
 
 const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const timings = {}
-  const posts = await getMdxPages({ request, timings })
+  const posts = (await getMdxPages({ request, timings }))
+    .sort(
+      (a, b) =>
+        new Date(b.frontmatter?.date ?? 0).getTime() -
+        new Date(a.frontmatter?.date ?? 0).getTime(),
+    )
+    .slice(0, 3)
 
   const __filename = fileURLToPath(import.meta.url)
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
@@ -224,7 +230,7 @@ Principal Group Engineering Manager (Director)"
           gap={2}
           justifyContent="space-between"
         >
-          {posts.slice(0, 3).map((post) => (
+          {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
         </Stack>

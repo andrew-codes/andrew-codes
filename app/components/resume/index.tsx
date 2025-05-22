@@ -81,8 +81,8 @@ const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
     <SectionRoot>
       <SectionTitle
         sx={(theme) => ({
-          color: theme.palette.primary.plainColor,
-          borderBottomColor: theme.palette.primary.plainColor,
+          color: theme.palette.common.black,
+          borderBottomColor: theme.palette.common.black,
         })}
       >
         {title}
