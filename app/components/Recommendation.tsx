@@ -95,6 +95,7 @@ const Recommendation: FC<
             minWidth: "100%",
             [theme.breakpoints.up("sm")]: {
               width: summarized && isOpen ? "80%" : "unset",
+              minWidth: "unset",
               maxWidth: "1200px",
               height: "unset",
             },
