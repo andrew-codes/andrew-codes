@@ -28,10 +28,16 @@ const ResumeContactInformation = styled.div`
     font-family: "Lato";
     font-size: 9pt;
     font-style: normal;
-    font-weight: 550;
+    font-weight: 400;
 
     @media (max-width: 640px) {
       display: inline-block;
+    }
+
+    @media screen {
+      height: 15px;
+      line-height: 15px;
+    }
   }
 `
 
@@ -40,6 +46,8 @@ const ResumeAddress = styled.address`
 
   @media print {
     font-style: normal;
+    height: 15px;
+    line-height: 15px;
   }
 `
 const ResumeAbbr = styled.abbr`

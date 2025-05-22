@@ -76,6 +76,20 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyLink: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.neutral.plainColor,
+          textDecorationColor: theme.palette.primary.plainColor,
+          "&:hover": {
+            color: theme.palette.primary.solidHoverBg,
+          },
+          "&:active": {
+            color: theme.palette.primary.solidActiveBg,
+          },
+        }),
+      },
+    },
     JoyButton: {
       styleOverrides: {
         root: ({ ownerState, theme }) => ({

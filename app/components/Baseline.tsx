@@ -9,17 +9,29 @@ const Baseline = ({ children }) => {
       <CssBaseline />
       <GlobalStyles
         styles={{
+          "@media print": {
+            background: "#fff",
+            "@page": {
+              size: "8.5in 11in",
+              margin: "0.25in",
+            },
+          },
           "*": {
             textSizeAdjust: "100%",
-          },
-          "@media print": {
-            backgroundColor: "#fff",
           },
           body: {
             margin: "0 auto",
             minWidth: "390px",
+            "@media print": {
+              backgroundColor: "transparent !important",
+              padding: "0 !important",
+            },
           },
           html: {
+            "@media print": {
+              backgroundColor: "transparent !important",
+              padding: "0 !important",
+            },
             minWidth: "390px",
             scrollbarWidth: "thin",
             scrollbarColor: `${theme.palette.text.tertiary} transparent`,

@@ -10,15 +10,7 @@ import { FC, PropsWithChildren } from "react"
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
   return (
-    <MuiLink
-      {...props}
-      component={RemixLink}
-      to={props.href}
-      sx={(theme) => ({
-        color: theme.palette.neutral.plainColor,
-        textDecoration: "underline",
-      })}
-    >
+    <MuiLink {...props} component={RemixLink} to={props.href}>
       {props.children}
     </MuiLink>
   )

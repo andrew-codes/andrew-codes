@@ -1,13 +1,9 @@
 import styled from "@emotion/styled"
+import Link from "@mui/joy/Link"
+import { Link as RemixLink } from "@remix-run/react"
 import type { FC } from "react"
 import { Fragment } from "react"
-import Link from "./Link"
 import SmallContentDivider from "./SmallContentDivider"
-
-const Tag = styled(Link)`
-  color: rgb(255, 255, 255);
-  font-size: 0.75rem;
-`
 
 const TagList = styled.ul`
   display: block;
@@ -23,7 +19,9 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
     {tags.map((tag: string, index: number) =>
       index === 0 ? (
         <li key={tag}>
-          <Tag to={`/tags/${tag}`}>{tag}</Tag>
+          <Link component={RemixLink} to={`/tags/${tag}`}>
+            {tag}
+          </Link>
         </li>
       ) : (
         <Fragment key={tag}>
@@ -31,7 +29,9 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
             <SmallContentDivider />
           </li>
           <li key={tag}>
-            <Tag to={`/tags/${tag}`}>{tag}</Tag>
+            <Link component={RemixLink} to={`/tags/${tag}`}>
+              {tag}
+            </Link>
           </li>
         </Fragment>
       ),

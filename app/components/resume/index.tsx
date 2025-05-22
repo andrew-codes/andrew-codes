@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { styled as muiStyled } from "@mui/joy/styles"
 import type { FC, ReactNode } from "react"
 import Paper from "../Paper"
 import { PrintTogether } from "../print"
@@ -46,6 +47,7 @@ const List = styled.ul`
   @media (max-width: 640px) {
     padding-left: 2rem !important;
   }
+  line-height: 19px;
 `
 
 const SectionRoot = styled.section`
@@ -56,22 +58,35 @@ const SectionRoot = styled.section`
     margin-top: 0;
   }
 `
-const SectionTitle = styled.h2`
-  border-bottom: 1px solid rgb(198, 198, 198);
-  color: rgb(81, 104, 173);
-  font-size: 14pt;
-  font-variant: all-small-caps;
-  margin: 0;
-  margin-bottom: 4pt;
-  padding-bottom: 4pt;
-`
+const SectionTitle = muiStyled("h2")({
+  borderBottom: "1px solid transparent",
+  color: "rgb(81, 104, 173)",
+  fontSize: "14pt",
+  fontVariant: "all-small-caps",
+  margin: 0,
+  marginBottom: "4pt",
+  paddingBottom: "4pt",
+
+  "@media print": {
+    color: "#000",
+    lineHeight: "22px",
+    borderBottomColor: "#000",
+  },
+})
 const Section: FC<{ children: ReactNode | ReactNode[]; title: string }> = ({
   children,
   title,
 }) => {
   return (
     <SectionRoot>
-      <SectionTitle>{title}</SectionTitle>
+      <SectionTitle
+        sx={(theme) => ({
+          color: theme.palette.primary.plainColor,
+          borderBottomColor: theme.palette.primary.plainColor,
+        })}
+      >
+        {title}
+      </SectionTitle>
       {children}
     </SectionRoot>
   )
@@ -94,9 +109,16 @@ const JobTitle = styled.h3`
   font-size: 14pt;
   margin: 0;
   min-width: 50%;
+
+  @media print {
+    line-height: 22px;
+  }
 `
 const TimeFrame = styled.span`
   display: inline-block;
+  @media print {
+    line-height: 22px;
+  }
 `
 const OrgName = styled.span`
   display: block;
@@ -104,13 +126,20 @@ const OrgName = styled.span`
   font-size: 13pt;
   margin-right: 2pt;
   min-width: 70%;
+  @media print {
+    line-height: 21px;
+  }
 `
 const Location = styled.span`
   display: inline-block;
+  @media print {
+    line-height: 21px;
+  }
 `
 const Description = styled.p`
   margin-top: 8pt;
   width: 100%;
+  margin-bottom: 0 !important;
 `
 const KeyTechnologies = styled.p`
   font-size: 0.875rem;
@@ -118,6 +147,12 @@ const KeyTechnologies = styled.p`
   margin-top: 8pt;
   text-align: right;
   width: 100%;
+  margin-bottom: 0 !important;
+
+  @media print {
+    font-size: 14px !important;
+    line-height: 17px !important;
+  }
 `
 const KeyResults = styled.div`
   margin-top: 8pt;
@@ -345,6 +380,10 @@ const Page = styled(Paper)`
     height: unset;
     padding: 0;
     width: unset;
+
+    p {
+      line-height: 1.1875rem;
+    }
   }
 
   @media (max-width: 640px) {

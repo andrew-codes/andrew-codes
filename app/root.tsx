@@ -98,6 +98,14 @@ const App: FC<{}> = () => {
           [theme.breakpoints.up("lg")]: {
             margin: theme.spacing(2, "auto"),
             maxWidth: "960px",
+            "@media print": {
+              margin: "0 auto",
+              maxWidth: "unset",
+            },
+          },
+          "@media print": {
+            margin: "0 auto",
+            padding: 0,
           },
         }}
       >

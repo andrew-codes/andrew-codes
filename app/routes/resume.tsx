@@ -1,10 +1,14 @@
-import { css, Global } from "@emotion/react"
 import styled from "@emotion/styled"
-import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
+import Stack from "@mui/joy/Stack"
+import type {
+  HeadersFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import type { FC } from "react"
-import { Helmet } from "react-helmet"
 import { fileURLToPath } from "url"
+import { useMediaQuery } from "usehooks-ts"
 import {
   Address,
   ConnectionList,
@@ -19,6 +23,7 @@ import {
   Telephone,
   Url,
 } from "../components/ContactCard"
+import PageHeader from "../components/PageHeader"
 import {
   Education,
   List,
@@ -85,7 +90,7 @@ const Main = styled.main`
 
   @media print {
     background-color: transparent;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
   }
 
@@ -97,14 +102,6 @@ const Main = styled.main`
   }
 `
 
-const globalStyles = css`
-  body {
-    @media print {
-      background-color: transparent !important;
-      padding: 0 !important;
-    }
-  }
-`
 const Note = styled.div`
   background-color: rgba(223, 201, 138, 1);
   color: rgb(0, 0, 0);
@@ -125,18 +122,34 @@ const Note = styled.div`
   }
 `
 
+const meta: MetaFunction = () => [
+  {
+    title: "James Andrew Smith - Resume",
+  },
+  {
+    name: "description",
+    content:
+      "Staff-level software engineer with 15 years of experience designing scalable, high-impact front-end systems at enterprise scale. Proven leader in front-end architecture, developer experience, and testing strategy.",
+  },
+  { name: "og:title", content: "James Andrew Smith - Resume" },
+  {
+    name: "og:description",
+    content:
+      "Staff-level software engineer with 15 years of experience designing scalable, high-impact front-end systems at enterprise scale. Proven leader in front-end architecture, developer experience, and testing strategy.",
+  },
+]
+
 const ResumeRoute: FC<{}> = () => {
   const today = new Date()
   const yearsOfExperience =
     new Date(today.getTime() - new Date(2008, 1, 1).getTime()).getFullYear() -
     1970
 
+  const matchesPrint = useMediaQuery("print")
+
   return (
-    <>
-      <Helmet>
-        <title>James Andrew Smith - Resume</title>
-      </Helmet>
-      <Global styles={globalStyles} />
+    <Stack direction="column" spacing={4}>
+      {!matchesPrint && <PageHeader />}
       <Root>
         <Main>
           <Note>
@@ -146,7 +159,14 @@ const ResumeRoute: FC<{}> = () => {
           </Note>
           <Page>
             <ContactCard as={ResumeContactCard}>
-              <FullName as={ResumeFullName}>James Andrew Smith</FullName>
+              <FullName
+                as={ResumeFullName}
+                sx={(theme) => ({
+                  color: theme.palette.primary.plainColor,
+                })}
+              >
+                James Andrew Smith
+              </FullName>
               <JobTitle as={ResumeJobTitle}>Staff Software Engineer</JobTitle>
               <ContactInformation as={ResumeContactInformation}>
                 <ConnectionList>
@@ -555,9 +575,9 @@ const ResumeRoute: FC<{}> = () => {
           </Page>
         </Main>
       </Root>
-    </>
+    </Stack>
   )
 }
 
 export default ResumeRoute
-export { headers, loader }
+export { headers, loader, meta }

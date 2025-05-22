@@ -44,7 +44,7 @@ const PageHeader: FC<PropsWithChildren<{}>> = ({ children }) => {
         </Box>
         {children}
       </Stack>
-      <Divider />
+      {children && <Divider />}
     </>
   )
 }
