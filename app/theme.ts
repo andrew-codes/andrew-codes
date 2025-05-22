@@ -14,8 +14,10 @@ const theme = extendTheme({
         background: {
           body: "#0F1214",
           surface: "#1E1E1E",
+          level1: "#0F1214",
         },
         neutral: {
+          plainColor: "#ffffff",
           outlinedColor: "#fff",
           outlinedHoverColor: "#0F1214",
           solidBg: "#1E1E1E",
@@ -39,6 +41,7 @@ const theme = extendTheme({
         background: {
           body: "#0F1214",
           surface: "#1E1E1E",
+          level1: "#0F1214",
         },
         neutral: {
           outlinedColor: "#fff",
@@ -66,6 +69,13 @@ const theme = extendTheme({
   },
   typography: {},
   components: {
+    JoyListItem: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&::marker": { color: theme.palette.neutral.plainColor },
+        }),
+      },
+    },
     JoyButton: {
       styleOverrides: {
         root: ({ ownerState, theme }) => ({

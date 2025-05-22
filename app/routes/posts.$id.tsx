@@ -22,9 +22,12 @@ import {
   H2,
   H3,
   H4,
+  Image,
   Link,
+  OrderedList,
   Paragraph,
   Table,
+  UnorderedList,
 } from "../components/Post"
 import Tags from "../components/Tags"
 import { getHash } from "../libs/hash.server"
@@ -147,8 +150,20 @@ const PostRoute = () => {
                 blockquote: Blockquote,
                 h2: H2,
                 h3: H3,
+                img: Image,
                 h4: H4,
                 p: Paragraph,
+                strong: (props) => (
+                  <Typography
+                    fontWeight={900}
+                    sx={(theme) => ({
+                      color: theme.palette.neutral.plainColor,
+                    })}
+                    {...props}
+                  />
+                ),
+                ul: (props) => <UnorderedList root {...props} />,
+                ol: (props) => <OrderedList root {...props} />,
                 table: Table,
                 pre: (props: any) => {
                   if (props.children.type === "code") {

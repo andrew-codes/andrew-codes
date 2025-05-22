@@ -47,8 +47,8 @@ If you use mocha/karma with CommonJS modules, you know those module paths can so
 1. Exclude your source files to prevent duplicate loads
 1. Include third-party dependencies to be used as CommonJS modules
 
-- Using bower? Either explicitly add every bower package's main file to the config file or write custom code to pull them and translate them properly
-- Using a CDN for some? Don't forget to include these explicitly
+> - Using bower? Either explicitly add every bower package's main file to the config file or write custom code to pull them and translate them properly
+> - Using a CDN for some? Don't forget to include these explicitly
 
 1. Don't forget to exclude your node_modules folder from being processed as CommonJS modules
 1. Don't forget to include configuration for the plugins that enable you to use CommonJS with karma ([karma-common-js](https://www.npmjs.org/package/karma-commonjs)).
