@@ -151,7 +151,6 @@ const PostRoute = () => {
                 p: Paragraph,
                 table: Table,
                 pre: (props: any) => {
-                  console.debug(props)
                   if (props.children.type === "code") {
                     return (
                       <CodePostAsset

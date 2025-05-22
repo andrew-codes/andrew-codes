@@ -24,8 +24,6 @@ const mdx = async (
   const { default: remarkParse } = await import("remark-parse")
   const { default: remarkRehype } = await import("remark-rehype")
 
-  console.debug("mdxFile", mdxFile, fileContents, source)
-
   const { code, frontmatter, errors } = await bundleMDX({
     source: source.trim(),
     cwd: path.resolve(mdxFile.filePath),
@@ -61,7 +59,6 @@ const mdx = async (
     },
   })
 
-  console.debug(code, "errors", errors)
   return { code, frontmatter }
 }
 
