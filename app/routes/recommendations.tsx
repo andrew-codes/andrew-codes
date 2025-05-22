@@ -107,7 +107,7 @@ Principal Group Engineering Manager (Director)"
                 company="Experience LLC."
                 profileImage={rick}
                 name="Rick Cabrera"
-                title="chief Technology Officer (CTO)"
+                title="Chief Technology Officer (CTO)"
               >
                 <Typography level="body-md" sx={{ marginBottom: 2 }}>
                   Andrew is a fantastic software developer. He was hired on at
@@ -284,7 +284,7 @@ Principal Group Engineering Manager (Director)"
                 company="Experience LLC."
                 profileImage={rick}
                 name="Rick Cabrera"
-                title="chief Technology Officer (CTO)"
+                title="Chief Technology Officer (CTO)"
               >
                 <Typography level="body-md" sx={{ marginBottom: 2 }}>
                   Andrew is a fantastic software developer. He was hired on at
