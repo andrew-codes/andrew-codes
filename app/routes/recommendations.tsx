@@ -55,7 +55,7 @@ const RecommendationsRoute = () => {
         >
           Here's what my peers, managers, and leaders have to say about me.
         </Typography>
-        <CallToAction secondaryTitle="Read my Posts" secondaryAction="/posts" />
+        <CallToAction secondaryTitle="Read Posts" secondaryAction="/posts" />
       </PageHeader>
       <Section>
         <SectionHeader title="Recommendations" />
@@ -91,8 +91,7 @@ Principal Group Engineering Manager (Director)"
                   in designing and implementing core engineering solutions for
                   Microsoft's Content Management System (CMS). His contributions
                   have been critical to ensuring the reliability and scalability
-                  of a platform that handles over 15 billion requests per
-                  month.{" "}
+                  of a platform that handles over 15 billion requests per month.{" "}
                 </Typography>
                 <Typography level="body-md" sx={{ marginBottom: 2 }}>
                   He combines deep technical expertise with a passion for
@@ -268,8 +267,7 @@ Principal Group Engineering Manager (Director)"
                   in designing and implementing core engineering solutions for
                   Microsoft's Content Management System (CMS). His contributions
                   have been critical to ensuring the reliability and scalability
-                  of a platform that handles over 15 billion requests per
-                  month.{" "}
+                  of a platform that handles over 15 billion requests per month.{" "}
                 </Typography>
                 <Typography level="body-md" sx={{ marginBottom: 2 }}>
                   He combines deep technical expertise with a passion for

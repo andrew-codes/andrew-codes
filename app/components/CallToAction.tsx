@@ -26,7 +26,7 @@ const CallToAction: FC<{
           component={RemixLink}
           size="lg"
         >
-          View My Resume
+          View Resume
         </Button>
         {typeof secondaryAction === "string" ? (
           <Button
