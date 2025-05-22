@@ -1,19 +1,16 @@
-import { CacheProvider } from "@emotion/react"
 import { RemixBrowser } from "@remix-run/react"
 import { startTransition, StrictMode } from "react"
 import { hydrateRoot } from "react-dom/client"
-import createEmotionCache from "./createEmotionCache"
-
-const clientSideCache = createEmotionCache()
+import { StyleProvider } from "./components/StyleProvider"
 
 function hydrateApp() {
   startTransition(() => {
     hydrateRoot(
-      document.getElementById("root"),
+      document,
       <StrictMode>
-        <CacheProvider value={clientSideCache}>
+        <StyleProvider>
           <RemixBrowser />
-        </CacheProvider>
+        </StyleProvider>
       </StrictMode>,
     )
   })

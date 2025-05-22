@@ -1,6 +1,6 @@
+import hljs from "highlight.js"
 import type { FC } from "react"
 import { useEffect, useRef } from "react"
-import hljs from "highlight.js"
 
 const CodePostAsset: FC<{ code: string; language: string }> = ({
   code,
@@ -48,3 +48,4 @@ const getCodePostAssetComponent = (
 }
 
 export default getCodePostAssetComponent
+export { CodePostAsset }

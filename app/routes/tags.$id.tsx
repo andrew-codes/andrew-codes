@@ -1,19 +1,18 @@
-import styled from "@emotion/styled"
+import Stack from "@mui/joy/Stack"
+import Typography from "@mui/joy/Typography"
 import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData, useParams } from "@remix-run/react"
 import { startCase } from "lodash-es"
 import { Helmet } from "react-helmet"
-import { Header } from "../components/Category"
-import Link from "../components/Link"
-import PageWithHeader from "../components/PageWithHeader"
-import { Posts } from "../components/Post"
-import Tags from "../components/Tags"
+import CallToAction from "../components/CallToAction"
+import PageHeader from "../components/PageHeader"
+import PostCard from "../components/PostCard"
+import { Section, SectionHeader } from "../components/Section"
 import { getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
-import { order } from "../libs/posts/sortPosts"
 import { getServerTimeHeader } from "../libs/timing.server"
-import { tryFormatDate, useLoaderHeaders } from "../libs/utils"
+import { useLoaderHeaders } from "../libs/utils"
 import type { MdxPage } from "../types"
 
 const onlyForTag = (tag: string) => (posts: MdxPage[]) =>
@@ -48,40 +47,7 @@ const loader = async ({ request, params }: LoaderFunctionArgs) => {
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const headers: HeadersFunction = useLoaderHeaders()
 
-const Page = styled(PageWithHeader)`
-  padding-bottom: 2rem;
-
-  header {
-    color: rgb(0, 0, 0);
-    margin-bottom: 2rem;
-  }
-  section > * {
-    margin: 0 1rem;
-  }
-
-  ol > li {
-    margin-top: 1.5rem;
-    position: relative;
-
-    time {
-      position: absolute;
-      right: 1rem;
-      top: 0;
-    }
-  }
-
-  h3 {
-    display: inline-block;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  ul a {
-    color: rgb(0, 0, 0);
-  }
-`
-const CategoryRoute = () => {
+const TagsRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
   const { id } = useParams()
 
@@ -90,41 +56,36 @@ const CategoryRoute = () => {
       <Helmet>
         <title>{startCase(id)} Tagged Articles | Andrew Smith</title>
       </Helmet>
-      <Page as="article">
-        <Header category={null}>
-          <h1>{id}</h1>
-        </Header>
-        <section>
-          <Posts>
-            {order(posts).map((post) => (
-              <li key={post.slug}>
-                <h3>
-                  <Link to={`/posts/${post.slug}`}>
-                    {post.frontmatter.title}
-                  </Link>
-                </h3>
-                {!!post.frontmatter.description && (
-                  <p>{post.frontmatter.description}</p>
-                )}
-                {!!post.frontmatter.date && (
-                  <time dateTime={tryFormatDate(post.frontmatter.date)}>
-                    {tryFormatDate(post.frontmatter.date, {
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </time>
-                )}
-                {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-                  <Tags tags={post.frontmatter.tags} />
-                )}
-              </li>
+      <Stack direction="column" spacing={4}>
+        <PageHeader>
+          <Typography
+            level="body-md"
+            sx={(theme) => ({
+              [theme.breakpoints.up("sm")]: {
+                fontSize: "1.5rem",
+              },
+            })}
+          >
+            Read about my experiences and thoughts on technology and software
+            engineering.
+          </Typography>
+          <CallToAction
+            secondaryTitle="View Recommendations"
+            secondaryAction="/recommendations?priority=featured"
+          />
+        </PageHeader>
+        <Section>
+          <SectionHeader title="Featured" />
+          <Stack direction="row" flexWrap="wrap" gap={2}>
+            {posts.map((post) => (
+              <PostCard key={post.slug} post={post} />
             ))}
-          </Posts>
-        </section>
-      </Page>
+          </Stack>
+        </Section>
+      </Stack>
     </>
   )
 }
 
-export default CategoryRoute
-export { headers, loader, meta }
+export default TagsRoute
+export { headers, loader }

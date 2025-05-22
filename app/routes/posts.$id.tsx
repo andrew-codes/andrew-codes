@@ -1,21 +1,33 @@
 import styled from "@emotion/styled"
-import type { HeadersFunction, LoaderFunctionArgs } from "@remix-run/node"
+import Box from "@mui/joy/Box"
+import Card from "@mui/joy/Card"
+import Stack from "@mui/joy/Stack"
+import Typography from "@mui/joy/Typography"
+import type {
+  HeadersFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
 import { Helmet } from "react-helmet"
-import { Header } from "../components/Category"
-import getCodePostAssetComponent from "../components/CodePostAsset"
+import getCodePostAssetComponent, {
+  CodePostAsset,
+} from "../components/CodePostAsset"
 import PageWithHeader from "../components/PageWithHeader"
 import {
   Blockquote,
   H2,
   H3,
   H4,
+  Image,
   Link,
+  OrderedList,
   Paragraph,
   Table,
+  UnorderedList,
 } from "../components/Post"
 import Tags from "../components/Tags"
 import { getHash } from "../libs/hash.server"
@@ -86,9 +98,24 @@ const Post = styled(PageWithHeader)`
   }
 `
 
+const meta: MetaFunction = () => {
+  return [
+    {
+      title: "Andrew Smith",
+    },
+    {
+      name: "og:title",
+      content: "Andrew Smith - Staff Software Engineer",
+    },
+  ]
+}
+
 const PostRoute = () => {
   const { code, frontmatter, codeAssets } = useLoaderData<typeof loader>()
-  const Component = useMemo(() => getMDXComponent(code, { styled }), [code])
+  const Component = useMemo(
+    () => getMDXComponent(code, { styled: styled }),
+    [code],
+  )
   const PostCodeAsset = useMemo(
     () => getCodePostAssetComponent(codeAssets),
     [codeAssets],
@@ -96,42 +123,66 @@ const PostRoute = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{frontmatter.title ?? "Article"} | Andrew Smith</title>
-      </Helmet>
-      <Post as="article">
-        <Header category={frontmatter.category}>
-          <h1>{frontmatter.title}</h1>
-          {!!frontmatter.date && (
-            <time dateTime={tryFormatDate(frontmatter.date)}>
-              {tryFormatDate(frontmatter.date, {
-                month: "long",
-                year: "numeric",
-              })}
-            </time>
-          )}
-          {!!frontmatter.tags && frontmatter.tags.length > 0 && (
-            <Tags tags={frontmatter.tags} />
-          )}
-        </Header>
-        <section>
-          <Component
-            components={{
-              CodePostAsset: PostCodeAsset,
-              a: Link,
-              blockquote: Blockquote,
-              h2: H2,
-              h3: H3,
-              h4: H4,
-              p: Paragraph,
-              table: Table,
-            }}
-          />
-        </section>
-      </Post>
+      <Helmet title={`Andrew Smith | ${frontmatter.title}`} />
+      <Card component="article">
+        <Stack direction="column" spacing={4}>
+          <Stack component="header" direction="column" spacing={0.25}>
+            <Stack direction="row" justifyContent="space-between">
+              <Typography level="h2">{frontmatter.title}</Typography>
+              {!!frontmatter.date && (
+                <time dateTime={tryFormatDate(frontmatter.date)}>
+                  {tryFormatDate(frontmatter.date, {
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </time>
+              )}
+            </Stack>
+            {!!frontmatter.tags && frontmatter.tags.length > 0 && (
+              <Tags tags={frontmatter.tags} />
+            )}
+          </Stack>
+          <Box>
+            <Component
+              components={{
+                CodePostAsset: PostCodeAsset,
+                a: Link,
+                blockquote: Blockquote,
+                h2: H2,
+                h3: H3,
+                img: Image,
+                h4: H4,
+                p: Paragraph,
+                strong: (props) => (
+                  <Typography
+                    fontWeight={900}
+                    sx={(theme) => ({
+                      color: theme.palette.neutral.plainColor,
+                    })}
+                    {...props}
+                  />
+                ),
+                ul: (props) => <UnorderedList root {...props} />,
+                ol: (props) => <OrderedList root {...props} />,
+                table: Table,
+                pre: (props: any) => {
+                  if (props.children.type === "code") {
+                    return (
+                      <CodePostAsset
+                        language={props.children.props.className}
+                        code={props.children.props.children}
+                      />
+                    )
+                  }
+                },
+              }}
+            />
+          </Box>
+        </Stack>
+      </Card>
     </>
   )
 }
 
 export default PostRoute
-export { headers, loader }
+export { headers, loader, meta }

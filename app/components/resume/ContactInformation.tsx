@@ -8,7 +8,7 @@ const ResumeContactCard = styled.header`
 
 const ResumeFullName = styled.h1`
   color: rgb(81, 104, 173);
-  font-family: "Lato-Regular";
+  font-family: "Lato";
   font-size: 20pt;
   font-weight: 800;
   margin: 0;
@@ -19,19 +19,25 @@ const ResumeFullName = styled.h1`
 
 const ResumeJobTitle = styled.span`
   display: block;
-  font-family: "Lato-Regular";
+  font-family: "Lato";
   font-size: 14pt;
 `
 
 const ResumeContactInformation = styled.div`
   * {
-    font-family: "Lato-Regular";
+    font-family: "Lato";
     font-size: 9pt;
     font-style: normal;
-    font-weight: 550;
+    font-weight: 400;
 
     @media (max-width: 640px) {
       display: inline-block;
+    }
+
+    @media screen {
+      height: 15px;
+      line-height: 15px;
+    }
   }
 `
 
@@ -40,6 +46,8 @@ const ResumeAddress = styled.address`
 
   @media print {
     font-style: normal;
+    height: 15px;
+    line-height: 15px;
   }
 `
 const ResumeAbbr = styled.abbr`

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { styled as muiStyled } from "@mui/joy/styles"
 import type { FC, HTMLProps, ReactNode } from "react"
 import { Children } from "react"
 import SmallContentDivider from "./SmallContentDivider"
@@ -17,14 +18,21 @@ const ContactCard: WrappedStyledComponent = ({ as, children }) => (
   </ContactCardStyled>
 )
 
-const FullNameStyled = styled.h1``
-const FullName: WrappedStyledComponent = ({ as, children }) => (
-  <FullNameStyled as={as} className="fn">
+const FullNameStyled = muiStyled("h1")({
+  fontWeight: 600,
+  lineHeight: "2rem",
+})
+const FullName: WrappedStyledComponent = ({ as, children, sx }) => (
+  <FullNameStyled as={as} className="fn" sx={sx}>
     {children}
   </FullNameStyled>
 )
 
-const JobTitleStyled = styled.span``
+const JobTitleStyled = styled.span`
+  @media print {
+    line-height: 1.375rem;
+  }
+`
 const JobTitle: WrappedStyledComponent = ({ as, children }) => (
   <JobTitleStyled as={as} className="title">
     {children}
@@ -101,6 +109,10 @@ const ConnectionOrderedList = styled.ol`
   padding: 0;
   margin: 0;
   display: block;
+
+  @media print {
+    line-height: 15px;
+  }
 `
 const ConnectionListItem = styled.li`
   padding: 0;
@@ -139,6 +151,5 @@ export {
   Notes,
   Region,
   Telephone,
-  Url
+  Url,
 }
-
