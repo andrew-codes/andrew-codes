@@ -163,8 +163,8 @@ const Recommendation: FC<
                       summarized && isOpen
                         ? `calc(100% + ${theme.spacing(12)})`
                         : `unset`,
-                    marginLeft: `calc(-1 * ${theme.spacing(10)})`,
-                    marginTop: theme.spacing(1),
+                    marginLeft: `calc(-1 * ${theme.spacing(10)}) !important`,
+                    marginTop: `${theme.spacing(1)} !important`,
                     "> * ": {
                       padding:
                         summarized && isOpen
