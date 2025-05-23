@@ -6,9 +6,10 @@ import type {
   MetaFunction,
 } from "@remix-run/node"
 import { json } from "@remix-run/node"
-import type { FC } from "react"
+import { useMemo, type FC } from "react"
 import { fileURLToPath } from "url"
 import { useMediaQuery } from "usehooks-ts"
+import CallToAction from "../components/CallToAction"
 import {
   Address,
   ConnectionList,
@@ -141,15 +142,25 @@ const meta: MetaFunction = () => [
 
 const ResumeRoute: FC<{}> = () => {
   const today = new Date()
-  const yearsOfExperience =
+  const yearsOfExperience = useMemo(() => {
     new Date(today.getTime() - new Date(2008, 1, 1).getTime()).getFullYear() -
-    1970
+      1970
+  }, [])
 
   const matchesPrint = useMediaQuery("print")
 
   return (
     <Stack direction="column" spacing={4}>
-      {!matchesPrint && <PageHeader />}
+      {!matchesPrint && (
+        <PageHeader>
+          <CallToAction
+            primaryTitle="View and Download PDF"
+            primaryAction="/James Andrew Smith - Resume.pdf"
+            secondaryTitle="View Recommendations"
+            secondaryAction="/recommendations?priority=featured"
+          />
+        </PageHeader>
+      )}
       <Root>
         <Main>
           <Note>
