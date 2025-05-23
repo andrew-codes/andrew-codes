@@ -25,19 +25,28 @@ import rick from "../public/images/rick-cabrera.jpeg"
 
 const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const timings = {}
-  const posts = (await getMdxPages({ request, timings }))
-    .sort(
-      (a, b) =>
-        new Date(b.frontmatter?.date ?? 0).getTime() -
-        new Date(a.frontmatter?.date ?? 0).getTime(),
-    )
+  const posts = (await getMdxPages({ request, timings })).sort(
+    (a, b) =>
+      new Date(b.frontmatter?.date ?? 0).getTime() -
+      new Date(a.frontmatter?.date ?? 0).getTime(),
+  )
+
+  let featuredPosts = posts
+    .filter((post) => post.frontmatter.tags?.includes("featured"))
     .slice(0, 3)
+  if (featuredPosts.length < 3) {
+    featuredPosts = featuredPosts.concat(
+      posts
+        .filter((post) => !post.frontmatter.tags?.includes("featured"))
+        .slice(0, 3 - featuredPosts.length),
+    )
+  }
 
   const __filename = fileURLToPath(import.meta.url)
   const selfFilePartsToHash = await getFilePartsToHash(__filename)
 
   return json(
-    { posts: posts },
+    { posts: featuredPosts },
     {
       status: 200,
       headers: {
