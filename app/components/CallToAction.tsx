@@ -4,12 +4,16 @@ import { Link as RemixLink } from "@remix-run/react"
 import { FC, MouseEventHandler } from "react"
 
 const CallToAction: FC<{
+  primaryTitle?: string
+  primaryAction?: string | MouseEventHandler
   secondaryTitle: string
   secondaryAction: string | MouseEventHandler
-}> = ({ secondaryAction, secondaryTitle }) => {
-  if (typeof secondaryAction === "string") {
-  }
-
+}> = ({
+  primaryTitle = "View Resume",
+  primaryAction = "/resume",
+  secondaryAction,
+  secondaryTitle,
+}) => {
   return (
     <>
       <Stack
@@ -19,15 +23,26 @@ const CallToAction: FC<{
         spacing={2}
         sx={{ marginTop: 2 }}
       >
-        <Button
-          color="primary"
-          variant="solid"
-          to="/resume"
-          component={RemixLink}
-          size="lg"
-        >
-          View My Resume
-        </Button>
+        {typeof primaryAction === "string" ? (
+          <Button
+            color="primary"
+            variant="solid"
+            href={primaryAction}
+            component={"a"}
+            size="lg"
+          >
+            {primaryTitle}
+          </Button>
+        ) : (
+          <Button
+            color="primary"
+            variant="solid"
+            onClick={primaryAction}
+            size="lg"
+          >
+            {primaryTitle}
+          </Button>
+        )}
         {typeof secondaryAction === "string" ? (
           <Button
             color="neutral"
