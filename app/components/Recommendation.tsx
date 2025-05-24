@@ -5,7 +5,6 @@ import Card from "@mui/joy/Card"
 import Chip from "@mui/joy/Chip"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import mixpanel from "mixpanel-browser"
 import { motion } from "motion/react"
 import {
   Children,
@@ -16,6 +15,7 @@ import {
   useRef,
   useState,
 } from "react"
+import useAnalytics from "../libs/useAnalytics"
 
 const overlayVariants = {
   active: {
@@ -60,19 +60,60 @@ const Recommendation: FC<
     }
   }, [isOpen])
 
+  const [isMounted, setIsMounted] = useState(false)
+  const { track } = useAnalytics()
+  const timestamp = useRef<Date | undefined>()
   useEffect(() => {
-    if (!isOpen) {
+    setIsMounted(true)
+  }, [])
+  useEffect(() => {
+    if (!isMounted) {
       return
     }
 
-    mixpanel.track("Recommendation Viewed", {
+    if (!isOpen && timestamp.current) {
+      const now = new Date()
+      const diff = now.getTime() - timestamp.current.getTime()
+      const seconds = Math.floor(diff / 1000)
+      track("recommendationViewed_time", {
+        seconds,
+        name,
+        title,
+        company,
+      })
+
+      return
+    }
+
+    timestamp.current = new Date()
+    track("recommendationViewed", {
       name,
       title,
       company,
-      summarized,
-      isOpen,
     })
   }, [isOpen])
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (!isMounted || !isOpen || !timestamp.current) {
+        return
+      }
+
+      const now = new Date()
+      const diff = now.getTime() - timestamp.current.getTime()
+      const seconds = Math.floor(diff / 1000)
+      track("recommendationViewed_time", {
+        seconds,
+        name,
+        title,
+        company,
+      })
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+      handleBeforeUnload()
+    }
+  }, [])
 
   return (
     <Box sx={{ minHeight: "191px" }}>
