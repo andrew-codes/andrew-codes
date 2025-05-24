@@ -8,17 +8,29 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react"
+import { json, LoaderFunction } from "@remix-run/server-runtime"
 import { PropsWithChildren, useContext, type FC } from "react"
 import Baseline from "./components/Baseline"
 import ClientStylesContext from "./components/ClientStylesContext"
+import Analytics from "./libs/Analytics"
 import avatar from "./public/images/Profile.webp"
 import theme from "./theme"
+
+const loader: LoaderFunction = async ({ request }) => {
+  const mpProjectToken = process.env.MIXPANEL_TOKEN
+  return json<{ mpProjectToken: string | undefined }>(
+    {
+      mpProjectToken,
+    },
+    200,
+  )
+}
 
 const Layout = withEmotionCache(
   ({ children }: FC<PropsWithChildren<{}>>, emotionCache) => {
     const clientStyleData = useContext(ClientStylesContext)
-
     // Only executed on client
     useEnhancedEffect(() => {
       // re-link sheet container
@@ -33,6 +45,10 @@ const Layout = withEmotionCache(
       clientStyleData.reset()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const data = useLoaderData() as {
+      mpProjectToken: string | undefined
+    }
 
     return (
       <html lang="en">
@@ -73,6 +89,7 @@ const Layout = withEmotionCache(
             type="text/css"
             href="/css/dracula.css"
           />
+          <Analytics token={data.mpProjectToken} />
         </head>
         <body>
           <InitColorSchemeScript defaultMode="dark" />
@@ -116,4 +133,4 @@ const App: FC<{}> = () => {
 }
 
 export default App
-export { Layout }
+export { Layout, loader }

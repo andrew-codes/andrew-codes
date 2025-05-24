@@ -56,6 +56,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:4.17.21"],\
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/lodash-es", "npm:4.17.12"],\
+          ["@types/mixpanel-browser", "npm:2.60.0"],\
           ["@types/morgan", "npm:1.9.9"],\
           ["@types/node", "npm:22.15.20"],\
           ["@types/on-finished", "npm:2.3.4"],\
@@ -87,6 +88,7 @@ const RAW_RUNTIME_STATE =
           ["lru-cache", "npm:11.1.0"],\
           ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:10.1.1"],\
           ["mixpanel", "npm:0.18.1"],\
+          ["mixpanel-browser", "npm:2.65.0"],\
           ["morgan", "npm:1.10.0"],\
           ["motion", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:12.12.1"],\
           ["nodemon", "npm:3.1.10"],\
@@ -163,6 +165,7 @@ const RAW_RUNTIME_STATE =
           ["@types/express", "npm:4.17.21"],\
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/lodash-es", "npm:4.17.12"],\
+          ["@types/mixpanel-browser", "npm:2.60.0"],\
           ["@types/morgan", "npm:1.9.9"],\
           ["@types/node", "npm:22.15.20"],\
           ["@types/on-finished", "npm:2.3.4"],\
@@ -194,6 +197,7 @@ const RAW_RUNTIME_STATE =
           ["lru-cache", "npm:11.1.0"],\
           ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:10.1.1"],\
           ["mixpanel", "npm:0.18.1"],\
+          ["mixpanel-browser", "npm:2.65.0"],\
           ["morgan", "npm:1.10.0"],\
           ["motion", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:12.12.1"],\
           ["nodemon", "npm:3.1.10"],\
@@ -4961,6 +4965,24 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@rrweb/types", [\
+      ["npm:2.0.0-alpha.18", {\
+        "packageLocation": "./.yarn/cache/@rrweb-types-npm-2.0.0-alpha.18-d6a42ff33b-ddb632d494.zip/node_modules/@rrweb/types/",\
+        "packageDependencies": [\
+          ["@rrweb/types", "npm:2.0.0-alpha.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@rrweb/utils", [\
+      ["npm:2.0.0-alpha.18", {\
+        "packageLocation": "./.yarn/cache/@rrweb-utils-npm-2.0.0-alpha.18-745eb1bda2-d0ca790639.zip/node_modules/@rrweb/utils/",\
+        "packageDependencies": [\
+          ["@rrweb/utils", "npm:2.0.0-alpha.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@rtsao/scc", [\
       ["npm:1.1.0", {\
         "packageLocation": "./.yarn/cache/@rtsao-scc-npm-1.1.0-f4ba9ceb2c-17d04adf40.zip/node_modules/@rtsao/scc/",\
@@ -5124,6 +5146,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-cookie-npm-0.6.0-1f4c3f48f0-b883348d5b.zip/node_modules/@types/cookie/",\
         "packageDependencies": [\
           ["@types/cookie", "npm:0.6.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/css-font-loading-module", [\
+      ["npm:0.0.7", {\
+        "packageLocation": "./.yarn/cache/@types-css-font-loading-module-npm-0.0.7-e5453ffa7c-f70b9098ee.zip/node_modules/@types/css-font-loading-module/",\
+        "packageDependencies": [\
+          ["@types/css-font-loading-module", "npm:0.0.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5334,6 +5365,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-mime-npm-3.0.1-dec03536dc-4040fac73f.zip/node_modules/@types/mime/",\
         "packageDependencies": [\
           ["@types/mime", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/mixpanel-browser", [\
+      ["npm:2.60.0", {\
+        "packageLocation": "./.yarn/cache/@types-mixpanel-browser-npm-2.60.0-fb1ce02c2c-99c1f4601f.zip/node_modules/@types/mixpanel-browser/",\
+        "packageDependencies": [\
+          ["@types/mixpanel-browser", "npm:2.60.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6077,6 +6117,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@xstate/fsm", [\
+      ["npm:1.6.5", {\
+        "packageLocation": "./.yarn/cache/@xstate-fsm-npm-1.6.5-ce4efd1c39-deae150116.zip/node_modules/@xstate/fsm/",\
+        "packageDependencies": [\
+          ["@xstate/fsm", "npm:1.6.5"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@zxing/text-encoding", [\
       ["npm:0.9.0", {\
         "packageLocation": "./.yarn/cache/@zxing-text-encoding-npm-0.9.0-8426ff59e9-268e4ef64b.zip/node_modules/@zxing/text-encoding/",\
@@ -6696,6 +6745,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/balanced-match-npm-1.0.2-a53c126459-9706c088a2.zip/node_modules/balanced-match/",\
         "packageDependencies": [\
           ["balanced-match", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["base64-arraybuffer", [\
+      ["npm:1.0.2", {\
+        "packageLocation": "./.yarn/cache/base64-arraybuffer-npm-1.0.2-18f4899892-15e6400d2d.zip/node_modules/base64-arraybuffer/",\
+        "packageDependencies": [\
+          ["base64-arraybuffer", "npm:1.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13953,12 +14011,31 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["mitt", [\
+      ["npm:3.0.1", {\
+        "packageLocation": "./.yarn/cache/mitt-npm-3.0.1-ce290ffa77-287c70d8e7.zip/node_modules/mitt/",\
+        "packageDependencies": [\
+          ["mitt", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["mixpanel", [\
       ["npm:0.18.1", {\
         "packageLocation": "./.yarn/cache/mixpanel-npm-0.18.1-99ca86a8a7-640ed982b2.zip/node_modules/mixpanel/",\
         "packageDependencies": [\
           ["https-proxy-agent", "npm:5.0.0"],\
           ["mixpanel", "npm:0.18.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["mixpanel-browser", [\
+      ["npm:2.65.0", {\
+        "packageLocation": "./.yarn/cache/mixpanel-browser-npm-2.65.0-7b6918dcec-0cc14191ef.zip/node_modules/mixpanel-browser/",\
+        "packageDependencies": [\
+          ["mixpanel-browser", "npm:2.65.0"],\
+          ["rrweb", "npm:2.0.0-alpha.18"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16249,6 +16326,43 @@ const RAW_RUNTIME_STATE =
           ["@types/estree", "npm:1.0.5"],\
           ["fsevents", "patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
           ["rollup", "npm:4.21.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["rrdom", [\
+      ["npm:2.0.0-alpha.18", {\
+        "packageLocation": "./.yarn/cache/rrdom-npm-2.0.0-alpha.18-231f228444-4b02e60a68.zip/node_modules/rrdom/",\
+        "packageDependencies": [\
+          ["rrdom", "npm:2.0.0-alpha.18"],\
+          ["rrweb-snapshot", "npm:2.0.0-alpha.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["rrweb", [\
+      ["npm:2.0.0-alpha.18", {\
+        "packageLocation": "./.yarn/cache/rrweb-npm-2.0.0-alpha.18-c34baf8760-44efc0475a.zip/node_modules/rrweb/",\
+        "packageDependencies": [\
+          ["@rrweb/types", "npm:2.0.0-alpha.18"],\
+          ["@rrweb/utils", "npm:2.0.0-alpha.18"],\
+          ["@types/css-font-loading-module", "npm:0.0.7"],\
+          ["@xstate/fsm", "npm:1.6.5"],\
+          ["base64-arraybuffer", "npm:1.0.2"],\
+          ["mitt", "npm:3.0.1"],\
+          ["rrdom", "npm:2.0.0-alpha.18"],\
+          ["rrweb", "npm:2.0.0-alpha.18"],\
+          ["rrweb-snapshot", "npm:2.0.0-alpha.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["rrweb-snapshot", [\
+      ["npm:2.0.0-alpha.18", {\
+        "packageLocation": "./.yarn/cache/rrweb-snapshot-npm-2.0.0-alpha.18-01434d8b84-5dbc717cf8.zip/node_modules/rrweb-snapshot/",\
+        "packageDependencies": [\
+          ["postcss", "npm:8.4.47"],\
+          ["rrweb-snapshot", "npm:2.0.0-alpha.18"]\
         ],\
         "linkType": "HARD"\
       }]\

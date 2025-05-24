@@ -6,7 +6,6 @@ import express from "express"
 import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
-import Mixpanel from "mixpanel"
 import morgan from "morgan"
 import serverTiming from "server-timing"
 import configuration from "./app/libs/configuration.server.js"
@@ -14,8 +13,6 @@ import { getMdxPages } from "./app/libs/mdx.server.js"
 import { getRedirectsMiddleware } from "./server/redirects.js"
 
 installGlobals()
-
-const mp = Mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
 
 const primaryHost = "andrew.codes"
 const getHost = (req: { get: (key: string) => string | undefined }) =>
@@ -149,11 +146,6 @@ app.all("*", (req, res, next) => {
   if (req.path.endsWith("/healthcheck")) {
     return
   }
-  mp.track("pageview", {
-    ip: req.ip,
-    distinct_id: req.ip,
-    path: req.path,
-  })
 })
 
 app.use((err: any, req: any, res: any, next: any) => {
