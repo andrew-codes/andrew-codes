@@ -180,14 +180,12 @@ app.post("/analytics", (req, res, next) => {
     osName,
     osVersion,
   })
-  next()
+
+  return res.status(200)
 })
 
 app.all("*", (req, res, next) => {
   createRequestHandler({ build, mode: MODE })(req, res, next)
-  if (req.path.endsWith("/healthcheck")) {
-    return
-  }
 })
 
 app.use((err: any, req: any, res: any, next: any) => {
