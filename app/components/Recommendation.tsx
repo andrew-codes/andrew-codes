@@ -5,6 +5,7 @@ import Card from "@mui/joy/Card"
 import Chip from "@mui/joy/Chip"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
+import mixpanel from "mixpanel-browser"
 import { motion } from "motion/react"
 import {
   Children,
@@ -57,6 +58,20 @@ const Recommendation: FC<
     if (!isOpen) {
       scrollable.current?.scroll({ top: 0 })
     }
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+
+    mixpanel.track("Recommendation Viewed", {
+      name,
+      title,
+      company,
+      summarized,
+      isOpen,
+    })
   }, [isOpen])
 
   return (
