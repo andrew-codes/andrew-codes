@@ -1,8 +1,12 @@
 import mp from "mixpanel-browser"
 import { FC, useEffect } from "react"
 
-const Analytics: FC<{ token?: string }> = ({ token = "" }) => {
+const Analytics: FC<{ token?: string }> = ({ token }) => {
   useEffect(() => {
+    if (!token) {
+      return
+    }
+
     mp.init(token, {
       autocapture: true,
     })
