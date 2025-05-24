@@ -152,10 +152,16 @@ app.post("/analytics", (req, res, next) => {
     return res.status(400).send("Event is required")
   }
 
-  const ip =
+  const ipFromHeaders =
     req.headers["FLY-CLIENT-IP"] ??
     req.headers["HTTP-FLY-CLIENT-IP"] ??
     req.headers["x-forwarded-for"]
+
+  let ip = ipFromHeaders
+  if (Array.isArray(ipFromHeaders)) {
+    ip = ipFromHeaders[0]
+  }
+  ip = (ip as string | undefined)?.split(",")[0] ?? ""
 
   const userAgent = req.headers["user-agent"]
   const { browser, device, os } = UAParser(userAgent)
@@ -170,7 +176,8 @@ app.post("/analytics", (req, res, next) => {
   mp.track(event, {
     ...properties,
     ip,
-    distinct_id: "",
+    $ip: ip,
+    distinct_id: ip,
     host: getHost(req),
     browserName,
     browserVersion,
