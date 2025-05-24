@@ -1,13 +1,16 @@
 import { createRequestHandler } from "@remix-run/express"
 import { installGlobals } from "@remix-run/node"
+import bodyParser from "body-parser"
 import compression from "compression"
 import "dotenv/config"
 import express from "express"
 import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
+import mixpanel from "mixpanel"
 import morgan from "morgan"
 import serverTiming from "server-timing"
+import { UAParser } from "ua-parser-js"
 import configuration from "./app/libs/configuration.server.js"
 import { getMdxPages } from "./app/libs/mdx.server.js"
 import { getRedirectsMiddleware } from "./server/redirects.js"
@@ -140,6 +143,45 @@ if (process.env.NODE_ENV === "production") {
 if (process.env.NODE_ENV !== "production") {
   build = () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
 }
+app.use(bodyParser.json())
+const mp = mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
+let events = {}
+app.post("/analytics", (req, res, next) => {
+  const { event, properties } = req.body
+  if (!event) {
+    return res.status(400).send("Event is required")
+  }
+
+  const ip =
+    req.headers["FLY-CLIENT-IP"] ??
+    req.headers["HTTP-FLY-CLIENT-IP"] ??
+    req.headers["x-forwarded-for"]
+
+  const userAgent = req.headers["user-agent"]
+  const { browser, device, os } = UAParser(userAgent)
+  const {
+    name: browserName,
+    version: browserVersion,
+    major: browserMajor,
+  } = browser
+  const { model: deviceName, vendor: deviceVendor } = device
+  const { name: osName, version: osVersion } = os
+
+  mp.track(event, {
+    ...properties,
+    ip,
+    distinct_id: "",
+    host: getHost(req),
+    browserName,
+    browserVersion,
+    browserMajor,
+    deviceName,
+    deviceVendor,
+    osName,
+    osVersion,
+  })
+  next()
+})
 
 app.all("*", (req, res, next) => {
   createRequestHandler({ build, mode: MODE })(req, res, next)

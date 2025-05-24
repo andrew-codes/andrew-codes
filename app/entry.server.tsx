@@ -4,6 +4,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node"
 import { RemixServer } from "@remix-run/react"
 import { isbot } from "isbot"
 import { ensurePrimary } from "litefs-js/remix"
+import mixpanel from "mixpanel"
 import { PassThrough } from "node:stream"
 import { renderToPipeableStream, renderToStaticMarkup } from "react-dom/server"
 import { Helmet } from "react-helmet"
@@ -12,6 +13,9 @@ import createEmotionCache from "./createEmotionCache"
 import configuration from "./libs/configuration.server"
 import { getEnv } from "./libs/env.server"
 import { routes as otherRoutes } from "./other-routes.server"
+
+const mp = mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
+
 const ABORT_DELAY = 5_000
 global.ENV = getEnv()
 
@@ -139,6 +143,11 @@ function serveBrowsers(...args: DocRequestArgs) {
         },
         onError(error: unknown) {
           responseStatusCode = 500
+          mp.track("Error", {
+            ip: request.headers.get("FLY_CLIENT_IP"),
+            pathname: new URL(request.url).pathname,
+            userAgent: request.headers.get("user-agent"),
+          })
           // Log streaming rendering errors from inside the shell.  Don't log
           // errors encountered during initial shell rendering since they'll
           // reject and get logged in handleDocumentRequest.
