@@ -146,9 +146,13 @@ if (process.env.NODE_ENV !== "production") {
 
 app.all("*", (req, res, next) => {
   createRequestHandler({ build, mode: MODE })(req, res, next)
+  if (req.path.endsWith("/healthcheck")) {
+    return
+  }
   mp.track("pageview", {
     ip: req.ip,
     distinct_id: req.ip,
+    path: req.path,
   })
 })
 
