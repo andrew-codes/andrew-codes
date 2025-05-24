@@ -24,7 +24,6 @@
     "@emotion/styled": "11.14.0",
     "@epic-web/cachified": "^5.2.0",
     "@fontsource/lato": "^5.2.5",
-    "@metronome-sh/express": "^8.1.0",
     "@mui/icons-material": "^7.1.0",
     "@mui/joy": "^5.0.0-beta.52",
     "@mui/material": "^7.1.0",
@@ -45,6 +44,7 @@
     "lodash-es": "^4.17.21",
     "lru-cache": "^11.0.1",
     "mdx-bundler": "^10.1.1",
+    "mixpanel": "^0.18.1",
     "morgan": "^1.10.0",
     "motion": "^12.12.1",
     "on-finished": "^2.4.1",
@@ -98,7 +98,6 @@
     "eslint-config-prettier": "^9.1.0",
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
-    "metronome-sh": "^8.5.2",
     "nodemon": "^3.1.10",
     "octokit": "^4.0.2",
     "prettier": "^3.3.3",
@@ -113,8 +112,6 @@
   "packageManager": "yarn@4.9.1",
   "resolutions": {
     "@babel/traverse": "^7.25.0",
-    "metronome-sh/path-to-regexp": "~6.3.0",
-    "@metronome-sh/runtime/path-to-regexp": "~6.3.0",
     "chokidar/braces": "~3.0.3",
     "micromatch/braces": "~3.0.3",
     "socks/ip": "~2.0.0",
@@ -134,10 +131,5 @@
     "follow-redirects": "^1.15.6",
     "axios": "^0.28.0",
     "postcss": "^8.4.31"
-  },
-  "dependenciesMeta": {
-    "metronome-sh@8.5.2": {
-      "unplugged": true
-    }
   }
 }

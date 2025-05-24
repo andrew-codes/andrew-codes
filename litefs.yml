@@ -31,7 +31,6 @@ proxy:
   db: "${CACHE_DATABASE_FILENAME}"
   debug: false
   passthrough:
-    - "/__metronome"
     - "/*.ico"
     - "/*.png"
     - "/*.txt"

@@ -6,6 +6,7 @@ import express from "express"
 import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
+import Mixpanel from "mixpanel"
 import morgan from "morgan"
 import serverTiming from "server-timing"
 import configuration from "./app/libs/configuration.server.js"
@@ -13,6 +14,8 @@ import { getMdxPages } from "./app/libs/mdx.server.js"
 import { getRedirectsMiddleware } from "./server/redirects.js"
 
 installGlobals()
+
+const mp = Mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
 
 const primaryHost = "andrew.codes"
 const getHost = (req: { get: (key: string) => string | undefined }) =>
@@ -141,7 +144,13 @@ if (process.env.NODE_ENV !== "production") {
   build = () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
 }
 
-app.all("*", createRequestHandler({ build, mode: MODE }))
+app.all("*", (req, res, next) => {
+  createRequestHandler({ build, mode: MODE })(req, res, next)
+  mp.track("pageview", {
+    ip: req.ip,
+    distinct_id: req.ip,
+  })
+})
 
 app.use((err: any, req: any, res: any, next: any) => {
   console.error(err.stack)

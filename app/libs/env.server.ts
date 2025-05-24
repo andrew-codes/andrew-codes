@@ -2,7 +2,6 @@ function getEnv() {
   return {
     FLY: process.env.FLY,
     NODE_ENV: process.env.NODE_ENV,
-    DISABLE_METRONOME: process.env.DISABLE_METRONOME,
   }
 }
 
