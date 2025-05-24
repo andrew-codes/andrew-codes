@@ -41,5 +41,5 @@ jobs:
         uses: superfly/fly-pr-review-apps@1.3.0
         with:
           name: andrew-codes-${{ github.event.number }}
-          secrets: PORT=${{ secrets.PORT }} INTERNAL_COMMAND_TOKEN=${{ secrets.INTERNAL_COMMAND_TOKEN }} SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+          secrets: PORT=${{ secrets.PORT }} INTERNAL_COMMAND_TOKEN=${{ secrets.INTERNAL_COMMAND_TOKEN }} SESSION_SECRET=${{ secrets.SESSION_SECRET }} MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
           memory: 1024
