@@ -107,26 +107,21 @@ function serveBrowsers(...args: DocRequestArgs) {
     loadContext,
   ] = args
   return new Promise((resolve, reject) => {
-    const clientSideCache = createEmotionCache()
+    const cache = createEmotionCache()
     const { extractCriticalToChunks, constructStyleTagsFromChunks } =
-      createEmotionServer(clientSideCache)
+      createEmotionServer(cache)
 
     const renderedOutput = renderToString(
-      <CacheProvider value={clientSideCache}>
+      <CacheProvider value={cache}>
         <RemixServer context={remixContext} url={request.url} />
       </CacheProvider>,
     )
-
-    const chunks = extractCriticalToChunks(renderedOutput)
-    const styles = constructStyleTagsFromChunks(chunks)
+    const emotionChunks = extractCriticalToChunks(renderedOutput)
+    const emotionStyleTags = constructStyleTagsFromChunks(emotionChunks)
 
     const head = renderHeadToString({ request, remixContext, Head })
 
-    const html =
-      `<!DOCTYPE html><html lang="en-US"><head>${head}</head><body><div id="root">${renderedOutput}</div></body></html>`.replace(
-        /<meta(\s)*name="emotion-insertion-point"(\s)*content="emotion-insertion-point"(\s)*\/>/,
-        `<meta name="emotion-insertion-point" content="emotion-insertion-point"/>${styles}`,
-      )
+    const html = `<!DOCTYPE html><html lang="en-US"><head><meta name="emotion-insertion-point" content="emotion-insertion-point" />${head}${emotionStyleTags}</head><body><div id="root">${renderedOutput}</div></body></html>`
 
     responseHeaders.set("Content-Type", "text/html; charset=utf-8")
     resolve(

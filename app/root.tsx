@@ -30,7 +30,6 @@ const Head = createHead(() => (
     <meta name="og:site_name" content="Andrew Smith" />
     <meta name="og:locale" content="en_US" />
     <Meta />
-    <meta name="emotion-insertion-point" content="emotion-insertion-point" />
     <link rel="icon" href="/images/favicon.ico" />
     <link
       rel="icon"
