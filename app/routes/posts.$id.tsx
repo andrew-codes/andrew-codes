@@ -12,7 +12,6 @@ import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
-import { Helmet } from "react-helmet"
 import getCodePostAssetComponent, {
   CodePostAsset,
 } from "../components/CodePostAsset"
@@ -98,14 +97,14 @@ const Post = styled(PageWithHeader)`
   }
 `
 
-const meta: MetaFunction = () => {
+const meta: MetaFunction<typeof loader> = (args) => {
   return [
     {
-      title: "Andrew Smith",
+      title: `Andrew Smith | ${args.data?.frontmatter?.title || "Post"}`,
     },
     {
       name: "og:title",
-      content: "Andrew Smith - Staff Software Engineer",
+      content: `Andrew Smith | ${args.data?.frontmatter?.title || "Post"}`,
     },
   ]
 }
@@ -123,7 +122,6 @@ const PostRoute = () => {
 
   return (
     <>
-      <Helmet title={`Andrew Smith | ${frontmatter.title}`} />
       <Card component="article">
         <Stack direction="column" spacing={4}>
           <Stack component="header" direction="column" spacing={0.25}>
