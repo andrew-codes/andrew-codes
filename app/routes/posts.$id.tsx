@@ -172,6 +172,8 @@ const PostRoute = () => {
                       />
                     )
                   }
+
+                  return <pre {...props} />
                 },
               }}
             />

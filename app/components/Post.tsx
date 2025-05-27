@@ -148,7 +148,6 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
 }
 
 const UnorderedList: FC<{}> = (props: any) => {
-  console.debug("ul", props)
   return (
     <List
       marker={"disc"}
