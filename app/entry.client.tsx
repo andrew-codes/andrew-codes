@@ -6,7 +6,7 @@ import { StyleProvider } from "./components/StyleProvider"
 function hydrateApp() {
   startTransition(() => {
     hydrateRoot(
-      document,
+      document.querySelector("#root")!,
       <StrictMode>
         <StyleProvider>
           <RemixBrowser />

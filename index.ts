@@ -7,7 +7,7 @@ import express from "express"
 import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
-import mixpanel from "mixpanel"
+import mixpanel, { Mixpanel } from "mixpanel"
 import morgan from "morgan"
 import serverTiming from "server-timing"
 import { UAParser } from "ua-parser-js"
@@ -143,10 +143,18 @@ if (process.env.NODE_ENV === "production") {
 if (process.env.NODE_ENV !== "production") {
   build = () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
 }
+
 app.use(bodyParser.json())
-const mp = mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
-let events = {}
+let mp: Mixpanel | null = null
+if (!!process.env.MIXPANEL_TOKEN) {
+  mp = mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
+}
+
 app.post("/analytics", (req, res, next) => {
+  if (!mp) {
+    return res.status(200)
+  }
+
   const { event, properties } = req.body
   if (!event) {
     return res.status(400).send("Event is required")

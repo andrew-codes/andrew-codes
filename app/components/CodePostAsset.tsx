@@ -17,8 +17,10 @@ const CodePostAsset: FC<{ code: string; language: string }> = ({
   }, [])
 
   return (
-    <pre ref={codeRef}>
-      <code className={`hljs ${language}`}>{code}</code>
+    <pre>
+      <code className={`hljs ${language}`} ref={codeRef}>
+        {code}
+      </code>
     </pre>
   )
 }

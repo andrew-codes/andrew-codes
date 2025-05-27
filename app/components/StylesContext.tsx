@@ -1,3 +1,11 @@
 import { createContext } from "react"
 
-export default createContext<null | string>(null)
+export interface ClientStyleContextData {
+  reset: () => void
+}
+
+const ctx = createContext<ClientStyleContextData>({
+  reset: () => {},
+})
+
+export default ctx
