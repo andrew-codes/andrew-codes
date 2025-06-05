@@ -86,7 +86,7 @@ const Darnell = () => (
     profileImage={darnell}
     company="Microsoft"
     name="Darnell Brown"
-    title="Principal Software Engineer"
+    title="Principal Engineering Manager"
   >
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
       Where do I start. Andrew's impact has been felt at all levels of our team
