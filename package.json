@@ -21,11 +21,12 @@
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "11.14.0",
     "@epic-web/cachified": "^5.2.0",
     "@fontsource/lato": "^5.2.5",
     "@mui/icons-material": "^7.1.0",
-    "@mui/joy": "^5.0.0-beta.52",
+    "@mui/joy": "^5.0.0-dev.240424162023-9968b4889d",
     "@mui/material": "^7.1.0",
     "@mui/utils": "^7.1.0",
     "@remix-run/express": "2.12.0",

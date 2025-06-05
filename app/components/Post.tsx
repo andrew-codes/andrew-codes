@@ -104,9 +104,10 @@ const Blockquote: FC<
       >
         {props.children
           .filter((child) => typeof child !== "string")
-          .map((child) => {
+          .map((child, index) => {
             return (
               <Typography
+                key={index}
                 {...child.props}
                 level="body-md"
                 sx={{ marginBottom: 3 }}
@@ -147,7 +148,6 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
 }
 
 const UnorderedList: FC<{}> = (props: any) => {
-  console.debug("ul", props)
   return (
     <List
       marker={"disc"}

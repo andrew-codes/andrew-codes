@@ -50,9 +50,9 @@ const CallToAction: FC<{
           <Button
             color="primary"
             variant="solid"
-            href={primaryAction}
+            to={primaryAction}
             onClick={handlePrimaryAction}
-            component={"a"}
+            component={RemixLink}
             size="lg"
           >
             {primaryTitle}
