@@ -143,8 +143,10 @@ const meta: MetaFunction = () => [
 const ResumeRoute: FC<{}> = () => {
   const today = new Date()
   const yearsOfExperience = useMemo(() => {
-    new Date(today.getTime() - new Date(2008, 1, 1).getTime()).getFullYear() -
+    return (
+      new Date(today.getTime() - new Date(2008, 1, 1).getTime()).getFullYear() -
       1970
+    )
   }, [])
 
   const matchesPrint = useMediaQuery("print")
@@ -260,7 +262,7 @@ const ResumeRoute: FC<{}> = () => {
             </ContactCard>
             <Section title="Recent Professional Experience">
               <WorkExperience
-                role="Staff-level Software Engineer (L64)"
+                role="Staff-level Software Engineer"
                 orgName="Microsoft"
                 location="Remote"
                 from={<time dateTime="2020-12">Dec 2020</time>}
