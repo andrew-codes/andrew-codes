@@ -2,7 +2,6 @@ import Button from "@mui/joy/Button"
 import Stack from "@mui/joy/Stack"
 import { Link as RemixLink } from "@remix-run/react"
 import { FC, MouseEventHandler } from "react"
-import useAnalytics from "../libs/useAnalytics"
 
 const CallToAction: FC<{
   primaryTitle?: string
@@ -15,23 +14,13 @@ const CallToAction: FC<{
   secondaryAction,
   secondaryTitle,
 }) => {
-  const { track } = useAnalytics()
-
   const handlePrimaryAction = (evt) => {
-    track("click_primary_call_to_action", {
-      action: typeof primaryAction === "string" ? primaryAction : "button",
-      title: primaryTitle,
-    })
     if (typeof primaryAction === "function") {
       primaryAction(evt)
     }
   }
 
   const handleSecondaryAction = (evt) => {
-    track("click_secondary_call_to_action", {
-      action: typeof secondaryAction === "string" ? secondaryAction : "button",
-      title: secondaryTitle,
-    })
     if (typeof secondaryAction === "function") {
       secondaryAction(evt)
     }
