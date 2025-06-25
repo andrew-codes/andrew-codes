@@ -16,28 +16,36 @@ const posthogProxy = async (request: Request) => {
   newUrl.pathname = newUrl.pathname.replace(/^\/afph/, "")
 
   const headers = new Headers(request.headers)
-  headers.delete("content-encoding")
-  headers.delete("content-length")
-  headers.delete("accept-encoding")
+  headers.delete("Content-Encoding")
+  headers.delete("Content-Length")
+  headers.delete("Accept-Encoding")
   headers.set("host", hostname)
 
-  const response = await fetch(newUrl, {
+  const fetchOptions: RequestInit = {
     method: request.method,
     headers,
-    body: request.body,
-  })
+    redirect: "follow",
+  }
+  if (!["GET", "HEAD"].includes(request.method)) {
+    fetchOptions.body = request.body
+    fetchOptions.duplex = "half"
+  }
+  const response = await fetch(newUrl, fetchOptions)
 
-  const data = await response.arrayBuffer()
+  const responseHeaders = new Headers(response.headers)
+  responseHeaders.delete("Content-Encoding")
+  responseHeaders.delete("Content-Length")
+  responseHeaders.delete("transfer-encoding")
 
-  return new Response(data, {
+  return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
-    headers: response.headers,
+    headers: responseHeaders,
   })
 }
 
-export const loader: LoaderFunction = async ({ request }) =>
-  posthogProxy(request)
+const loader: LoaderFunction = async ({ request }) => posthogProxy(request)
 
-export const action: ActionFunction = async ({ request }) =>
-  posthogProxy(request)
+const action: ActionFunction = async ({ request }) => posthogProxy(request)
+
+export { action, loader }
