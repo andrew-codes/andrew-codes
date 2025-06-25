@@ -104,12 +104,26 @@ app.use(
     crossOriginEmbedderPolicy: false,
     contentSecurityPolicy: {
       directives: {
-        "connect-src": MODE === "development" ? ["ws:", "'self'"] : null,
+        "connect-src":
+          MODE === "development"
+            ? ["ws:", "'self'", "https://posthog.com", "https://*.posthog.com"]
+            : ['"self"', "https://posthog.com", "https://*.posthog.com"],
         "font-src": ["'self'"],
         "frame-src": ["'self'", "https://www.youtube.com"],
-        "img-src": ["'self'", "data:"],
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://posthog.com",
+          "https://*.posthog.com",
+        ],
         "media-src": ["'self'", "data:", "blob:", "https://www.youtube.com"],
-        "script-src": ["'unsafe-inline'", "'unsafe-eval'", "'self'"],
+        "script-src": [
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "'self'",
+          "https://posthog.com",
+          "https://*.posthog.com",
+        ],
         "script-src-attr": ["'unsafe-inline'"],
         "upgrade-insecure-requests": null,
       },
