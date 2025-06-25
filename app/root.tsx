@@ -8,11 +8,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react"
-import { PropsWithChildren, useEffect, useRef, type FC } from "react"
+import { PropsWithChildren, type FC } from "react"
 import { createHead } from "remix-island"
 import { PHProvider } from "./analytics/PostHogProvider"
 import Baseline from "./components/Baseline"
-import useAnalytics from "./libs/useAnalytics"
 import avatar from "./public/images/Profile.webp"
 import theme from "./theme"
 
@@ -60,28 +59,6 @@ const Head = createHead(() => (
 ))
 
 const App: FC<PropsWithChildren<{}>> = ({ children }) => {
-  const { track } = useAnalytics()
-  const timestamp = useRef(new Date())
-  useEffect(() => {
-    track("pageview")
-
-    const handlePageViewTime = () => {
-      const now = new Date()
-      const diff = now.getTime() - timestamp.current.getTime()
-      const seconds = Math.floor(diff / 1000)
-      track("pageview_time", {
-        seconds,
-      })
-      timestamp.current = new Date()
-    }
-
-    window.addEventListener("beforeunload", handlePageViewTime)
-    return () => {
-      window.removeEventListener("beforeunload", handlePageViewTime)
-      handlePageViewTime()
-    }
-  }, [])
-
   return (
     <PHProvider>
       <CssVarsProvider theme={theme}>

@@ -15,7 +15,6 @@ import {
   useRef,
   useState,
 } from "react"
-import useAnalytics from "../libs/useAnalytics"
 
 const overlayVariants = {
   active: {
@@ -59,61 +58,6 @@ const Recommendation: FC<
       scrollable.current?.scroll({ top: 0 })
     }
   }, [isOpen])
-
-  const [isMounted, setIsMounted] = useState(false)
-  const { track } = useAnalytics()
-  const timestamp = useRef<Date | undefined>()
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-  useEffect(() => {
-    if (!isMounted) {
-      return
-    }
-
-    if (!isOpen && timestamp.current) {
-      const now = new Date()
-      const diff = now.getTime() - timestamp.current.getTime()
-      const seconds = Math.floor(diff / 1000)
-      track("recommendationViewed_time", {
-        seconds,
-        name,
-        title,
-        company,
-      })
-
-      return
-    }
-
-    timestamp.current = new Date()
-    track("recommendationViewed", {
-      name,
-      title,
-      company,
-    })
-  }, [isOpen])
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (!isMounted || !isOpen || !timestamp.current) {
-        return
-      }
-
-      const now = new Date()
-      const diff = now.getTime() - timestamp.current.getTime()
-      const seconds = Math.floor(diff / 1000)
-      track("recommendationViewed_time", {
-        seconds,
-        name,
-        title,
-        company,
-      })
-    }
-    window.addEventListener("beforeunload", handleBeforeUnload)
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload)
-      handleBeforeUnload()
-    }
-  }, [])
 
   return (
     <Box sx={{ minHeight: "191px" }}>
