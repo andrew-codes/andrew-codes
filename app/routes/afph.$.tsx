@@ -16,6 +16,8 @@ const posthogProxy = async (request: Request) => {
   newUrl.pathname = newUrl.pathname.replace(/^\/afph/, "")
 
   const headers = new Headers(request.headers)
+  headers.delete("content-encoding")
+  headers.delete("content-length")
   headers.set("host", hostname)
 
   const response = await fetch(newUrl, {
