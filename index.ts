@@ -107,23 +107,12 @@ app.use(
         "connect-src":
           MODE === "development"
             ? ["ws:", "'self'", "https://posthog.com", "https://*.posthog.com"]
-            : ['"self"', "https://posthog.com", "https://*.posthog.com"],
+            : null,
         "font-src": ["'self'"],
         "frame-src": ["'self'", "https://www.youtube.com"],
-        "img-src": [
-          "'self'",
-          "data:",
-          "https://posthog.com",
-          "https://*.posthog.com",
-        ],
+        "img-src": ["'self'", "data:"],
         "media-src": ["'self'", "data:", "blob:", "https://www.youtube.com"],
-        "script-src": [
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-          "'self'",
-          "https://posthog.com",
-          "https://*.posthog.com",
-        ],
+        "script-src": ["'unsafe-inline'", "'unsafe-eval'", "'self'"],
         "script-src-attr": ["'unsafe-inline'"],
         "upgrade-insecure-requests": null,
       },
