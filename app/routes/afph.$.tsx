@@ -18,6 +18,7 @@ const posthogProxy = async (request: Request) => {
   const headers = new Headers(request.headers)
   headers.delete("content-encoding")
   headers.delete("content-length")
+  headers.delete("accept-encoding")
   headers.set("host", hostname)
 
   const response = await fetch(newUrl, {
@@ -26,7 +27,9 @@ const posthogProxy = async (request: Request) => {
     body: request.body,
   })
 
-  return new Response(response.body, {
+  const data = await response.arrayBuffer()
+
+  return new Response(data, {
     status: response.status,
     statusText: response.statusText,
     headers: response.headers,
