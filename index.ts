@@ -7,10 +7,8 @@ import express from "express"
 import fs from "fs"
 import helmet from "helmet"
 import { getInstanceInfo } from "litefs-js"
-import mixpanel, { Mixpanel } from "mixpanel"
 import morgan from "morgan"
 import serverTiming from "server-timing"
-import { UAParser } from "ua-parser-js"
 import configuration from "./app/libs/configuration.server.js"
 import { getMdxPages } from "./app/libs/mdx.server.js"
 import { getRedirectsMiddleware } from "./server/redirects.js"
@@ -145,59 +143,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 app.use(bodyParser.json())
-let mp: Mixpanel | null = null
-if (!!process.env.MIXPANEL_TOKEN) {
-  mp = mixpanel.init(process.env.MIXPANEL_TOKEN ?? "")
-}
-
-app.post("/analytics", (req, res, next) => {
-  if (!mp) {
-    return res.status(200)
-  }
-
-  const { event, properties } = req.body
-  if (!event) {
-    return res.status(400).send("Event is required")
-  }
-
-  const ipFromHeaders =
-    req.headers["FLY-CLIENT-IP"] ??
-    req.headers["HTTP-FLY-CLIENT-IP"] ??
-    req.headers["x-forwarded-for"]
-
-  let ip = ipFromHeaders
-  if (Array.isArray(ipFromHeaders)) {
-    ip = ipFromHeaders[0]
-  }
-  ip = (ip as string | undefined)?.split(",")[0] ?? ""
-
-  const userAgent = req.headers["user-agent"]
-  const { browser, device, os } = UAParser(userAgent)
-  const {
-    name: browserName,
-    version: browserVersion,
-    major: browserMajor,
-  } = browser
-  const { model: deviceName, vendor: deviceVendor } = device
-  const { name: osName, version: osVersion } = os
-
-  mp.track(event, {
-    ...properties,
-    ip,
-    $ip: ip,
-    distinct_id: ip,
-    host: getHost(req),
-    browserName,
-    browserVersion,
-    browserMajor,
-    deviceName,
-    deviceVendor,
-    osName,
-    osVersion,
-  })
-
-  return res.status(200)
-})
 
 app.all("*", (req, res, next) => {
   createRequestHandler({ build, mode: MODE })(req, res, next)

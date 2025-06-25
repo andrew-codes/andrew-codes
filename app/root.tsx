@@ -10,6 +10,7 @@ import {
 } from "@remix-run/react"
 import { PropsWithChildren, useEffect, useRef, type FC } from "react"
 import { createHead } from "remix-island"
+import { PHProvider } from "./analytics/PostHogProvider"
 import Baseline from "./components/Baseline"
 import useAnalytics from "./libs/useAnalytics"
 import avatar from "./public/images/Profile.webp"
@@ -82,36 +83,38 @@ const App: FC<PropsWithChildren<{}>> = ({ children }) => {
   }, [])
 
   return (
-    <CssVarsProvider theme={theme}>
-      <InitColorSchemeScript defaultMode="dark" />
-      <Baseline>
-        <Box
-          sx={{
-            width: "100vw",
-            [theme.breakpoints.down("lg")]: {
-              margin: 0,
-              padding: theme.spacing(4, 3),
-            },
-            [theme.breakpoints.up("lg")]: {
-              margin: theme.spacing(2, "auto"),
-              maxWidth: "960px",
+    <PHProvider>
+      <CssVarsProvider theme={theme}>
+        <InitColorSchemeScript defaultMode="dark" />
+        <Baseline>
+          <Box
+            sx={{
+              width: "100vw",
+              [theme.breakpoints.down("lg")]: {
+                margin: 0,
+                padding: theme.spacing(4, 3),
+              },
+              [theme.breakpoints.up("lg")]: {
+                margin: theme.spacing(2, "auto"),
+                maxWidth: "960px",
+                "@media print": {
+                  margin: "0 auto",
+                  maxWidth: "unset",
+                },
+              },
               "@media print": {
                 margin: "0 auto",
-                maxWidth: "unset",
+                padding: 0,
               },
-            },
-            "@media print": {
-              margin: "0 auto",
-              padding: 0,
-            },
-          }}
-        >
-          <Outlet />
-        </Box>
-      </Baseline>
-      <ScrollRestoration />
-      <Scripts />
-    </CssVarsProvider>
+            }}
+          >
+            <Outlet />
+          </Box>
+        </Baseline>
+        <ScrollRestoration />
+        <Scripts />
+      </CssVarsProvider>
+    </PHProvider>
   )
 }
 
