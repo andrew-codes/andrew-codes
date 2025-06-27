@@ -1,7 +1,12 @@
+import { spawn } from "child_process"
+import { mkdir } from "fs"
 import fs from "fs/promises"
 import { merge } from "lodash-es"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
+import remarkMdx from "remark-mdx"
+import { unified } from "unified"
+import { visit } from "unist-util-visit"
 import type { MdxPage, MdxPageFile } from "../types"
 import type { CachifiedOptions } from "./cache.server"
 import {
@@ -11,6 +16,10 @@ import {
   getCache,
 } from "./cache.server"
 import { readDir, readDirFiles } from "./fs.server"
+import { DEFAULT_OPTIONS } from "./mdx.server/remark/plugins/defaults"
+
+const __dirname =
+  import.meta.dirname || path.dirname(new URL(import.meta.url).pathname)
 
 const mdx = async (
   mdxFile: MdxPageFile,
@@ -22,18 +31,152 @@ const mdx = async (
   const { default: remarkGfm } = await import("remark-gfm")
   const { default: rehypeHighlight } = await import("rehype-highlight")
   const { default: remarkParse } = await import("remark-parse")
-  const { default: remarkRehype } = await import("remark-rehype")
+
+  // Step 1: Parse the MDX file and detect image references
+  const mdxAst = unified().use(remarkParse).use(remarkMdx).parse(source)
+
+  const imageFiles: Record<string, string> = {}
+  visit(mdxAst, "image", (node: any) => {
+    const imagePath = node.url
+    if (imagePath && !imageFiles[imagePath] && imagePath.startsWith("./")) {
+      const resolvedPath = path.resolve(
+        path.dirname(mdxFile.filePath),
+        imagePath,
+      )
+      imageFiles[imagePath] = resolvedPath
+    }
+  })
+  let count = 0
+  visit(mdxAst, "code", (node: any) => {
+    if (node.lang !== "d2") {
+      return
+    }
+    const urlPath = `./d2/${count}.png`
+    imageFiles[urlPath] = path.resolve(
+      path.dirname(mdxFile.filePath),
+      `./d2/${count}.png`,
+    )
+
+    const d2 = spawn("d2", [
+      "-t=100",
+      "--dark-theme=200",
+      "-",
+      imageFiles[`./d2/${count}.png`],
+    ])
+    d2.stdin.write(node.value)
+    d2.stdin.end()
+    count++
+  })
+
+  const imageContents: Record<string, string> = {}
+  for (const [imagePath, resolvedPath] of Object.entries(imageFiles)) {
+    try {
+      const imageData = await fs.readFile(resolvedPath)
+      // Must pass binary data and fake its type as a string. This avoid double base64 encoding.
+      imageContents[imagePath] = imageData as unknown as string
+    } catch (error) {
+      console.warn(`Failed to read image file: ${resolvedPath}`, error)
+    }
+  }
+
+  const imageAttrs = {}
 
   const { code, frontmatter, errors } = await bundleMDX({
     source: source.trim(),
     cwd: path.resolve(mdxFile.filePath),
-    files: fileContents,
+    files: {
+      ...fileContents,
+      ...imageContents,
+    },
     globals: { "@emotion/styled": "styled" },
     mdxOptions: (options) => {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
         remarkParse,
-        remarkMdxImages,
+        () => {
+          const opts = { ...DEFAULT_OPTIONS }
+          // Verify options
+          if (path.isAbsolute(opts.compilePath) && !opts.unsafe) {
+            throw new Error(
+              "remark-d2: compilePath is an absolute path and unsafe is false. No transformation done",
+            )
+          }
+
+          opts.compilePath = path.normalize(opts.compilePath)
+          opts.linkPath = path.normalize(opts.linkPath)
+
+          return (tree, file) => {
+            let count = 0
+            let relDir = ""
+            if (file?.path !== undefined || file?.path !== null) {
+              relDir = path.join(file.dirname).replace(/\.mdx$/, "")
+              relDir = path.isAbsolute(file.path)
+                ? path.relative(file.cwd, relDir)
+                : relDir
+            }
+            relDir = path.normalize(relDir).replace(/ /g, "-")
+            const compileDir = path.join(relDir, "d2")
+            const linkDir = path.join("./", "d2")
+
+            mkdir(compileDir, { recursive: true }, (err) => {
+              if (err) throw err
+            })
+
+            visit(tree, "code", (node) => {
+              const { lang, meta } = node
+              if (!lang || lang !== "d2") return
+              const image = `${count}.${opts.ext}`
+
+              const urlPath = path.join(linkDir, image)
+
+              delete node.value
+              delete node.lang
+              node.type = "image"
+              node.url = urlPath
+              node.alt = opts.defaultImageAttrs.alt
+              node.title = opts.defaultImageAttrs.alt
+              ;(meta ?? "")?.split(";")?.forEach((kv) => {
+                const [key, value] = kv.split("=").map((s) => s.trim())
+                imageAttrs[urlPath] = {
+                  ...(imageAttrs[urlPath] ?? {}),
+                  [key]: value,
+                }
+              })
+              count++
+            })
+
+            return tree
+          }
+        },
+        [remarkMdxImages],
+        () => {
+          return (tree) => {
+            visit(tree, "mdxJsxTextElement", (node) => {
+              if (node.name !== "img") {
+                return
+              }
+              const src =
+                node?.attributes
+                  ?.find((attr) => attr.name === "src")
+                  ?.value?.value?.split("_d2_")?.[1]
+                  ?.split("_")?.[0] ?? null
+              if (!src) {
+                return
+              }
+              const attributes = imageAttrs[`d2/${src}.png`] ?? {}
+
+              node.attributes = node.attributes.concat(
+                Object.entries(attributes).map(([key, value]) => {
+                  return {
+                    type: "mdxJsxAttribute",
+                    name: key,
+                    value,
+                  }
+                }),
+              )
+            })
+          }
+        },
         remarkGfm,
         // remarkRehype,
         rehypeHighlight,
@@ -44,15 +187,21 @@ const mdx = async (
 
     esbuildOptions(options, frontmatter) {
       options.minify = true
-      options.outdir = path.resolve(mdxFile.filePath, "..", "public", "files")
+      options.outdir = path.resolve(
+        __dirname,
+        "../public/images/posts",
+        mdxFile.slug,
+      )
       options.loader = {
         ...options.loader,
-        ".png": "file",
+        ".png": "dataurl",
         ".mp4": "file",
-        ".jpg": "file",
-        ".gif": "file",
+        ".jpg": "dataurl",
+        ".gif": "dataurl",
+        ".webp": "dataurl",
+        ".svg": "dataurl",
       }
-      options.publicPath = "/files"
+      options.publicPath = `/images/posts/${mdxFile.slug}`
       options.write = true
 
       return options

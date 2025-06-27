@@ -132,7 +132,7 @@ class GuestTracker(hass.Hass):
 
 ## Guest Devices that Stay Home
 
-Many times a guest will bring a laptop or device that will remain home during their stay. These devices should not be registered with Home Assistant or, at the very least, not in the same group. I handled this case by adding a checkbox to the captive portal. The checkbox indicates whether the connecting device is a phone or something else. Phones are considered primary devices and follow the flow outlined above. All other devices may be ignored. Personally, I register these devices with Home Assitant via a different MQTT topic subscription and different Home Assistant group. This is one reason why these values are passed into the automation via the configuration YAML. This enables me to run two instances of the automation; one for phones and one for all other devices.
+Many times a guest will bring a laptop or device that will remain home during their stay. These devices should not be registered with Home Assistant or, at the very least, not in the same group. I handled this case by adding a checkbox to the captive portal. The checkbox indicates whether the connecting device is a phone or something else. Phones are considered primary devices and follow the flow outlined above. All other devices may be ignored. Personally, I register these devices with Home Assistant via a different MQTT topic subscription and different Home Assistant group. This is one reason why these values are passed into the automation via the configuration YAML. This enables me to run two instances of the automation; one for phones and one for all other devices.
 
 > Example Automation Configuration
 

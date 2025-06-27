@@ -41,7 +41,11 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }
 
   const timings = {}
-  const post = await getMdxPage(id, { request, timings })
+  const post = await getMdxPage(id, {
+    forceFresh: process.env.NODE_ENV === "development",
+    request,
+    timings,
+  })
 
   return json(post, {
     status: 200,

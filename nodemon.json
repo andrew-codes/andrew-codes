@@ -13,6 +13,9 @@
     "./*.ts",
     "./app/posts/**/*.*"
   ],
+  "ignore": [
+    "app/posts/**/d2/**/*.*"
+  ],
   "env": {
     "NODE_ENV": "development"
   }

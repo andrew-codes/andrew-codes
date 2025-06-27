@@ -23,3 +23,5 @@ data/cache.db
 vite.config.js*
 
 *.log
+
+app/posts/**/d2/*.png

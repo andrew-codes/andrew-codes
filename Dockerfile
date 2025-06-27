@@ -24,6 +24,8 @@ ENV LITEFS_DIR="/litefs"
 ENV CACHE_DATABASE_FILENAME="cache.db"
 ENV CACHE_DATABASE_PATH="/$LITEFS_DIR/$CACHE_DATABASE_FILENAME"
 
+RUN curl -fsSL https://d2lang.com/install.sh | sh -s --
+
 RUN echo "#!/bin/sh\nset -x\nsqlite3 \$CACHE_DATABASE_PATH" >/usr/local/bin/cache-database-cli && chmod +x /usr/local/bin/cache-database-cli
 
 RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
