@@ -1,16 +1,14 @@
 ---
-title: Guest Presence Detection
+aliases: [guest-presence-detection]
+category: home automation
+date: 2020-11-13
+date created: Thursday, June 5th 2025, 2:34:26 pm
+date modified: Saturday, June 28th 2025, 1:12:07 pm
 description: >-
   Detetermine if there are guests based on when they connect to the guest wi-fi. Useful with presence based home automations.
-date: 2020-11-13
-category: home automation
-tags:
-  - featured
-  - home assistant
-  - python
-  - node.js
-  - guests
-  - presence detection
+linter-yaml-title-alias: guest-presence-detection
+tags: [featured, guests, home assistant, node.js, presence detection, python]
+title: Guest Presence Detection
 ---
 
 ## Overview
@@ -28,7 +26,7 @@ Presence detection is the ability for your smart home to know when you or your f
 ### One Example Guest Automation Problem
 
 | Automation | Action Without Guests   | Action With Guests                                                               |
-| :--------- | :---------------------- | :------------------------------------------------------------------------------- |
+|:--------- |:---------------------- |:------------------------------------------------------------------------------- |
 | Goodnight  | Turn off all the lights | Turn off all the lights, except those in the guest room and primary living areas |
 
 #### Explanation
@@ -38,7 +36,7 @@ Without any guests, going to bed would often turn off all the lights, lock the d
 ### Another Guest Automation Problem
 
 | Automation | Action Without Guests                      | Action With Guests                                                  |
-| :--------- | :----------------------------------------- | :------------------------------------------------------------------ |
+|:--------- |:----------------------------------------- |:------------------------------------------------------------------ |
 | Goodbye    | Lock the doors and arm the security system | Only lock and arm security once all family **AND** guests have left |
 
 #### Explanation
@@ -71,7 +69,7 @@ Upon clicking the connect button, the express app authorizes the guest to connec
 
 While the above provides the ability to know when a guest connects to the network, it does not automatically register them as "home" or "away" in [Home Assistant](https://www.home-assistant.io/). This is accomplished with a custom Python automation via [AppDaemon](https://appdaemon.readthedocs.io/en/latest/). In addition to the above, clicking the "Connect" button publishes a message on my MQTT bus and the python automation subscribes to these messages.
 
-For each messsage, the automation creates an entity for the MAC address and adds it to a "Guests" group as a device tracker; ignoring any guest devices that are already registered. Upon doing this, Home Assistant will track the entity as "home" or "away" based on when it connects/disconnects from the network. The group is used for knowing once all guests are "not home."
+For each message, the automation creates an entity for the MAC address and adds it to a "Guests" group as a device tracker; ignoring any guest devices that are already registered. Upon doing this, Home Assistant will track the entity as "home" or "away" based on when it connects/disconnects from the network. The group is used for knowing once all guests are "not home."
 
 Below is the python automation I used via AppDaemon. Values, such as the group name, mqtt connection details, and MQTT topic, of the script are pulled from the application's configuration in AppDaemon.
 
