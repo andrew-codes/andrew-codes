@@ -64,9 +64,6 @@ const mdx = async (
         d2.stdin.write(node.value)
         d2.stdin.end()
         d2.on("exit", (code) => {
-          console.debug(`D2 image generated: ${imageFiles[urlPath]}`)
-          console.debug(`D2 exit code: ${code}`)
-          console.debug(node.value)
           resolve()
         })
       }),
@@ -118,7 +115,7 @@ const mdx = async (
                 return
               }
 
-              const image = `${count}.${svg}`
+              const image = `${count}.svg`
 
               const urlPath = path.join(linkDir, image)
 
@@ -285,7 +282,7 @@ const getMdxPage = async (
 
       const output = { ...transformedMdx, slug, codeAssets }
       if (!output.frontmatter.category) {
-        output.frontmatter.category = "no categorized"
+        output.frontmatter.category = "not categorized"
       }
 
       return output
