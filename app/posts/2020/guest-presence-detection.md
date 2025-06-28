@@ -1,13 +1,20 @@
 ---
-aliases: [guest-presence-detection]
+aliases:
+  - guest-presence-detection
 category: home automation
 date: 2020-11-13
 date created: Thursday, June 5th 2025, 2:34:26 pm
-date modified: Saturday, June 28th 2025, 1:12:07 pm
+date modified: Saturday, June 28th 2025, 5:04:59 pm
 description: >-
   Detetermine if there are guests based on when they connect to the guest wi-fi. Useful with presence based home automations.
 linter-yaml-title-alias: guest-presence-detection
-tags: [featured, guests, home assistant, node.js, presence detection, python]
+tags:
+  - featured
+  - guests
+  - home assistant
+  - node.js
+  - presence detection
+  - python
 title: Guest Presence Detection
 ---
 
