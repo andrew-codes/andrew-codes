@@ -107,15 +107,6 @@ const mdx = async (
         remarkParse,
         () => {
           const opts = { ...DEFAULT_OPTIONS }
-          // Verify options
-          if (path.isAbsolute(opts.compilePath) && !opts.unsafe) {
-            throw new Error(
-              "remark-d2: compilePath is an absolute path and unsafe is false. No transformation done",
-            )
-          }
-
-          opts.compilePath = path.normalize(opts.compilePath)
-          opts.linkPath = path.normalize(opts.linkPath)
 
           return (tree, file) => {
             let count = 0
