@@ -32,7 +32,6 @@ const mdx = async (
   const { default: rehypeHighlight } = await import("rehype-highlight")
   const { default: remarkParse } = await import("remark-parse")
 
-  console.debug("Processing MDX file:", mdxFile.filePath)
   // Step 1: Parse the MDX file and detect image references
   const mdxAst = unified().use(remarkParse).use(remarkMdx).parse(source)
 
@@ -69,7 +68,6 @@ const mdx = async (
       imageFiles[imagePath] = resolvedPath
     }
   })
-  console.debug("Image files detected:", imageFiles)
 
   const imageContents: Record<string, string> = {}
   for (const [imagePath, resolvedPath] of Object.entries(imageFiles)) {
@@ -81,8 +79,6 @@ const mdx = async (
       console.warn(`Failed to read image file: ${resolvedPath}`, error)
     }
   }
-
-  console.debug(imageContents)
 
   const imageAttrs = {}
 
