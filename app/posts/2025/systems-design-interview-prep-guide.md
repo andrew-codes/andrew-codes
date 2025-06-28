@@ -4,7 +4,7 @@ aliases:
 category: engineering
 date: 2025-06-28
 date created: Saturday, June 28th 2025, 12:06:10 pm
-date modified: Saturday, June 28th 2025, 6:48:51 pm
+date modified: Saturday, June 28th 2025, 6:51:01 pm
 description: "I've compiled a guide for systems design interviews for senior and staff-level engineers."
 linter-yaml-title-alias: systems-design-interview-prep-guide
 tags:
@@ -29,11 +29,11 @@ Below is a framework of how to break down a problem into discrete sections and h
 | Deep dive                  | 15 - 20 mins |
 | Justification              | 10 mins      |
 
-### Step 1: Feature Expectations (10 mins)
+## Step 1: Feature Expectations (10 mins)
 
 This first step is critical as it sets the tone and direction for the remainder of the interview.
 
-#### Clarifying Questions
+### Clarifying Questions
 
 Ask questions to clarify the system's uses cases. The purpose is to quickly identify **key features** and those that can be considered out of scope for the sake of the problem. Some prompt questions to help you ascertain these:
 
@@ -42,11 +42,11 @@ Ask questions to clarify the system's uses cases. The purpose is to quickly iden
 - What size system are we anticipating needing to build? Specifically, how many daily active users are we expecting on average and at peaks?
 - What are users' usage patterns in how they use the system?
 
-#### Summarize Requirements
+### Summarize Requirements
 
 Next, outline or even quickly write down a summary of the major requirements of the system. You'll use the answers from your questions to drive these statements. This is also the time to discuss non-functional requirements; again based on the primary use cases. **Focus on only the top 3 use cases.** Others can be outlined as out of scope.
 
-### Step 2: Estimations (5 mins)
+## Step 2: Estimations (5 mins)
 
 This step is all about back-of-the-envelope estimations. These insights will help **guide your decisions** on **technology choices** and **overall design** of the system.
 
@@ -56,7 +56,7 @@ Secondly, calculating requests per second based on daily active users and their 
 
 Finally, you may be asked to determine storage needs, i.e., how much storage space is required for the system to operate. This may influence decisions around storage options.
 
-### Step 3: High Level Design (10 mins)
+## Step 3: High Level Design (10 mins)
 
 The high level design communicates the paths in which data flows in the system via diagrams. My recommendation is to **focus on and communicate one use case at a time**. This naturally allows you to tell the story of the system incrementally, which will be easier for the interviewer to follow along.
 
@@ -87,11 +87,11 @@ NoSQL DB {
 
 Additionally, as you are walking through each use case, identify key areas that will require additional thought or explanation. For example, in a URL shortener, every URL will need a unique and short identifier. You can mention these key areas as places to be followed up on in the next phase.
 
-### Step 4: Deep Dive
+## Step 4: Deep Dive
 
 This is where you can dive into those critical areas that were identified in the previous step. These represent some of the more challenging implementations in the system and this provides you an opportunity to speak to how they will be solved.
 
-### Step 5: Justification and Trade-offs
+## Step 5: Justification and Trade-offs
 
 Finally, you close by discussing your justifications for why certain trade-offs were made. Every decision on technology choice and design will come with trade-offs. Decisions should align with the system's goals and use cases. It is important to not only communicate these trade-offs, but reason through what guided your decision making process.
 
