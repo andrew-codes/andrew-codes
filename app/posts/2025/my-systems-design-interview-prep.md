@@ -2,9 +2,9 @@
 aliases: [my-systems-design-interview-prep]
 date: 2025-06-28
 date created: Saturday, June 28th 2025, 12:06:10 pm
-date modified: Saturday, June 28th 2025, 1:12:18 pm
+date modified: Saturday, June 28th 2025, 1:34:48 pm
 linter-yaml-title-alias: my-systems-design-interview-prep
-tags: []
+tags: [featured, systems-design]
 title: My Systems Design Interview Prep
 ---
 
