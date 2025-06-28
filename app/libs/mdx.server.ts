@@ -127,7 +127,7 @@ const mdx = async (
                 return
               }
 
-              const image = `${count}.${opts.ext}`
+              const image = `${count}.${svg}`
 
               const urlPath = path.join(linkDir, image)
 

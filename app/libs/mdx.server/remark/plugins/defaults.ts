@@ -1,7 +1,6 @@
 export const DEFAULT_OPTIONS = {
   compilePath: "app/public/images/posts",
   unsafe: false,
-  ext: "png",
   linkPath: "./",
   defaultD2Opts: ["-t=100", "--dark-theme=200"],
   htmlImage: false,
