@@ -25,7 +25,6 @@ const mdx = async (
   fileContents: Record<string, string> = {},
 ): Promise<{ code: string; frontmatter: Record<string, any> }> => {
   const source = await fs.readFile(mdxFile.filePath, "utf8")
-
   const { default: remarkMdxImages } = await import("remark-mdx-images")
   const { default: remarkGfm } = await import("remark-gfm")
   const { default: rehypeHighlight } = await import("rehype-highlight")
@@ -33,7 +32,6 @@ const mdx = async (
 
   // Step 1: Parse the MDX file and detect image references
   const mdxAst = unified().use(remarkParse).use(remarkMdx).parse(source)
-
   let count = 0
   const imageFiles: Record<string, string> = {}
   const generatedImages = [] as Array<Promise<void>>
@@ -42,24 +40,32 @@ const mdx = async (
       return
     }
     generatedImages.push(
-      new Promise((resolve) => {
-        const urlPath = `./d2/${count}.png`
+      new Promise(async (resolve) => {
+        await fs.mkdir(
+          path.join(path.dirname(mdxFile.filePath), mdxFile.slug, "d2"),
+          {
+            recursive: true,
+          },
+        )
+        const urlPath = `./${mdxFile.slug}/d2/${count}.png`
+        count++
         imageFiles[urlPath] = path.resolve(
           path.dirname(mdxFile.filePath),
-          `./d2/${count}.png`,
+          urlPath,
         )
 
         const d2 = spawn("d2", [
           "-t=100",
           "--dark-theme=200",
           "-",
-          imageFiles[`./d2/${count}.png`],
+          imageFiles[urlPath],
         ])
-        d2.stdin.write(node.value, (sb) => {
+
+        d2.stdin.write(node.value)
+        d2.stdin.end()
+        d2.on("close", (code) => {
           resolve()
         })
-        d2.stdin.end()
-        count++
       }),
     )
   })
@@ -110,7 +116,7 @@ const mdx = async (
 
           return (tree, file) => {
             let count = 0
-            const linkDir = path.join("./d2")
+            const linkDir = path.join(`./${mdxFile.slug}/d2`)
 
             visit(tree, "code", (node) => {
               const { lang, meta } = node
