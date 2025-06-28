@@ -1,9 +1,10 @@
 ---
 aliases:
   - systems-design-interview-prep-guide
+category: engineering
 date: 2025-06-28
 date created: Saturday, June 28th 2025, 12:06:10 pm
-date modified: Saturday, June 28th 2025, 6:41:43 pm
+date modified: Saturday, June 28th 2025, 6:48:51 pm
 description: "I've compiled a guide for systems design interviews for senior and staff-level engineers."
 linter-yaml-title-alias: systems-design-interview-prep-guide
 tags:
