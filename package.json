@@ -8,7 +8,7 @@
     "node": "22.14.0"
   },
   "scripts": {
-    "start": "yarn cross-env NODE_ENV=development yarn nodemon index.ts",
+    "start": "yarn cross-env NODE_ENV=development yarn node scripts/start.js",
     "clean/build": "rimraf  ./build server-build",
     "clean/dist": "rimraf ./dist",
     "clean": "rimraf ./node_modules/.cache ./node_modules/.vite && concurrently 'yarn run clean/build' 'yarn run clean/dist'",
