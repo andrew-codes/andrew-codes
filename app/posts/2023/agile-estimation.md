@@ -1,14 +1,14 @@
 ---
-title: Agile Estimation
+aliases: [agile-estimation]
+category: agility
+date: 2023-11-14
+date created: Thursday, June 5th 2025, 2:34:26 pm
+date modified: Saturday, June 28th 2025, 12:02:05 pm
 description: >-
   Understand the role of estimation and effective ways to utilize it.
-date: 2023-11-14
-category: agility
-tags:
-  - featured
-  - estimation
-  - story points
-  - bucketing
+linter-yaml-title-alias: agile-estimation
+tags: [bucketing, estimation, featured, story points]
+title: agile-estimation
 ---
 
 ## Overview
@@ -32,7 +32,9 @@ There are better mechanisms to forecast project timelines, which I will discuss 
 ### Why We "Actually" Estimate
 
 <em>"You can't put ten pounds of stuff into a five-pound bag."</em> There are
+
 always more tasks than there are people, time, and money to complete them.
+
 Therefore, we are always faced with trade-offs: what work should we do next?
 
 > Estimation helps prioritize work by understanding the trade-offs of the work's
