@@ -32,20 +32,10 @@ const mdx = async (
   const { default: rehypeHighlight } = await import("rehype-highlight")
   const { default: remarkParse } = await import("remark-parse")
 
+  console.debug("Processing MDX file:", mdxFile.filePath)
   // Step 1: Parse the MDX file and detect image references
   const mdxAst = unified().use(remarkParse).use(remarkMdx).parse(source)
 
-  const imageFiles: Record<string, string> = {}
-  visit(mdxAst, "image", (node: any) => {
-    const imagePath = node.url
-    if (imagePath && !imageFiles[imagePath] && imagePath.startsWith("./")) {
-      const resolvedPath = path.resolve(
-        path.dirname(mdxFile.filePath),
-        imagePath,
-      )
-      imageFiles[imagePath] = resolvedPath
-    }
-  })
   let count = 0
   visit(mdxAst, "code", (node: any) => {
     if (node.lang !== "d2") {
@@ -68,6 +58,19 @@ const mdx = async (
     count++
   })
 
+  const imageFiles: Record<string, string> = {}
+  visit(mdxAst, "image", (node: any) => {
+    const imagePath = node.url
+    if (imagePath && !imageFiles[imagePath] && imagePath.startsWith("./")) {
+      const resolvedPath = path.resolve(
+        path.dirname(mdxFile.filePath),
+        imagePath,
+      )
+      imageFiles[imagePath] = resolvedPath
+    }
+  })
+  console.debug("Image files detected:", imageFiles)
+
   const imageContents: Record<string, string> = {}
   for (const [imagePath, resolvedPath] of Object.entries(imageFiles)) {
     try {
@@ -78,6 +81,8 @@ const mdx = async (
       console.warn(`Failed to read image file: ${resolvedPath}`, error)
     }
   }
+
+  console.debug(imageContents)
 
   const imageAttrs = {}
 
