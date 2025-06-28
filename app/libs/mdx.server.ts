@@ -63,7 +63,7 @@ const mdx = async (
 
         d2.stdin.write(node.value)
         d2.stdin.end()
-        d2.on("close", (code) => {
+        d2.on("exit", (code) => {
           resolve()
         })
       }),
