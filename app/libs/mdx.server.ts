@@ -1,5 +1,4 @@
 import { spawn } from "child_process"
-import { mkdir } from "fs"
 import fs from "fs/promises"
 import { merge } from "lodash-es"
 import { bundleMDX } from "mdx-bundler"
@@ -108,24 +107,14 @@ const mdx = async (
 
           return (tree, file) => {
             let count = 0
-            let relDir = ""
-            if (file?.path !== undefined || file?.path !== null) {
-              relDir = path.join(file.dirname).replace(/\.mdx$/, "")
-              relDir = path.isAbsolute(file.path)
-                ? path.relative(file.cwd, relDir)
-                : relDir
-            }
-            relDir = path.normalize(relDir).replace(/ /g, "-")
-            const compileDir = path.join(relDir, "d2")
-            const linkDir = path.join("./", "d2")
-
-            mkdir(compileDir, { recursive: true }, (err) => {
-              if (err) throw err
-            })
+            const linkDir = path.join("./d2")
 
             visit(tree, "code", (node) => {
               const { lang, meta } = node
-              if (!lang || lang !== "d2") return
+              if (!lang || lang !== "d2") {
+                return
+              }
+
               const image = `${count}.${opts.ext}`
 
               const urlPath = path.join(linkDir, image)
