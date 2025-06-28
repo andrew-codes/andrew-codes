@@ -4,7 +4,7 @@ aliases:
 category: engineering
 date: 2025-06-28
 date created: Saturday, June 28th 2025, 12:06:10 pm
-date modified: Saturday, June 28th 2025, 6:51:01 pm
+date modified: Saturday, June 28th 2025, 6:58:20 pm
 description: "I've compiled a guide for systems design interviews for senior and staff-level engineers."
 linter-yaml-title-alias: systems-design-interview-prep-guide
 tags:
@@ -31,20 +31,14 @@ Below is a framework of how to break down a problem into discrete sections and h
 
 ## Step 1: Feature Expectations (10 mins)
 
-This first step is critical as it sets the tone and direction for the remainder of the interview.
-
-### Clarifying Questions
-
-Ask questions to clarify the system's uses cases. The purpose is to quickly identify **key features** and those that can be considered out of scope for the sake of the problem. Some prompt questions to help you ascertain these:
+This first step is critical as it sets the tone and direction for the remainder of the interview. Ask questions to clarify the system's uses cases. The purpose is to quickly identify **key features** and those that can be considered out of scope for the sake of the problem. Some prompt questions to help you ascertain these:
 
 - Who are the users and, more specifically, what are their goals in using the system? Which of these goals is most important to them?
 - What does the system do? Are there any goals determined by the business?
 - What size system are we anticipating needing to build? Specifically, how many daily active users are we expecting on average and at peaks?
 - What are users' usage patterns in how they use the system?
 
-### Summarize Requirements
-
-Next, outline or even quickly write down a summary of the major requirements of the system. You'll use the answers from your questions to drive these statements. This is also the time to discuss non-functional requirements; again based on the primary use cases. **Focus on only the top 3 use cases.** Others can be outlined as out of scope.
+Outline or even quickly write down a summary of the major requirements of the system. You'll use the answers from your questions to drive these statements. This is also the time to discuss non-functional requirements; again based on the primary use cases. **Focus on only the top 3 use cases.** Others can be outlined as out of scope.
 
 ## Step 2: Estimations (5 mins)
 
