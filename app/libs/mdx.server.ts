@@ -47,7 +47,7 @@ const mdx = async (
             recursive: true,
           },
         )
-        const urlPath = `./${mdxFile.slug}/d2/${count}.png`
+        const urlPath = `./${mdxFile.slug}/d2/${count}.svg`
         count++
         imageFiles[urlPath] = path.resolve(
           path.dirname(mdxFile.filePath),
@@ -64,6 +64,9 @@ const mdx = async (
         d2.stdin.write(node.value)
         d2.stdin.end()
         d2.on("exit", (code) => {
+          console.debug(`D2 image generated: ${imageFiles[urlPath]}`)
+          console.debug(`D2 exit code: ${code}`)
+          console.debug(node.value)
           resolve()
         })
       }),
@@ -163,7 +166,7 @@ const mdx = async (
                 return
               }
               const attributes =
-                imageAttrs[path.join(`./${mdxFile.slug}/d2/${src}.png`)] ?? {}
+                imageAttrs[path.join(`./${mdxFile.slug}/d2/${src}.svg`)] ?? {}
 
               node.attributes = node.attributes.concat(
                 Object.entries(attributes).map(([key, value]) => {
