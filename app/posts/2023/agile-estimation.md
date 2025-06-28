@@ -3,12 +3,11 @@ aliases: [agile-estimation]
 category: agility
 date: 2023-11-14
 date created: Thursday, June 5th 2025, 2:34:26 pm
-date modified: Saturday, June 28th 2025, 12:02:05 pm
-description: >-
-  Understand the role of estimation and effective ways to utilize it.
+date modified: Saturday, June 28th 2025, 12:39:19 pm
+description: Understand the role of estimation and effective ways to utilize it.
 linter-yaml-title-alias: agile-estimation
-tags: [bucketing, estimation, featured, story points]
-title: agile-estimation
+tags: [bucketing, estimation, featured, points, story]
+title: Agile Estimation
 ---
 
 ## Overview

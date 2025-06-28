@@ -1,14 +1,14 @@
 ---
-title: Agile Forecasting
+aliases: [agile-forecasting]
+category: agility
+date: 2024-09-18
+date created: Thursday, June 5th 2025, 2:34:26 pm
+date modified: Saturday, June 28th 2025, 12:38:38 pm
 description: >-
   Learn how to use this data-driven forecasting technique as a more effective way to predict project timelines.
-date: 2024-09-18
-category: agility
-tags:
-  - featured
-  - forecasting
-  - estimation
-  - ai
+linter-yaml-title-alias: agile-forecasting
+tags: [ai, estimation, featured, forecasting]
+title: Agile Forecasting
 ---
 
 ## Overview
