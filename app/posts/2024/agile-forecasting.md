@@ -13,9 +13,9 @@ tags:
 
 ## Overview
 
-With the establishment that [estimation is not effective for planning](/posts/agile-estimation), we need a way to forecast project timelines. Fortunately, there is a more effective way to predict project timelines using data-driven forecasting techniques. In this post, I'll discuss this technique, how it works, and a [desktop GUI tool](https://github.com/andrew-codes/forecast-work-oss?tab=readme-ov-file#how-do-i-get-started) I've written to aid in employing it.
+With the establishment that [estimation is not effective for planning](../2023/agile-estimation), we need a way to forecast project timelines. Fortunately, there is a more effective way to predict project timelines using data-driven forecasting techniques. In this post, I'll discuss this technique, how it works, and a [desktop GUI tool](https://github.com/andrew-codes/forecast-work-oss?tab=readme-ov-file#how-do-i-get-started) I've written to aid in employing it.
 
-> See [Agile Estimation](/posts/agile-estimation) for more information on the purpose of estimation.
+> See [Agile Estimation](../2023/agile-estimation) for more information on the purpose of estimation.
 
 ## A Tale of Two Problems
 
@@ -42,17 +42,17 @@ The unique thing about this technique is that it is data-driven. We use historic
 
 The only required historical data is the date that a story was completed. No other data is needed; start dates, story points or sizings, etc. are not required. This is because we are only interested in the throughput of the team, i.e., how many stories are completed in a given time period.
 
-![Example throughput data aggregated by Week](./throughput-by-week.webp)
+![Example throughput data aggregated by Week](./agile-forecasting/throughput-by-week.webp)
 
 ## How Does it Work?
 
 Given the throughput data, we can take a random sampling to create a single forecast. We then repeat this process, say 20,000 times. Some scenarios will occur more than once. We can plot the number of times each scenario occurs, which creates a normal distribution. The probability of any scenario is the value of the area underneath its curve.
 
-![Example forecast distribution](./forecast-distribution.webp)
+![Example forecast distribution](./agile-forecasting/forecast-distribution.webp)
 
 This is then calculated for every point in the distribution. The result is a range of possible delivery dates and the probability of hitting any given one. These probabilities are then sorted and plotted to create a cumulative distribution function (CDF). This is a graph that shows the probability of hitting a delivery date or sooner.
 
-![Example graph of sorted probabilities](./sorted-probabilities.webp)
+![Example graph of sorted probabilities](./agile-forecasting/sorted-probabilities.webp)
 
 ## Final Thoughts
 

@@ -230,6 +230,7 @@ const getCodeAssets = async (
     const assetsFiles = await readDirFiles(
       path.join(
         mdxFile.filePath.replace(new RegExp(`${mdxFile.fileName}$`), ""),
+        mdxFile.slug,
         "assets",
       ),
     )

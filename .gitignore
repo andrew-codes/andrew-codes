@@ -25,3 +25,8 @@ vite.config.js*
 *.log
 
 app/posts/**/d2/*.png
+app/posts/.obsidian/**/*.*
+!app/posts/.obsidian/appearance.json
+!app/posts/.obsidian/backlink.json
+!app/posts/.obsidian/community-plugins.json
+!app/posts/.obsidian/core-plugins.json

@@ -13,9 +13,9 @@ tags:
 
 ## Overview
 
-Estimating is a common practice in Agile software development. It helps teams understand the relative size of work and prioritize tasks. However, estimating can be time-consuming and often leads to inaccurate forecasts, making it ineffective for planning. In this post, I'll discuss the purpose of estimation and a more effective way to forecast project timelines in an [upcoming article](/posts/agile-forecasting).
+Estimating is a common practice in Agile software development. It helps teams understand the relative size of work and prioritize tasks. However, estimating can be time-consuming and often leads to inaccurate forecasts, making it ineffective for planning. In this post, I'll discuss the purpose of estimation and a more effective way to forecast project timelines in an [upcoming article](../2024/agile-forecasting.md).
 
-> See [Agile Forecasting](/posts/agile-forecasting) for more information on forecasting project timelines.
+> See [Agile Forecasting](../2024/agile-forecasting.md) for more information on forecasting project timelines.
 
 ## Why Do We Estimate?
 
@@ -78,4 +78,4 @@ Over time, bucketing will reduce the spread of estimates. Work will either be on
 
 ## Final Thoughts
 
-There is one gap in this article that I have not addressed. I have not discussed how to forecast project timelines. This is a critical piece of the puzzle that I will address in an [upcoming article](/posts/agile-forecasting). However, I hope I have convinced you that estimation is not the tool for planning. Instead, it is a tool for prioritization. Understanding this distinction will help you make more informed decisions about what to work on next.
+There is one gap in this article that I have not addressed. I have not discussed how to forecast project timelines. This is a critical piece of the puzzle that I will address in an [upcoming article](../2024/agile-forecasting.md). However, I hope I have convinced you that estimation is not the tool for planning. Instead, it is a tool for prioritization. Understanding this distinction will help you make more informed decisions about what to work on next.
