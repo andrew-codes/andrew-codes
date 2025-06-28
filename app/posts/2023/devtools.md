@@ -1,14 +1,12 @@
 ---
-aliases:
-  - devtools
+aliases: [devtools]
 category: engineering
 date: 2023-05-19
 date created: Thursday, June 5th 2025, 2:38:47 pm
-date modified: Saturday, June 28th 2025, 12:03:44 pm
+date modified: Saturday, June 28th 2025, 12:39:39 pm
 description: "\"Show the development tools I love and how I've automated setting up my development environment.\""
 linter-yaml-title-alias: devtools
-tags:
-  - craftsmanship
+tags: [craftsmanship]
 title: My Developer Workbench
 ---
 
