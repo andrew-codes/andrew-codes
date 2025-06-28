@@ -89,7 +89,7 @@ const mdx = async (
     imageContents[imagePath] = imageData as unknown as string
   }
 
-  const imageAttrs = {}
+  const imageAttrs: Record<string, any> = {}
   const { code, frontmatter, errors } = await bundleMDX({
     source: source.trim(),
     cwd: path.resolve(mdxFile.filePath),
@@ -162,7 +162,8 @@ const mdx = async (
               if (!src) {
                 return
               }
-              const attributes = imageAttrs[`d2/${src}.png`] ?? {}
+              const attributes =
+                imageAttrs[path.join(`./${mdxFile.slug}/d2/${src}.png`)] ?? {}
 
               node.attributes = node.attributes.concat(
                 Object.entries(attributes).map(([key, value]) => {
