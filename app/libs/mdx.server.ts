@@ -35,28 +35,36 @@ const mdx = async (
   const mdxAst = unified().use(remarkParse).use(remarkMdx).parse(source)
 
   let count = 0
+  const imageFiles: Record<string, string> = {}
+  const generatedImages = [] as Array<Promise<void>>
   visit(mdxAst, "code", (node: any) => {
     if (node.lang !== "d2") {
       return
     }
-    const urlPath = `./d2/${count}.png`
-    imageFiles[urlPath] = path.resolve(
-      path.dirname(mdxFile.filePath),
-      `./d2/${count}.png`,
+    generatedImages.push(
+      new Promise((resolve) => {
+        const urlPath = `./d2/${count}.png`
+        imageFiles[urlPath] = path.resolve(
+          path.dirname(mdxFile.filePath),
+          `./d2/${count}.png`,
+        )
+
+        const d2 = spawn("d2", [
+          "-t=100",
+          "--dark-theme=200",
+          "-",
+          imageFiles[`./d2/${count}.png`],
+        ])
+        d2.stdin.write(node.value, (sb) => {
+          resolve()
+        })
+        d2.stdin.end()
+        count++
+      }),
     )
-
-    const d2 = spawn("d2", [
-      "-t=100",
-      "--dark-theme=200",
-      "-",
-      imageFiles[`./d2/${count}.png`],
-    ])
-    d2.stdin.write(node.value)
-    d2.stdin.end()
-    count++
   })
+  await Promise.all(generatedImages)
 
-  const imageFiles: Record<string, string> = {}
   visit(mdxAst, "image", (node: any) => {
     const imagePath = node.url
     if (imagePath && !imageFiles[imagePath] && imagePath.startsWith("./")) {
@@ -70,17 +78,12 @@ const mdx = async (
 
   const imageContents: Record<string, string> = {}
   for (const [imagePath, resolvedPath] of Object.entries(imageFiles)) {
-    try {
-      const imageData = await fs.readFile(resolvedPath)
-      // Must pass binary data and fake its type as a string. This avoid double base64 encoding.
-      imageContents[imagePath] = imageData as unknown as string
-    } catch (error) {
-      console.warn(`Failed to read image file: ${resolvedPath}`, error)
-    }
+    const imageData = await fs.readFile(resolvedPath)
+    // Must pass binary data and fake its type as a string. This avoid double base64 encoding.
+    imageContents[imagePath] = imageData as unknown as string
   }
 
   const imageAttrs = {}
-
   const { code, frontmatter, errors } = await bundleMDX({
     source: source.trim(),
     cwd: path.resolve(mdxFile.filePath),
