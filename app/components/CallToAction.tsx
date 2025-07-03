@@ -8,12 +8,7 @@ const CallToAction: FC<{
   primaryAction?: string | MouseEventHandler
   secondaryTitle: string
   secondaryAction: string | MouseEventHandler
-}> = ({
-  primaryTitle = "View Resume",
-  primaryAction = "/resume",
-  secondaryAction,
-  secondaryTitle,
-}) => {
+}> = ({ primaryTitle, primaryAction, secondaryAction, secondaryTitle }) => {
   const handlePrimaryAction = (evt) => {
     if (typeof primaryAction === "function") {
       primaryAction(evt)
@@ -35,12 +30,21 @@ const CallToAction: FC<{
         spacing={2}
         sx={{ marginTop: 2 }}
       >
-        {typeof primaryAction === "string" ? (
+        {!primaryAction ? (
+          <Button
+            color="primary"
+            variant="solid"
+            href={encodeURI("/James Andrew Smith - Resume.pdf")}
+            component="a"
+            size="lg"
+          >
+            Download Resume
+          </Button>
+        ) : typeof primaryAction === "string" ? (
           <Button
             color="primary"
             variant="solid"
             to={primaryAction}
-            onClick={handlePrimaryAction}
             component={RemixLink}
             size="lg"
           >
@@ -62,7 +66,6 @@ const CallToAction: FC<{
             variant="outlined"
             component={RemixLink}
             to={secondaryAction}
-            onClick={handleSecondaryAction}
             size="lg"
           >
             {secondaryTitle}
