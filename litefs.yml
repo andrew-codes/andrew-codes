@@ -33,6 +33,7 @@ proxy:
   passthrough:
     - "/*.ico"
     - "/*.png"
+    - "/*.svg"
     - "/*.txt"
     - "/*.webmanifest"
     - "/build/*"

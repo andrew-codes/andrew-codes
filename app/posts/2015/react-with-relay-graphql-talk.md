@@ -1,14 +1,14 @@
 ---
-title: React with Relay and GraphQL Talk
+aliases: [react-with-relay-graphql-talk]
+category: presentation
+date: 2015-07-22
+date created: Tuesday, May 20th 2025, 9:46:04 am
+date modified: Saturday, June 28th 2025, 1:12:04 pm
 description: >-
   Focusing on GraphQL and how it may impact React in the future.
-date: 2015-07-22
-category: presentation
-tags:
-  - react
-  - relay
-  - graphql
-  - javascript
+linter-yaml-title-alias: react-with-relay-graphql-talk
+tags: [graphql, javascript, react, relay]
+title: React with Relay and GraphQL Talk
 ---
 
 ## Presentation
