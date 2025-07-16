@@ -30,4 +30,4 @@ Feel free to ask me about simple and easy. Any of my interest. I'm always seekin
 
 I do not favor unexpected phone calls. I prefer to chat in public forums, so information can be more easily shared. I strive to be available to answer questions, pair program, etc.
 
-[My site](https://andrew.codes) - [Resume](https://andrew.codes/resume) - [LinkedIn](https://www.linkedin.com/in/jamesandrewsmith/)
+[My site](https://andrew.codes) - [Resume](https://andrew.codes/James%20Andrew%20Smith%20-%20Resume.pdf) - [LinkedIn](https://www.linkedin.com/in/jamesandrewsmith/)
