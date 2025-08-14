@@ -16,11 +16,11 @@ I aim to make software development more accessible to a wider audience. I accomp
 
 ## Topics I find Interesting
 
-Tinkering with [my home automation project](https://github.com/andrew-codes/home-automation). Applied design principles and patterns. Gaming; mostly PC, some PlayStation. Elixir and functional programming. Science and philosophy. Mentorship and teaching technical concepts.
+I love working on [my home ops project](https://github.com/andrew-codes/home-ops) and an open-source, self-hosted application for game management, [Playnite Web](https://github.com/andrew-codes/playnite-web). Applied design principles and patterns. Gaming; mostly PC, some PlayStation. Elixir and functional programming. Science and philosophy. Mentorship and teaching technical concepts.
 
 ## Ask Me About
 
-Feel free to ask me about simple and easy. Any of my interest. I'm always seeking individuals with a passion to learn more about software engineering.
+Feel free to ask me about simple and easy, any of my interests, or just to talk tech. I'm always seeking individuals with a passion to learn more improve their craft.
 
 ## Goals
 
