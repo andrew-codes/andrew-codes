@@ -1,11 +1,14 @@
 ---
-title: Software Craftsmanship
+aliases: [software-craftsmanship]
+category: engineering
+date: 2014-07-08
+date created: Tuesday, May 20th 2025, 9:46:04 am
+date modified: Saturday, June 28th 2025, 1:10:55 pm
 description: >-
   Understanding software craftsmanship and my determination to seek constant improvement.
-date: 2014-07-08
-category: engineering
-tags:
-  - craftsmanship
+linter-yaml-title-alias: software-craftsmanship
+tags: [craftsmanship]
+title: Software Craftsmanship
 ---
 
 ## What is Software Craftsmanship?

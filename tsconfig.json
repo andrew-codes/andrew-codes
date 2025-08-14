@@ -1,7 +1,5 @@
 {
-  "exclude": [
-    "./cypress"
-  ],
+  "exclude": ["./cypress"],
   "include": [
     "remix.env.d.ts",
     "**/*.ts",
@@ -10,16 +8,11 @@
     "server.ts",
     "config/**/*.*",
     "scripts/*.ts",
-    "server/**/*.ts"
+    "server/**/*.ts",
+    "scripts/start.js"
   ],
   "compilerOptions": {
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ES2019",
-      "ES2021",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ES2019", "ES2021", "ESNext"],
     "types": [
       "@types/react",
       "@types/node",
