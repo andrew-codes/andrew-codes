@@ -8,7 +8,7 @@ I aim to make software development more accessible to a wider audience. I accomp
 
 **Growth mindset**: Be willing to begin again. Empty your cup. Embrace growth opportunities.
 
-**Authentic Self**: strive to create safe environments and empower everyone to bring their authentic self to the table.
+**Cultivate community**: strive to create safe environments and empower everyone to bring their authentic self to the table.
 
 **Honesty**: Be honest and transparent.
 
