@@ -8,7 +8,9 @@ const readDir = async (dir: string): Promise<string[]> => {
 
   let results: string[] = []
 
-  for (let file of files) {
+  for (let file of files.filter(
+    (f) => !f.startsWith(".obsidian") && !f.startsWith(".smart-env"),
+  )) {
     const filePath = path.join(dir, file)
     const stat = await fs.stat(filePath)
     if (stat?.isDirectory()) {

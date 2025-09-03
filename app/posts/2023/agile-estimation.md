@@ -1,21 +1,26 @@
 ---
-title: Agile Estimation
-description: >-
-  Understand the role of estimation and effective ways to utilize it.
-date: 2023-11-14
+aliases:
+  - agile-estimation
 category: agility
+date: 2023-11-14
+date created: Thursday, June 5th 2025, 2:34:26 pm
+date modified: Saturday, June 28th 2025, 6:48:36 pm
+description: Understand the role of estimation and effective ways to utilize it.
+linter-yaml-title-alias: agile-estimation
 tags:
-  - featured
-  - estimation
-  - story points
   - bucketing
+  - estimation
+  - featured
+  - points
+  - story
+title: Agile Estimation
 ---
 
 ## Overview
 
-Estimating is a common practice in Agile software development. It helps teams understand the relative size of work and prioritize tasks. However, estimating can be time-consuming and often leads to inaccurate forecasts, making it ineffective for planning. In this post, I'll discuss the purpose of estimation and a more effective way to forecast project timelines in an [upcoming article](/posts/agile-forecasting).
+Estimating is a common practice in Agile software development. It helps teams understand the relative size of work and prioritize tasks. However, estimating can be time-consuming and often leads to inaccurate forecasts, making it ineffective for planning. In this post, I'll discuss the purpose of estimation and a more effective way to forecast project timelines in an [upcoming article](../2024/agile-forecasting.md).
 
-> See [Agile Forecasting](/posts/agile-forecasting) for more information on forecasting project timelines.
+> See [Agile Forecasting](../2024/agile-forecasting.md) for more information on forecasting project timelines.
 
 ## Why Do We Estimate?
 
@@ -32,7 +37,9 @@ There are better mechanisms to forecast project timelines, which I will discuss 
 ### Why We "Actually" Estimate
 
 <em>"You can't put ten pounds of stuff into a five-pound bag."</em> There are
+
 always more tasks than there are people, time, and money to complete them.
+
 Therefore, we are always faced with trade-offs: what work should we do next?
 
 > Estimation helps prioritize work by understanding the trade-offs of the work's
@@ -78,4 +85,4 @@ Over time, bucketing will reduce the spread of estimates. Work will either be on
 
 ## Final Thoughts
 
-There is one gap in this article that I have not addressed. I have not discussed how to forecast project timelines. This is a critical piece of the puzzle that I will address in an [upcoming article](/posts/agile-forecasting). However, I hope I have convinced you that estimation is not the tool for planning. Instead, it is a tool for prioritization. Understanding this distinction will help you make more informed decisions about what to work on next.
+There is one gap in this article that I have not addressed. I have not discussed how to forecast project timelines. This is a critical piece of the puzzle that I will address in an [upcoming article](../2024/agile-forecasting.md). However, I hope I have convinced you that estimation is not the tool for planning. Instead, it is a tool for prioritization. Understanding this distinction will help you make more informed decisions about what to work on next.

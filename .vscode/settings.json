@@ -29,5 +29,6 @@
   ],
   "typescript.preferences.autoImportSpecifierExcludeRegexes": [
     "^@mui/[^/]+$"
-  ]
+  ],
+  "editor.wordWrap": "on"
 }

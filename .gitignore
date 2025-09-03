@@ -23,3 +23,14 @@ data/cache.db
 vite.config.js*
 
 *.log
+
+app/posts/**/d2/*.svg
+app/posts/.obsidian/**/*.*
+.smart-env
+
+!app/posts/.obsidian/app.json
+!app/posts/.obsidian/appearance.json
+!app/posts/.obsidian/backlink.json
+!app/posts/.obsidian/community-plugins.json
+!app/posts/.obsidian/core-plugins.json
+!app/posts/.obsidian/themes/**/*.*

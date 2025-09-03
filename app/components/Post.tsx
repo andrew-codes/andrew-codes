@@ -131,11 +131,8 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
   return (
     <img
       {...props}
-      src={props.src}
-      alt={props.alt}
       style={{
         maxWidth: "100%",
-        height: "auto",
         margin: "0 auto",
         display: "block",
         borderRadius: theme.radius.md,
