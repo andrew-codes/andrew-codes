@@ -26,7 +26,7 @@ const mdx = async (
 
   const { code, frontmatter, errors } = await bundleMDX({
     source: source.trim(),
-    cwd: path.resolve(mdxFile.filePath),
+    cwd: path.dirname(path.resolve(mdxFile.filePath)),
     files: fileContents,
     globals: { "@emotion/styled": "styled" },
     mdxOptions: (options) => {
@@ -44,7 +44,8 @@ const mdx = async (
 
     esbuildOptions(options, frontmatter) {
       options.minify = true
-      options.outdir = path.resolve(mdxFile.filePath, "..", "public", "files")
+      // Emit all MDX file assets to the globally served static directory.
+      options.outdir = path.resolve("app", "public", "files")
       options.loader = {
         ...options.loader,
         ".png": "file",
