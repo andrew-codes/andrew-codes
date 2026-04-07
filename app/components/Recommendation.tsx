@@ -138,7 +138,17 @@ const Recommendation: FC<
                   <Typography level="h3" fontSize="lg">
                     {name}
                   </Typography>
-                  <Chip>{company}</Chip>
+                  <Chip
+                    sx={{
+                      background: "rgba(201, 138, 42, 0.12)",
+                      color: "#c98a2a",
+                      border: "0.5px solid rgba(201, 138, 42, 0.35)",
+                      borderRadius: "4px",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {company}
+                  </Chip>
                 </Stack>
                 <Typography level="body-sm">{title}</Typography>
               </Stack>
@@ -194,6 +204,7 @@ const Recommendation: FC<
                     color="primary"
                     size="sm"
                     onClick={toggleOpen}
+                    sx={{ "&:hover": { backgroundColor: "rgba(201, 122, 88, 0.12)" } }}
                   >
                     {isOpen ? "Close" : "Read more"}
                   </Button>

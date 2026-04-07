@@ -26,7 +26,7 @@ const PageHeader: FC<PropsWithChildren<{}>> = ({ children }) => {
           >
             Andrew Smith
           </Typography>
-          <Divider>
+          <Divider sx={{ mx: "4rem" }}>
             <Typography
               level="body-lg"
               sx={(theme) => ({
@@ -44,7 +44,6 @@ const PageHeader: FC<PropsWithChildren<{}>> = ({ children }) => {
         </Box>
         {children}
       </Stack>
-      {children && <Divider />}
     </>
   )
 }

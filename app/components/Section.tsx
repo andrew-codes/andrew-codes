@@ -8,7 +8,16 @@ const SectionHeader: FC<PropsWithChildren<{ title: string }>> = ({
 }) => {
   return (
     <Stack direction="row" justifyContent="space-between" sx={{}}>
-      <Typography level="h2" fontSize="xl2" fontWeight={700} sx={{}}>
+      <Typography
+        level="h2"
+        fontSize="xl2"
+        fontWeight={700}
+        sx={{
+          borderLeft: "3px solid #b85c38",
+          paddingLeft: "0.75rem",
+          color: "#f0ede4",
+        }}
+      >
         {title}
       </Typography>
       {children}

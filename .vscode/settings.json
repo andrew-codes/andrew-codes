@@ -27,7 +27,6 @@
       "query": "state:open repo:${owner}/${repository} sort:updated-desc"
     }
   ],
-  "typescript.preferences.autoImportSpecifierExcludeRegexes": [
-    "^@mui/[^/]+$"
-  ]
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["^@mui/[^/]+$"],
+  "js/ts.tsdk.path": ".yarn/sdks/typescript/lib"
 }

@@ -19,7 +19,7 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
     {tags.map((tag: string, index: number) =>
       index === 0 ? (
         <li key={tag}>
-          <Link component={RemixLink} to={`/tags/${tag}`}>
+          <Link component={RemixLink} to={`/tags/${tag}`} sx={{ color: "#c98a2a", textDecorationColor: "#c98a2a" }}>
             {tag}
           </Link>
         </li>
@@ -29,7 +29,7 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
             <SmallContentDivider />
           </li>
           <li key={tag}>
-            <Link component={RemixLink} to={`/tags/${tag}`}>
+            <Link component={RemixLink} to={`/tags/${tag}`} sx={{ color: "#c98a2a", textDecorationColor: "#c98a2a" }}>
               {tag}
             </Link>
           </li>

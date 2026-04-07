@@ -5,56 +5,56 @@ const theme = extendTheme({
     dark: {
       palette: {
         primary: {
-          plainColor: "#6C63FF",
-          solidBg: "#6C63FF",
-          solidHoverBg: "#825CFF",
-          solidActiveBg: "#825CFF",
+          plainColor: "#c97a58",
+          solidBg: "#b85c38",
+          solidHoverBg: "#c97a58",
+          solidActiveBg: "#b85c38",
           mainChannel: "210 70 4",
         },
         background: {
-          body: "#0F1214",
-          surface: "#1E1E1E",
-          level1: "#0F1214",
+          body: "#1a1917",
+          surface: "#222120",
+          level1: "#1a1917",
         },
         neutral: {
           plainColor: "#ffffff",
           outlinedColor: "#fff",
-          outlinedHoverColor: "#0F1214",
-          solidBg: "#1E1E1E",
+          outlinedHoverColor: "#1a1917",
+          solidBg: "#222120",
           solidDisabledBg: "#B0B0B0",
         },
         text: {
-          primary: "#ffffff",
-          secondary: "#b0b0b0",
-          tertiary: "#e8e2db",
+          primary: "#e2e0d8",
+          secondary: "#9e9b91",
+          tertiary: "#f0ede4",
         },
       },
     },
     light: {
       palette: {
         primary: {
-          plainColor: "#6C63FF",
-          solidBg: "#6C63FF",
-          solidHoverBg: "#825CFF",
-          solidActiveBg: "#825CFF",
+          plainColor: "#c97a58",
+          solidBg: "#b85c38",
+          solidHoverBg: "#c97a58",
+          solidActiveBg: "#b85c38",
         },
         background: {
-          body: "#0F1214",
-          surface: "#1E1E1E",
-          level1: "#0F1214",
+          body: "#1a1917",
+          surface: "#222120",
+          level1: "#1a1917",
         },
         neutral: {
           plainColor: "#ffffff",
           outlinedColor: "#fff",
-          outlinedHoverColor: "#0F1214",
-          solidBg: "#1E1E1E",
+          outlinedHoverColor: "#1a1917",
+          solidBg: "#222120",
           solidDisabledBg: "#B0B0B0",
-          outlinedBorder: "#b0b0b0",
+          outlinedBorder: "#9e9b91",
         },
         text: {
-          primary: "#ffffff",
-          secondary: "#e8e2db",
-          tertiary: "#b0b0b0",
+          primary: "#e2e0d8",
+          secondary: "#f0ede4",
+          tertiary: "#9e9b91",
         },
       },
     },
@@ -62,7 +62,7 @@ const theme = extendTheme({
   focus: {
     default: {
       outlineWidth: "3px",
-      outlineColor: "#6C63FF",
+      outlineColor: "#b85c38",
     },
   },
   fontFamily: {
@@ -71,6 +71,13 @@ const theme = extendTheme({
   },
   typography: {},
   components: {
+    JoyCard: {
+      styleOverrides: {
+        root: {
+          border: "none",
+        },
+      },
+    },
     JoyListItem: {
       styleOverrides: {
         root: ({ theme }) => ({
