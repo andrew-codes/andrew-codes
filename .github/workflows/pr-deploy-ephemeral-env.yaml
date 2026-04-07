@@ -38,8 +38,10 @@ jobs:
 
       - name: Deploy PR app to Fly.io
         id: deploy
-        uses: superfly/fly-pr-review-apps@1.3.0
+        uses: superfly/fly-pr-review-apps@1.6.0
         with:
           name: andrew-codes-${{ github.event.number }}
+          region: lax
           secrets: PORT=${{ secrets.PORT }} INTERNAL_COMMAND_TOKEN=${{ secrets.INTERNAL_COMMAND_TOKEN }} SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+          vmsize: shared-cpu-1x
           memory: 1024

@@ -97,6 +97,10 @@ const PostsRoute = () => {
         <CallToAction
           secondaryTitle="View Recommendations"
           secondaryAction="/recommendations?priority=featured"
+          {...(isPostPage && {
+            tertiaryTitle: "Read My Posts",
+            tertiaryAction: "/posts",
+          })}
         />
       </PageHeader>
 
