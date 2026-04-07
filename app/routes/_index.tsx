@@ -104,6 +104,8 @@ const HomeRoute = () => {
         <CallToAction
           secondaryTitle="View Recommendations"
           secondaryAction="/recommendations?priority=featured"
+          tertiaryTitle="Read my Posts"
+          tertiaryAction="/posts"
         />
       </PageHeader>
       <Section>

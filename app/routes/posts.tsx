@@ -1,3 +1,4 @@
+import Box from "@mui/joy/Box"
 import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
@@ -96,6 +97,10 @@ const PostsRoute = () => {
         <CallToAction
           secondaryTitle="View Recommendations"
           secondaryAction="/recommendations?priority=featured"
+          {...(isPostPage && {
+            tertiaryTitle: "Read My Posts",
+            tertiaryAction: "/posts",
+          })}
         />
       </PageHeader>
 
@@ -130,7 +135,9 @@ const PostsRoute = () => {
           </Section>
         </>
       )}
-      <Outlet />
+      <Box>
+        <Outlet />
+      </Box>
     </Stack>
   )
 }

@@ -8,7 +8,9 @@ const CallToAction: FC<{
   primaryAction?: string | MouseEventHandler
   secondaryTitle: string
   secondaryAction: string | MouseEventHandler
-}> = ({ primaryTitle, primaryAction, secondaryAction, secondaryTitle }) => {
+  tertiaryTitle?: string
+  tertiaryAction?: string | MouseEventHandler
+}> = ({ primaryTitle, primaryAction, secondaryAction, secondaryTitle, tertiaryTitle, tertiaryAction }) => {
   const handlePrimaryAction = (evt) => {
     if (typeof primaryAction === "function") {
       primaryAction(evt)
@@ -79,6 +81,28 @@ const CallToAction: FC<{
           >
             {secondaryTitle}
           </Button>
+        )}
+        {tertiaryTitle && tertiaryAction && (
+          typeof tertiaryAction === "string" ? (
+            <Button
+              color="neutral"
+              variant="outlined"
+              component={RemixLink}
+              to={tertiaryAction}
+              size="lg"
+            >
+              {tertiaryTitle}
+            </Button>
+          ) : (
+            <Button
+              color="neutral"
+              variant="outlined"
+              size="lg"
+              onClick={tertiaryAction as MouseEventHandler}
+            >
+              {tertiaryTitle}
+            </Button>
+          )
         )}
       </Stack>
     </>

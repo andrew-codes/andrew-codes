@@ -61,7 +61,7 @@ const Post = styled(PageWithHeader)`
   header {
     time {
       align-self: end;
-      color: rgb(80, 80, 80);
+      color: #c98a2a;
       font-size: 1.125rem;
       position: absolute;
       right: 1.5rem;
@@ -89,6 +89,7 @@ const Post = styled(PageWithHeader)`
 
     li {
       margin-bottom: 0.5rem;
+      line-height: 1.8;
     }
 
     img {
@@ -121,10 +122,19 @@ const PostRoute = () => {
   )
 
   return (
-    <>
-      <Card component="article">
+    <Box sx={{ width: "100%", backgroundColor: "#222120", padding: "2rem", borderRadius: "0.75rem", border: "1px solid rgba(255,255,255,0.08)" }}>
+      <Card
+        component="article"
+        variant="plain"
+        sx={{
+          background: "none",
+          width: "min(68ch, 100%)",
+          margin: "0 auto",
+          padding: 0,
+        }}
+      >
         <Stack direction="column" spacing={4}>
-          <Stack component="header" direction="column" spacing={0.25}>
+          <Stack component="header" direction="column" spacing={0.25} sx={{ marginTop: "1.5rem" }}>
             <Stack direction="row" justifyContent="space-between">
               <Typography level="h2">{frontmatter.title}</Typography>
               {!!frontmatter.date && (
@@ -140,7 +150,7 @@ const PostRoute = () => {
               <Tags tags={frontmatter.tags} />
             )}
           </Stack>
-          <Box>
+          <Box sx={{ maxWidth: "68ch", margin: "0 auto" }}>
             <Component
               components={{
                 CodePostAsset: PostCodeAsset,
@@ -180,7 +190,7 @@ const PostRoute = () => {
           </Box>
         </Stack>
       </Card>
-    </>
+    </Box>
   )
 }
 

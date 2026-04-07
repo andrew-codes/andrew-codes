@@ -1,6 +1,24 @@
+import styled from "@emotion/styled"
 import hljs from "highlight.js"
 import type { FC } from "react"
 import { useEffect, useRef } from "react"
+
+const CodeWrapper = styled.div`
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100vw - 6rem);
+  max-width: calc(960px - 6rem);
+  margin: 1.5rem 0;
+
+  @media (max-width: 640px) {
+    position: static;
+    width: 100%;
+    left: unset;
+    transform: none;
+    overflow-x: auto;
+  }
+`
 
 const CodePostAsset: FC<{ code: string; language: string }> = ({
   code,
@@ -17,11 +35,28 @@ const CodePostAsset: FC<{ code: string; language: string }> = ({
   }, [])
 
   return (
-    <pre>
-      <code className={`hljs ${language}`} ref={codeRef}>
-        {code}
-      </code>
-    </pre>
+    <CodeWrapper>
+      <pre
+        style={{
+          background: "#111210",
+          border: "0.5px solid #2e2d2a",
+          borderRadius: "8px",
+          padding: "1.25rem 1.5rem",
+          overflowX: "auto",
+          margin: 0,
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        <code
+          className={`hljs ${language}`}
+          ref={codeRef}
+          style={{ fontSize: "13.5px", lineHeight: 1.7, background: "transparent" }}
+        >
+          {code}
+        </code>
+      </pre>
+    </CodeWrapper>
   )
 }
 

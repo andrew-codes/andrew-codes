@@ -22,7 +22,17 @@ const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
       })}
     >
       <Stack direction="row" justifyContent="space-between">
-        <Chip>{post.frontmatter.category}</Chip>
+        <Chip
+          sx={{
+            background: "rgba(201, 138, 42, 0.12)",
+            color: "#c98a2a",
+            border: "0.5px solid rgba(201, 138, 42, 0.35)",
+            borderRadius: "4px",
+            fontSize: "12px",
+          }}
+        >
+          {post.frontmatter.category}
+        </Chip>
         {post.frontmatter.date && (
           <Typography level="body-xs">
             <time>{new Date(post.frontmatter?.date).toLocaleDateString()}</time>

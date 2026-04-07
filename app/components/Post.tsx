@@ -17,10 +17,26 @@ const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
 }
 
 const H2: FC<PropsWithChildren<{}>> = (props) => {
-  return <Typography {...props} level="h2" fontSize="xl" fontWeight={700} />
+  return (
+    <Typography
+      {...props}
+      level="h2"
+      fontSize="xl"
+      fontWeight={700}
+      sx={{ lineHeight: 1.3, marginTop: "2.5rem", marginBottom: "0.6rem" }}
+    />
+  )
 }
 const H3: FC<PropsWithChildren<{}>> = (props) => {
-  return <Typography {...props} level="h3" fontSize="lg" fontWeight={700} />
+  return (
+    <Typography
+      {...props}
+      level="h3"
+      fontSize="lg"
+      fontWeight={700}
+      sx={{ lineHeight: 1.3, marginTop: "2rem", marginBottom: "0.6rem" }}
+    />
+  )
 }
 
 const H4: FC<PropsWithChildren<{}>> = (props) => {
@@ -30,33 +46,64 @@ const H4: FC<PropsWithChildren<{}>> = (props) => {
       level="h2"
       fontSize="xl"
       fontWeight={700}
-      sx={{ marginBottom: 1 }}
+      sx={{ lineHeight: 1.3, marginTop: "2rem", marginBottom: "0.6rem" }}
     />
   )
 }
 
+const TableWrapper = styled("div")({
+  position: "relative",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "calc(100vw - 6rem)",
+  maxWidth: "calc(960px - 6rem)",
+  margin: "1.5rem 0",
+  "@media (max-width: 640px)": {
+    position: "static",
+    width: "100%",
+    left: "unset",
+    transform: "none",
+    overflowX: "auto",
+  },
+})
+
 const Table = styled("table")({
-  borderCollapse: "collapse",
-  margin: "0 auto",
   width: "100%",
+  borderCollapse: "collapse",
+  fontSize: "14px",
+  lineHeight: 1.6,
 
-  "& thead tr": {
-    borderBottom: "1px solid black",
+  "& thead th": {
+    textAlign: "left",
+    padding: "10px 16px",
+    fontSize: "11px",
+    fontWeight: 500,
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    color: "#9e9b91",
+    borderBottom: "1px solid #2e2b28",
+    whiteSpace: "nowrap",
   },
 
-  th: {
-    fontVariant: "all-small-caps",
-    padding: "0 1rem",
+  "& tbody td": {
+    padding: "12px 16px",
+    color: "#e2e0d8",
+    verticalAlign: "top",
+    borderBottom: "0.5px solid #2a2724",
   },
 
-  td: {
-    padding: "0.25rem 0",
-    "&:first-child": {
-      paddingLeft: "2rem",
-    },
-    "&:last-child": {
-      paddingRight: "2rem",
-    },
+  "& tbody tr:nth-child(even) td": {
+    background: "rgba(255, 255, 255, 0.03)",
+  },
+
+  "& tbody tr:hover td": {
+    background: "rgba(201, 122, 88, 0.06)",
+  },
+
+  "& tbody td:first-child": {
+    color: "#f0ede4",
+    fontWeight: 500,
+    whiteSpace: "nowrap",
   },
 })
 
@@ -65,27 +112,29 @@ const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
     <Typography
       {...props}
       level="body-lg"
-      sx={(theme) => ({ marginBottom: theme.spacing(3) })}
+      sx={(theme) => ({
+        lineHeight: 1.8,
+        marginBottom: "1.5rem",
+      })}
     />
   )
 }
 
 const StyledBlockquote = styled("blockquote")({
   position: "relative",
-  margin: "0 0 1.125rem 0",
-  padding: "0.5rem 0.5rem 0.5rem 2.5rem",
+  margin: "1.5rem 0",
+  padding: "0.75rem 1.25rem",
+  background: "rgba(184, 92, 56, 0.15)",
+  borderLeft: "3px solid #b85c38",
+  borderRadius: "0 6px 6px 0",
+  color: "#f0d4c4",
 
   "p:last-child": {
     marginBottom: "0 !important",
   },
 
   "&::before": {
-    content: '""',
-    left: "0rem",
-    position: "absolute",
-    top: "0rem",
-    bottom: "0rem",
-    width: "0.375rem",
+    display: "none",
   },
 })
 
@@ -94,14 +143,7 @@ const Blockquote: FC<
 > = (props) => {
   if (props.children.length > 1) {
     return (
-      <StyledBlockquote
-        sx={{
-          backgroundColor: "background.level1",
-          "&::before": {
-            backgroundColor: "primary.plainColor",
-          },
-        }}
-      >
+      <StyledBlockquote>
         {props.children
           .filter((child) => typeof child !== "string")
           .map((child, index) => {
@@ -205,6 +247,12 @@ const OrderedList: FC<{}> = (props: any) => {
   )
 }
 
+const TableContainer: FC<PropsWithChildren<{}>> = ({ children }) => (
+  <TableWrapper>
+    <Table>{children}</Table>
+  </TableWrapper>
+)
+
 export {
   Blockquote,
   H2,
@@ -214,6 +262,6 @@ export {
   Link,
   OrderedList,
   Paragraph,
-  Table,
+  TableContainer as Table,
   UnorderedList,
 }

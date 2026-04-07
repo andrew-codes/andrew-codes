@@ -49,6 +49,32 @@ const Head = createHead(() => (
       href="/images/apple-touch-icon.png"
     />
     <link
+      rel="preload"
+      as="font"
+      type="font/ttf"
+      href="/fonts/Lato-Regular.ttf"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/ttf"
+      href="/fonts/Lato-Bold.ttf"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/ttf"
+      href="/fonts/Lato-Black.ttf"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/css/fonts.css"
+    />
+    <link
       crossOrigin="anonymous"
       rel="stylesheet"
       type="text/css"
@@ -67,6 +93,7 @@ const App: FC<PropsWithChildren<{}>> = ({ children }) => {
           <Box
             sx={{
               width: "100vw",
+              minWidth: "380px",
               [theme.breakpoints.down("lg")]: {
                 margin: 0,
                 padding: theme.spacing(4, 3),
