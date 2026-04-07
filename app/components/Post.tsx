@@ -9,8 +9,20 @@ import { Link as RemixLink } from "@remix-run/react"
 import { FC, PropsWithChildren } from "react"
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
+  const hasImageChild = Array.isArray(props.children)
+    ? props.children.some((c: any) => c?.props?.src)
+    : !!(props.children as any)?.props?.src
+
+  if (hasImageChild) {
+    return (
+      <a href={props.href} style={{ display: "contents" }}>
+        {props.children}
+      </a>
+    )
+  }
+
   return (
-    <MuiLink {...props} component={RemixLink} to={props.href}>
+    <MuiLink {...props} component={RemixLink} to={props.href} sx={{ textDecoration: "underline" }}>
       {props.children}
     </MuiLink>
   )
@@ -167,25 +179,40 @@ const Blockquote: FC<
   )
 }
 
+const ImageWrapper = styled("div")({
+  position: "relative",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "calc(100vw - 6rem)",
+  maxWidth: "calc(960px - 6rem)",
+  margin: "1.5rem 0",
+  "@media (max-width: 640px)": {
+    position: "static",
+    width: "100%",
+    left: "unset",
+    transform: "none",
+  },
+})
+
 const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
   const theme = useTheme()
 
   return (
-    <img
-      {...props}
-      src={props.src}
-      alt={props.alt}
-      style={{
-        maxWidth: "100%",
-        height: "auto",
-        margin: "0 auto",
-        display: "block",
-        borderRadius: theme.radius.md,
-        border: "4px solid rgba(0, 0, 0,0.8)",
-        boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.3)",
-        marginBottom: theme.spacing(1),
-      }}
-    />
+    <ImageWrapper>
+      <img
+        {...props}
+        src={props.src}
+        alt={props.alt}
+        style={{
+          width: "100%",
+          height: "auto",
+          display: "block",
+          borderRadius: theme.radius.md,
+          border: "4px solid rgba(0, 0, 0,0.8)",
+          boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.3)",
+        }}
+      />
+    </ImageWrapper>
   )
 }
 

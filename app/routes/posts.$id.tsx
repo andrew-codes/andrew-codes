@@ -122,7 +122,7 @@ const PostRoute = () => {
   )
 
   return (
-    <Box sx={{ width: "100%", backgroundColor: "#222120", padding: "2rem", borderRadius: "0.75rem", border: "1px solid rgba(255,255,255,0.08)" }}>
+    <Box sx={{ width: "100%" }}>
       <Card
         component="article"
         variant="plain"
