@@ -62,6 +62,7 @@ const Recommendation: FC<
   return (
     <Box sx={{ minHeight: "191px" }}>
       <motion.div
+        initial={false}
         style={{
           pointerEvents: "none",
           willChange: "opacity",

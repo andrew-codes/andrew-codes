@@ -99,6 +99,25 @@ const theme = extendTheme({
         }),
       },
     },
+    JoyMenu: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#222120",
+          border: "1px solid #9e9b91",
+          "--ListItem-minHeight": "48px",
+          "--joy-palette-text-primary": "#e2e0d8",
+          "--joy-palette-neutral-plainHoverBg": "#2e2c2b",
+          "--joy-palette-neutral-plainActiveBg": "#3a3836",
+        },
+      },
+    },
+    JoyMenuItem: {
+      styleOverrides: {
+        root: {
+          color: "#e2e0d8",
+        },
+      },
+    },
     JoyButton: {
       styleOverrides: {
         root: ({ ownerState, theme }) => ({

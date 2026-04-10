@@ -1,7 +1,12 @@
+import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
+import Dropdown from "@mui/joy/Dropdown"
+import Menu from "@mui/joy/Menu"
+import MenuButton from "@mui/joy/MenuButton"
+import MenuItem from "@mui/joy/MenuItem"
 import Stack from "@mui/joy/Stack"
 import { Link as RemixLink } from "@remix-run/react"
-import { FC, MouseEventHandler } from "react"
+import React, { FC, MouseEventHandler, useEffect, useRef, useState } from "react"
 
 const CallToAction: FC<{
   primaryTitle?: string
@@ -11,13 +16,22 @@ const CallToAction: FC<{
   tertiaryTitle?: string
   tertiaryAction?: string | MouseEventHandler
 }> = ({ primaryTitle, primaryAction, secondaryAction, secondaryTitle, tertiaryTitle, tertiaryAction }) => {
-  const handlePrimaryAction = (evt) => {
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const [menuWidth, setMenuWidth] = useState<number | undefined>()
+
+  useEffect(() => {
+    if (menuButtonRef.current) {
+      setMenuWidth(menuButtonRef.current.offsetWidth)
+    }
+  }, [])
+
+  const handlePrimaryAction = (evt: React.MouseEvent) => {
     if (typeof primaryAction === "function") {
       primaryAction(evt)
     }
   }
 
-  const handleSecondaryAction = (evt) => {
+  const handleSecondaryAction = (evt: React.MouseEvent) => {
     if (typeof secondaryAction === "function") {
       secondaryAction(evt)
     }
@@ -25,12 +39,56 @@ const CallToAction: FC<{
 
   return (
     <>
+      {/* Phone: full-width dropdown */}
+      <Box sx={{ display: { xs: "block", sm: "none" }, mt: 2 }}>
+        <Dropdown>
+          <MenuButton ref={menuButtonRef} size="lg" sx={{ width: "100%" }}>
+            Navigation
+          </MenuButton>
+          <Menu sx={{ minWidth: menuWidth }}>
+            {!primaryAction ? (
+              <MenuItem component="a" href={encodeURI("/James Andrew Smith - Resume.pdf")}>
+                Download Resume
+              </MenuItem>
+            ) : typeof primaryAction === "string" ? (
+              <MenuItem component={RemixLink as any} to={primaryAction}>
+                {primaryTitle}
+              </MenuItem>
+            ) : (
+              <MenuItem onClick={handlePrimaryAction}>
+                {primaryTitle}
+              </MenuItem>
+            )}
+            {typeof secondaryAction === "string" ? (
+              <MenuItem component={RemixLink as any} to={secondaryAction}>
+                {secondaryTitle}
+              </MenuItem>
+            ) : (
+              <MenuItem onClick={handleSecondaryAction}>
+                {secondaryTitle}
+              </MenuItem>
+            )}
+            {tertiaryTitle && tertiaryAction && (
+              typeof tertiaryAction === "string" ? (
+                <MenuItem component={RemixLink as any} to={tertiaryAction}>
+                  {tertiaryTitle}
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={tertiaryAction as MouseEventHandler}>
+                  {tertiaryTitle}
+                </MenuItem>
+              )
+            )}
+          </Menu>
+        </Dropdown>
+      </Box>
+
+      {/* Tablet+: button row */}
       <Stack
         direction="row"
         alignItems="center"
         justifyContent="center"
-        spacing={2}
-        sx={{ marginTop: 2 }}
+        sx={{ display: { xs: "none", sm: "flex" }, mt: 2, gap: 2 }}
       >
         {!primaryAction ? (
           <Button
