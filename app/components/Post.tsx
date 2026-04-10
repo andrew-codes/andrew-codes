@@ -2,11 +2,14 @@ import MuiLink from "@mui/joy/Link"
 import List from "@mui/joy/List"
 import ListItem from "@mui/joy/ListItem"
 import ListItemContent from "@mui/joy/ListItemContent"
+import Modal from "@mui/joy/Modal"
+import ModalClose from "@mui/joy/ModalClose"
+import ModalDialog from "@mui/joy/ModalDialog"
 import { useTheme } from "@mui/joy/styles"
 import styled from "@mui/joy/styles/styled"
 import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "@remix-run/react"
-import { FC, PropsWithChildren } from "react"
+import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from "react"
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
   const hasImageChild = Array.isArray(props.children)
@@ -196,22 +199,74 @@ const ImageWrapper = styled("div")({
 
 const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
   const theme = useTheme()
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLargeScreen, setIsLargeScreen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  const handleImageClick = (event: MouseEvent<HTMLImageElement>) => {
+    if (!isLargeScreen) {
+      return
+    }
+
+    if (event.currentTarget.closest("a")) {
+      return
+    }
+
+    setIsOpen(true)
+  }
+
+  useEffect(() => {
+    setMounted(true)
+    const mq = window.matchMedia("(min-width: 1024px)")
+    setIsLargeScreen(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsLargeScreen(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
 
   return (
     <ImageWrapper>
       <img
-        {...props}
         src={props.src}
         alt={props.alt}
+        onClick={handleImageClick}
         style={{
           width: "100%",
           height: "auto",
           display: "block",
           borderRadius: theme.radius.md,
-          border: "4px solid rgba(0, 0, 0,0.8)",
+          border: "4px solid rgba(0, 0, 0, 0.8)",
           boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.3)",
+          cursor: isLargeScreen ? "zoom-in" : "default",
         }}
       />
+      {mounted && <Modal open={isOpen} onClose={() => setIsOpen(false)} disableScrollLock>
+        <ModalDialog
+          layout="center"
+          sx={{
+            background: "transparent",
+            border: "none",
+            boxShadow: "none",
+            p: 0,
+          }}
+        >
+          <ModalClose variant="solid" />
+          <img
+            src={props.src}
+            alt={props.alt}
+            style={{
+              maxWidth: "90vw",
+              maxHeight: "90vh",
+              objectFit: "contain",
+              borderRadius: theme.radius.md,
+              border: "4px solid rgba(0, 0, 0, 0.8)",
+              boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.3)",
+              filter: "drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45))",
+              display: "block",
+            }}
+          />
+        </ModalDialog>
+      </Modal>}
     </ImageWrapper>
   )
 }
