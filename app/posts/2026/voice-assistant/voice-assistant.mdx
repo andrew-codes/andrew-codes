@@ -23,6 +23,21 @@ This article is a wider versus deeper look at the system. Before diving into the
 
 [![Demonstrating My Latest Voice-Controlled Home Assistant Features](./public/files/showcase.png)](https://www.loom.com/share/0ae0c1ac32ca49a5972b010a53bc2458)
 
+## Why Build My Own?
+
+The obvious question is: why not just use Alexa or Google Home?
+
+Privacy is an immediate benefit of running your own solution, though it was not my primary motivation. The bigger driver is that commercial assistants are fundamentally general-purpose tools, and that generality comes
+with real limits on customization. Building my own means I can shape the assistant around how I actually live rather than working around what a platform allows.
+
+A few concrete examples of things my assistant does that would be difficult or impossible with off-the-shelf alternatives:
+
+- **Grocery list integration**: Adding items to a shopping list that surfaces in home dashboards and triggers a reminder when we arrive at the relevant store — not an Alexa or Google task list.
+- **Spotify with room awareness**: Playing music and targeting specific rooms or grouping them for whole-home audio, with full playback control.
+- **Guest concierge**: A self-service experience that helps guests understand how to control the home without needing to ask.
+
+There is also the honest answer: this is a hobby I enjoy. I learn an enormous amount from the process of building, not just from the end result.
+
 ## Goals
 
 Let us outline a few scenarios I want this assistant to handle.
@@ -44,17 +59,33 @@ Let us outline a few scenarios I want this assistant to handle.
 Here is an overview of the major components that make this work.
 
 - **Kotlin-based native Android app**<br/> Runs on a tablet and handles wake word detection, response visualization, and screen sleep and wake behavior. Visualization and settings are controlled through Home Assistant
-  via a Python integration. Using [ViewAssistant Companion app](https://github.com/msp1974/ViewAssistCompanionApp).
+  via a Python integration. Using [ViewAssistant Companion app](https://github.com/msp1974/ViewAssistCompanionApp).<br/><br/> The device must be Android. iOS does not allow third-party apps to continuously listen in the
+  background, which is a hard requirement for wake word detection. A browser-based UI has the same problem — it cannot always be on and listening. I also considered repurposing an older Echo Show, since specific firmware
+  versions can be rooted to run custom software. In practice, finding a device running the right exploitable version is unreliable — most sellers do not know what firmware version they have — and the approach is not
+  sustainable long-term since it depends on exploits that can be patched at any time.
 
 - **AI workloads**<br/> Speech to text uses [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) and text to speech uses [Piper](https://github.com/rhasspy/piper), both running in Kubernetes. A single NVIDIA GPU
-  is shared through time-sliced resource constraints defined in deployment YAML.
+  is shared through time-sliced resource constraints defined in deployment YAML.<br/><br/> I had a spare GPU, which made self-hosted AI workloads a natural fit. My initial setup ran both services on a single Debian VM,
+  which worked but was harder to maintain and update than a GitOps-based approach. Moving to Kubernetes meant learning several things in sequence: passing through the GPU at the hypervisor layer via PCIe, making the GPU
+  visible to the Kubernetes cluster at the node level, and then distributing that single GPU resource across more than one pod. I also explored MIG (Multi-Instance GPU) along the way before discovering my GPU does not
+  support it. Piper is a well-regarded choice in the Home Assistant community. Faster Whisper had strong performance relative to the alternatives I evaluated at the time, though I did not do an exhaustive comparison.
 
-- **Home Assistant**<br/> Connects the Android app to AI workloads via the Wyoming protocol.
+- **Home Assistant**<br/> Connects the Android app to AI workloads via the Wyoming protocol.<br/><br/> I was already running Home Assistant before starting this project, having previously tried SmartThings, OpenHAB, and
+  a custom Crestron solution. Home Assistant strikes the right balance: broad device and service compatibility, but still flexible enough for a maker who wants to go deeper than the defaults.
 
-- **Python-based Home Assistant integrations**<br/> Control Android app settings and connect Home Assistant Assist to OpenAI. Using [this custom integration](https://github.com/jekalmin/extended_openai_conversation).
+- **Python-based Home Assistant integrations**<br/> Control Android app settings and connect Home Assistant Assist to OpenAI. Using
+  [Extended OpenAI Conversation](https://github.com/jekalmin/extended_openai_conversation).<br/><br/> I started building my own HACS integration for OpenAI, but while I was working on it someone else published one that
+  covered the same ground. I ended up using theirs, and it only supports OpenAI. I tried local LLMs as an alternative, but found them unreliable when the entire assistant is driven by a single large prompt covering many
+  distinct areas (music, thermostat, timers, etc.). The cost-to-performance ratio of OpenAI made it a reasonable pragmatic choice for now. My next iteration will revisit local models, but with a different architecture: a
+  LangChain agent per capability area rather than one monolithic prompt. That approach should give a local LLM a much better chance of handling each scenario reliably, but will also require building a new custom Python
+  integration to replace the current one.
 
 - **Playnite Web**<br/> A custom web experience for browsing and remote controlling a game library across PC, PlayStation, Xbox, and Nintendo. This is the default view for the game room tablet. See
   [this repo](https://public.home.playniteweb.com/).
+
+- **Kubernetes**<br/> All AI workloads run as pods in an existing cluster managed with Flux GitOps.<br/><br/> I already had the cluster running, so deploying here was a natural extension of existing infrastructure.
+  GitOps makes it straightforward to upgrade or roll back service versions without touching the underlying VM's operating system. It also turned out to be a great opportunity to go deeper on GPU resource sharing in
+  Kubernetes, which I would not have encountered otherwise.
 
 ### Architecture Snapshot
 
