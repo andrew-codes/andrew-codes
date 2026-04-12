@@ -2,6 +2,7 @@ import fs from "fs/promises"
 import { merge } from "lodash-es"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
+import calculateReadingTime from "reading-time"
 import type { MdxPage, MdxPageFile } from "../types"
 import type { CachifiedOptions } from "./cache.server"
 import {
@@ -15,7 +16,7 @@ import { readDir, readDirFiles } from "./fs.server"
 const mdx = async (
   mdxFile: MdxPageFile,
   fileContents: Record<string, string> = {},
-): Promise<{ code: string; frontmatter: Record<string, any> }> => {
+): Promise<{ code: string; frontmatter: Record<string, any>; readTime: ReturnType<typeof calculateReadingTime> }> => {
   const source = await fs.readFile(mdxFile.filePath, "utf8")
 
   const { default: remarkMdxImages } = await import("remark-mdx-images")
@@ -60,7 +61,8 @@ const mdx = async (
     },
   })
 
-  return { code, frontmatter }
+  const readTime = calculateReadingTime(source)
+  return { code, frontmatter, readTime }
 }
 
 const getMdxFiles = async (

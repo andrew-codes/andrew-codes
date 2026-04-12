@@ -1,5 +1,7 @@
+import Button from "@mui/joy/Button"
 import Card from "@mui/joy/Card"
-import Chip from "@mui/joy/Chip"
+import CardContent from "@mui/joy/CardContent"
+import Divider from "@mui/joy/Divider"
 import Link from "@mui/joy/Link"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
@@ -13,6 +15,8 @@ const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
       key={post.slug}
       sx={(theme) => ({
         maxWidth: `calc(33% - ${theme.spacing(2)})`,
+        display: "flex",
+        flexDirection: "column",
         [theme.breakpoints.down("md")]: {
           maxWidth: `calc(50% - ${theme.spacing(2)})`,
         },
@@ -21,30 +25,45 @@ const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
         },
       })}
     >
-      <Stack direction="row" justifyContent="space-between">
-        <Chip
-          sx={{
-            background: "rgba(201, 138, 42, 0.12)",
-            color: "#c98a2a",
-            border: "0.5px solid rgba(201, 138, 42, 0.35)",
-            borderRadius: "4px",
-            fontSize: "12px",
-          }}
-        >
-          {post.frontmatter.category}
-        </Chip>
-        {post.frontmatter.date && (
-          <Typography level="body-xs">
-            <time>{new Date(post.frontmatter?.date).toLocaleDateString()}</time>
+      <CardContent sx={{ flex: 1 }}>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography level="body-xs" sx={{ color: "neutral.500", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+            {post.frontmatter.category}
+          </Typography>
+          {post.frontmatter.date && (
+            <Typography level="body-xs">
+              <time>{new Date(post.frontmatter?.date).toLocaleDateString()}</time>
+            </Typography>
+          )}
+        </Stack>
+        <Link component={RemixLink} to={`/posts/${post.slug}`} sx={{ mt: 1, display: "block" }}>
+          <Typography level="h3" fontSize="lg">
+            {post.frontmatter.title}
+          </Typography>
+        </Link>
+        <Typography level="body-md">{post.frontmatter.description}</Typography>
+      </CardContent>
+      <Divider />
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{
+          mx: "calc(-1 * var(--Card-padding))",
+          my: "calc(-1 * var(--Card-padding))",
+          px: "var(--Card-padding)",
+          py: "var(--Card-padding)",
+        }}
+      >
+        {post.readTime && (
+          <Typography level="body-xs" sx={{ color: "neutral.500" }}>
+            {post.readTime.text}
           </Typography>
         )}
+        <Button component={RemixLink} to={`/posts/${post.slug}`} variant="plain" color="primary" size="sm" sx={{ ml: "auto", "&:hover": { backgroundColor: "rgba(201, 122, 88, 0.12)" } }}>
+          Read more
+        </Button>
       </Stack>
-      <Link component={RemixLink} to={`/posts/${post.slug}`}>
-        <Typography level="h3" fontSize="lg">
-          {post.frontmatter.title}
-        </Typography>
-      </Link>
-      <Typography level="body-md">{post.frontmatter.description}</Typography>
     </Card>
   )
 }

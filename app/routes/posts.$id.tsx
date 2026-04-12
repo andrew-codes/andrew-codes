@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import Box from "@mui/joy/Box"
 import Card from "@mui/joy/Card"
+import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import type {
@@ -111,7 +112,7 @@ const meta: MetaFunction<typeof loader> = (args) => {
 }
 
 const PostRoute = () => {
-  const { code, frontmatter, codeAssets } = useLoaderData<typeof loader>()
+  const { code, frontmatter, codeAssets, readTime } = useLoaderData<typeof loader>()
   const Component = useMemo(
     () => getMDXComponent(code, { styled: styled }),
     [code],
@@ -123,6 +124,7 @@ const PostRoute = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
+      <Divider sx={{ mb: 2 }} />
       <Card
         component="article"
         variant="plain"
@@ -133,24 +135,32 @@ const PostRoute = () => {
           padding: 0,
         }}
       >
-        <Stack direction="column" spacing={4}>
+        <Stack direction="column" spacing={2}>
           <Stack component="header" direction="column" spacing={0.25} sx={{ marginTop: "1.5rem" }}>
-            <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
               <Typography level="h2">{frontmatter.title}</Typography>
-              {!!frontmatter.date && (
-                <time dateTime={tryFormatDate(frontmatter.date)}>
-                  {tryFormatDate(frontmatter.date, {
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </time>
-              )}
+              <Stack direction="column" alignItems="flex-end" spacing={0.25}>
+                {!!frontmatter.date && (
+                  <time dateTime={tryFormatDate(frontmatter.date)}>
+                    {tryFormatDate(frontmatter.date, {
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </time>
+                )}
+                {!!readTime && (
+                  <Typography level="body-xs" sx={{ color: "neutral.500" }}>
+                    {readTime.text}
+                  </Typography>
+                )}
+              </Stack>
             </Stack>
             {!!frontmatter.tags && frontmatter.tags.length > 0 && (
               <Tags tags={frontmatter.tags} />
             )}
           </Stack>
-          <Box sx={{ maxWidth: "760px", margin: "0 auto" }}>
+          <Divider />
+          <Box sx={{ maxWidth: "760px", margin: "0 auto", "& > *:first-child": { marginTop: 0 } }}>
             <Component
               components={{
                 CodePostAsset: PostCodeAsset,
