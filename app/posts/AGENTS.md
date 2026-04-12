@@ -59,6 +59,8 @@ These articles are written by a working practitioner sharing hard-won, opinionat
 
 **Use the honest answer.** When there is a pragmatic or personal motivation alongside the principled one, name it. "There is also the honest answer: this is a hobby I enjoy" is more trustworthy than pretending every decision is purely technical.
 
+**Do not write like an AI bot**. Write like a human would.
+
 # Structure and Format
 
 **Standard article shape** — use `##` for all top-level sections; the `title` front matter serves as the H1:
@@ -77,6 +79,8 @@ These articles are written by a working practitioner sharing hard-won, opinionat
 **Numbered lists for sequential steps; bullet lists for parallel items.** Do not use numbered lists for things that can happen in any order.
 
 **Cross-link related articles.** When an article depends on context from another, link to it early. When an article will be followed up, name that explicitly and link when it exists.
+
+**Do NOT use dashes for aside content.** When adding additional aside information in a sentence, use commas instead of em dashes.
 
 # Paragraph and Sentence Style
 

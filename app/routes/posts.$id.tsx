@@ -19,6 +19,7 @@ import getCodePostAssetComponent, {
 import PageWithHeader from "../components/PageWithHeader"
 import {
   Blockquote,
+  CollapsibleSection,
   H2,
   H3,
   H4,
@@ -164,6 +165,7 @@ const PostRoute = () => {
             <Component
               components={{
                 CodePostAsset: PostCodeAsset,
+                CollapsibleSection,
                 a: Link,
                 blockquote: Blockquote,
                 h2: H2,
