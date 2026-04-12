@@ -69,7 +69,11 @@ const getMdxFiles = async (
 ): Promise<Record<string, MdxPageFile>> => {
   const allFilesInPostsDirectory = await readDir(fileDirPath)
   return allFilesInPostsDirectory
-    .filter((filePath) => /^.*\.mdx?$/.test(filePath))
+    .filter(
+      (filePath) =>
+        /^.*\.mdx?$/.test(filePath) &&
+        path.basename(filePath) !== "AGENTS.md",
+    )
 
     .reduce((acc, filePath) => {
       const slug = path.basename(filePath).replace(/\.mdx?$/, "")
