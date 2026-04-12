@@ -128,7 +128,7 @@ const PostRoute = () => {
         variant="plain"
         sx={{
           background: "none",
-          width: "min(68ch, 100%)",
+          width: "min(760px, 100%)",
           margin: "0 auto",
           padding: 0,
         }}
@@ -150,7 +150,7 @@ const PostRoute = () => {
               <Tags tags={frontmatter.tags} />
             )}
           </Stack>
-          <Box sx={{ maxWidth: "68ch", margin: "0 auto" }}>
+          <Box sx={{ maxWidth: "760px", margin: "0 auto" }}>
             <Component
               components={{
                 CodePostAsset: PostCodeAsset,
