@@ -1,3 +1,6 @@
+import Accordion from "@mui/joy/Accordion"
+import AccordionDetails from "@mui/joy/AccordionDetails"
+import AccordionSummary from "@mui/joy/AccordionSummary"
 import MuiLink from "@mui/joy/Link"
 import List from "@mui/joy/List"
 import ListItem from "@mui/joy/ListItem"
@@ -36,9 +39,16 @@ const H2: FC<PropsWithChildren<{}>> = (props) => {
     <Typography
       {...props}
       level="h2"
-      fontSize="xl"
+      fontSize="xl2"
       fontWeight={700}
-      sx={{ lineHeight: 1.3, marginTop: "2.5rem", marginBottom: "0.6rem" }}
+      sx={{
+        lineHeight: 1.3,
+        marginTop: "3rem",
+        marginBottom: "0.75rem",
+        paddingBottom: "0.4rem",
+        borderBottom: "2px solid",
+        borderColor: "divider",
+      }}
     />
   )
 }
@@ -48,8 +58,15 @@ const H3: FC<PropsWithChildren<{}>> = (props) => {
       {...props}
       level="h3"
       fontSize="lg"
-      fontWeight={700}
-      sx={{ lineHeight: 1.3, marginTop: "2rem", marginBottom: "0.6rem" }}
+      fontWeight={600}
+      sx={{
+        lineHeight: 1.3,
+        marginTop: "2rem",
+        marginBottom: "0.6rem",
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+      }}
     />
   )
 }
@@ -71,7 +88,7 @@ const TableWrapper = styled("div")({
   left: "50%",
   transform: "translateX(-50%)",
   width: "calc(100vw - 6rem)",
-  maxWidth: "calc(960px - 6rem)",
+  maxWidth: "calc(1366px - 6rem)",
   margin: "1.5rem 0",
   "@media (max-width: 640px)": {
     position: "static",
@@ -187,7 +204,7 @@ const ImageWrapper = styled("div")({
   left: "50%",
   transform: "translateX(-50%)",
   width: "calc(100vw - 6rem)",
-  maxWidth: "calc(960px - 6rem)",
+  maxWidth: "calc(1366px - 6rem)",
   margin: "1.5rem 0",
   "@media (max-width: 640px)": {
     position: "static",
@@ -335,8 +352,47 @@ const TableContainer: FC<PropsWithChildren<{}>> = ({ children }) => (
   </TableWrapper>
 )
 
+const CollapsibleSection: FC<PropsWithChildren<{ title: string }>> = ({ title, children }) => {
+  return (
+    <Accordion
+      defaultExpanded={false}
+      sx={{
+        marginTop: "3rem",
+        "--Accordion-padding": "0",
+        border: "none",
+        background: "transparent",
+      }}
+    >
+      <AccordionSummary
+        sx={{
+          fontSize: "var(--joy-fontSize-xl2)",
+          fontWeight: 700,
+          lineHeight: 1.3,
+          paddingBottom: "0.4rem",
+          paddingLeft: 0,
+          paddingRight: 0,
+          borderBottom: "2px solid",
+          borderColor: "divider",
+          marginBottom: "0.75rem",
+          "--variant-plainColor": "var(--joy-palette-text-primary)",
+          "--variant-plainHoverBg": "rgba(201, 122, 88, 0.06)",
+          "--variant-plainHoverColor": "#c97a58",
+          "--variant-plainActiveBg": "rgba(201, 122, 88, 0.1)",
+          "--variant-plainActiveColor": "#c97a58",
+        }}
+      >
+        {title}
+      </AccordionSummary>
+      <AccordionDetails sx={{ padding: 0 }}>
+        {children}
+      </AccordionDetails>
+    </Accordion>
+  )
+}
+
 export {
   Blockquote,
+  CollapsibleSection,
   H2,
   H3,
   H4,
