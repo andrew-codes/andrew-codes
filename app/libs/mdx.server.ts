@@ -50,6 +50,7 @@ const mdx = async (
       options.loader = {
         ...options.loader,
         ".png": "file",
+        ".svg": "file",
         ".mp4": "file",
         ".jpg": "file",
         ".gif": "file",

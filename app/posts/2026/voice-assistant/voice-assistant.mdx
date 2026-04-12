@@ -14,6 +14,10 @@ tags:
 
 import { SiAndroid } from "react-icons/si"
 import { MdMic } from "react-icons/md"
+import homeAssistantLogo from "./public/files/home-assistant-logo.png"
+import pythonLogo from "./public/files/python-logo.svg"
+import playniteWebLogo from "./public/files/playnite-web-logo.png"
+import kubernetesLogo from "./public/files/kubernetes-logo.svg"
 
 I am a home automation enthusiast and love building and learning new things. My smart home is already configured with all sorts of fun and useful automations, but I wanted to build the missing link: a voice assistant
 tailored to how I actually live.
@@ -71,21 +75,21 @@ Runs on a tablet and handles wake word detection, response visualization, and sc
 Speech to text uses [Faster Whisper](https://github.com/SYSTRAN/faster-whisper) and text to speech uses [Piper](https://github.com/rhasspy/piper), both running in Kubernetes. A single NVIDIA GPU is shared through
 time-sliced resource constraints defined in deployment YAML.
 
-### <img src="./public/files/home-assistant-logo.png" style={{ width: "1em", height: "1em", objectFit: "contain", verticalAlign: "middle" }} /> Home Assistant
+### <img src={homeAssistantLogo} style={{ width: "1em", height: "1em", objectFit: "contain", verticalAlign: "middle" }} /> Home Assistant
 
 Connects the Android app to AI workloads via the Wyoming protocol.
 
-### <img src="./public/files/python-logo.svg" style={{ width: "1em", height: "1em", objectFit: "contain", verticalAlign: "middle" }} /> Python-based Home Assistant integrations
+### <img src={pythonLogo} style={{ width: "1em", height: "1em", objectFit: "contain", verticalAlign: "middle" }} /> Python-based Home Assistant integrations
 
 Control Android app settings and connect Home Assistant Assist to OpenAI. Using [Extended OpenAI Conversation](https://github.com/jekalmin/extended_openai_conversation). The integration only supports OpenAI, and the
 tradeoffs behind that choice are covered below.
 
-### <img src="./public/files/playnite-web-logo.png" style={{ width: "1.05em", height: "1.05em", objectFit: "contain", verticalAlign: "middle" }} /> Playnite Web
+### <img src={playniteWebLogo} style={{ width: "1.05em", height: "1.05em", objectFit: "contain", verticalAlign: "middle" }} /> Playnite Web
 
 A custom web experience for browsing and remote controlling a game library across PC, PlayStation, Xbox, and Nintendo. This is the default view for the game room tablet. See
 [this repo](https://public.home.playniteweb.com/).
 
-### <img src="./public/files/kubernetes-logo.svg" style={{ width: "1em", height: "1em", objectFit: "contain", verticalAlign: "middle" }} /> Kubernetes
+### <img src={kubernetesLogo} style={{ width: "1em", height: "1em", objectFit: "contain", verticalAlign: "middle" }} /> Kubernetes
 
 All AI workloads run as pods in an existing cluster managed with Flux GitOps. I already had the cluster running, so deploying here was a natural extension of existing infrastructure. GitOps makes it straightforward to
 upgrade or roll back service versions without touching the underlying VM's operating system.
