@@ -20,17 +20,8 @@ ENV NODE_ENV=${NODE_ENV}
 ENV INTERNAL_PORT="8080"
 ENV PRIMARY_REGION="iad"
 ENV FLY="true"
-ENV LITEFS_DIR="/litefs"
-ENV CACHE_DATABASE_FILENAME="cache.db"
-ENV CACHE_DATABASE_PATH="/$LITEFS_DIR/$CACHE_DATABASE_FILENAME"
-
-RUN echo "#!/bin/sh\nset -x\nsqlite3 \$CACHE_DATABASE_PATH" >/usr/local/bin/cache-database-cli && chmod +x /usr/local/bin/cache-database-cli
 
 RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
-
-COPY --from=flyio/litefs /usr/local/bin/litefs /app/litefs
-ADD ./litefs.yml /etc/litefs.yml
-RUN mkdir -p /data ${LITEFS_DIR}
 
 WORKDIR /app
 # Copy built application
