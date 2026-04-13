@@ -68,18 +68,25 @@ app.all(
 
 app.use((req, res, next) => {
   if (req.path.endsWith("/") && req.path.length > 1 && req.method === "GET") {
-    const query = req.url.slice(req.path.length)
-    const safepath = req.path.slice(0, -1).replace(/\/+/g, "/")
-    const target = safepath + query
+    const normalizedPath = req.path.slice(0, -1).replace(/\/+/g, "/")
+    const rawQuery = req.url.slice(req.path.length)
 
-    const isSafeLocalRedirectTarget =
-      target.startsWith("/") &&
-      !target.startsWith("//") &&
-      !target.includes("\\") &&
-      !target.includes("\r") &&
-      !target.includes("\n")
+    const isSafeLocalPath =
+      normalizedPath.startsWith("/") &&
+      !normalizedPath.startsWith("//") &&
+      !normalizedPath.includes("\\") &&
+      !normalizedPath.includes("\r") &&
+      !normalizedPath.includes("\n")
 
-    res.redirect(301, isSafeLocalRedirectTarget ? target : "/")
+    const isSafeQuery =
+      (rawQuery === "" || rawQuery.startsWith("?")) &&
+      !rawQuery.includes("\r") &&
+      !rawQuery.includes("\n")
+
+    const target =
+      isSafeLocalPath && isSafeQuery ? `${normalizedPath}${rawQuery}` : "/"
+
+    res.redirect(301, target)
   } else {
     next()
   }
