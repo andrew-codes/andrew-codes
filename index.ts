@@ -4,6 +4,7 @@ import compression from "compression"
 import "dotenv/config"
 import express from "express"
 import fs from "fs"
+import path from "path"
 import helmet from "helmet"
 import morgan from "morgan"
 import serverTiming from "server-timing"
@@ -146,6 +147,23 @@ app.use(
 )
 
 app.use(express.static("app/public", { maxAge: "1y" }))
+
+// In production, serve pre-rendered SSG pages directly — never let MDX compile at request time.
+if (process.env.NODE_ENV === "production") {
+  const buildClientDir = path.resolve("build/client")
+  app.use(async (req, res, next) => {
+    const indexPath = path.resolve(buildClientDir, "." + req.path, "index.html")
+    if (!indexPath.startsWith(buildClientDir + path.sep)) {
+      return next()
+    }
+    try {
+      await fs.promises.access(indexPath)
+      return res.sendFile(indexPath)
+    } catch {
+      next()
+    }
+  })
+}
 
 let build: any
 
