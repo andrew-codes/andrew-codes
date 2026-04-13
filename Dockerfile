@@ -32,6 +32,7 @@ COPY --from=build /app/.pnp.cjs .pnp.cjs
 COPY --from=build /app/.pnp.loader.mjs .pnp.loader.mjs
 COPY --from=build /app/package.json package.json
 COPY --from=build /app/yarn.lock yarn.lock
+RUN corepack enable
 
 # RUN yarn install --mode skip-build
 
