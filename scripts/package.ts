@@ -8,7 +8,6 @@ const dist = here("..", "dist")
 await fsExtra.ensureDir(path.join(dist))
 
 await fsExtra.copy(here("..", "build"), path.join(dist, "build"))
-await fsExtra.copy(here("..", "app", "posts"), path.join(dist, "app", "posts"))
 await fsExtra.copy(
   here("..", "app", "public"),
   path.join(dist, "app", "public"),

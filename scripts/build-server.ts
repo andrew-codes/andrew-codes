@@ -49,26 +49,6 @@ building app router...`)
     },
   })
 
-  const excluded = sync("app/*.ts")
-    .concat(sync("app/*.tsx"))
-    .concat(sync("app/routes/*.tsx"))
-    .concat(sync("app/libs/**/*.server.ts"))
-    .concat(sync("app/**/*.d.ts"))
-  const mdxComponentsEntryPoints = sync("app/**/*.ts")
-    .concat(sync("app/**/*.tsx"))
-    .filter((file) => !excluded.includes(file))
-  console.log(mdxComponentsEntryPoints)
-
-  await build({
-    bundle: false,
-    entryPoints: mdxComponentsEntryPoints,
-    format: "esm",
-    logLevel: "info",
-    minify: true,
-    outdir: here("..", "dist", "app"),
-    platform: "node",
-    target: [`node${pkg.engines.node}`],
-  })
 } catch (error: any) {
   console.error(error)
   process.exit(1)
