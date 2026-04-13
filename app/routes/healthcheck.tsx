@@ -1,6 +1,6 @@
-import { type DataFunctionArgs } from "@remix-run/node"
+import { type LoaderFunctionArgs } from "react-router"
 
-const loader = async ({ request }: DataFunctionArgs) => {
+const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
     return new Response("OK")
   } catch (error: unknown) {

@@ -4,14 +4,12 @@ import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import calculateReadingTime from "reading-time"
 import type { MdxPage, MdxPageFile } from "../types"
-import type { CachifiedOptions } from "./cache.server"
-import {
-  cachified,
-  defaultStaleWhileRevalidate,
-  defaultTtl,
-  getCache,
-} from "./cache.server"
 import { readDir, readDirFiles } from "./fs.server"
+
+type MdxOptions = {
+  request?: Request
+  forceFresh?: boolean | string
+}
 
 const mdx = async (
   mdxFile: MdxPageFile,
@@ -67,7 +65,6 @@ const mdx = async (
 }
 
 const getMdxFiles = async (
-  options: CachifiedOptions,
   fileDirPath: string,
 ): Promise<Record<string, MdxPageFile>> => {
   const allFilesInPostsDirectory = await readDir(fileDirPath)
@@ -90,7 +87,6 @@ const getMdxFiles = async (
 
 const getCodeAssets = async (
   mdxFile: MdxPageFile,
-  options: CachifiedOptions,
 ): Promise<Record<string, string>> => {
   try {
     const assetsFiles = await readDirFiles(
@@ -113,62 +109,18 @@ const getCodeAssets = async (
   }
 }
 
-const checkCompiledValue = (value: unknown) =>
-  typeof value === "object" &&
-  (value === null || ("code" in value && "frontmatter" in value))
-
 const getMdxPage = async (
   slug: string,
-  options: CachifiedOptions,
-  fileDirPath?: string,
-  filesContents: Record<string, string> = {},
-): Promise<MdxPage> => {
-  const { forceFresh, ttl = defaultTtl, request, timings } = options
-  const key = `mdx-page:${slug}:compiled`
-  const cache = await getCache()
-
-  const page = cachified({
-    key,
-    cache,
-    request,
-    timings,
-    ttl,
-    staleWhileRevalidate: defaultStaleWhileRevalidate,
-    forceFresh,
-    checkValue: checkCompiledValue,
-    getFreshValue: async () => {
-      if (!fileDirPath) {
-        const pages = await getMdxPages(options)
-        return pages.find((page) => page.slug === slug)
-      }
-
-      const mdxFiles = await getMdxFiles(options, fileDirPath)
-      const mdxFile = mdxFiles[slug]
-      const transformedMdx = await mdx(mdxFile, filesContents)
-      const codeAssets = await getCodeAssets(mdxFile, options)
-
-      const output = { ...transformedMdx, slug, codeAssets }
-      if (!output.frontmatter.category) {
-        output.frontmatter.category = "no categorized"
-      }
-
-      return output
-    },
-  })
-
-  if (!page) {
-    void cache.delete(key)
-  }
-
-  return page as unknown as MdxPage
-}
-
-const getMdxPages = async (
-  options: CachifiedOptions,
+  options: MdxOptions = {},
   fileDirPath: string = "app/posts",
   extraFilesPath: string = "app/components",
-): Promise<MdxPage[]> => {
-  const mdxFiles = await getMdxFiles(options, fileDirPath)
+): Promise<MdxPage> => {
+  const mdxFiles = await getMdxFiles(fileDirPath)
+  const mdxFile = mdxFiles[slug]
+
+  if (!mdxFile) {
+    throw new Error(`No MDX file found for slug: ${slug}`)
+  }
 
   const componentsDir = path.join(extraFilesPath)
   const allComponentFiles = await readDirFiles(componentsDir)
@@ -179,15 +131,42 @@ const getMdxPages = async (
     ])
     .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
 
-  let pages = []
+  const transformedMdx = await mdx(mdxFile, fileContents)
+  const codeAssets = await getCodeAssets(mdxFile)
+
+  const output = { ...transformedMdx, slug, codeAssets }
+  if (!output.frontmatter.category) {
+    output.frontmatter.category = "no categorized"
+  }
+
+  return output as MdxPage
+}
+
+const getMdxPages = async (
+  options: MdxOptions = {},
+  fileDirPath: string = "app/posts",
+  extraFilesPath: string = "app/components",
+): Promise<MdxPage[]> => {
+  const mdxFiles = await getMdxFiles(fileDirPath)
+
+  const componentsDir = path.join(extraFilesPath)
+  const allComponentFiles = await readDirFiles(componentsDir)
+  const fileContents = allComponentFiles
+    .map(([filePath, contents]) => [
+      `../${filePath.replace(/\\/g, "/")}`,
+      contents,
+    ])
+    .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
+
+  const pages: MdxPage[] = []
   for (const mdxFile of Object.values(mdxFiles)) {
-    const page = await getMdxPage(
-      mdxFile.slug,
-      options,
-      fileDirPath,
-      fileContents,
-    )
-    pages.push(page)
+    const transformedMdx = await mdx(mdxFile, fileContents)
+    const codeAssets = await getCodeAssets(mdxFile)
+    const output = { ...transformedMdx, slug: mdxFile.slug, codeAssets }
+    if (!output.frontmatter.category) {
+      output.frontmatter.category = ""
+    }
+    pages.push(output as MdxPage)
   }
 
   return pages

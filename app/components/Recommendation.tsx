@@ -3,28 +3,20 @@ import Box from "@mui/joy/Box"
 import Button from "@mui/joy/Button"
 import Card from "@mui/joy/Card"
 import Chip from "@mui/joy/Chip"
+import Modal from "@mui/joy/Modal"
+import ModalClose from "@mui/joy/ModalClose"
+import ModalDialog from "@mui/joy/ModalDialog"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import { motion } from "motion/react"
 import {
   Children,
   FC,
   PropsWithChildren,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react"
 
-const overlayVariants = {
-  active: {
-    opacity: 1,
-  },
-  inactive: {
-    opacity: 0,
-    display: "none",
-  },
-}
 const Recommendation: FC<
   PropsWithChildren<{
     profileImage: string
@@ -38,184 +30,152 @@ const Recommendation: FC<
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev)
   }, [])
+  const scrollable = useRef<HTMLDivElement>(null)
 
-  const handleKeyDown = (evt) => {
-    if (summarized && isOpen && evt.key === "Escape") {
-      toggleOpen()
-    }
-  }
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown)
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [handleKeyDown])
-
-  const scrollable = useRef<HTMLDivElement>()
-  useEffect(() => {
-    window.document.body.style.overflow = isOpen ? "hidden" : "unset"
-    if (!isOpen) {
-      scrollable.current?.scroll({ top: 0 })
-    }
-  }, [isOpen])
+  const cardContent = (expanded: boolean) => (
+    <Stack
+      direction="row"
+      spacing={2}
+      sx={(theme) => ({
+        width: "100%",
+        [theme.breakpoints.down("sm")]: {
+          height: expanded ? "100%" : "unset",
+        },
+      })}
+    >
+      <Avatar
+        alt={name}
+        src={profileImage}
+        sx={(theme) => ({
+          width: 80,
+          height: 80,
+          [theme.breakpoints.down("sm")]: {
+            width: 45,
+            height: 45,
+          },
+        })}
+        variant="plain"
+      />
+      <Stack
+        direction="column"
+        sx={{ textAlign: "left", width: "100%" }}
+        spacing={1}
+      >
+        <Stack direction="column" spacing={0.25}>
+          <Stack
+            direction="row"
+            spacing={1}
+            justifyContent="space-between"
+          >
+            <Typography level="h3" fontSize="lg">
+              {name}
+            </Typography>
+            <Chip
+              sx={{
+                background: "rgba(201, 138, 42, 0.12)",
+                color: "#c98a2a",
+                border: "0.5px solid rgba(201, 138, 42, 0.35)",
+                borderRadius: "4px",
+                fontSize: "12px",
+              }}
+            >
+              {company}
+            </Chip>
+          </Stack>
+          <Typography level="body-sm">{title}</Typography>
+        </Stack>
+        <Box
+          ref={expanded ? scrollable : undefined}
+          sx={(theme) => ({
+            maxHeight: expanded ? "100%" : "calc(1.5rem * 3)",
+            overflowY: expanded ? "auto" : "hidden",
+            scrollbarWidth: "thin",
+            scrollbarColor: `${theme.palette.text.tertiary} transparent`,
+            "&::-webkit-scrollbar": {
+              width: theme.spacing(0.5),
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "transparent",
+            },
+            textOverflow: !expanded ? "ellipsis" : "unset",
+            width: "100%",
+          })}
+        >
+          {expanded ? children : Children.toArray(children)[0]}
+        </Box>
+        {summarized && !expanded && (
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ marginTop: 1 }}
+            justifyContent="flex-end"
+          >
+            <Button
+              variant="plain"
+              color="primary"
+              size="sm"
+              onClick={toggleOpen}
+            >
+              Read more
+            </Button>
+          </Stack>
+        )}
+      </Stack>
+    </Stack>
+  )
 
   return (
     <Box sx={{ minHeight: "191px" }}>
-      <motion.div
-        initial={false}
-        style={{
-          pointerEvents: "none",
-          willChange: "opacity",
-          position: "fixed",
-          inset: 0,
-          background: "rgba(0, 0, 0, 0.8)",
-          zIndex: 100,
-        }}
-        variants={overlayVariants}
-        animate={isOpen ? "active" : "inactive"}
-        onClick={toggleOpen}
-      ></motion.div>
-      <Box
-        sx={(theme) => ({
-          margin: 0,
-          zIndex: isOpen ? 101 : 0,
-          position: isOpen ? "fixed" : "relative",
-          top: isOpen ? 0 : "unset",
-          left: isOpen ? 0 : "unset",
-          width: isOpen ? "100%" : "unset",
-          height: isOpen ? `calc(100vh - ${theme.spacing(2)})` : "unset",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        })}
-      >
-        <Card
-          sx={(theme) => ({
-            height: "100%",
-            margin: summarized && isOpen ? 1 : 0,
-            minWidth: "100%",
-            [theme.breakpoints.up("sm")]: {
-              width: summarized && isOpen ? "80%" : "unset",
-              minWidth: "unset",
-              maxWidth: "1200px",
-              height: "unset",
-            },
-          })}
-        >
-          <Stack
-            direction="row"
-            spacing={2}
+      <Card>{cardContent(false)}</Card>
+      {summarized && (
+        <Modal open={isOpen} onClose={toggleOpen}>
+          <ModalDialog
+            layout="center"
             sx={(theme) => ({
-              width: "100%",
+              maxWidth: "1200px",
+              width: "90%",
+              maxHeight: "90vh",
+              overflow: "visible",
+              padding: 0,
               [theme.breakpoints.down("sm")]: {
-                height: "100%",
+                width: "100%",
+                maxHeight: "100vh",
+                borderRadius: 0,
               },
             })}
           >
-            <Avatar
-              alt={name}
-              src={profileImage}
+            <ModalClose
+              sx={{
+                position: "absolute",
+                top: "-1rem",
+                right: "-1rem",
+                zIndex: 1,
+                backgroundColor: "#9e9b91",
+                color: "#1a1917",
+                borderRadius: "50%",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                "&:hover": {
+                  backgroundColor: "#b0ada3",
+                },
+              }}
+            />
+            <Box
               sx={(theme) => ({
-                width: 80,
-                height: 80,
+                overflow: "auto",
+                maxHeight: "90vh",
+                padding: theme.spacing(2),
                 [theme.breakpoints.down("sm")]: {
-                  width: 45,
-                  height: 45,
+                  maxHeight: "100vh",
                 },
               })}
-              variant="plain"
-            ></Avatar>
-            <Stack
-              direction="column"
-              sx={{ textAlign: "left", width: "100%" }}
-              spacing={1}
             >
-              <Stack direction="column" spacing={0.25}>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  justifyContent="space-between"
-                >
-                  <Typography level="h3" fontSize="lg">
-                    {name}
-                  </Typography>
-                  <Chip
-                    sx={{
-                      background: "rgba(201, 138, 42, 0.12)",
-                      color: "#c98a2a",
-                      border: "0.5px solid rgba(201, 138, 42, 0.35)",
-                      borderRadius: "4px",
-                      fontSize: "12px",
-                    }}
-                  >
-                    {company}
-                  </Chip>
-                </Stack>
-                <Typography level="body-sm">{title}</Typography>
-              </Stack>
-              <Box
-                ref={scrollable}
-                sx={(theme) => ({
-                  maxHeight:
-                    !summarized || isOpen ? "100%" : "calc(1.5rem * 3)",
-                  overflowY: !summarized || isOpen ? "scroll" : "hidden",
-                  scrollbarWidth: "thin",
-                  scrollbarColor: `${theme.palette.text.tertiary} transparent`,
-                  "&::-webkit-scrollbar": {
-                    width: theme.spacing(0.5),
-                  },
-                  "&::--webkit-scrollbar-track": {
-                    background: "transparent",
-                  },
-                  textOverflow: !summarized || !isOpen ? "unset" : "ellipsis",
-                  width: "100%",
-                  [theme.breakpoints.down("sm")]: {
-                    height: summarized && isOpen ? `100%` : "unset",
-                    width:
-                      summarized && isOpen
-                        ? `calc(100% + ${theme.spacing(12)})`
-                        : `unset`,
-                    marginLeft: `calc(-1 * ${theme.spacing(10)}) !important`,
-                    marginTop: `${theme.spacing(1)} !important`,
-                    "> * ": {
-                      padding:
-                        summarized && isOpen
-                          ? theme.spacing(0, 4)
-                          : theme.spacing(0, 2),
-                    },
-                  },
-                  [theme.breakpoints.up("sm")]: {
-                    // height: summarized && isOpen ? "100vh" : "unset",
-                  },
-                })}
-              >
-                {!summarized || isOpen
-                  ? children
-                  : Children.toArray(children)[0]}
-              </Box>
-              {summarized && (
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ marginTop: 1 }}
-                  justifyContent={"flex-end"}
-                >
-                  <Button
-                    variant="plain"
-                    color="primary"
-                    size="sm"
-                    onClick={toggleOpen}
-                    sx={{ "&:hover": { backgroundColor: "rgba(201, 122, 88, 0.12)" } }}
-                  >
-                    {isOpen ? "Close" : "Read more"}
-                  </Button>
-                </Stack>
-              )}
-            </Stack>
-          </Stack>
-        </Card>
-      </Box>
+              {cardContent(true)}
+            </Box>
+          </ModalDialog>
+        </Modal>
+      )}
     </Box>
   )
 }
+
 export default Recommendation

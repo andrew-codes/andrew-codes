@@ -2,56 +2,25 @@ import Box from "@mui/joy/Box"
 import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import type {
-  HeadersFunction,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/node"
-import { json } from "@remix-run/node"
-import { Outlet, useLoaderData, useLocation } from "@remix-run/react"
-import { fileURLToPath } from "url"
+import type { LoaderFunctionArgs, MetaFunction } from "react-router"
+import { Outlet, useLoaderData, useLocation } from "react-router"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
-import { getFilePartsToHash, getHash } from "../libs/hash.server"
 import { getMdxPages } from "../libs/mdx.server"
-import { getServerTimeHeader } from "../libs/timing.server"
-import { useLoaderHeaders } from "../libs/utils"
 
-const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  const timings = {}
-  const posts = await getMdxPages({ request, timings })
+const loader = async ({ request }: LoaderFunctionArgs) => {
+  const posts = await getMdxPages({ request })
 
-  const __filename = fileURLToPath(import.meta.url)
-  const selfFilePartsToHash = await getFilePartsToHash(__filename)
-
-  return json(
-    {
-      posts: posts.sort(
-        (a, b) =>
-          new Date(b.frontmatter?.date ?? 0).getTime() -
-          new Date(a.frontmatter?.date ?? 0).getTime(),
-      ),
-    },
-    {
-      status: 200,
-      headers: {
-        "Cache-Control": "private, max-age=3600",
-        Vary: "Cookie",
-        "Server-Timing": getServerTimeHeader(timings),
-        ETag: getHash(
-          posts
-            .flatMap((post) => [post.code, JSON.stringify(post.frontmatter)])
-            .concat([selfFilePartsToHash]),
-        ),
-      },
-    },
-  )
+  return {
+    posts: posts.sort(
+      (a, b) =>
+        new Date(b.frontmatter?.date ?? 0).getTime() -
+        new Date(a.frontmatter?.date ?? 0).getTime(),
+    ),
+  }
 }
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const headers: HeadersFunction = useLoaderHeaders()
 
 const meta: MetaFunction = () => {
   return [
@@ -143,4 +112,4 @@ const PostsRoute = () => {
 }
 
 export default PostsRoute
-export { headers, loader, meta }
+export { loader, meta }

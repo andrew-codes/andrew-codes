@@ -5,12 +5,10 @@ import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import type {
-  HeadersFunction,
   LoaderFunctionArgs,
   MetaFunction,
-} from "@remix-run/node"
-import { json } from "@remix-run/node"
-import { useLoaderData } from "@remix-run/react"
+} from "react-router"
+import { useLoaderData } from "react-router"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
 import getCodePostAssetComponent, {
@@ -31,10 +29,8 @@ import {
   UnorderedList,
 } from "../components/Post"
 import Tags from "../components/Tags"
-import { getHash } from "../libs/hash.server"
 import { getMdxPage } from "../libs/mdx.server"
-import { getServerTimeHeader } from "../libs/timing.server"
-import { tryFormatDate, useLoaderHeaders } from "../libs/utils"
+import { tryFormatDate } from "../libs/utils"
 
 const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { id } = params
@@ -42,22 +38,10 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Error("Missing id")
   }
 
-  const timings = {}
-  const post = await getMdxPage(id, { request, timings })
+  const post = await getMdxPage(id, { request })
 
-  return json(post, {
-    status: 200,
-    headers: {
-      "Cache-Control": "private, max-age=3600",
-      Vary: "Cookie",
-      "Server-Timing": getServerTimeHeader(timings),
-      ETag: getHash([post.code, JSON.stringify(post.frontmatter)]),
-    },
-  })
+  return post
 }
-
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const headers: HeadersFunction = useLoaderHeaders()
 
 const Post = styled(PageWithHeader)`
   header {
@@ -207,4 +191,4 @@ const PostRoute = () => {
 }
 
 export default PostRoute
-export { headers, loader, meta }
+export { loader, meta }

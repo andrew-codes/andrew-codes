@@ -5,7 +5,7 @@ import Divider from "@mui/joy/Divider"
 import Link from "@mui/joy/Link"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import { Link as RemixLink } from "@remix-run/react"
+import { Link as RemixLink } from "react-router"
 import { FC } from "react"
 import { MdxPage } from "types"
 

@@ -1,19 +1,14 @@
-import { createRequestHandler } from "@remix-run/express"
-import { installGlobals } from "@remix-run/node"
+import { createRequestHandler } from "@react-router/express"
 import bodyParser from "body-parser"
 import compression from "compression"
 import "dotenv/config"
 import express from "express"
 import fs from "fs"
 import helmet from "helmet"
-import { getInstanceInfo } from "litefs-js"
 import morgan from "morgan"
 import serverTiming from "server-timing"
 import configuration from "./app/libs/configuration.server.js"
-import { getMdxPages } from "./app/libs/mdx.server.js"
 import { getRedirectsMiddleware } from "./server/redirects.js"
-
-installGlobals()
 
 const primaryHost = "andrew.codes"
 const getHost = (req: { get: (key: string) => string | undefined }) =>
@@ -25,12 +20,9 @@ const app = express()
 
 app.use(serverTiming())
 
-app.use(async (req, res, next) => {
-  const { currentInstance, primaryInstance } = await getInstanceInfo()
+app.use((req, res, next) => {
   res.set("X-Fly-Region", process.env.FLY_REGION ?? "unknown")
   res.set("X-Fly-App", process.env.FLY_APP_NAME ?? "unknown")
-  res.set("X-Fly-Instance", currentInstance)
-  res.set("X-Fly-Primary-Instance", primaryInstance)
   res.set("X-Frame-Options", "SAMEORIGIN")
 
   const host = getHost(req)
@@ -76,9 +68,26 @@ app.all(
 
 app.use((req, res, next) => {
   if (req.path.endsWith("/") && req.path.length > 1 && req.method === "GET") {
-    const query = req.url.slice(req.path.length)
-    const safepath = req.path.slice(0, -1).replace(/\/+/g, "/")
-    res.redirect(301, safepath + query)
+    const parsedUrl = new URL(req.originalUrl, `https://${primaryHost}`)
+    const normalizedPath = parsedUrl.pathname.replace(/\/+$/, "") || "/"
+
+    const isSafeLocalPath =
+      normalizedPath.startsWith("/") &&
+      !normalizedPath.startsWith("//") &&
+      !normalizedPath.includes("\\") &&
+      !normalizedPath.includes("\r") &&
+      !normalizedPath.includes("\n")
+
+    const rawQuery = parsedUrl.search
+    const isSafeQuery =
+      (rawQuery === "" || rawQuery.startsWith("?")) &&
+      !rawQuery.includes("\r") &&
+      !rawQuery.includes("\n")
+
+    const target =
+      isSafeLocalPath && isSafeQuery ? `${normalizedPath}${rawQuery}` : "/"
+
+    res.redirect(301, target)
   } else {
     next()
   }
@@ -142,7 +151,7 @@ if (process.env.NODE_ENV === "production") {
   build = await import("./build/server/index.js")
 }
 if (process.env.NODE_ENV !== "production") {
-  build = () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
+  build = () => viteDevServer.ssrLoadModule("virtual:react-router/server-build")
 }
 
 app.use(bodyParser.json())
@@ -157,12 +166,6 @@ app.use((err: any, req: any, res: any, next: any) => {
 })
 
 const port = process.env.PORT ?? 8080
-getMdxPages(
-  { forceFresh: true, timings: {} },
-  "app/posts",
-  "app/components",
-).then(() => {
-  app.listen(port, () => {
-    console.log(`Production express server listening on port ${port}`)
-  })
+app.listen(port, () => {
+  console.log(`Production express server listening on port ${port}`)
 })

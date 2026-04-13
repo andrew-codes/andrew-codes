@@ -5,7 +5,7 @@ import Menu from "@mui/joy/Menu"
 import MenuButton from "@mui/joy/MenuButton"
 import MenuItem from "@mui/joy/MenuItem"
 import Stack from "@mui/joy/Stack"
-import { Link as RemixLink } from "@remix-run/react"
+import { Link as RemixLink } from "react-router"
 import React, { FC, MouseEventHandler, useEffect, useRef, useState } from "react"
 
 const CallToAction: FC<{
