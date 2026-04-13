@@ -27,7 +27,5 @@ WORKDIR /app
 # Copy built application
 COPY --from=build /app/dist /app/
 
-# RUN yarn install --mode skip-build
-
 WORKDIR /app
 CMD ["node", "index.js" ]

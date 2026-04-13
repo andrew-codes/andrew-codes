@@ -42,7 +42,6 @@ building app router...`)
       "lightningcss",
       "fsevents",
       "esbuild",
-      "better-sqlite3",
       "./build/server/index.js",
     ],
     banner: {
