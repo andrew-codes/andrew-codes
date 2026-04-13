@@ -140,7 +140,9 @@ if (process.env.NODE_ENV != "production") {
   )
 }
 app.use(
-  viteDevServer ? viteDevServer.middlewares : express.static("build/client"),
+  viteDevServer
+    ? viteDevServer.middlewares
+    : express.static("build/client", { redirect: false }),
 )
 
 app.use(express.static("app/public", { maxAge: "1y" }))
