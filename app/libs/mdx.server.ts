@@ -164,7 +164,7 @@ const getMdxPages = async (
     const codeAssets = await getCodeAssets(mdxFile)
     const output = { ...transformedMdx, slug: mdxFile.slug, codeAssets }
     if (!output.frontmatter.category) {
-      output.frontmatter.category = ""
+      output.frontmatter.category = "not categorized"
     }
     pages.push(output as MdxPage)
   }

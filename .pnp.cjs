@@ -76,11 +76,9 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:11.0.0"],\
           ["helmet", "npm:7.2.0"],\
           ["highlight.js", "npm:11.10.0"],\
-          ["isbot", "npm:5.1.28"],\
           ["lodash-es", "npm:4.17.21"],\
           ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:10.1.1"],\
           ["morgan", "npm:1.10.0"],\
-          ["motion", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:12.12.1"],\
           ["nodemon", "npm:3.1.10"],\
           ["octokit", "npm:4.0.2"],\
           ["on-finished", "npm:2.4.1"],\
@@ -100,7 +98,6 @@ const RAW_RUNTIME_STATE =
           ["remark-rehype", "npm:11.1.2"],\
           ["rimraf", "npm:6.0.1"],\
           ["server-timing", "npm:3.3.3"],\
-          ["sha1", "npm:1.1.1"],\
           ["tsc", "npm:2.0.4"],\
           ["tslib", "npm:2.8.1"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
@@ -175,11 +172,9 @@ const RAW_RUNTIME_STATE =
           ["glob", "npm:11.0.0"],\
           ["helmet", "npm:7.2.0"],\
           ["highlight.js", "npm:11.10.0"],\
-          ["isbot", "npm:5.1.28"],\
           ["lodash-es", "npm:4.17.21"],\
           ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:10.1.1"],\
           ["morgan", "npm:1.10.0"],\
-          ["motion", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:12.12.1"],\
           ["nodemon", "npm:3.1.10"],\
           ["octokit", "npm:4.0.2"],\
           ["on-finished", "npm:2.4.1"],\
@@ -199,7 +194,6 @@ const RAW_RUNTIME_STATE =
           ["remark-rehype", "npm:11.1.2"],\
           ["rimraf", "npm:6.0.1"],\
           ["server-timing", "npm:3.3.3"],\
-          ["sha1", "npm:1.1.1"],\
           ["tsc", "npm:2.0.4"],\
           ["tslib", "npm:2.8.1"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
@@ -5511,15 +5505,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["charenc", [\
-      ["npm:0.0.2", {\
-        "packageLocation": "./.yarn/cache/charenc-npm-0.0.2-aca0c2f207-81dcadbe57.zip/node_modules/charenc/",\
-        "packageDependencies": [\
-          ["charenc", "npm:0.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["check-more-types", [\
       ["npm:2.24.0", {\
         "packageLocation": "./.yarn/cache/check-more-types-npm-2.24.0-fa2e491b27-67c5288443.zip/node_modules/check-more-types/",\
@@ -5927,15 +5912,6 @@ const RAW_RUNTIME_STATE =
           ["path-key", "npm:3.1.1"],\
           ["shebang-command", "npm:2.0.0"],\
           ["which", "npm:2.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["crypt", [\
-      ["npm:0.0.2", {\
-        "packageLocation": "./.yarn/cache/crypt-npm-0.0.2-033627d94f-2c72768de3.zip/node_modules/crypt/",\
-        "packageDependencies": [\
-          ["crypt", "npm:0.0.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7432,39 +7408,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["framer-motion", [\
-      ["npm:12.12.1", {\
-        "packageLocation": "./.yarn/cache/framer-motion-npm-12.12.1-31e9ca406d-096cd6e8b1.zip/node_modules/framer-motion/",\
-        "packageDependencies": [\
-          ["framer-motion", "npm:12.12.1"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:32e428b32f298d9de0545a5604562cc65005108a931729aadddc2d21612be7a16eaed166d58dea30a5af027364d6dffd85c5f03311827e4657d45b576bd12534#npm:12.12.1", {\
-        "packageLocation": "./.yarn/__virtual__/framer-motion-virtual-d8f4fcd152/0/cache/framer-motion-npm-12.12.1-31e9ca406d-096cd6e8b1.zip/node_modules/framer-motion/",\
-        "packageDependencies": [\
-          ["@emotion/is-prop-valid", null],\
-          ["@types/emotion__is-prop-valid", null],\
-          ["@types/react", "npm:19.2.14"],\
-          ["@types/react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:19.2.3"],\
-          ["framer-motion", "virtual:32e428b32f298d9de0545a5604562cc65005108a931729aadddc2d21612be7a16eaed166d58dea30a5af027364d6dffd85c5f03311827e4657d45b576bd12534#npm:12.12.1"],\
-          ["motion-dom", "npm:12.12.1"],\
-          ["motion-utils", "npm:12.12.1"],\
-          ["react", "npm:19.2.5"],\
-          ["react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:19.2.5"],\
-          ["tslib", "npm:2.8.1"]\
-        ],\
-        "packagePeers": [\
-          "@emotion/is-prop-valid",\
-          "@types/emotion__is-prop-valid",\
-          "@types/react-dom",\
-          "@types/react",\
-          "react-dom",\
-          "react"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["fresh", [\
       ["npm:0.5.2", {\
         "packageLocation": "./.yarn/cache/fresh-npm-0.5.2-ad2bb4c0a2-64c88e489b.zip/node_modules/fresh/",\
@@ -8485,13 +8428,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["isbot", [\
-      ["npm:5.1.28", {\
-        "packageLocation": "./.yarn/cache/isbot-npm-5.1.28-e29262c261-8cf014c170.zip/node_modules/isbot/",\
-        "packageDependencies": [\
-          ["isbot", "npm:5.1.28"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:5.1.38", {\
         "packageLocation": "./.yarn/cache/isbot-npm-5.1.38-9513ac449d-3e9302cdad.zip/node_modules/isbot/",\
         "packageDependencies": [\
@@ -10087,57 +10023,6 @@ const RAW_RUNTIME_STATE =
           ["morgan", "npm:1.10.0"],\
           ["on-finished", "npm:2.3.0"],\
           ["on-headers", "npm:1.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["motion", [\
-      ["npm:12.12.1", {\
-        "packageLocation": "./.yarn/cache/motion-npm-12.12.1-948b836f2f-132eb7e2bb.zip/node_modules/motion/",\
-        "packageDependencies": [\
-          ["motion", "npm:12.12.1"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
-      ["virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:12.12.1", {\
-        "packageLocation": "./.yarn/__virtual__/motion-virtual-32e428b32f/0/cache/motion-npm-12.12.1-948b836f2f-132eb7e2bb.zip/node_modules/motion/",\
-        "packageDependencies": [\
-          ["@emotion/is-prop-valid", null],\
-          ["@types/emotion__is-prop-valid", null],\
-          ["@types/react", "npm:19.2.14"],\
-          ["@types/react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:19.2.3"],\
-          ["framer-motion", "virtual:32e428b32f298d9de0545a5604562cc65005108a931729aadddc2d21612be7a16eaed166d58dea30a5af027364d6dffd85c5f03311827e4657d45b576bd12534#npm:12.12.1"],\
-          ["motion", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:12.12.1"],\
-          ["react", "npm:19.2.5"],\
-          ["react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:19.2.5"],\
-          ["tslib", "npm:2.8.1"]\
-        ],\
-        "packagePeers": [\
-          "@emotion/is-prop-valid",\
-          "@types/emotion__is-prop-valid",\
-          "@types/react-dom",\
-          "@types/react",\
-          "react-dom",\
-          "react"\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["motion-dom", [\
-      ["npm:12.12.1", {\
-        "packageLocation": "./.yarn/cache/motion-dom-npm-12.12.1-05911c06f5-ac25565c55.zip/node_modules/motion-dom/",\
-        "packageDependencies": [\
-          ["motion-dom", "npm:12.12.1"],\
-          ["motion-utils", "npm:12.12.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["motion-utils", [\
-      ["npm:12.12.1", {\
-        "packageLocation": "./.yarn/cache/motion-utils-npm-12.12.1-63d9ae8f87-679503df10.zip/node_modules/motion-utils/",\
-        "packageDependencies": [\
-          ["motion-utils", "npm:12.12.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -11749,17 +11634,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/setprototypeof-npm-1.2.0-0fedbdcd3a-fde1630422.zip/node_modules/setprototypeof/",\
         "packageDependencies": [\
           ["setprototypeof", "npm:1.2.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["sha1", [\
-      ["npm:1.1.1", {\
-        "packageLocation": "./.yarn/cache/sha1-npm-1.1.1-5020443cbb-da9f47e949.zip/node_modules/sha1/",\
-        "packageDependencies": [\
-          ["charenc", "npm:0.0.2"],\
-          ["crypt", "npm:0.0.2"],\
-          ["sha1", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
