@@ -35,4 +35,4 @@ COPY --from=build /app/yarn.lock yarn.lock
 RUN corepack enable && yarn workspaces focus --production
 
 WORKDIR /app
-CMD ["node", "--require", "./.pnp.cjs", "index.js" ]
+CMD ["node", "--import", "./.pnp.loader.mjs", "index.js" ]
