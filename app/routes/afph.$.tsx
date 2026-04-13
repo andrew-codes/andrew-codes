@@ -1,4 +1,4 @@
-import type { ActionFunction, LoaderFunction } from "@remix-run/node"
+import type { ActionFunction, LoaderFunction } from "react-router"
 
 const API_HOST = "us.i.posthog.com"
 const ASSET_HOST = "us-assets.i.posthog.com"

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import type { FC } from "react"
-import avatar from "../public/images/Profile.webp"
+const avatar = "/images/Profile.webp"
 import {
   ConnectionList,
   ContactCard,

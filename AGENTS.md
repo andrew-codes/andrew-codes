@@ -1,6 +1,6 @@
 # andrew-codes
 
-Personal website, portfolio, and resume for James Andrew Smith — built with Remix, Vite, TypeScript, and MUI Joy.
+Personal website, portfolio, and resume for James Andrew Smith — built with react-router SSG, Vite, TypeScript, and MUI Joy.
 
 ## Package Manager
 
@@ -11,7 +11,7 @@ Use `yarn` (not npm). The project uses Yarn 4.x with PnP-style workspaces.
 ```bash
 yarn start          # dev server (nodemon)
 yarn build          # full production build (runs clean, remix, server, and post-build steps)
-yarn build/remix    # Remix/Vite build only
+yarn build/client    # react-router build only
 yarn build/server   # Express server build only
 ```
 

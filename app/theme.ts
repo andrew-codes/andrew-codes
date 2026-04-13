@@ -18,8 +18,10 @@ const theme = extendTheme({
         },
         neutral: {
           plainColor: "#ffffff",
+          plainHoverBg: "rgba(201, 122, 88, 0.12)",
           outlinedColor: "#fff",
-          outlinedHoverColor: "#1a1917",
+          outlinedHoverColor: "rgb(26, 25, 23)",
+          outlinedHoverBg: "#ffffff",
           solidBg: "#222120",
           solidDisabledBg: "#B0B0B0",
         },
@@ -45,8 +47,10 @@ const theme = extendTheme({
         },
         neutral: {
           plainColor: "#ffffff",
+          plainHoverBg: "rgba(201, 122, 88, 0.12)",
           outlinedColor: "#fff",
-          outlinedHoverColor: "#1a1917",
+          outlinedHoverColor: "rgb(26, 25, 23)",
+          outlinedHoverBg: "#ffffff",
           solidBg: "#222120",
           solidDisabledBg: "#B0B0B0",
           outlinedBorder: "#9e9b91",
@@ -80,23 +84,23 @@ const theme = extendTheme({
     },
     JoyListItem: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          "&::marker": { color: theme.palette.neutral.plainColor },
-        }),
+        root: {
+          "&::marker": { color: "#ffffff" },
+        },
       },
     },
     JoyLink: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.neutral.plainColor,
-          textDecorationColor: theme.palette.primary.plainColor,
+        root: {
+          color: "#ffffff",
+          textDecorationColor: "#c97a58",
           "&:hover": {
-            color: theme.palette.primary.solidHoverBg,
+            color: "#c97a58",
           },
           "&:active": {
-            color: theme.palette.primary.solidActiveBg,
+            color: "#b85c38",
           },
-        }),
+        },
       },
     },
     JoyMenu: {
@@ -120,20 +124,26 @@ const theme = extendTheme({
     },
     JoyButton: {
       styleOverrides: {
-        root: ({ ownerState, theme }) => ({
-          // borderRadius: "6px",
+        root: ({ ownerState }) => ({
           boxShadow: "0 1px 0 0 rgba(27, 31, 35, 0.04)",
           transition: "80ms cubic-bezier(0.33, 1, 0.68, 1)",
           transitionProperty: "color,background-color,box-shadow,border-color",
+          // neutral outlined: solid bg on hover with dark text (e.g. header CTA buttons)
           ...(ownerState.color === "neutral" &&
             ownerState.variant === "outlined" && {
-              "&:active": {
-                boxShadow: "none",
-              },
+              "&:active": { boxShadow: "none" },
               "&:hover": {
-                color: `${theme.palette.neutral.outlinedHoverColor} !important`,
+                backgroundColor: "#ffffff",
+                color: "rgb(26, 25, 23)",
               },
             }),
+          // plain variant (any color): warm orange tint on hover (e.g. "View All", "Read more" buttons)
+          ...(ownerState.variant === "plain" && {
+            "&:hover": {
+              backgroundColor: "rgba(201, 122, 88, 0.12)",
+              color: "#c97a58",
+            },
+          }),
         }),
       },
     },

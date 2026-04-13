@@ -11,7 +11,7 @@ import ModalDialog from "@mui/joy/ModalDialog"
 import { useTheme } from "@mui/joy/styles"
 import styled from "@mui/joy/styles/styled"
 import Typography from "@mui/joy/Typography"
-import { Link as RemixLink } from "@remix-run/react"
+import { Link as RemixLink } from "react-router"
 import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from "react"
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
@@ -28,7 +28,14 @@ const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
   }
 
   return (
-    <MuiLink {...props} component={RemixLink} to={props.href} sx={{ textDecoration: "underline" }}>
+    <MuiLink
+      {...props}
+      component={RemixLink}
+      to={props.href}
+      sx={{
+        textDecoration: "underline",
+      }}
+    >
       {props.children}
     </MuiLink>
   )
@@ -353,9 +360,12 @@ const TableContainer: FC<PropsWithChildren<{}>> = ({ children }) => (
 )
 
 const CollapsibleSection: FC<PropsWithChildren<{ title: string }>> = ({ title, children }) => {
+  const [expanded, setExpanded] = useState(false)
+
   return (
     <Accordion
-      defaultExpanded={false}
+      expanded={expanded}
+      onChange={(_, isExpanded) => setExpanded(isExpanded)}
       sx={{
         marginTop: "3rem",
         "--Accordion-padding": "0",

@@ -20,6 +20,12 @@ const Baseline = ({ children }) => {
               padding: "0 !important",
             },
           },
+          "strong, b": {
+            color: "#ffffff",
+          },
+          ".MuiCard-root": {
+            border: "none !important",
+          },
           html: {
             "@media print": {
               background: "#fff",

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import Link from "@mui/joy/Link"
-import { Link as RemixLink } from "@remix-run/react"
+import { Link as RemixLink } from "react-router"
 import type { FC } from "react"
 import { Fragment } from "react"
 import SmallContentDivider from "./SmallContentDivider"

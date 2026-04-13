@@ -7,84 +7,54 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react"
-import { PropsWithChildren, type FC } from "react"
-import { createHead } from "remix-island"
+} from "react-router"
+import { type FC } from "react"
 import { PHProvider } from "./analytics/PostHogProvider"
 import Baseline from "./components/Baseline"
-import avatar from "./public/images/Profile.webp"
 import theme from "./theme"
 
-const Head = createHead(() => (
-  <>
-    <meta charSet="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="keywords"
-      content="Software Engineer, Staff Engineer, Tech Lead, Full Stack Developer, JavaScript, React, Node.js"
-    />
-    <meta name="author" content="Andrew Smith" />
-    <meta name="og:image" content={avatar} />
-    <meta name="og:url" content="https://andrew.codes" />
-    <meta name="og:type" content="website" />
-    <meta name="og:site_name" content="Andrew Smith" />
-    <meta name="og:locale" content="en_US" />
-    <Meta />
-    <link rel="icon" href="/images/favicon.ico" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/images/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/images/favicon-16x16.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/images/apple-touch-icon.png"
-    />
-    <link
-      rel="preload"
-      as="font"
-      type="font/ttf"
-      href="/fonts/Lato-Regular.ttf"
-      crossOrigin="anonymous"
-    />
-    <link
-      rel="preload"
-      as="font"
-      type="font/ttf"
-      href="/fonts/Lato-Bold.ttf"
-      crossOrigin="anonymous"
-    />
-    <link
-      rel="preload"
-      as="font"
-      type="font/ttf"
-      href="/fonts/Lato-Black.ttf"
-      crossOrigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="/css/fonts.css"
-    />
-    <link
-      crossOrigin="anonymous"
-      rel="stylesheet"
-      type="text/css"
-      href="/css/dracula.css"
-    />
-    <Links />
-  </>
-))
+const avatar = "/images/Profile.webp"
 
-const App: FC<PropsWithChildren<{}>> = ({ children }) => {
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en-US">
+      <head>
+        <meta name="emotion-insertion-point" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="keywords" content="Software Engineer, Staff Engineer, Tech Lead, Full Stack Developer, JavaScript, React, Node.js" />
+        <meta name="author" content="Andrew Smith" />
+        <meta name="og:image" content={avatar} />
+        <meta name="og:url" content="https://andrew.codes" />
+        <meta name="og:type" content="website" />
+        <meta name="og:site_name" content="Andrew Smith" />
+        <meta name="og:locale" content="en_US" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {children}
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
+export const meta = () => [{ charSet: "utf-8" }]
+
+export const links = () => [
+  { rel: "icon", href: "/images/favicon.ico" },
+  { rel: "icon", type: "image/png", sizes: "32x32", href: "/images/favicon-32x32.png" },
+  { rel: "icon", type: "image/png", sizes: "16x16", href: "/images/favicon-16x16.png" },
+  { rel: "apple-touch-icon", sizes: "180x180", href: "/images/apple-touch-icon.png" },
+  { rel: "preload", as: "font", type: "font/ttf", href: "/fonts/Lato-Regular.ttf", crossOrigin: "anonymous" },
+  { rel: "preload", as: "font", type: "font/ttf", href: "/fonts/Lato-Bold.ttf", crossOrigin: "anonymous" },
+  { rel: "preload", as: "font", type: "font/ttf", href: "/fonts/Lato-Black.ttf", crossOrigin: "anonymous" },
+  { rel: "stylesheet", type: "text/css", href: "/css/fonts.css" },
+  { rel: "stylesheet", type: "text/css", href: "/css/dracula.css", crossOrigin: "anonymous" },
+]
+
+const App: FC = () => {
   return (
     <PHProvider>
       <CssVarsProvider theme={theme}>
@@ -115,12 +85,9 @@ const App: FC<PropsWithChildren<{}>> = ({ children }) => {
             <Outlet />
           </Box>
         </Baseline>
-        <ScrollRestoration />
-        <Scripts />
       </CssVarsProvider>
     </PHProvider>
   )
 }
 
 export default App
-export { Head }

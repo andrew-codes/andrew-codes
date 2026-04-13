@@ -1,14 +1,10 @@
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import type { HeadersFunction } from "@remix-run/node"
-import { MetaFunction, useLocation } from "@remix-run/react"
+import { MetaFunction, useLocation } from "react-router"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import { Section, SectionHeader } from "../components/Section"
-import { useLoaderHeaders } from "../libs/utils"
 import { featured, nonFeatured } from "../recommendations"
-
-const headers: HeadersFunction = useLoaderHeaders()
 
 const meta: MetaFunction = () => {
   return [
@@ -72,4 +68,4 @@ const RecommendationsRoute = () => {
 }
 
 export default RecommendationsRoute
-export { headers, meta }
+export { meta }
