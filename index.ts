@@ -166,6 +166,6 @@ app.use((err: any, req: any, res: any, next: any) => {
 })
 
 const port = process.env.PORT ?? 8080
-app.listen(port, () => {
+app.listen(Number(port), "0.0.0.0", () => {
   console.log(`Production express server listening on port ${port}`)
 })
