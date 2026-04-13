@@ -32,8 +32,8 @@ COPY --from=build /app/package.json package.json
 COPY --from=build /app/yarn.lock yarn.lock
 # Switch to node-modules linker so Node's native ESM resolver works without PnP
 RUN corepack enable && \
-    yq -i '.nodeLinker = "node-modules"' .yarnrc.yml && \
-    yq -i 'del(.enableGlobalCache)' .yarnrc.yml && \
+    yq -yi '.nodeLinker = "node-modules"' .yarnrc.yml && \
+    yq -yi 'del(.enableGlobalCache)' .yarnrc.yml && \
     yarn workspaces focus --production
 
 WORKDIR /app
