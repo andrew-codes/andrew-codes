@@ -26,6 +26,13 @@ RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
 WORKDIR /app
 # Copy built application
 COPY --from=build /app/dist /app/
+COPY --from=build /app/.yarn .yarn
+COPY --from=build /app/.yarnrc.yml .yarnrc.yml
+COPY --from=build /app/.pnp.cjs .pnp.cjs
+COPY --from=build /app/.pnp.loader.mjs .pnp.loader.mjs
+COPY --from=build /app/package.json package.json
+COPY --from=build /app/yarn.lock yarn.lock
+RUN corepack enable && yarn workspaces focus --production
 
 WORKDIR /app
-CMD ["node", "index.js" ]
+CMD ["node", "--require", "./.pnp.cjs", "index.js" ]

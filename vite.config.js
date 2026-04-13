@@ -11,7 +11,11 @@ export default defineConfig({
     reactRouter(),
   ],
   ssr: {
-    noExternal: true,
+    noExternal: [
+      "@mui/*", // fix material-ui ES modules imported error.
+      "posthog-js",
+      "posthog-js/react",
+    ],
   },
   optimizeDeps: {
     include: ["@mui/*"],
