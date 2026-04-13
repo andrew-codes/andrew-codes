@@ -2,7 +2,13 @@ fly.toml
 Dockerfile
 /.devcontainer
 /.github
+/.react-router
+/.serena
 /.vscode
+/build
+/dist
+/server-build
+/node_modules
 .dockerignore
 node_modules
 .git
