@@ -34,7 +34,7 @@ COPY --from=build /app/yarn.lock yarn.lock
 RUN corepack enable && \
     yq -i '.nodeLinker = "node-modules"' .yarnrc.yml && \
     yq -i 'del(.enableGlobalCache)' .yarnrc.yml && \
-    yarn install
+    yarn workspaces focus --production
 
 WORKDIR /app
 CMD ["node", "index.js" ]
