@@ -70,7 +70,16 @@ app.use((req, res, next) => {
   if (req.path.endsWith("/") && req.path.length > 1 && req.method === "GET") {
     const query = req.url.slice(req.path.length)
     const safepath = req.path.slice(0, -1).replace(/\/+/g, "/")
-    res.redirect(301, safepath + query)
+    const target = safepath + query
+
+    const isSafeLocalRedirectTarget =
+      target.startsWith("/") &&
+      !target.startsWith("//") &&
+      !target.includes("\\") &&
+      !target.includes("\r") &&
+      !target.includes("\n")
+
+    res.redirect(301, isSafeLocalRedirectTarget ? target : "/")
   } else {
     next()
   }
