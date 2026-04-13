@@ -21,17 +21,19 @@ ENV INTERNAL_PORT="8080"
 ENV PRIMARY_REGION="iad"
 ENV FLY="true"
 
-RUN apt-get update -qq && apt-get install -y fuse3 ca-certificates
+RUN apt-get update -qq && apt-get install -y ca-certificates yq
 
 WORKDIR /app
 # Copy built application
 COPY --from=build /app/dist /app/
 COPY --from=build /app/.yarn .yarn
+COPY --from=build /app/.yarnrc.yml .yarnrc.yml
 COPY --from=build /app/package.json package.json
 COPY --from=build /app/yarn.lock yarn.lock
 # Switch to node-modules linker so Node's native ESM resolver works without PnP
 RUN corepack enable && \
-    printf "nodeLinker: node-modules\nenableGlobalCache: false\nyarnPath: .yarn/releases/yarn-4.9.1.cjs\n" > .yarnrc.yml && \
+    yq -i '.nodeLinker = "node-modules"' .yarnrc.yml && \
+    yq -i 'del(.enableGlobalCache)' .yarnrc.yml && \
     yarn install
 
 WORKDIR /app
