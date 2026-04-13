@@ -40,7 +40,6 @@ const createEnvConfigResolver = <T extends Record<string, string>>(
 
 const envConfigurationDefintion = {
   internalPort: "INTERNAL_PORT",
-  internalCommandToken: "INTERNAL_COMMAND_TOKEN",
   primaryRegion: "PRIMARY_REGION",
   fly: "FLY",
   primaryHost: "PRIMARY_HOST",

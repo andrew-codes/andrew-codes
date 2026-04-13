@@ -42,7 +42,7 @@ jobs:
         with:
           name: andrew-codes-${{ github.event.number }}
           region: lax
-          secrets: PORT=${{ secrets.PORT }} INTERNAL_COMMAND_TOKEN=${{ secrets.INTERNAL_COMMAND_TOKEN }} SESSION_SECRET=${{ secrets.SESSION_SECRET }}
+          secrets: PORT=${{ secrets.PORT }} SESSION_SECRET=${{ secrets.SESSION_SECRET }}
           vmsize: shared-cpu-1x
           memory: 1024
           deploy_options: --strategy immediate
