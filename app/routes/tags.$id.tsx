@@ -16,7 +16,13 @@ const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const posts = await getMdxPages({ request })
   const postsForTag = onlyForTag(params.id ?? "")(posts)
 
-  return { posts: postsForTag }
+  return {
+    posts: postsForTag.sort(
+      (a, b) =>
+        new Date(b.frontmatter?.date ?? 0).getTime() -
+        new Date(a.frontmatter?.date ?? 0).getTime(),
+    ),
+  }
 }
 
 const meta: MetaFunction = () => {
