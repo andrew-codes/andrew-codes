@@ -27,12 +27,12 @@ WORKDIR /app
 # Copy built application
 COPY --from=build /app/dist /app/
 COPY --from=build /app/.yarn .yarn
-COPY --from=build /app/.yarnrc.yml .yarnrc.yml
-COPY --from=build /app/.pnp.cjs .pnp.cjs
-COPY --from=build /app/.pnp.loader.mjs .pnp.loader.mjs
 COPY --from=build /app/package.json package.json
 COPY --from=build /app/yarn.lock yarn.lock
-RUN corepack enable && yarn workspaces focus --production
+# Switch to node-modules linker so Node's native ESM resolver works without PnP
+RUN corepack enable && \
+    printf "nodeLinker: node-modules\nenableGlobalCache: false\nyarnPath: .yarn/releases/yarn-4.9.1.cjs\n" > .yarnrc.yml && \
+    yarn install
 
 WORKDIR /app
-CMD ["node", "--import", "./.pnp.loader.mjs", "index.js" ]
+CMD ["node", "index.js" ]
