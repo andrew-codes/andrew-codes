@@ -68,8 +68,8 @@ app.all(
 
 app.use((req, res, next) => {
   if (req.path.endsWith("/") && req.path.length > 1 && req.method === "GET") {
-    const normalizedPath = req.path.slice(0, -1).replace(/\/+/g, "/")
-    const rawQuery = req.url.slice(req.path.length)
+    const parsedUrl = new URL(req.originalUrl, `https://${primaryHost}`)
+    const normalizedPath = parsedUrl.pathname.replace(/\/+$/, "") || "/"
 
     const isSafeLocalPath =
       normalizedPath.startsWith("/") &&
@@ -78,6 +78,7 @@ app.use((req, res, next) => {
       !normalizedPath.includes("\r") &&
       !normalizedPath.includes("\n")
 
+    const rawQuery = parsedUrl.search
     const isSafeQuery =
       (rawQuery === "" || rawQuery.startsWith("?")) &&
       !rawQuery.includes("\r") &&
