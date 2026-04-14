@@ -25,3 +25,4 @@ vite.config.js*
 *.log
 
 .react-router
+app/public/files
