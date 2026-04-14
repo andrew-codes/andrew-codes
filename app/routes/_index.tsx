@@ -18,18 +18,7 @@ const loader = async ({ request }: LoaderFunctionArgs) => {
       new Date(a.frontmatter?.date ?? 0).getTime(),
   )
 
-  let featuredPosts = posts
-    .filter((post) => post.frontmatter.tags?.includes("featured"))
-    .slice(0, 3)
-  if (featuredPosts.length < 3) {
-    featuredPosts = featuredPosts.concat(
-      posts
-        .filter((post) => !post.frontmatter.tags?.includes("featured"))
-        .slice(0, 3 - featuredPosts.length),
-    )
-  }
-
-  return { posts: featuredPosts }
+  return { posts: posts.slice(0, 3) }
 }
 
 const meta: MetaFunction = () => {
@@ -99,7 +88,7 @@ const HomeRoute = () => {
       </Section>
       <Divider />
       <Section>
-        <SectionHeader title="Featured Posts">
+        <SectionHeader title="Latest Posts">
           <Button
             variant="plain"
             component={RemixLink}

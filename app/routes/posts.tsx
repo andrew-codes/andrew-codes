@@ -83,9 +83,12 @@ const PostsRoute = () => {
               gap={2}
               justifyContent="space-between"
             >
-              {posts.slice(0, 3).map((post) => (
-                <PostCard key={post.slug} post={post} />
-              ))}
+              {posts
+                .filter((post) => post.frontmatter.tags?.includes("featured"))
+                .slice(0, 3)
+                .map((post) => (
+                  <PostCard key={post.slug} post={post} />
+                ))}
             </Stack>
           </Section>
           <Divider />
