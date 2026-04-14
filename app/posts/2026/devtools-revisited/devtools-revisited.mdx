@@ -1,0 +1,111 @@
+---
+title: My Developer Workbench, Revisited
+description: >-
+  I rewrote my dev environment automation from scratch, trading bash scripts for Ansible playbooks. Here's what changed, what got harder, and whether it was worth it.
+date: 2026-04-22
+category: engineering
+tags:
+  - devtools
+  - automation
+  - ansible
+---
+
+A few years ago I wrote about [my developer workbench](https://andrew.codes/posts/devtools), the tools I rely on and how I automated getting them onto a new machine. That post was mostly about _what_ I install. This one
+is about _how_, and why I rewrote the whole thing.
+
+## Why Bash Wasn't Cutting It
+
+The original setup was pure bash. Every tool, every dotfile, every symlink managed through shell scripts. That sounds simple, but bash has one persistent problem when used for environment setup: idempotency is entirely
+your problem.
+
+A setup script needs to be safe to run more than once. Run it on a fresh machine and everything gets installed. Run it again six months later and nothing breaks. With bash you have to hand-roll that guarantee. Every step
+needs its own "does this already exist?" check before it acts. For a handful of tools that's fine. As the list grows, so does the defensive boilerplate, and eventually you're writing non-trivial bash just to manage
+state.
+
+> Non-trivial bash is its own maintenance burden, and it shows up exactly when you least want it to.
+
+I kept adding tools and kept accumulating edge cases. At some point the scripts were harder to reason about than the problem they were solving.
+
+## Right Tool for the Job
+
+The new version still requires only bash to bootstrap, a constraint that matters because you may be running this on a machine that has nothing on it yet. But bash is no longer doing the heavy lifting.
+
+The [entrypoint script](https://github.com/andrew-codes/devtools/blob/main/setup.sh) does three things: detects your OS and CPU architecture, bootstraps Python 3 and Ansible via pip, then hands off to the appropriate
+Ansible playbook. That's it. Everything after that is Ansible's responsibility.
+
+Ansible was the right call for this because idempotency is not something you add to it. It is how it works. Every task already knows how to check whether its work is done before running. Adding a new tool to my workbench
+means adding a playbook task, not writing another round of defensive shell scripting. The cognitive load dropped considerably once that shift clicked.
+
+All shared configuration and variables live in a single [`group_vars/all.yml`](https://github.com/andrew-codes/devtools/blob/main/ansible/group_vars/all.yml). Secrets and environment-specific values are driven by
+environment variables, not a secrets manager like 1Password CLI or Vault. That keeps the whole setup self-contained and portable. The honest trade-off is that it puts the responsibility on you to make sure those
+variables are not stored in a `.env` file on disk. That is a common habit worth breaking if you use this.
+
+## The One-Liner
+
+You do not need to clone the repo to run the setup. The entrypoint script checks whether it is already running inside the repo, and if not, it clones it automatically over HTTPS so SSH does not need to be configured yet.
+You can kick the whole thing off with:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/andrew-codes/devtools/refs/heads/main/setup.sh | bash
+```
+
+The script also handles privilege escalation. The intention is that you run it as a normal user and it will prompt for elevated permissions once when it needs them, rather than requiring you to run the whole thing as
+admin from the start.
+
+## The Windows Problem
+
+macOS was straightforward. Windows was not.
+
+Ansible configures a Windows machine over WinRM, which is fine in a typical remote-management scenario. The catch here is that we are configuring the machine from itself. To set up WinRM on Windows, you have to do it
+from WSL. The entrypoint script handles spinning up WSL and configuring WinRM so that Ansible can then turn around and configure the rest of the system. Getting that bootstrapping sequence right took some iteration.
+
+The other Windows wrinkle: Ansible has no native support for `winget`. Rather than fight that, I went with Chocolatey for Windows package management. I would have preferred winget, but the ecosystem support is not there
+yet. It is a real trade-off, and I acknowledge it. The net result is still a significant improvement over what existed before.
+
+## What Gets Installed
+
+The [macOS ARM64 playbook](https://github.com/andrew-codes/devtools/blob/main/ansible/site-macos-arm64.yml) covers the following. This is my specific setup; the intent is that you fork the repo and adjust this list to
+fit yours.
+
+| Tool                                                  | Purpose                                                        |
+| ----------------------------------------------------- | -------------------------------------------------------------- |
+| Homebrew                                              | Package manager                                                |
+| Git                                                   | Version control                                                |
+| GitHub CLI (`gh`)                                     | GitHub from the terminal                                       |
+| git-config, git-completion, git-prompt, git-shortcuts | Git configuration and quality-of-life improvements             |
+| Node.js                                               | JavaScript runtime                                             |
+| `jq` / `yq`                                           | JSON and YAML processing from the command line                 |
+| `shfmt`                                               | Shell script formatter                                         |
+| `uvx`                                                 | Python tool execution                                          |
+| 1Password SSH agent                                   | SSH key management via 1Password                               |
+| VS Code                                               | Editor                                                         |
+| Docker                                                | Local container management                                     |
+| Ghostty                                               | Terminal emulator                                              |
+| Raycast                                               | App launcher and automation                                    |
+| Lens                                                  | Kubernetes IDE                                                 |
+| Logi Options+                                         | Logitech device configuration                                  |
+| Claude Code                                           | AI coding assistant                                            |
+| Serena                                                | MCP server for semantic code navigation in AI coding workflows |
+| bash-profile, bash-utilities, devtools-bash-env       | Shell environment configuration and utilities                  |
+
+Windows gets equivalent coverage through Chocolatey rather than Homebrew. The platform-specific conditional logic is handled by Ansible's `when:` guards, so the playbooks read cleanly without a tangle of if/else
+branches.
+
+## Making It Yours
+
+The hard part is done: the entrypoint bootstrap, the WinRM setup, the Ansible scaffolding, all of it. If you want to adapt this for your own machine, the pattern is:
+
+1. Fork the repo
+2. Edit the OS-specific site playbook ([macOS ARM64](https://github.com/andrew-codes/devtools/blob/main/ansible/site-macos-arm64.yml) or the Windows equivalent)
+3. Add or remove playbook imports to match your toolset
+4. Run the one-liner above
+
+Each tool's playbook is self-contained and follows the same pattern, so adding something new is a matter of following an existing example rather than figuring out a new convention.
+
+## Final Thoughts
+
+This has made setting up a new development environment noticeably less painful, and more importantly, consistent. Running the same script on a fresh machine six months from now will produce the same result as running it
+today. That predictability is the whole point.
+
+If you are still managing your dev environment with a growing pile of bash scripts, I would encourage you to look at Ansible for this. The learning curve is real but shallow, and the payoff starts immediately. The repo
+is at [github.com/andrew-codes/devtools](https://github.com/andrew-codes/devtools).
