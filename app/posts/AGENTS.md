@@ -23,18 +23,12 @@ tags:
 
 # File Layout
 
-**Simple article** (no images or attachments):
+Always use the subdirectory layout, even if there are no assets yet:
 
-```
-app/posts/{year}/{slug}.mdx
-```
-
-**Article with assets** (images, downloads, code files):
-
-```
+```text
 app/posts/{year}/{slug}/
   {slug}.mdx
-  public/files/    ← images and other assets
+  public/files/    ← images and other assets (add when needed)
 ```
 
 Reference assets with relative paths from the `.mdx` file:
@@ -101,4 +95,4 @@ These articles are written by a working practitioner sharing hard-won, opinionat
 - Excessive hedging ("it might be possible that perhaps...")
 - Claiming exhaustive coverage when the treatment is intentionally focused
 - Padding sentences to sound more formal or academic
-- Referring to the reader as "the reader" — address them directly as "you"
+- Referring to the reader as "the reader" (address them directly as "you")
