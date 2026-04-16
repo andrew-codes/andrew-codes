@@ -30,15 +30,15 @@ I kept adding tools and kept accumulating edge cases. At some point the scripts 
 
 The new version still requires only bash to bootstrap, a constraint that matters because you may be running this on a machine that has nothing on it yet. But bash is no longer doing the heavy lifting.
 
-The [entrypoint script](https://github.com/andrew-codes/devtools/blob/main/setup.sh) does three things: detects your OS and CPU architecture, bootstraps Python 3 and Ansible via pip, then hands off to the appropriate
-Ansible playbook. That's it. Everything after that is Ansible's responsibility.
+The [entrypoint script](https://github.com/andrew-codes/devtools/blob/bf93535500004d6444e6ed64892add605ccb76b1/setup.sh) does three things: detects your OS and CPU architecture, bootstraps Python 3 and Ansible via pip,
+then hands off to the appropriate Ansible playbook. That's it. Everything after that is Ansible's responsibility.
 
 Ansible was the right call for this because idempotency is not something you add to it. It is how it works. Every task already knows how to check whether its work is done before running. Adding a new tool to my workbench
 means adding a playbook task, not writing another round of defensive shell scripting. The cognitive load dropped considerably once that shift clicked.
 
-All shared configuration and variables live in a single [`group_vars/all.yml`](https://github.com/andrew-codes/devtools/blob/main/ansible/group_vars/all.yml). Secrets and environment-specific values are driven by
-environment variables, not a secrets manager like 1Password CLI or Vault. That keeps the whole setup self-contained and portable. The honest trade-off is that it puts the responsibility on you to make sure those
-variables are not stored in a `.env` file on disk. That is a common habit worth breaking if you use this.
+All shared configuration and variables live in a single [`group_vars/all.yml`](https://github.com/andrew-codes/devtools/blob/bf93535500004d6444e6ed64892add605ccb76b1/ansible/group_vars/all.yml). Secrets and
+environment-specific values are driven by environment variables, not a secrets manager like 1Password CLI or Vault. That keeps the whole setup self-contained and portable. The honest trade-off is that it puts the
+responsibility on you to make sure those variables are not stored in a `.env` file on disk. That is a common habit worth breaking if you use this.
 
 ## The One-Liner
 
@@ -67,26 +67,26 @@ yet. It is a real trade-off, and I acknowledge it. The net result is still a sig
 The [macOS ARM64 playbook](https://github.com/andrew-codes/devtools/blob/main/ansible/site-macos-arm64.yml) covers the following. This is my specific setup; the intent is that you fork the repo and adjust this list to
 fit yours.
 
-| Tool                                                  | Purpose                                                        |
-| ----------------------------------------------------- | -------------------------------------------------------------- |
-| Homebrew                                              | Package manager                                                |
-| Git                                                   | Version control                                                |
-| GitHub CLI (`gh`)                                     | GitHub from the terminal                                       |
-| git-config, git-completion, git-prompt, git-shortcuts | Git configuration and quality-of-life improvements             |
-| Node.js                                               | JavaScript runtime                                             |
-| `jq` / `yq`                                           | JSON and YAML processing from the command line                 |
-| `shfmt`                                               | Shell script formatter                                         |
-| `uvx`                                                 | Python tool execution                                          |
-| 1Password SSH agent                                   | SSH key management via 1Password                               |
-| VS Code                                               | Editor                                                         |
-| Docker                                                | Local container management                                     |
-| Ghostty                                               | Terminal emulator                                              |
-| Raycast                                               | App launcher and automation                                    |
-| Lens                                                  | Kubernetes IDE                                                 |
-| Logi Options+                                         | Logitech device configuration                                  |
-| Claude Code                                           | AI coding assistant                                            |
-| Serena                                                | MCP server for semantic code navigation in AI coding workflows |
-| bash-profile, bash-utilities, devtools-bash-env       | Shell environment configuration and utilities                  |
+| Tool                                                                                                                                                                                          | Purpose                                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Homebrew                                                                                                                                                                                      | Package manager                                                |
+| Git                                                                                                                                                                                           | Version control                                                |
+| GitHub CLI (`gh`)                                                                                                                                                                             | GitHub from the terminal                                       |
+| git-config,<br/>git-completion,<br/>git-prompt,<br/>[git-shortcuts](https://github.com/andrew-codes/devtools/blob/bf93535500004d6444e6ed64892add605ccb76b1/workbench/git-shortcuts/README.md) | Git configuration and quality-of-life improvements             |
+| Node.js                                                                                                                                                                                       | JavaScript runtime                                             |
+| `jq` / `yq`                                                                                                                                                                                   | JSON and YAML processing from the command line                 |
+| `shfmt`                                                                                                                                                                                       | Shell script formatter                                         |
+| `uvx`                                                                                                                                                                                         | Python tool execution                                          |
+| 1Password SSH agent                                                                                                                                                                           | SSH key management via 1Password                               |
+| VS Code                                                                                                                                                                                       | Editor                                                         |
+| Docker                                                                                                                                                                                        | Local container management                                     |
+| Ghostty                                                                                                                                                                                       | Terminal emulator                                              |
+| Raycast                                                                                                                                                                                       | App launcher and automation                                    |
+| Lens                                                                                                                                                                                          | Kubernetes IDE                                                 |
+| Logi Options+                                                                                                                                                                                 | Logitech device configuration                                  |
+| Claude Code                                                                                                                                                                                   | AI coding assistant                                            |
+| Serena                                                                                                                                                                                        | MCP server for semantic code navigation in AI coding workflows |
+| bash-profile,<br/>bash-utilities,<br/>[projects](https://github.com/andrew-codes/devtools/blob/bf93535500004d6444e6ed64892add605ccb76b1/workbench/projects/README.md),<br/>devtools-bash-env  | Shell environment configuration and utilities                  |
 
 Windows gets equivalent coverage through Chocolatey rather than Homebrew. The platform-specific conditional logic is handled by Ansible's `when:` guards, so the playbooks read cleanly without a tangle of if/else
 branches.
@@ -96,7 +96,7 @@ branches.
 The hard part is done: the entrypoint bootstrap, the WinRM setup, the Ansible scaffolding, all of it. If you want to adapt this for your own machine, the pattern is:
 
 1. Fork the repo
-2. Edit the OS-specific site playbook ([macOS ARM64](https://github.com/andrew-codes/devtools/blob/main/ansible/site-macos-arm64.yml) or the Windows equivalent)
+2. Edit the OS-specific site playbook ([macOS ARM64](https://github.com/andrew-codes/devtools/blob/bf93535500004d6444e6ed64892add605ccb76b1/ansible/site-macos-arm64.yml) or the Windows equivalent)
 3. Add or remove playbook imports to match your toolset
 4. Run the one-liner above
 
