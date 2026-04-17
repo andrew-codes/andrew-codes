@@ -7,5 +7,4 @@ export default [
   ]),
   route("recommendations", "routes/recommendations.tsx"),
   route("tags/:id", "routes/tags.$id.tsx"),
-  route("healthcheck", "routes/healthcheck.tsx"),
 ] satisfies RouteConfig

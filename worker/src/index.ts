@@ -53,6 +53,10 @@ export default {
       return posthogProxy(request)
     }
 
+    if (url.pathname === "/healthcheck") {
+      return new Response("OK")
+    }
+
     return env.ASSETS.fetch(request)
   },
 }
