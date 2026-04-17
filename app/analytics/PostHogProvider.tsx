@@ -8,7 +8,7 @@ const PHProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   useEffect(() => {
     posthog.init("phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC", {
       api_host: "/afph",
-      defaults: "2025-05-24",
+      defaults: "2026-01-30",
       person_profiles: "always",
     })
 

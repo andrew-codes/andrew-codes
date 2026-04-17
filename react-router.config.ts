@@ -16,7 +16,7 @@ const getTagsFromFile = async (filePath: string): Promise<string[]> => {
 }
 
 export default {
-  serverBuildFile: "index.js",
+  ssr: false,
   prerender: async () => {
     const allFiles = await readDir("app/posts")
     const mdxFiles = allFiles.filter(
