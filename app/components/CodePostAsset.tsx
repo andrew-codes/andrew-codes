@@ -1,7 +1,5 @@
 import styled from "@emotion/styled"
-import hljs from "highlight.js"
 import type { FC } from "react"
-import { useEffect, useRef } from "react"
 
 const CodeWrapper = styled.div`
   position: relative;
@@ -20,48 +18,34 @@ const CodeWrapper = styled.div`
   }
 `
 
-const CodePostAsset: FC<{ code: string; language: string }> = ({
-  code,
+const CodePostAsset: FC<{ highlightedHtml: string; language: string }> = ({
+  highlightedHtml,
   language,
-}) => {
-  const codeRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    if (!codeRef.current) {
-      return
-    }
-
-    hljs.highlightElement(codeRef.current)
-  }, [])
-
-  return (
-    <CodeWrapper>
-      <pre
-        style={{
-          background: "#111210",
-          border: "0.5px solid #2e2d2a",
-          borderRadius: "8px",
-          padding: "1.25rem 1.5rem",
-          overflowX: "auto",
-          margin: 0,
-          width: "100%",
-          boxSizing: "border-box",
-        }}
-      >
-        <code
-          className={`hljs ${language}`}
-          ref={codeRef}
-          style={{ fontSize: "13.5px", lineHeight: 1.7, background: "transparent" }}
-        >
-          {code}
-        </code>
-      </pre>
-    </CodeWrapper>
-  )
-}
+}) => (
+  <CodeWrapper>
+    <pre
+      style={{
+        background: "#111210",
+        border: "0.5px solid #2e2d2a",
+        borderRadius: "8px",
+        padding: "1.25rem 1.5rem",
+        overflowX: "auto",
+        margin: 0,
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      <code
+        className={`hljs ${language}`}
+        style={{ fontSize: "13.5px", lineHeight: 1.7, background: "transparent" }}
+        dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+      />
+    </pre>
+  </CodeWrapper>
+)
 
 const getCodePostAssetComponent = (
-  codeAssets: Record<string, string> | undefined,
+  codeAssets: Record<string, { raw: string; highlightedHtml: string }> | undefined,
 ) => {
   const C: FC<{ fileName: string; language: string | undefined | null }> = ({
     fileName,
@@ -71,14 +55,10 @@ const getCodePostAssetComponent = (
       return null
     }
 
-    const code = codeAssets[fileName]
-    let lang = ""
+    const asset = codeAssets[fileName]
+    const lang = language ? `language-${language}` : ""
 
-    if (language) {
-      lang = `language-${language}`
-    }
-
-    return <CodePostAsset language={lang} code={code} />
+    return <CodePostAsset language={lang} highlightedHtml={asset.highlightedHtml} />
   }
 
   return C

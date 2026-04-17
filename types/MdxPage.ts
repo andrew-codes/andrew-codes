@@ -11,7 +11,7 @@ type MdxPage = {
   code: string
   slug: string
   readTime?: ReturnType<typeof calculateReadingTime>
-  codeAssets?: Record<string, string>
+  codeAssets?: Record<string, { raw: string; highlightedHtml: string }>
 
   frontmatter: {
     title?: string

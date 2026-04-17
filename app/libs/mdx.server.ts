@@ -85,10 +85,29 @@ const getMdxFiles = async (
     }, {})
 }
 
+const EXT_TO_LANGUAGE: Record<string, string> = {
+  ts: "typescript",
+  tsx: "typescript",
+  js: "javascript",
+  jsx: "javascript",
+  py: "python",
+  rb: "ruby",
+  sh: "bash",
+  bash: "bash",
+  css: "css",
+  html: "html",
+  json: "json",
+  yaml: "yaml",
+  yml: "yaml",
+  rs: "rust",
+  go: "go",
+}
+
 const getCodeAssets = async (
   mdxFile: MdxPageFile,
-): Promise<Record<string, string>> => {
+): Promise<Record<string, { raw: string; highlightedHtml: string }>> => {
   try {
+    const { default: hljs } = await import("highlight.js")
     const assetsFiles = await readDirFiles(
       path.join(
         mdxFile.filePath.replace(new RegExp(`${mdxFile.fileName}$`), ""),
@@ -98,14 +117,21 @@ const getCodeAssets = async (
     return assetsFiles
       .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
       .reduce(
-        (acc, [assetFilePath, assetFileContent]) => ({
-          ...acc,
-          [path.basename(assetFilePath)]: assetFileContent,
-        }),
+        (acc, [assetFilePath, raw]) => {
+          const ext = assetFilePath.split(".").at(-1) ?? ""
+          const language = EXT_TO_LANGUAGE[ext]
+          const highlightedHtml = language
+            ? hljs.highlight(raw, { language }).value
+            : hljs.highlightAuto(raw).value
+          return {
+            ...acc,
+            [path.basename(assetFilePath)]: { raw, highlightedHtml },
+          }
+        },
         {},
       )
   } catch (error) {
-    return {} as Record<string, string>
+    return {}
   }
 }
 

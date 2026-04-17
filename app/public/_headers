@@ -1,0 +1,19 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=3153600000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: font-src 'self'; frame-src 'self' https://www.youtube.com; img-src 'self' data:; media-src 'self' data: blob: https://www.youtube.com; script-src 'unsafe-inline' 'unsafe-eval' 'self'; script-src-attr 'unsafe-inline'
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/files/*
+  Cache-Control: public, max-age=31536000, immutable
