@@ -43,8 +43,10 @@ const mdx = async (
 
     esbuildOptions(options, frontmatter) {
       options.minify = true
-      // Emit all MDX file assets to the globally served static directory.
-      options.outdir = path.resolve("app", "public", "files")
+      options.outdir =
+        process.env.NODE_ENV === "production"
+          ? path.resolve("build", "client", "files")
+          : path.resolve("app", "public", "files")
       options.loader = {
         ...options.loader,
         ".png": "file",
