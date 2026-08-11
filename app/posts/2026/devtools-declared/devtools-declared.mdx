@@ -19,7 +19,7 @@ Four months later the Ansible is gone. The entire `ansible/` tree went in one co
 The push came from Kun Chen's [L8 Principal's Agentic Dev Environment From Scratch](https://www.youtube.com/watch?v=5N-okeDdIuI), which is what finally made me look at Nix seriously instead of nodding at it from a distance.
 It also rekindled an itch I have been ignoring for years, to work entirely in the terminal. That one is a separate post, and I have not earned it yet.
 
-Publishing a reversal four months later is awkward, so let me start there.
+Publishing a reversal this quickly is awkward, so let me start there.
 
 ## What I Said in April
 
@@ -151,9 +151,9 @@ session-start hook script, invoked from pi's hooks and from Claude Code's settin
 They do not all share equally, and I would rather say so than draw a tidier diagram than the truth. Claude Code and pi overlap most, because they agree on the on-disk formats: a subagent is a markdown file with YAML front
 matter in both. Codex shares the instruction file and the ambient-context hooks. Where the formats diverge, one config still beats three.
 
-{/* IMAGE SUGGESTION: A fan-out diagram: source boxes on the left (home/AGENTS.md, home/.agents/skills, home/.pi/agent/agents, home/.config/mcp/mcp.json) with arrows to three harness boxes on the right (Claude Code, pi,
-Codex), each arrow labeled with its mechanism, "symlink" or "merged on activation". It earns its place by showing at a glance which agent gets which piece, including the uneven overlap the paragraph above admits to, and
-it sets up the next post. */}
+{/* IMAGE SUGGESTION: A fan-out diagram: source boxes on the left (home/AGENTS.md, home/.agents/skills, home/.pi/agent/agents, the shared session-start hook) with arrows to three harness boxes on the right (Claude Code,
+pi, Codex). It earns its place by showing at a glance which agent gets which piece, including the uneven overlap the paragraph above admits to, and it sets up the next post. Worth drawing the Codex arrows as the thinner
+set, since that asymmetry is the honest part. */}
 
 ## Final Thoughts
 
