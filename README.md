@@ -24,7 +24,8 @@ Feel free to ask me about simple and easy, any of my interests, or just to talk 
 
 ## Goals
 
-- Dedicate time each week to learn about Elixir
+- Go terminal-only, with vim as my driving editor
+- Explore how AI fits into my everyday developer workflows
 
 ## Connect With Me
 
