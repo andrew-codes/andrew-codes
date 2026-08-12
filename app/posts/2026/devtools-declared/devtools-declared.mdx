@@ -163,8 +163,8 @@ had a machine I could roll back.
 If you are running Ansible for your own workbench and it is working, I am not telling you to move. The learning curve here is real, and steeper than the one I called shallow in April. Nix's error messages are the worst
 part of the experience by some distance.
 
-What I did not expect is how much of this migration turned out not to be about machine setup at all. The largest share of what I added is agent harness: shared skills, subagent definitions more than one harness reads, a
-session-start hook that puts every git repo behind a review pipeline, and ambient-context tooling that has the state of my work in front of an agent on the first turn instead of costing it a tool call to go find. The
+What I did not expect is how much of this migration turned out not to be about machine setup at all. The largest share of what I added is agent harness: shared skills, subagent definitions more than one harness reads, and a
+session-start hook that puts every git repo behind a review pipeline. Ambient-context tooling has the state of my work in front of an agent on the first turn, instead of costing it a tool call to go find. The
 interesting question is not how any of that gets installed. It is what changes about how you work when the agent already knows where you left off.
 
 That is the next post.
