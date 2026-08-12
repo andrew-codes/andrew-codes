@@ -37,9 +37,7 @@ idempotent playbook still tells you nothing about what your machine looks like w
 An Ansible playbook is a sequence of tasks that converge on a result. To know the state you end up in, you read it top to bottom and simulate the machine in your head. Nix inverts that. `configuration.nix` and `home.nix`
 are not steps, they are a description of the finished machine, and `darwin-rebuild switch` reconciles the real machine to it.
 
-{/* IMAGE SUGGESTION: A two-panel before/after diagram. Left panel "Ansible": a vertical chain of numbered task boxes, each with its own small "already done?" diamond branching back into the chain, ending at a machine
-icon. Right panel "Nix": one document box labeled "desired state" with a single arrow labeled "reconcile" pointing at the machine icon. This is the central argument of the post and it lands much faster as a picture than
-as two paragraphs of prose, so it belongs right here, before the table. Producible in D2 or Excalidraw, no design skill needed. */}
+![Ansible versus Nix flow diagram](./public/files/ansible-nix-diagram.png)
 
 |                          | Ansible                           | nix-darwin                               |
 | :----------------------- | :-------------------------------- | :--------------------------------------- |
@@ -85,9 +83,7 @@ rediscover the fix missing on the next machine. That entire category of bug is g
 
 > The repo is not something I install from any more. It is the thing that is running.
 
-{/* IMAGE SUGGESTION: An annotated screenshot or carbon-style code image of the `home.file` block in home.nix, with two callout arrows: one on mkOutOfStoreSymlink labeled "points at the repo, not the Nix store", one on
-the ~/.dotfiles path prefix labeled "one symlink every path resolves through". It earns its place by making this section's claim concrete: the reader has just been told edits are live, and this is where they see the few
-lines that make it true. */}
+![home.nix symlinking of agent files](./public/files/home-nix-file-section.png)
 
 ## The Shell and the Terminal
 
@@ -97,8 +93,7 @@ deliberately off, because its `gco` and `glg` aliases would shadow my own script
 The terminal is [WezTerm](https://wezterm.org/), and I picked it for one reason above the others: it runs on macOS, Linux and Windows from the same configuration file. This repo supports macOS on Apple Silicon and nothing
 else today, and Windows is genuinely on my list rather than a thing I say. When I get there, I want the terminal to be the boring part.
 
-{/* IMAGE SUGGESTION: A WezTerm screenshot showing the starship prompt in a git repo (directory, branch, dirty status, command duration) with autosuggestion ghost text visible mid-typed. The shell is the thing the reader
-looks at all day, and one screenshot conveys more about it than the paragraph above. */}
+![Wezterm with starship prompt](./public/files/terminal.png)
 
 ## Applying a Change, and Undoing One
 
@@ -116,8 +111,7 @@ There is no equivalent for a playbook. The undo for an Ansible run that made you
 
 > Ansible can make a machine converge. It cannot make it go back.
 
-{/* IMAGE SUGGESTION: Terminal screenshot of `darwin-rebuild --list-generations`, showing several dated generations with the current one marked. It earns its place because rollback is the strongest single claim in this
-post, and a list of real generations with real dates proves it in a way the sentence above cannot. */}
+![Terminal screenshot of darwin-rebuild --list-generations](./public/files/nix-list-generation.png)
 
 ## The Windows Problem, Revisited
 
