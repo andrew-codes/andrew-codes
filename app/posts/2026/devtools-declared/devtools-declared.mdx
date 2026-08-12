@@ -1,0 +1,164 @@
+---
+title: My Developer Workbench, Declared
+description: >-
+  Four months ago I argued that Ansible was the right tool for automating my dev environment. I have since deleted all of it and replaced it with Nix. Here is what changed my mind.
+date: 2026-08-10
+category: engineering
+tags:
+  - devtools
+  - automation
+  - nix
+  - zsh
+  - ansible
+  - featured
+---
+
+In April I published [My Developer Workbench, Revisited](https://andrew.codes/posts/devtools-revisited), where I threw out a pile of bash scripts, replaced them with Ansible, and made a confident case for the change.
+Four months later the Ansible is gone. The entire `ansible/` tree went in one commit: 37 playbooks, two inventories, and the shared `group_vars/all.yml`. The `setup.sh` that drove it shrank from 555 lines to 19.
+
+The push came from Kun Chen's [L8 Principal's Agentic Dev Environment From Scratch](https://www.youtube.com/watch?v=5N-okeDdIuI), which is what finally made me look at Nix seriously instead of nodding at it from a distance.
+It also rekindled an itch I have been ignoring for years, to work entirely in the terminal. That one is a separate post, and I have not earned it yet.
+
+Publishing a reversal this quickly is awkward, so let me start there.
+
+## What I Said in April
+
+The argument I made was that bash forced me to hand-roll idempotency and Ansible did not:
+
+> Ansible was the right call for this because idempotency is not something you add to it. It is how it works.
+
+That sentence is still true about Ansible. What I got wrong is how much it buys you. Idempotency is a claim about what happens when you run the same thing twice, and it describes the run, not the result. A perfectly
+idempotent playbook still tells you nothing about what your machine looks like when it finishes.
+
+> Idempotency is a property of the run. What I actually wanted was a property of the machine.
+
+## Idempotent Is Not the Same as Declarative
+
+An Ansible playbook is a sequence of tasks that converge on a result. To know the state you end up in, you read it top to bottom and simulate the machine in your head. Nix inverts that. `configuration.nix` and `home.nix`
+are not steps, they are a description of the finished machine, and `darwin-rebuild switch` reconciles the real machine to it.
+
+![Ansible versus Nix flow diagram](./public/files/ansible-nix-diagram.png)
+
+|                          | Ansible                           | nix-darwin                               |
+| :----------------------- | :-------------------------------- | :--------------------------------------- |
+| The configuration is     | a list of tasks to run            | a description of the result              |
+| Idempotency comes from   | each module asserting its own     | the model itself                         |
+| A run that fails halfway | leaves a machine in neither state | leaves the previous generation untouched |
+| Deleting a line          | does nothing to the machine       | removes the thing on the next rebuild    |
+
+That second row is the one that matters. Ansible's guarantee is only as strong as the weakest module in the playbook, and the moment you reach for `command` or `shell`, which in a machine-setup playbook is constantly, you
+are back to writing the checks by hand.
+
+> Ansible did not remove the defensive boilerplate. It gave it a schema.
+
+## So What Is the New Setup?
+
+`flake.nix` is the whole entry point, and it pins four inputs:
+
+| Input                            | Responsibility           |
+| :------------------------------- | :----------------------- |
+| nixpkgs (`nixpkgs-26.05-darwin`) | The package set          |
+| nix-darwin (`nix-darwin-26.05`)  | System-level macOS state |
+| home-manager (`release-26.05`)   | User-level state         |
+| nix-homebrew                     | Manages Homebrew itself  |
+
+Everything resolves from a single `darwinConfigurations."mac"`, and one `user = "andrew"` line is the only thing you need to change if you are not me.
+
+`configuration.nix` holds what belongs to the machine: macOS defaults, the login shell, and the Homebrew formulae and casks. `home.nix` holds everything scoped to my account: the nixpkgs CLI toolchain, zsh and starship,
+every dotfile symlink, and the activation scripts.
+
+## The Dotfiles Are Not Copies
+
+This is the part I would keep even if I left Nix tomorrow.
+
+Setup symlinks the repo checkout to `~/.dotfiles`, and every path in `home.nix` resolves through that link. The files themselves are linked with `mkOutOfStoreSymlink`, home-manager's escape hatch: instead of copying a
+file into the read-only Nix store and linking there, it points `~/.config/wezterm` at the actual file inside my checkout. My git config, Neovim, the agent harness config, and every script in `~/.local/bin` work the same
+way.
+
+The mechanism is small. The consequence is not.
+
+Editing `~/.config/wezterm/wezterm.lua` is editing the file in the repo. No copy step, no rebuild to pick the change up, and no moment where the machine and the repo disagree about what my config says. Every setup I wrote
+before this one, bash and Ansible both, copied or templated files into place, so the machine started drifting from the repo the instant I edited either one. I would fix something at 11pm, forget to backport it, and
+rediscover the fix missing on the next machine. That entire category of bug is gone, because there is only ever one file.
+
+> The repo is not something I install from any more. It is the thing that is running.
+
+![home.nix symlinking of agent files](./public/files/home-nix-file-section.png)
+
+## The Shell and the Terminal
+
+bash is gone. It is zsh now, with oh-my-zsh, the native autosuggestion module (`Ctrl-F` accepts the ghost text), syntax highlighting, and [starship](https://starship.rs/) for the prompt. The oh-my-zsh `git` plugin is
+deliberately off, because its `gco` and `glg` aliases would shadow my own scripts of the same name.
+
+The terminal is [WezTerm](https://wezterm.org/), and I picked it for one reason above the others: it runs on macOS, Linux and Windows from the same configuration file. This repo supports macOS on Apple Silicon and nothing
+else today, and Windows is genuinely on my list rather than a thing I say. When I get there, I want the terminal to be the boring part.
+
+![Wezterm with starship prompt](./public/files/terminal.png)
+
+## Applying a Change, and Undoing One
+
+`devtools-rebuild`, from anywhere. It re-points `~/.dotfiles`, trusts any Homebrew taps that actually have something installed from them, and hands off to `darwin-rebuild switch --flake ~/.dotfiles#mac`. A clean machine
+takes `./setup.sh`, which bootstraps Determinate Nix itself, so nothing has to be preinstalled.
+
+Every switch creates a generation, and generations are addressable:
+
+```bash
+darwin-rebuild --list-generations
+darwin-rebuild --rollback
+```
+
+There is no equivalent for a playbook. The undo for an Ansible run that made your machine worse is to work out what it did and then write more Ansible.
+
+> Ansible can make a machine converge. It cannot make it go back.
+
+![Terminal screenshot of darwin-rebuild --list-generations](./public/files/nix-list-generations.png)
+
+## The Windows Problem, Revisited
+
+The April post had a section called The Windows Problem, about the WinRM-over-WSL bootstrap dance, and I described it as something that took some iteration to get right. I should have said it more plainly: Ansible cannot
+run on Windows as a control node at all. That is [upstream policy](https://docs.ansible.com/projects/ansible/latest/installation_guide/intro_installation.html), not a gap in my setup. WSL was never a clever workaround, it
+was the only door into the building.
+
+The new setup does not solve that either. It supports macOS on Apple Silicon, and `setup.sh` prints what it detected and exits on anything else. I traded a setup that covered two platforms badly for one that covers one
+platform well, and I am not going to dress that up as a simplification. It is also not permanent: `home.nix` already branches its git and SSH config on the platform, and the terminal is portable by design.
+
+## Where Nix Does Not Save You
+
+A declarative model does not make the platform underneath it declarative.
+
+Mac App Store apps cannot be installed from inside activation at all. nix-darwin runs `brew bundle` without `launchctl asuser`, so it lands outside my per-user launchd session, and `mas` reaches the App Store through
+StoreAgent, which lives in that session. The app list therefore sits in `mas-apps.nix` and gets applied by `setup/macOS.sh` as the real user, with a comment explaining why so nobody helpfully fixes it in six months.
+
+`homebrew.onActivation.cleanup = "none"` undercuts a row in my own table: with cleanup off, deleting a line from `brews` uninstalls nothing. That is deliberate. These machines carry plenty of software I never intend to
+manage here. The declarative property holds for the nixpkgs half of this config and not the Homebrew half.
+
+And Ansible is still installed, right there in `home.packages`. I still use it for other things. It just does not run my machine any more.
+
+## One Configuration, Three Agents
+
+The piece I am most pleased with is not really about Nix at all.
+
+I run three coding agents, Claude Code, [pi](https://pi.dev/), and Codex, and they used to mean three copies of everything. A single `home/AGENTS.md` is now symlinked to both `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`,
+so the standing instructions are written once. Skills live in `home/.agents/skills/` and subagent definitions in `home/.pi/agent/agents/`, and Claude Code and pi both point at those same directories. They share one
+session-start hook script, invoked from pi's hooks and from Claude Code's settings.
+
+They do not all share equally, and I would rather say so than draw a tidier diagram than the truth. Claude Code and pi overlap most, because they agree on the on-disk formats: a subagent is a markdown file with YAML front
+matter in both. Codex shares the instruction file and the ambient-context hooks. Where the formats diverge, one config still beats three.
+
+{/* IMAGE SUGGESTION: A fan-out diagram: source boxes on the left (home/AGENTS.md, home/.agents/skills, home/.pi/agent/agents, the shared session-start hook) with arrows to three harness boxes on the right (Claude Code,
+pi, Codex). It earns its place by showing at a glance which agent gets which piece, including the uneven overlap the paragraph above admits to, and it sets up the next post. Worth drawing the Codex arrows as the thinner
+set, since that asymmetry is the honest part. */}
+
+## Final Thoughts
+
+The April post was not wrong that bash was the problem, or that Ansible beats bash at this. It was wrong about how far that gets you. Convergence is a weaker promise than description, and I did not feel the gap until I
+had a machine I could roll back.
+
+If you are running Ansible for your own workbench and it is working, I am not telling you to move. The learning curve here is real, and steeper than the one I called shallow in April. Nix's error messages are the worst
+part of the experience by some distance.
+
+What I did not expect is how much of this migration turned out not to be about machine setup at all. The largest share of what I added is agent harness: shared skills, subagent definitions more than one harness reads, and a
+session-start hook that puts every git repo behind a review pipeline. Ambient-context tooling has the state of my work in front of an agent on the first turn, instead of costing it a tool call to go find. The
+interesting question is not how any of that gets installed. It is what changes about how you work when the agent already knows where you left off.
+
+That is the next post.
