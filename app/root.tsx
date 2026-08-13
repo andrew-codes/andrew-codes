@@ -1,13 +1,7 @@
 import Box from "@mui/joy/Box"
 import { CssVarsProvider } from "@mui/joy/styles"
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript"
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router"
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
 import { type FC } from "react"
 import { PHProvider } from "./analytics/PostHogProvider"
 import Baseline from "./components/Baseline"
