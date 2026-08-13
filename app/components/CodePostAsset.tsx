@@ -18,39 +18,42 @@ const CodeWrapper = styled.div`
   }
 `
 
-const CodePostAsset: FC<{ highlightedHtml: string; language: string }> = ({
-  highlightedHtml,
-  language,
-}) => (
-  <CodeWrapper>
-    <pre
-      style={{
-        background: "#111210",
-        border: "0.5px solid #2e2d2a",
-        borderRadius: "8px",
-        padding: "1.25rem 1.5rem",
-        overflowX: "auto",
-        margin: 0,
-        width: "100%",
-        boxSizing: "border-box",
-      }}
-    >
-      <code
-        className={`hljs ${language}`}
-        style={{ fontSize: "13.5px", lineHeight: 1.7, background: "transparent" }}
-        dangerouslySetInnerHTML={{ __html: highlightedHtml }}
-      />
-    </pre>
-  </CodeWrapper>
-)
+const CodePostAsset: FC<{
+  highlightedHtml?: string
+  code?: string
+  language: string
+}> = ({ highlightedHtml, code, language }) => {
+  const codeClassName = `hljs ${language}`
+  const codeStyle = { fontSize: "13.5px", lineHeight: 1.7, background: "transparent" }
 
-const getCodePostAssetComponent = (
-  codeAssets: Record<string, { raw: string; highlightedHtml: string }> | undefined,
-) => {
-  const C: FC<{ fileName: string; language: string | undefined | null }> = ({
-    fileName,
-    language,
-  }) => {
+  return (
+    <CodeWrapper>
+      <pre
+        style={{
+          background: "#111210",
+          border: "0.5px solid #2e2d2a",
+          borderRadius: "8px",
+          padding: "1.25rem 1.5rem",
+          overflowX: "auto",
+          margin: 0,
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        {highlightedHtml ? (
+          <code className={codeClassName} style={codeStyle} dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
+        ) : (
+          <code className={codeClassName} style={codeStyle}>
+            {code}
+          </code>
+        )}
+      </pre>
+    </CodeWrapper>
+  )
+}
+
+const getCodePostAssetComponent = (codeAssets: Record<string, { raw: string; highlightedHtml: string }> | undefined) => {
+  const C: FC<{ fileName: string; language: string | undefined | null }> = ({ fileName, language }) => {
     if (!codeAssets) {
       return null
     }

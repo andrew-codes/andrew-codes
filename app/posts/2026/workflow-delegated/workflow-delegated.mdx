@@ -1,0 +1,154 @@
+---
+title: My Developer Workflow, Delegated
+description: >-
+  I went from VS Code to Zed to a terminal-only agentic workflow. Here is the tooling that finally let me run several threads of work at once, and what it cost me to get there.
+date: 2026-08-12
+category: engineering
+tags:
+  - devtools
+  - ai
+  - agents
+  - workflow
+  - featured
+---
+
+[My Developer Workbench, Declared](https://andrew.codes/posts/devtools-declared) ended on a question I did not answer: what changes about how you work when the agent already knows where you left off. This post is the
+answer, and it took me two abandoned setups and one video to get there.
+
+## TL;DR
+
+I have been running this workflow for three days, on open source work on GitHub and on my day job. Against a comparable stretch before it, my daily contributions on GitHub went up almost 500%. I used to open a PR
+every few days. In one of those three days I merged 7 PRs.
+
+The experience is stranger than the number. I am not the one writing the code, and I am not the one keeping track of what is in flight. I say what needs doing, answer questions when they come up, and review the
+evidence that the work is done.
+
+Three days is a short window and I am not going to claim more from it than it can carry. This is only the beginning. I am still learning the workflow and how to use it most effectively.
+
+![Running several threads of work with firstmate](./public/files/firstmate-usage.png)
+
+## Where I Started
+
+VS Code was my editor for years, and it was the first thing to break when I started trying to run more than one piece of work at a time.
+
+The unit of parallel work in git is the worktree, a second checkout of the same repository that lets two branches exist on disk at once. VS Code opens each worktree in its own window. Every worktree I created meant
+another window, and at a glance they all looked the same. I spent real time working out which window held which branch, and I got it wrong often enough to notice.
+
+Zed came next and fixed exactly that: worktrees live in the same window, and switching between them does not spawn a new one. That was a genuine improvement and I stayed there a while.
+
+Somewhere in the middle of all this I tried going terminal-only. I had tried that once before, earlier in my career. It ended with me learning some vim and not staying with it long enough to get as effective as I wanted
+to be. The second attempt did not last much longer than the first.
+
+## What Was Actually Broken
+
+The windows were a symptom. The problem was that I was the scheduler.
+
+Every thread of work I started was a thread I had to hold in my head: what it was doing, how far along it was, and whether it was waiting on me. That last one is the expensive part. An agent that has stopped to ask a
+question looks exactly like an agent that is still working. The only way to tell them apart is to go and look. So I polled. I rotated through worktrees checking for a prompt, and the cost of rotating grew faster than the
+work I got out of it.
+
+> Two threads of work were fine. Four made me the bottleneck.
+
+Neither editor was at fault here, since I was asking an editor to be a work queue, and that is not what an editor is. My conclusion at the time was that the tooling had not caught up yet, and I left it there.
+
+|                           | VS Code      | Zed                   | Where I am now         |
+| :------------------------ | :----------- | :-------------------- | :--------------------- |
+| A new worktree costs      | a new window | a switch, same window | one command, same pane |
+| Knowing a thread is stuck | go and look  | go and look           | it asks me             |
+| Scheduling the work is    | my job       | my job                | firstmate's job        |
+
+## The Turning Point
+
+Then I watched Kun Chen's [walkthrough of his agentic dev workflow](https://youtu.be/iQyg-KypKAA?si=s6POp38DZ4McyDdi). It runs about 45 minutes and is worth all 45 of them. The last post started with a different video of
+his, which makes this the second time one of his videos has rearranged how I work.
+
+Full disclosure before you spend the time: the workflow is terminal-only. Having already failed at terminal-only twice, I expected that to be the part that lost me. It was not. My earlier attempts died because I was
+rebuilding an IDE out of terminal parts and arriving at a worse IDE. This is not that. The terminal is where work gets dispatched and inspected, not where I sit reading every line of code.
+
+What it is, concretely, is a handful of focused CLI tools that each do one job and are tuned to conserve token consumption: [treehouse](https://github.com/kunchenguid/treehouse),
+[no-mistakes](https://kunchenguid.github.io/no-mistakes/), and integrations with outside services through [AXI](https://axi.md). AXI is what these tools reach for when the work has to leave the machine, a focused CLI per
+outside service, GitHub and the browser included. This is where I landed, and the rest of this post is those tools and what running them has been like.
+
+## treehouse
+
+treehouse manages worktrees, and it is the smallest of these tools by a wide margin.
+
+Creating one is a single command:
+
+```bash
+treehouse
+```
+
+That creates a worktree and switches to it in a new shell session, in the terminal pane I am already looking at. Nothing new opens, and exiting the session cleans the worktree up automatically and frees it for re-use
+later.
+
+What it removes is a minute of ceremony from an operation I now do many times a day. That sounds minor written down, but it is the difference between starting a worktree because a thought occurred to me and deciding the
+thought was not worth the setup.
+
+> Cheap worktrees change what you are willing to start.
+
+## no-mistakes
+
+no-mistakes makes sure work lands with, wait for it, no mistakes.
+
+Running the CLI starts an agentic workflow over the branch. It is configurable, and it works unconfigured, which is how I ran it for the first couple of weeks. The mechanical phases are the ones you would guess:
+rebasing, linting, formatting, and testing.
+
+Those phases are not where the value is. The review and document phases are.
+
+Review is a thorough pass over the branch, and when it finds a problem it fixes the problem rather than filing it. It also evaluates how risky the branch's changes are and flags the ones that warrant a human read. That
+handoff happens inside the run, so I answer in the loop and it carries on from where it stopped. Once the branch settles, it opens a PR, and the description carries both a real account of the change and supporting
+evidence that the change works.
+
+## Moving the Bottleneck
+
+That last part, the evidence, is what makes the rest of this viable.
+
+An agent writing and designing code does not remove the bottleneck. It moves the bottleneck, from writing code to reviewing code. If every line has to pass under my eyes before it ships, my throughput is capped by how
+fast I read, and running more agents only makes the queue longer. There is no version of that arrangement where I multiply my productivity.
+
+The way out is to review less code, which is an alarming thing to say unless you put something in its place. Evidence is the something. I do not need to read a diff to believe a feature works when I can watch it work.
+
+So I have no-mistakes configured to write and run an end-to-end test derived from what changed on the branch, drive the feature the way a user would, and take screenshots on the way through. Those screenshots are
+uploaded into the PR description. I look at the screenshots.
+
+> I still review every branch. I review the evidence instead of the implementation.
+
+## firstmate
+
+treehouse made worktrees cheap. no-mistakes made landing them safe. Neither one addressed what I was complaining about at the top of this post, which is that I was still the one holding every thread.
+
+[firstmate](https://github.com/kunchenguid/firstmate) is the missing piece, and it runs with any model and any agent harness. I open an agent session inside a clone of the firstmate repo and give it a body of work plus a
+repository URL. From there it clones the repo, manages the worktrees, and drives the work to a merged PR.
+
+Four properties of it matter more than the rest:
+
+- **A process per body of work**: firstmate spawns a new agent session, in its own process, for each body of work. Those sessions are free to use their own subagents for whatever their specific work requires.
+- **One session I talk to**: I interact only with the firstmate session. When any sub-process needs input, the question bubbles up and is asked there, and my answer is funneled back down to the process that asked for it.
+  Nothing waits silently, so the polling problem from earlier in this post is gone.
+- **Done means merged**: it does not stop at "PR opened". Sub-processes monitor their PRs and the CI running on them. A failed test, a lint failure, a branch that has fallen too many commits behind main, all of it is
+  fixed automatically and run back through the same no-mistakes workflow. The process stops when the PR is merged, and the worktree is cleaned up behind it.
+- **State survives the session**: the state of each work item is persistent. I can start several streams of work, then pause them, stop them, or kill the sessions outright. A new firstmate session tomorrow picks them up
+  when I tell it to continue where it left off.
+
+That last one took the longest to trust and is the one I would miss most.
+
+## What This Cost Me
+
+None of this was free, and what it cost was not tooling.
+
+I have had to give up micro-managing the code that comes out of the other end. I care about whether the thing works. I care much less than I used to about how it is built. That has been a hard change to make, and I am
+not going to claim I made it gracefully. I still open diffs I have no business opening.
+
+What got me through it was admitting that shipping a feature beats not shipping it because I was busy being precious about how I built it. That is obvious on the page. It was not obvious while I was doing the opposite.
+
+## Final Thoughts
+
+I have always put heavy weight on code quality, and for me that has meant simplicity of design. I did not build quality in for its own sake. I did it because quality code is cheaper to change when the next feature
+arrives, and there is always a next feature.
+
+AI moves that argument. The cost of making changes is getting cheaper on its own, and it keeps getting cheaper for as long as the features I already have keep working. That condition is doing all of the work in the
+sentence. Quality has to be asserted somewhere, and if it is not asserted in the design, it has to be asserted in the evidence.
+
+If I can assert that features work at the speed AI can write them, the entire dynamic changes. I do not know yet what replaces the argument I have been making for most of my career. I am fairly confident that argument is
+not coming back.
