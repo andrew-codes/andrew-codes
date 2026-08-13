@@ -26,7 +26,18 @@ const tryFormatDate = (
   locale: Intl.LocalesArgument = "en-us",
 ) => {
   try {
-    return new Date(dateString).toLocaleDateString(locale, options)
+    // timeZone must be pinned to UTC (not left to the runtime default): this
+    // is prerendered at build time on one machine and re-rendered again at
+    // hydration time in the visitor's browser. Post dates are stored as
+    // date-only strings (e.g. "2026-08-10"), which Date parses as UTC
+    // midnight, so formatting in whatever the *local* timezone happens to be
+    // gives a different calendar day on either side of that UTC instant.
+    // Pinning to UTC makes the output identical everywhere, matching the
+    // date the author actually wrote in the frontmatter.
+    return new Date(dateString).toLocaleDateString(locale, {
+      ...options,
+      timeZone: "UTC",
+    })
   } catch {
     return ""
   }
