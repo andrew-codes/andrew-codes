@@ -12,14 +12,24 @@ import { useTheme } from "@mui/joy/styles"
 import styled from "@mui/joy/styles/styled"
 import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "react-router"
-import { FC, MouseEvent, PropsWithChildren, useEffect, useState } from "react"
+import { FC, Fragment, MouseEvent, PropsWithChildren, useEffect, useState } from "react"
+
+// Image (below) renders a block-level <div> wrapper for its full-bleed
+// breakout positioning. MDX/remark still wraps a markdown paragraph that
+// contains only an image - `![alt](src)` on its own line - in a <p>, and a
+// <div> is not permitted inside <p> per the HTML5 content model. A browser
+// parsing server-rendered HTML auto-closes the <p> before that <div>, so the
+// DOM it builds doesn't match the tree React asked for, and hydration fails
+// with a text/HTML structure mismatch. Any element whose children include an
+// image needs to skip its normal wrapper and pass the image through as-is.
+const hasImageChild = (children: PropsWithChildren<{}>["children"]): boolean => {
+  if (children == null) return false
+  const nodes = Array.isArray(children) ? children : [children]
+  return nodes.some((node: any) => !!node?.props?.src || hasImageChild(node?.props?.children))
+}
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
-  const hasImageChild = Array.isArray(props.children)
-    ? props.children.some((c: any) => c?.props?.src)
-    : !!(props.children as any)?.props?.src
-
-  if (hasImageChild) {
+  if (hasImageChild(props.children)) {
     return (
       <a href={props.href} style={{ display: "contents" }}>
         {props.children}
@@ -147,6 +157,10 @@ const Table = styled("table")({
 })
 
 const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
+  if (hasImageChild(props.children)) {
+    return <>{props.children}</>
+  }
+
   return (
     <Typography
       {...props}
@@ -177,6 +191,27 @@ const StyledBlockquote = styled("blockquote")({
   },
 })
 
+// MDX always includes the raw whitespace around a blockquote's content as a
+// leading/trailing string child, so `children.length > 1` is true even for a
+// blockquote around a single paragraph - this renders each non-string child
+// individually rather than trying to tell "one real child" apart from "more
+// than one" by counting.
+const renderBlockquoteChild = (child: any, key: number) => {
+  // A blockquote whose only content is a list ("> - one\n> - two") must be
+  // passed through as-is rather than unwrapped into Typography's <p> below:
+  // a <ul>/<ol> is not valid content for a <p>, and nesting one there causes
+  // the same class of hydration mismatch as the image-in-paragraph bug
+  // above - the browser's parser auto-closes the <p> before the block
+  // element, producing a DOM shape React didn't ask for. A paragraph
+  // child's type is our Paragraph component (MDX substitutes `p` uniformly),
+  // so this only affects genuinely non-paragraph block content.
+  if (child?.type && child.type !== Paragraph) {
+    return <Fragment key={key}>{child}</Fragment>
+  }
+
+  return <Typography key={key} {...child.props} level="body-md" sx={{ marginBottom: 3 }} />
+}
+
 const Blockquote: FC<
   PropsWithChildren<{ children: Array<{ props: Record<string, any> }> }>
 > = (props) => {
@@ -185,18 +220,15 @@ const Blockquote: FC<
       <StyledBlockquote>
         {props.children
           .filter((child) => typeof child !== "string")
-          .map((child, index) => {
-            return (
-              <Typography
-                key={index}
-                {...child.props}
-                level="body-md"
-                sx={{ marginBottom: 3 }}
-              />
-            )
-          })}
+          .map(renderBlockquoteChild)}
       </StyledBlockquote>
     )
+  }
+
+  const [child] = Array.isArray(props.children) ? props.children : [props.children]
+
+  if ((child as any)?.type && (child as any).type !== Paragraph) {
+    return <blockquote>{child}</blockquote>
   }
 
   return (

@@ -8,6 +8,7 @@ import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "react-router"
 import { FC } from "react"
 import { MdxPage } from "types"
+import { tryFormatDate } from "../libs/utils"
 
 const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
   return (
@@ -32,7 +33,7 @@ const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
           </Typography>
           {post.frontmatter.date && (
             <Typography level="body-xs">
-              <time>{new Date(post.frontmatter?.date).toLocaleDateString()}</time>
+              <time>{tryFormatDate(post.frontmatter.date)}</time>
             </Typography>
           )}
         </Stack>
