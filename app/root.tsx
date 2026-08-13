@@ -19,6 +19,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-US">
       <head>
+        {/*
+          Charset must be declared as a literal tag here, as the first child of
+          <head>, rather than via a route's `meta` export. React Router's <Meta />
+          only renders the *last matched route's* meta array (it does not merge
+          route meta with parent meta unless a route explicitly re-includes it),
+          so a charSet entry returned from this file's `meta` export gets silently
+          dropped by every leaf route that defines its own `meta` (title, og:*,
+          etc). Without an explicit charset - in neither the HTTP Content-Type
+          header nor the HTML - browsers fall back to a locale-based guess (often
+          windows-1252), which mangles multi-byte UTF-8 characters (em dashes,
+          curly quotes) in the server-rendered HTML and causes a React hydration
+          text mismatch once the client re-renders the correctly-decoded string.
+        */}
+        <meta charSet="utf-8" />
         <meta name="emotion-insertion-point" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="Software Engineer, Staff Engineer, Tech Lead, Full Stack Developer, JavaScript, React, Node.js" />
@@ -39,8 +53,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </html>
   )
 }
-
-export const meta = () => [{ charSet: "utf-8" }]
 
 export const links = () => [
   { rel: "icon", href: "/images/favicon.ico" },
