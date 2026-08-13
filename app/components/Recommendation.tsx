@@ -145,7 +145,7 @@ const Recommendation: FC<
             })}
           >
             <ModalClose
-              sx={{
+              sx={(theme) => ({
                 position: "absolute",
                 top: "-1rem",
                 right: "-1rem",
@@ -157,7 +157,25 @@ const Recommendation: FC<
                 "&:hover": {
                   backgroundColor: "#b0ada3",
                 },
-              }}
+                [theme.breakpoints.down("sm")]: {
+                  // At this breakpoint ModalDialog goes edge-to-edge
+                  // (width: 100%, borderRadius: 0), so there is no longer
+                  // a margin around it for a negative offset to float
+                  // into. Anchor inside the dialog instead.
+                  top: theme.spacing(1),
+                  right: theme.spacing(1),
+                },
+                // Sizing is governed by touch capability, not viewport
+                // width, so landscape phones and touch tablets also get
+                // the platform's minimum touch target regardless of
+                // whether they fall under the "sm" width breakpoint.
+                "@media (pointer: coarse), (hover: none)": {
+                  width: "44px",
+                  height: "44px",
+                  minWidth: "44px",
+                  minHeight: "44px",
+                },
+              })}
             />
             <Box
               sx={(theme) => ({
@@ -166,6 +184,9 @@ const Recommendation: FC<
                 padding: theme.spacing(2),
                 [theme.breakpoints.down("sm")]: {
                   maxHeight: "100vh",
+                  // Clear the close button, which now sits inside the
+                  // dialog's top-right corner instead of floating above it.
+                  paddingTop: theme.spacing(7),
                 },
               })}
             >
