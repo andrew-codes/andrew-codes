@@ -25,9 +25,7 @@ import { FC, Fragment, MouseEvent, PropsWithChildren, useEffect, useState } from
 const hasImageChild = (children: PropsWithChildren<{}>["children"]): boolean => {
   if (children == null) return false
   const nodes = Array.isArray(children) ? children : [children]
-  return nodes.some(
-    (node: any) => !!node?.props?.src || hasImageChild(node?.props?.children),
-  )
+  return nodes.some((node: any) => !!node?.props?.src || hasImageChild(node?.props?.children))
 }
 
 const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
@@ -211,9 +209,7 @@ const renderBlockquoteChild = (child: any, key: number) => {
     return <Fragment key={key}>{child}</Fragment>
   }
 
-  return (
-    <Typography key={key} {...child.props} level="body-md" sx={{ marginBottom: 3 }} />
-  )
+  return <Typography key={key} {...child.props} level="body-md" sx={{ marginBottom: 3 }} />
 }
 
 const Blockquote: FC<

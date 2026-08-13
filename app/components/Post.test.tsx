@@ -18,15 +18,11 @@ import { Link, Paragraph } from "./Post"
 // The fix: Paragraph (the `p` override) detects when its content is (or
 // contains, e.g. a linked image) an image and renders it unwrapped, instead
 // of inside a <p>.
-const FakeImage = (props: { src: string; alt: string }) => (
-  <img data-testid="image" src={props.src} alt={props.alt} />
-)
+const FakeImage = (props: { src: string; alt: string }) => <img data-testid="image" src={props.src} alt={props.alt} />
 
 describe("Paragraph", () => {
   it("renders ordinary text inside a <p>", () => {
-    const html = renderToStaticMarkup(
-      <Paragraph>Some ordinary paragraph text.</Paragraph>,
-    )
+    const html = renderToStaticMarkup(<Paragraph>Some ordinary paragraph text.</Paragraph>)
 
     expect(html).toMatch(/<p[ >][^]*Some ordinary paragraph text\.[^]*<\/p>/)
   })
