@@ -48,8 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      issues: read
-      pull-requests: read
+      checks: read
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
@@ -59,20 +58,20 @@ jobs:
           node-version: "22.14.0"
       - run: corepack enable
       - run: yarn install --immutable
-      - name: Wait for Cloudflare commit preview deployment
+      - name: Wait for Cloudflare Workers Build check
         id: cf-preview
         env:
           REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        # The cloudflare-workers-and-pages bot posts one PR comment per branch
-        # and edits it in place on every push, so it may not exist yet, or may
-        # still reflect a previous commit, when this job starts (the
-        # Cloudflare build is async and can lag behind this CI run). Poll
-        # until the comment's "Latest Commit" column matches this PR's head
-        # SHA, then pull the Commit Preview URL (immutable, tied to this exact
-        # commit) out of that row - never the Branch Preview URL, which is
-        # overwritten by later pushes and can't be trusted to match.
+        # Cloudflare's Workers Builds git integration publishes a real GitHub
+        # Check Run (app cloudflare-workers-and-pages, name "Workers Builds:
+        # <script>") directly against this commit SHA - unlike the bot's PR
+        # comment, the check-runs API is already scoped to the exact commit,
+        # so there's no separate SHA-matching step. The build is async and can
+        # still be queued/in_progress when this job starts, so poll until it
+        # completes. Its output.summary has a "Preview URL:" line (tied to
+        # this commit) and a separate "Preview Alias URL:" line (the branch
+        # one, overwritten by later pushes) - only the former is used.
         run: |
           set -euo pipefail
           TIMEOUT_SECONDS=900
@@ -80,21 +79,27 @@ jobs:
           ELAPSED=0
 
           while [ "$ELAPSED" -lt "$TIMEOUT_SECONDS" ]; do
-            COMMENT_BODY=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" \
-              --jq '[.[] | select(.user.login == "cloudflare-workers-and-pages[bot]")] | last | .body // empty')
+            CHECK_RUN=$(gh api "repos/$REPO/commits/$HEAD_SHA/check-runs" \
+              --jq '[.check_runs[] | select(.app.slug == "cloudflare-workers-and-pages")] | sort_by(.started_at) | last // empty')
 
-            if [ -n "$COMMENT_BODY" ]; then
-              COMMIT_LINE=$(printf '%s\n' "$COMMENT_BODY" | grep -F 'Commit Preview URL' | tail -1 || true)
-              if [ -n "$COMMIT_LINE" ]; then
-                COMMENT_SHA=$(printf '%s' "$COMMIT_LINE" | awk -F'|' '{gsub(/^[ \t]+|[ \t]+$/, "", $4); print $4}')
-                if [ -n "$COMMENT_SHA" ] && [ "${HEAD_SHA#"$COMMENT_SHA"}" != "$HEAD_SHA" ]; then
-                  PREVIEW_URL=$(printf '%s' "$COMMIT_LINE" | grep -oE "href='[^']+'>Commit Preview URL" | grep -oE "href='[^']+'" | sed "s/href='//;s/'$//")
-                  if [ -n "$PREVIEW_URL" ]; then
-                    echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
-                    echo "Matched Cloudflare deployment for commit $HEAD_SHA: $PREVIEW_URL"
-                    exit 0
-                  fi
+            if [ -n "$CHECK_RUN" ]; then
+              STATUS=$(printf '%s' "$CHECK_RUN" | jq -r '.status')
+              if [ "$STATUS" = "completed" ]; then
+                CONCLUSION=$(printf '%s' "$CHECK_RUN" | jq -r '.conclusion')
+                if [ "$CONCLUSION" != "success" ]; then
+                  echo "::error::Cloudflare Workers Build check for commit $HEAD_SHA completed with conclusion '$CONCLUSION', not 'success'" >&2
+                  exit 1
                 fi
+
+                PREVIEW_URL=$(printf '%s' "$CHECK_RUN" | jq -r '.output.summary // ""' | grep -oE '^Preview URL: .*' | sed -E 's/^Preview URL: //')
+                if [ -n "$PREVIEW_URL" ]; then
+                  echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
+                  echo "Cloudflare Workers Build ready for commit $HEAD_SHA: $PREVIEW_URL"
+                  exit 0
+                fi
+
+                echo "::error::Cloudflare Workers Build check for commit $HEAD_SHA completed successfully but no 'Preview URL:' line was found in its summary" >&2
+                exit 1
               fi
             fi
 
@@ -102,7 +107,7 @@ jobs:
             ELAPSED=$((ELAPSED + INTERVAL_SECONDS))
           done
 
-          echo "::error::Timed out after ${TIMEOUT_SECONDS}s waiting for a Cloudflare preview comment matching commit $HEAD_SHA on PR #$PR_NUMBER" >&2
+          echo "::error::Timed out after ${TIMEOUT_SECONDS}s waiting for the Cloudflare Workers Build check run to complete for commit $HEAD_SHA" >&2
           exit 1
       - name: Run Cypress against Cloudflare commit preview
         env:
