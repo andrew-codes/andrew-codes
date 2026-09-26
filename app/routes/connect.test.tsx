@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest"
 import { ConnectPageContent, LINKEDIN_PROFILE_URL, loader } from "./connect"
 
 describe("connect route", () => {
-  it("renders James Andrew Smith as the page header", async () => {
+  it("renders Andrew Smith as the page header", async () => {
     const qrCodeSvg = await QRCode.toString(LINKEDIN_PROFILE_URL, {
       type: "svg",
       margin: 1,
@@ -12,7 +12,18 @@ describe("connect route", () => {
 
     const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
 
-    expect(html).toContain("James Andrew Smith")
+    expect(html).toContain("Andrew Smith")
+  })
+
+  it("renders the headshot beside the name", async () => {
+    const qrCodeSvg = await QRCode.toString(LINKEDIN_PROFILE_URL, {
+      type: "svg",
+      margin: 1,
+    })
+
+    const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
+
+    expect(html).toContain("/images/andrew-smith.webp")
   })
 
   it("renders the subtitle with title and current company", async () => {

@@ -1,5 +1,4 @@
 import Box from "@mui/joy/Box"
-import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import QRCode from "qrcode"
@@ -22,14 +21,16 @@ const loader = async (_args: LoaderFunctionArgs) => {
   return { qrCodeSvg }
 }
 
+const HEADSHOT_SRC = "/images/andrew-smith.webp"
+
 const meta: MetaFunction = () => {
   return [
     {
-      title: "James Andrew Smith | Connect",
+      title: "Andrew Smith | Connect",
     },
     {
       name: "description",
-      content: "Scan this QR code to connect with James Andrew Smith on LinkedIn.",
+      content: "Scan this QR code to connect with Andrew Smith on LinkedIn.",
     },
   ]
 }
@@ -47,19 +48,31 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       py: 4,
     }}
   >
-    <Box>
-      <Typography level="h1" fontWeight={900} sx={{ fontSize: "2.5rem" }}>
-        James Andrew Smith
-      </Typography>
-      <Divider sx={{ mx: "2rem" }}>
-        <Typography level="body-lg" sx={{ fontSize: "1.25rem" }}>
+    <Stack direction="row" spacing={2} alignItems="center">
+      <Box
+        component="img"
+        src={HEADSHOT_SRC}
+        alt="Andrew Smith"
+        sx={{
+          width: "4.5rem",
+          height: "4.5rem",
+          borderRadius: "50%",
+          objectFit: "cover",
+          flexShrink: 0,
+        }}
+      />
+      <Box sx={{ textAlign: "left" }}>
+        <Typography level="h1" fontWeight={900} sx={{ fontSize: "1.75rem" }}>
+          Andrew Smith
+        </Typography>
+        <Typography level="body-lg" sx={{ fontSize: "1rem" }}>
           Principal Software Engineer @ Atlassian
         </Typography>
-      </Divider>
-    </Box>
+      </Box>
+    </Stack>
     <Box
       role="img"
-      aria-label="QR code linking to James Andrew Smith's LinkedIn profile"
+      aria-label="QR code linking to Andrew Smith's LinkedIn profile"
       sx={{
         width: "100%",
         maxWidth: "20rem",
