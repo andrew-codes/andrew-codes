@@ -34,6 +34,7 @@ export default {
       "/",
       "/posts",
       "/recommendations",
+      "/connect",
       ...slugs.map((slug) => `/posts/${slug}`),
       ...uniqueTags.map((tag) => `/tags/${tag}`),
     ]
