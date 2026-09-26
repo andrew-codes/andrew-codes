@@ -3,7 +3,7 @@ import { merge } from "lodash-es"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import calculateReadingTime from "reading-time"
-import type { MdxPage, MdxPageFile } from "../types"
+import type { MdxListItem, MdxPage, MdxPageFile } from "../types"
 import { readDir, readDirFiles } from "./fs.server"
 
 type MdxOptions = {
@@ -156,4 +156,15 @@ const getMdxPages = async (_options: MdxOptions = {}, fileDirPath: string = "app
   return pages
 }
 
-export { getMdxPage, getMdxPages }
+// List views (posts index, tags, home) only render frontmatter/slug/readTime
+// via PostCard - never the bundled MDX `code` or `codeAssets`. Those fields
+// are the fully compiled, per-post JS and syntax-highlighted code blocks, so
+// including them in a list loader's response bloats its prerendered *.data
+// file to multiple megabytes, which is slow enough to fetch that route
+// transitions in e2e tests (and for real visitors) can time out.
+const getMdxListItems = async (options: MdxOptions = {}, fileDirPath: string = "app/posts", extraFilesPath: string = "app/components"): Promise<MdxListItem[]> => {
+  const pages = await getMdxPages(options, fileDirPath, extraFilesPath)
+  return pages.map(({ code: _code, codeAssets: _codeAssets, ...listItem }) => listItem)
+}
+
+export { getMdxListItems, getMdxPage, getMdxPages }

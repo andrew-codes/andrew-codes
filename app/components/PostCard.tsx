@@ -7,10 +7,10 @@ import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "react-router"
 import { FC } from "react"
-import { MdxPage } from "types"
+import { MdxListItem } from "types"
 import { tryFormatDate } from "../libs/utils"
 
-const PostCard: FC<{ post: MdxPage }> = ({ post }) => {
+const PostCard: FC<{ post: MdxListItem }> = ({ post }) => {
   return (
     <Card
       key={post.slug}
