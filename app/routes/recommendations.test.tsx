@@ -17,6 +17,14 @@ describe("recommendations route", () => {
 
     const html = renderToStaticMarkup(<Stub initialEntries={["/recommendations?priority=featured"]} />)
 
-    expect(html).toContain("Recommendations")
+    expect(html.indexOf("Denise Architetto")).toBeLessThan(html.indexOf("Keith Gargano"))
+  })
+
+  it("does not prioritize featured recommendations when the priority query param is absent", () => {
+    const Stub = createRoutesStub([{ path: "/recommendations", Component: RecommendationsRoute }])
+
+    const html = renderToStaticMarkup(<Stub initialEntries={["/recommendations"]} />)
+
+    expect(html.indexOf("Keith Gargano")).toBeLessThan(html.indexOf("Denise Architetto"))
   })
 })
