@@ -14,7 +14,6 @@ import { useMemo } from "react"
 import getCodePostAssetComponent, {
   CodePostAsset,
 } from "../components/CodePostAsset"
-import PageWithHeader from "../components/PageWithHeader"
 import {
   Blockquote,
   CollapsibleSection,
@@ -43,47 +42,6 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
   return post
 }
 
-const Post = styled(PageWithHeader)`
-  header {
-    time {
-      align-self: end;
-      color: #c98a2a;
-      font-size: 1.125rem;
-      position: absolute;
-      right: 1.5rem;
-      text-align-last: end;
-      bottom: -2rem;
-    }
-  }
-
-  section {
-    padding: 0 1.5rem 1.5rem;
-
-    @media (max-width: 640px) {
-      padding: 0 0.75rem;
-    }
-
-    dt {
-      font-weight: bold;
-      font-family: "Lato-Black", sans-serif;
-    }
-
-    strong {
-      font-weight: bold;
-      font-family: "Lato-Black", sans-serif;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-      line-height: 1.8;
-    }
-
-    img {
-      max-width: 100%;
-    }
-  }
-`
-
 const meta: MetaFunction<typeof loader> = (args) => {
   return [
     {
@@ -98,6 +56,9 @@ const meta: MetaFunction<typeof loader> = (args) => {
 
 const PostRoute = () => {
   const { code, frontmatter, codeAssets, readTime } = useLoaderData<typeof loader>()
+  // Intentional: mdx-bundler's documented pattern for rendering compiled MDX
+  // is to build the component from the bundled `code` string via useMemo, so
+  // identity only changes when the post's compiled code changes.
   const Component = useMemo(
     () => getMDXComponent(code, { styled: styled }),
     [code],
@@ -146,6 +107,7 @@ const PostRoute = () => {
           </Stack>
           <Divider />
           <Box sx={{ maxWidth: "760px", margin: "0 auto", "& > *:first-child": { marginTop: 0 } }}>
+            {/* eslint-disable-next-line react-hooks/static-components -- memoized on [code], see definition above */}
             <Component
               components={{
                 CodePostAsset: PostCodeAsset,

@@ -22,7 +22,7 @@ import { FC, Fragment, MouseEvent, PropsWithChildren, useEffect, useState } from
 // DOM it builds doesn't match the tree React asked for, and hydration fails
 // with a text/HTML structure mismatch. Any element whose children include an
 // image needs to skip its normal wrapper and pass the image through as-is.
-const hasImageChild = (children: PropsWithChildren<{}>["children"]): boolean => {
+const hasImageChild = (children: PropsWithChildren<object>["children"]): boolean => {
   if (children == null) return false
   const nodes = Array.isArray(children) ? children : [children]
   return nodes.some((node: any) => !!node?.props?.src || hasImageChild(node?.props?.children))
@@ -51,7 +51,7 @@ const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
   )
 }
 
-const H2: FC<PropsWithChildren<{}>> = (props) => {
+const H2: FC<PropsWithChildren<object>> = (props) => {
   return (
     <Typography
       {...props}
@@ -69,7 +69,7 @@ const H2: FC<PropsWithChildren<{}>> = (props) => {
     />
   )
 }
-const H3: FC<PropsWithChildren<{}>> = (props) => {
+const H3: FC<PropsWithChildren<object>> = (props) => {
   return (
     <Typography
       {...props}
@@ -88,7 +88,7 @@ const H3: FC<PropsWithChildren<{}>> = (props) => {
   )
 }
 
-const H4: FC<PropsWithChildren<{}>> = (props) => {
+const H4: FC<PropsWithChildren<object>> = (props) => {
   return (
     <Typography
       {...props}
@@ -156,7 +156,7 @@ const Table = styled("table")({
   },
 })
 
-const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
+const Paragraph: FC<PropsWithChildren<object>> = (props) => {
   if (hasImageChild(props.children)) {
     return <>{props.children}</>
   }
@@ -165,10 +165,10 @@ const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
     <Typography
       {...props}
       level="body-lg"
-      sx={(theme) => ({
+      sx={{
         lineHeight: 1.8,
         marginBottom: "1.5rem",
-      })}
+      }}
     />
   )
 }
@@ -272,6 +272,11 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
   }
 
   useEffect(() => {
+    // Intentional: `window.matchMedia` only exists client-side, so this mount
+    // flag and the initial media-query state can only be read after mount -
+    // triggering the one extra client-only render this rule normally warns
+    // against.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
     const mq = window.matchMedia("(min-width: 1024px)")
     setIsLargeScreen(mq.matches)
@@ -327,7 +332,7 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
   )
 }
 
-const UnorderedList: FC<{}> = (props: any) => {
+const UnorderedList: FC<object> = (props: any) => {
   return (
     <List
       marker={"disc"}
@@ -357,7 +362,7 @@ const UnorderedList: FC<{}> = (props: any) => {
     </List>
   )
 }
-const OrderedList: FC<{}> = (props: any) => {
+const OrderedList: FC<object> = (props: any) => {
   return (
     <List marker={"decimal"} sx={{ marginBottom: props.root ? 2 : 0 }}>
       {props.children
@@ -385,7 +390,7 @@ const OrderedList: FC<{}> = (props: any) => {
   )
 }
 
-const TableContainer: FC<PropsWithChildren<{}>> = ({ children }) => (
+const TableContainer: FC<PropsWithChildren<object>> = ({ children }) => (
   <TableWrapper>
     <Table>{children}</Table>
   </TableWrapper>

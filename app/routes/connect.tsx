@@ -1,4 +1,5 @@
 import Box from "@mui/joy/Box"
+import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import QRCode from "qrcode"
@@ -46,9 +47,16 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       py: 4,
     }}
   >
-    <Typography level="h1" fontWeight={900} sx={{ fontSize: "2rem" }}>
-      James Andrew Smith
-    </Typography>
+    <Box>
+      <Typography level="h1" fontWeight={900} sx={{ fontSize: "2.5rem" }}>
+        James Andrew Smith
+      </Typography>
+      <Divider sx={{ mx: "2rem" }}>
+        <Typography level="body-lg" sx={{ fontSize: "1.25rem" }}>
+          Principal Software Engineer @ Atlassian
+        </Typography>
+      </Divider>
+    </Box>
     <Box
       role="img"
       aria-label="QR code linking to James Andrew Smith's LinkedIn profile"

@@ -51,7 +51,7 @@ const RecommendationsRoute = () => {
             },
           })}
         >
-          Here's what my peers, managers, and leaders have to say about me.
+          Here’s what my peers, managers, and leaders have to say about me.
         </Typography>
         <CallToAction secondaryTitle="Read my Posts" secondaryAction="/posts" />
       </PageHeader>

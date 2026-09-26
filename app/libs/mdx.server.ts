@@ -21,9 +21,8 @@ const mdx = async (
   const { default: remarkGfm } = await import("remark-gfm")
   const { default: rehypeHighlight } = await import("rehype-highlight")
   const { default: remarkParse } = await import("remark-parse")
-  const { default: remarkRehype } = await import("remark-rehype")
 
-  const { code, frontmatter, errors } = await bundleMDX({
+  const { code, frontmatter } = await bundleMDX({
     source: source.trim(),
     cwd: path.dirname(path.resolve(mdxFile.filePath)),
     files: fileContents,
@@ -41,7 +40,7 @@ const mdx = async (
       return options
     },
 
-    esbuildOptions(options, frontmatter) {
+    esbuildOptions(options, _frontmatter) {
       options.minify = true
       options.outdir =
         process.env.NODE_ENV === "production"
@@ -132,14 +131,14 @@ const getCodeAssets = async (
         },
         {},
       )
-  } catch (error) {
+  } catch {
     return {}
   }
 }
 
 const getMdxPage = async (
   slug: string,
-  options: MdxOptions = {},
+  _options: MdxOptions = {},
   fileDirPath: string = "app/posts",
   extraFilesPath: string = "app/components",
 ): Promise<MdxPage> => {
@@ -171,7 +170,7 @@ const getMdxPage = async (
 }
 
 const getMdxPages = async (
-  options: MdxOptions = {},
+  _options: MdxOptions = {},
   fileDirPath: string = "app/posts",
   extraFilesPath: string = "app/components",
 ): Promise<MdxPage[]> => {

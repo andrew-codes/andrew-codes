@@ -2,7 +2,7 @@ import Button from "@mui/joy/Button"
 import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import type { HeadersFunction, LoaderFunctionArgs, MetaFunction } from "react-router"
+import type { LoaderFunctionArgs, MetaFunction } from "react-router"
 import { Link as RemixLink, useLoaderData } from "react-router"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
@@ -73,9 +73,9 @@ const HomeRoute = () => {
             component={RemixLink}
             to="/recommendations"
             size="sm"
-            sx={(theme) => ({
+            sx={{
               height: "1rem",
-            })}
+            }}
           >
             View All
           </Button>
@@ -94,9 +94,9 @@ const HomeRoute = () => {
             component={RemixLink}
             to="/posts"
             size="sm"
-            sx={(theme) => ({
+            sx={{
               height: "1rem",
-            })}
+            }}
           >
             View All
           </Button>

@@ -29,13 +29,13 @@ const descriptions: Record<Category, string | ReactNode> = {
   ),
   presentation: (
     <>
-      Presentations and workshops I've given at conferences, meetups, etc.;
+      Presentations and workshops I’ve given at conferences, meetups, etc.;
       freely available.
     </>
   ),
   agility: (
     <>
-      Articles about practices and tools that I've used to improve agility; both
+      Articles about practices and tools that I’ve used to improve agility; both
       personally and in the context of a team.
     </>
   ),

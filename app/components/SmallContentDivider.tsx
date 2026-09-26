@@ -8,7 +8,7 @@ const SmallContentDividerRoot = styled.span`
     margin: 0 2pt;
   }
 `
-const SmallContentDivider: FC<{}> = () => (
+const SmallContentDivider: FC<object> = () => (
   <SmallContentDividerRoot>∙</SmallContentDividerRoot>
 )
 

@@ -4,7 +4,7 @@ import type { FC, HTMLProps, ReactNode } from "react"
 import { Children } from "react"
 import SmallContentDivider from "./SmallContentDivider"
 
-type WrappedStyledComponent<Props = {}> = FC<
+type WrappedStyledComponent<Props = object> = FC<
   {
     as?: string | React.ComponentType<any>
     children: ReactNode | ReactNode[]

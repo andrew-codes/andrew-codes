@@ -24,7 +24,7 @@ Principal Group Engineering Manager (Director)"
       <Typography level="body-md" sx={{ marginBottom: 2 }}>
         Andrew is a highly talented and passionate engineer who consistently
         brings innovation, precision, and thoughtfulness to everything he does.
-        He's a true trailblazer—always exploring modern technologies to solve
+        He’s a true trailblazer—always exploring modern technologies to solve
         complex legacy challenges and driving engineering productivity and
         efficiency across the board.
       </Typography>
@@ -38,7 +38,7 @@ Principal Group Engineering Manager (Director)"
       </Typography>
       <Typography level="body-md" sx={{ marginBottom: 2 }}>
         Andrew takes great pride in his work and has been instrumental in
-        designing and implementing core engineering solutions for Microsoft's
+        designing and implementing core engineering solutions for Microsoft’s
         Content Management System (CMS). His contributions have been critical to
         ensuring the reliability and scalability of a platform that handles over
         15 billion requests per month.{" "}
@@ -72,8 +72,8 @@ const Rick = () => (
       His commitment to personal growth and to his team is beyond reproach.
       Aside from constantly learning new technologies and building hobby
       projects, Andrew is a thoughtful developer and leader that seeks and is
-      very responsive to feedback from his peers and managers. I'm excited for
-      what the future holds for Andrew and recommend him highly. While he'd be a
+      very responsive to feedback from his peers and managers. I’m excited for
+      what the future holds for Andrew and recommend him highly. While he’d be a
       significant asset to any team looking for immediate technical
       implementation and leadership, his potential is immense and very much
       worth consideration for your team.
@@ -89,7 +89,7 @@ const Darnell = () => (
     title="Principal Engineering Manager"
   >
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
-      Where do I start. Andrew's impact has been felt at all levels of our team
+      Where do I start. Andrew’s impact has been felt at all levels of our team
       and he is as gifted and well seasoned of any engineer that I have ever
       seen and witnessed firsthand. He flourishes in ambiguity. He excels in the
       unknown. He leads when others are not watching, and he priorities and
@@ -99,9 +99,9 @@ const Darnell = () => (
       but more than that, he has continuously elevated the engineers around him
       to think and breath through a value driven lens of quality. This is what
       sets Andrew apart. Andrew is the principal, distinguished, staff engineer
-      that could help lead any team to new heights and achievements. Andrew's
+      that could help lead any team to new heights and achievements. Andrew’s
       selfless and humble approach to growth and improvement is one that I
-      respect so much given his tenure in the industry. He's a leader that isn't
+      respect so much given his tenure in the industry. He’s a leader that isn’t
       afraid to take feedback. He simply receives and gives back a continuously
       improved version of himself. Hire the man!!
     </Typography>
@@ -130,7 +130,7 @@ const Keith = () => (
       of Test Driven Development.
     </Typography>
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
-      When I think back to working with Andrew, and consider what 'Archetype' he
+      When I think back to working with Andrew, and consider what ‘Archetype’ he
       filled, he could best be described as the Engineering Professor. Excited
       about both learning and teaching others, well versed in theory and
       brimming at the chance to put theory into practice.
@@ -152,8 +152,8 @@ const Walker = () => (
     title="Senior Software Engineer"
   >
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
-      Andrew stands out as the best I've ever worked with. What sets him apart
-      isn't just his undeniable technical brilliance, it's his rare ability to
+      Andrew stands out as the best I’ve ever worked with. What sets him apart
+      isn’t just his undeniable technical brilliance, it’s his rare ability to
       consistently build the right thing at exactly the right time. He does this
       while applying best practices with a level of precision and ease that can
       only come from years of deliberate skill-building. The result is work that
@@ -161,10 +161,10 @@ const Walker = () => (
     </Typography>
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
       Beyond his technical excellence, Andrew is an organic leader in the truest
-      sense. He doesn't seek the spotlight, yet people naturally look to him for
+      sense. He doesn’t seek the spotlight, yet people naturally look to him for
       direction. His approach is grounded in servant leadership. He lifts others
       up, leads by example, and creates space for collaboration and growth. His
-      mentorship is unmatched. Whether you're just getting started or deep into
+      mentorship is unmatched. Whether you’re just getting started or deep into
       your career, Andrew meets you where you are and helps you move the needle
       forward in ways that feel both challenging and empowering.
     </Typography>
@@ -172,14 +172,14 @@ const Walker = () => (
       He is relentlessly curious and deeply committed to growth. He embodies a
       true growth mindset—never static, always evolving. Andrew is constantly
       expanding his technical skillset, not just to keep pace, but to stay at
-      the cutting edge of what's possible. He seeks out emerging technologies,
+      the cutting edge of what’s possible. He seeks out emerging technologies,
       tools, and practices with the same rigor he applies to mastering them.
-      Whether it's diving into new domains or developing his leadership
+      Whether it’s diving into new domains or developing his leadership
       capacity, Andrew pushes boundaries—not only for himself, but for everyone
       around him.
     </Typography>
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
-      Working with Andrew doesn't just elevate the product—it elevates the
+      Working with Andrew doesn’t just elevate the product—it elevates the
       people. His presence raises the bar for what great truly looks like.
     </Typography>
   </Recommendation>
@@ -203,18 +203,18 @@ const Jamel = () => (
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
       We also collaborated on an internal drag-and-drop editor project — a
       foundation that evolved into a broader internal component library.
-      Andrew's attention to detail and thoughtful approach to reusable design
+      Andrew’s attention to detail and thoughtful approach to reusable design
       made a lasting impact.{" "}
     </Typography>
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
-      Andrew operates at an architect level. If you're looking to raise the bar
-      on your team's frontend codebase, he's absolutely the person to bring in.
+      Andrew operates at an architect level. If you’re looking to raise the bar
+      on your team’s frontend codebase, he’s absolutely the person to bring in.
       His technical vision, strong coding standards, and mentorship mindset make
       him an invaluable asset.
     </Typography>
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
       Beyond the tech, Andrew is kind, collaborative, and a joy to work with.
-      He's also built an impressive home automation tool on the side, which
+      He’s also built an impressive home automation tool on the side, which
       shows his passion for building smart, user-focused systems. Any team would
       be lucky to have him.
     </Typography>
@@ -230,7 +230,7 @@ const Arun = () => (
     title="Senior Software Engineer"
   >
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
-      I've had the pleasure of working with Andrew, and I must say he is an
+      I’ve had the pleasure of working with Andrew, and I must say he is an
       exceptionally talented individual when it comes to technology. His
       expertise spans across all areas—from problem-solving and guiding peers to
       consistently delivering high-quality work. His passion for technology is
@@ -280,7 +280,7 @@ const Russell = () => (
       positioned him as a trusted advisor for many clients. Furthermore, Andrew
       exhibits a degree of expertise and professionalism that has impressed
       every client that he has worked with to date. These factors combined with
-      Andrew's tremendous work ethic produce, in my opinion, a top tier
+      Andrew’s tremendous work ethic produce, in my opinion, a top tier
       consultant.
     </Typography>
   </Recommendation>
@@ -302,7 +302,7 @@ const Maxine = () => (
     </Typography>
     <Typography level="body-md" sx={{ marginBottom: 2 }}>
       Andrew is not only technically sharp but also incredibly collaborative and
-      generous with his time - someone who genuinely makes the team better. I've
+      generous with his time - someone who genuinely makes the team better. I’ve
       learned a lot from him and truly appreciate his steady presence during
       crunch time.
     </Typography>

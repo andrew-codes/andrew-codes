@@ -84,7 +84,7 @@ const Nav = styled.nav`
   }
 `
 
-const GlobalNavImpl: FC<{}> = (props) => {
+const GlobalNavImpl: FC<object> = (props) => {
   return (
     <Header {...props}>
       <HeaderBoundary>
