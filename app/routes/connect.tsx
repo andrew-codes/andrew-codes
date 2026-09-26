@@ -28,8 +28,7 @@ const meta: MetaFunction = () => {
     },
     {
       name: "description",
-      content:
-        "Scan this QR code to connect with James Andrew Smith on LinkedIn.",
+      content: "Scan this QR code to connect with James Andrew Smith on LinkedIn.",
     },
   ]
 }

@@ -1,11 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import QRCode from "qrcode"
 import { describe, expect, it } from "vitest"
-import {
-  ConnectPageContent,
-  LINKEDIN_PROFILE_URL,
-  loader,
-} from "./connect"
+import { ConnectPageContent, LINKEDIN_PROFILE_URL, loader } from "./connect"
 
 describe("connect route", () => {
   it("renders James Andrew Smith as the page header", async () => {
@@ -14,9 +10,7 @@ describe("connect route", () => {
       margin: 1,
     })
 
-    const html = renderToStaticMarkup(
-      <ConnectPageContent qrCodeSvg={qrCodeSvg} />,
-    )
+    const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
 
     expect(html).toContain("James Andrew Smith")
   })
@@ -34,9 +28,7 @@ describe("connect route", () => {
   it("renders the loaded QR code as an svg", async () => {
     const { qrCodeSvg } = await loader({} as any)
 
-    const html = renderToStaticMarkup(
-      <ConnectPageContent qrCodeSvg={qrCodeSvg} />,
-    )
+    const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
 
     expect(html).toContain("<svg")
   })
