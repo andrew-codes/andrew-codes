@@ -15,7 +15,7 @@ describe("connect route", () => {
     expect(html).toContain("Andrew Smith")
   })
 
-  it("renders the headshot beside the name", async () => {
+  it("renders the headshot above the name", async () => {
     const qrCodeSvg = await QRCode.toString(LINKEDIN_PROFILE_URL, {
       type: "svg",
       margin: 1,
@@ -26,7 +26,7 @@ describe("connect route", () => {
     expect(html).toContain("/images/andrew-smith.webp")
   })
 
-  it("renders the subtitle with title and current company", async () => {
+  it("renders the subtitle as two lines: title, then company", async () => {
     const qrCodeSvg = await QRCode.toString(LINKEDIN_PROFILE_URL, {
       type: "svg",
       margin: 1,
@@ -34,7 +34,8 @@ describe("connect route", () => {
 
     const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
 
-    expect(html).toContain("Principal Software Engineer @ Atlassian")
+    expect(html).toContain("Principal Software Engineer")
+    expect(html).toContain("@ Atlassian")
   })
 
   it("loads a QR code that encodes the LinkedIn profile URL", async () => {

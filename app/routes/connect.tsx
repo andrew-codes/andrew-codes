@@ -44,8 +44,8 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
     }}
   >
     <Stack
-      direction="row"
-      spacing={2}
+      direction="column"
+      spacing={1}
       alignItems="center"
       sx={{
         position: "absolute",
@@ -54,7 +54,6 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
         transform: "translateX(-50%)",
         width: "calc(100% - 2rem)",
         maxWidth: "20rem",
-        minWidth: 0,
       }}
     >
       <Box
@@ -62,21 +61,26 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
         src={HEADSHOT_SRC}
         alt="Andrew Smith"
         sx={{
-          width: "4.5rem",
-          height: "4.5rem",
+          width: "5rem",
+          height: "5rem",
           borderRadius: "50%",
           objectFit: "cover",
-          flexShrink: 0,
+          mb: 1,
         }}
       />
-      <Box sx={{ textAlign: "left", minWidth: 0, flex: "1 1 auto" }}>
-        <Typography level="h1" fontWeight={900} sx={{ fontSize: "1.75rem" }}>
-          Andrew Smith
-        </Typography>
-        <Typography level="body-lg" sx={{ fontSize: "1rem" }}>
-          {"Principal Software Engineer @ Atlassian"}
-        </Typography>
-      </Box>
+      <Typography
+        level="h1"
+        fontWeight={900}
+        sx={(theme) => ({
+          [theme.breakpoints.up("sm")]: {
+            fontSize: "4rem",
+          },
+        })}
+      >
+        Andrew Smith
+      </Typography>
+      <Typography level="body-lg">Principal Software Engineer</Typography>
+      <Typography level="body-lg">@ Atlassian</Typography>
     </Stack>
     <Box
       role="img"
