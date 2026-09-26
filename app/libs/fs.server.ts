@@ -8,7 +8,7 @@ const readDir = async (dir: string): Promise<string[]> => {
 
   let results: string[] = []
 
-  for (let file of files) {
+  for (const file of files) {
     const filePath = path.join(dir, file)
     const stat = await fs.stat(filePath)
     if (stat?.isDirectory()) {
@@ -30,7 +30,7 @@ const readDirFiles = async (dir: string): Promise<[string, string][]> => {
   }
 
   const results: [string, string][] = []
-  for (let file of files) {
+  for (const file of files) {
     const contents = await fs.readFile(file, "utf8")
     results.push([file, contents])
   }

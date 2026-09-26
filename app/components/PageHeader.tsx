@@ -4,7 +4,7 @@ import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { FC, PropsWithChildren } from "react"
 
-const PageHeader: FC<PropsWithChildren<{}>> = ({ children }) => {
+const PageHeader: FC<PropsWithChildren<object>> = ({ children }) => {
   return (
     <>
       <Stack

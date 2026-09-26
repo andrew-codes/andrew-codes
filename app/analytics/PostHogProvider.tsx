@@ -2,7 +2,7 @@ import posthog from "posthog-js"
 import { PostHogProvider } from "posthog-js/react"
 import { FC, PropsWithChildren, useEffect, useState } from "react"
 
-const PHProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
+const PHProvider: FC<PropsWithChildren<object>> = ({ children }) => {
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
@@ -12,6 +12,10 @@ const PHProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
       person_profiles: "always",
     })
 
+    // Intentional: this flips the hydration-guard flag after mount so the
+    // PostHog SDK never initializes during SSR, deliberately triggering the
+    // one extra client-only render this rule normally warns against.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHydrated(true)
   }, [])
 

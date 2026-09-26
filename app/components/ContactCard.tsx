@@ -4,7 +4,7 @@ import type { FC, HTMLProps, ReactNode } from "react"
 import { Children } from "react"
 import SmallContentDivider from "./SmallContentDivider"
 
-type WrappedStyledComponent<Props = {}> = FC<
+type WrappedStyledComponent<Props = object> = FC<
   {
     as?: string | React.ComponentType<any>
     children: ReactNode | ReactNode[]
@@ -41,9 +41,7 @@ const JobTitle: WrappedStyledComponent = ({ as, children }) => (
 
 const ContactInformationStyled = styled.div``
 
-const ContactInformation: WrappedStyledComponent = ({ as, children }) => (
-  <ContactInformationStyled as={as}>{children}</ContactInformationStyled>
-)
+const ContactInformation: WrappedStyledComponent = ({ as, children }) => <ContactInformationStyled as={as}>{children}</ContactInformationStyled>
 
 const AddressStyled = styled.address``
 const Address: WrappedStyledComponent = ({ as, children }) => (
@@ -59,40 +57,24 @@ const Locality: WrappedStyledComponent = ({ as, children }) => (
     {children}
   </Text>
 )
-const Region: WrappedStyledComponent<{ title: string }> = ({
-  as,
-  children,
-  title,
-}) => (
+const Region: WrappedStyledComponent<{ title: string }> = ({ as, children, title }) => (
   <Abbr as={as} className="region" title={title}>
     {children}
   </Abbr>
 )
 
 const Link = styled.a``
-const Email: WrappedStyledComponent<HTMLProps<HTMLAnchorElement>> = ({
-  as,
-  children,
-  ...props
-}) => (
+const Email: WrappedStyledComponent<HTMLProps<HTMLAnchorElement>> = ({ as, children, ...props }) => (
   <Link as={as} className="email" {...props}>
     {children}
   </Link>
 )
-const Telephone: WrappedStyledComponent<HTMLProps<HTMLAnchorElement>> = ({
-  as,
-  children,
-  ...props
-}) => (
+const Telephone: WrappedStyledComponent<HTMLProps<HTMLAnchorElement>> = ({ as, children, ...props }) => (
   <Link as={as} className="tel" {...props}>
     {children}
   </Link>
 )
-const Url: WrappedStyledComponent<HTMLProps<HTMLAnchorElement>> = ({
-  as,
-  children,
-  ...props
-}) => (
+const Url: WrappedStyledComponent<HTMLProps<HTMLAnchorElement>> = ({ as, children, ...props }) => (
   <Link as={as} className="url" {...props}>
     {children}
   </Link>
@@ -139,17 +121,4 @@ const ConnectionList: WrappedStyledComponent = ({ children }) => (
   </ConnectionOrderedList>
 )
 
-export {
-  Address,
-  ConnectionList,
-  ContactCard,
-  ContactInformation,
-  Email,
-  FullName,
-  JobTitle,
-  Locality,
-  Notes,
-  Region,
-  Telephone,
-  Url,
-}
+export { Address, ConnectionList, ContactCard, ContactInformation, Email, FullName, JobTitle, Locality, Notes, Region, Telephone, Url }

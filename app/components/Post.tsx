@@ -22,7 +22,7 @@ import { FC, Fragment, MouseEvent, PropsWithChildren, useEffect, useState } from
 // DOM it builds doesn't match the tree React asked for, and hydration fails
 // with a text/HTML structure mismatch. Any element whose children include an
 // image needs to skip its normal wrapper and pass the image through as-is.
-const hasImageChild = (children: PropsWithChildren<{}>["children"]): boolean => {
+const hasImageChild = (children: PropsWithChildren<object>["children"]): boolean => {
   if (children == null) return false
   const nodes = Array.isArray(children) ? children : [children]
   return nodes.some((node: any) => !!node?.props?.src || hasImageChild(node?.props?.children))
@@ -51,7 +51,7 @@ const Link: FC<PropsWithChildren<{ href: string }>> = (props) => {
   )
 }
 
-const H2: FC<PropsWithChildren<{}>> = (props) => {
+const H2: FC<PropsWithChildren<object>> = (props) => {
   return (
     <Typography
       {...props}
@@ -69,7 +69,7 @@ const H2: FC<PropsWithChildren<{}>> = (props) => {
     />
   )
 }
-const H3: FC<PropsWithChildren<{}>> = (props) => {
+const H3: FC<PropsWithChildren<object>> = (props) => {
   return (
     <Typography
       {...props}
@@ -88,16 +88,8 @@ const H3: FC<PropsWithChildren<{}>> = (props) => {
   )
 }
 
-const H4: FC<PropsWithChildren<{}>> = (props) => {
-  return (
-    <Typography
-      {...props}
-      level="h2"
-      fontSize="xl"
-      fontWeight={700}
-      sx={{ lineHeight: 1.3, marginTop: "2rem", marginBottom: "0.6rem" }}
-    />
-  )
+const H4: FC<PropsWithChildren<object>> = (props) => {
+  return <Typography {...props} level="h2" fontSize="xl" fontWeight={700} sx={{ lineHeight: 1.3, marginTop: "2rem", marginBottom: "0.6rem" }} />
 }
 
 const TableWrapper = styled("div")({
@@ -156,7 +148,7 @@ const Table = styled("table")({
   },
 })
 
-const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
+const Paragraph: FC<PropsWithChildren<object>> = (props) => {
   if (hasImageChild(props.children)) {
     return <>{props.children}</>
   }
@@ -165,10 +157,10 @@ const Paragraph: FC<PropsWithChildren<{}>> = (props) => {
     <Typography
       {...props}
       level="body-lg"
-      sx={(theme) => ({
+      sx={{
         lineHeight: 1.8,
         marginBottom: "1.5rem",
-      })}
+      }}
     />
   )
 }
@@ -212,17 +204,9 @@ const renderBlockquoteChild = (child: any, key: number) => {
   return <Typography key={key} {...child.props} level="body-md" sx={{ marginBottom: 3 }} />
 }
 
-const Blockquote: FC<
-  PropsWithChildren<{ children: Array<{ props: Record<string, any> }> }>
-> = (props) => {
+const Blockquote: FC<PropsWithChildren<{ children: Array<{ props: Record<string, any> }> }>> = (props) => {
   if (props.children.length > 1) {
-    return (
-      <StyledBlockquote>
-        {props.children
-          .filter((child) => typeof child !== "string")
-          .map(renderBlockquoteChild)}
-      </StyledBlockquote>
-    )
+    return <StyledBlockquote>{props.children.filter((child) => typeof child !== "string").map(renderBlockquoteChild)}</StyledBlockquote>
   }
 
   const [child] = Array.isArray(props.children) ? props.children : [props.children]
@@ -272,6 +256,11 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
   }
 
   useEffect(() => {
+    // Intentional: `window.matchMedia` only exists client-side, so this mount
+    // flag and the initial media-query state can only be read after mount -
+    // triggering the one extra client-only render this rule normally warns
+    // against.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true)
     const mq = window.matchMedia("(min-width: 1024px)")
     setIsLargeScreen(mq.matches)
@@ -296,43 +285,42 @@ const Image: FC<PropsWithChildren<{ src: string; alt: string }>> = (props) => {
           cursor: isLargeScreen ? "zoom-in" : "default",
         }}
       />
-      {mounted && <Modal open={isOpen} onClose={() => setIsOpen(false)} disableScrollLock>
-        <ModalDialog
-          layout="center"
-          sx={{
-            background: "transparent",
-            border: "none",
-            boxShadow: "none",
-            p: 0,
-          }}
-        >
-          <ModalClose variant="solid" />
-          <img
-            src={props.src}
-            alt={props.alt}
-            style={{
-              maxWidth: "90vw",
-              maxHeight: "90vh",
-              objectFit: "contain",
-              borderRadius: theme.radius.md,
-              border: "4px solid rgba(0, 0, 0, 0.8)",
-              boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.3)",
-              filter: "drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45))",
-              display: "block",
+      {mounted && (
+        <Modal open={isOpen} onClose={() => setIsOpen(false)} disableScrollLock>
+          <ModalDialog
+            layout="center"
+            sx={{
+              background: "transparent",
+              border: "none",
+              boxShadow: "none",
+              p: 0,
             }}
-          />
-        </ModalDialog>
-      </Modal>}
+          >
+            <ModalClose variant="solid" />
+            <img
+              src={props.src}
+              alt={props.alt}
+              style={{
+                maxWidth: "90vw",
+                maxHeight: "90vh",
+                objectFit: "contain",
+                borderRadius: theme.radius.md,
+                border: "4px solid rgba(0, 0, 0, 0.8)",
+                boxShadow: "0 0 0.5rem rgba(0, 0, 0, 0.3)",
+                filter: "drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45))",
+                display: "block",
+              }}
+            />
+          </ModalDialog>
+        </Modal>
+      )}
     </ImageWrapper>
   )
 }
 
-const UnorderedList: FC<{}> = (props: any) => {
+const UnorderedList: FC<object> = (props: any) => {
   return (
-    <List
-      marker={"disc"}
-      sx={{ marginBottom: props.root ? 2 : 0, marginTop: props.root ? -2 : 0 }}
-    >
+    <List marker={"disc"} sx={{ marginBottom: props.root ? 2 : 0, marginTop: props.root ? -2 : 0 }}>
       {props.children
         .filter((child) => typeof child !== "string")
         .map((child: any, index: number) => {
@@ -340,24 +328,18 @@ const UnorderedList: FC<{}> = (props: any) => {
             <ListItem key={index} nested={child.type !== "li"} {...child.props}>
               {child.type === "li" && (
                 <ListItemContent>
-                  <Typography level="body-md">
-                    {child.props.children}
-                  </Typography>
+                  <Typography level="body-md">{child.props.children}</Typography>
                 </ListItemContent>
               )}
-              {child.type === "ul" && (
-                <UnorderedList {...child.props.children.props} />
-              )}
-              {child.type === "ul" && (
-                <OrderedList {...child.props.children.props} />
-              )}
+              {child.type === "ul" && <UnorderedList {...child.props.children.props} />}
+              {child.type === "ul" && <OrderedList {...child.props.children.props} />}
             </ListItem>
           )
         })}
     </List>
   )
 }
-const OrderedList: FC<{}> = (props: any) => {
+const OrderedList: FC<object> = (props: any) => {
   return (
     <List marker={"decimal"} sx={{ marginBottom: props.root ? 2 : 0 }}>
       {props.children
@@ -367,17 +349,11 @@ const OrderedList: FC<{}> = (props: any) => {
             <ListItem key={index} nested={child.type !== "li"} {...child.props}>
               {child.type === "li" && (
                 <ListItemContent>
-                  <Typography level="body-md">
-                    {child.props.children}
-                  </Typography>
+                  <Typography level="body-md">{child.props.children}</Typography>
                 </ListItemContent>
               )}
-              {child.type === "ul" && (
-                <UnorderedList {...child.props.children.props} />
-              )}
-              {child.type === "ul" && (
-                <OrderedList {...child.props.children.props} />
-              )}
+              {child.type === "ul" && <UnorderedList {...child.props.children.props} />}
+              {child.type === "ul" && <OrderedList {...child.props.children.props} />}
             </ListItem>
           )
         })}
@@ -385,7 +361,7 @@ const OrderedList: FC<{}> = (props: any) => {
   )
 }
 
-const TableContainer: FC<PropsWithChildren<{}>> = ({ children }) => (
+const TableContainer: FC<PropsWithChildren<object>> = ({ children }) => (
   <TableWrapper>
     <Table>{children}</Table>
   </TableWrapper>
@@ -425,23 +401,9 @@ const CollapsibleSection: FC<PropsWithChildren<{ title: string }>> = ({ title, c
       >
         {title}
       </AccordionSummary>
-      <AccordionDetails sx={{ padding: 0 }}>
-        {children}
-      </AccordionDetails>
+      <AccordionDetails sx={{ padding: 0 }}>{children}</AccordionDetails>
     </Accordion>
   )
 }
 
-export {
-  Blockquote,
-  CollapsibleSection,
-  H2,
-  H3,
-  H4,
-  Image,
-  Link,
-  OrderedList,
-  Paragraph,
-  TableContainer as Table,
-  UnorderedList,
-}
+export { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, TableContainer as Table, UnorderedList }

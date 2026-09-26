@@ -13,8 +13,7 @@ const meta: MetaFunction = () => {
     },
     {
       name: "description",
-      content:
-        "Recommendations from my peers, managers, and leaders in the industry.",
+      content: "Recommendations from my peers, managers, and leaders in the industry.",
     },
     {
       name: "og:title",
@@ -22,16 +21,14 @@ const meta: MetaFunction = () => {
     },
     {
       name: "og:description",
-      content:
-        "Recommendations from my peers, managers, and leaders in the industry.",
+      content: "Recommendations from my peers, managers, and leaders in the industry.",
     },
   ]
 }
 
 const RecommendationsRoute = () => {
   const location = useLocation()
-  const prioritizeFeatured =
-    new URLSearchParams(location.search).get("priority") === "featured"
+  const prioritizeFeatured = new URLSearchParams(location.search).get("priority") === "featured"
 
   let recommendations = nonFeatured
   if (prioritizeFeatured) {
@@ -51,7 +48,7 @@ const RecommendationsRoute = () => {
             },
           })}
         >
-          Here's what my peers, managers, and leaders have to say about me.
+          Here’s what my peers, managers, and leaders have to say about me.
         </Typography>
         <CallToAction secondaryTitle="Read my Posts" secondaryAction="/posts" />
       </PageHeader>

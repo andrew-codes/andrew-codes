@@ -4,30 +4,12 @@ import Card from "@mui/joy/Card"
 import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import type {
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "react-router"
+import type { LoaderFunctionArgs, MetaFunction } from "react-router"
 import { useLoaderData } from "react-router"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
-import getCodePostAssetComponent, {
-  CodePostAsset,
-} from "../components/CodePostAsset"
-import PageWithHeader from "../components/PageWithHeader"
-import {
-  Blockquote,
-  CollapsibleSection,
-  H2,
-  H3,
-  H4,
-  Image,
-  Link,
-  OrderedList,
-  Paragraph,
-  Table,
-  UnorderedList,
-} from "../components/Post"
+import getCodePostAssetComponent, { CodePostAsset } from "../components/CodePostAsset"
+import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, Table, UnorderedList } from "../components/Post"
 import Tags from "../components/Tags"
 import { getMdxPage } from "../libs/mdx.server"
 import { tryFormatDate } from "../libs/utils"
@@ -43,47 +25,6 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
   return post
 }
 
-const Post = styled(PageWithHeader)`
-  header {
-    time {
-      align-self: end;
-      color: #c98a2a;
-      font-size: 1.125rem;
-      position: absolute;
-      right: 1.5rem;
-      text-align-last: end;
-      bottom: -2rem;
-    }
-  }
-
-  section {
-    padding: 0 1.5rem 1.5rem;
-
-    @media (max-width: 640px) {
-      padding: 0 0.75rem;
-    }
-
-    dt {
-      font-weight: bold;
-      font-family: "Lato-Black", sans-serif;
-    }
-
-    strong {
-      font-weight: bold;
-      font-family: "Lato-Black", sans-serif;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-      line-height: 1.8;
-    }
-
-    img {
-      max-width: 100%;
-    }
-  }
-`
-
 const meta: MetaFunction<typeof loader> = (args) => {
   return [
     {
@@ -98,14 +39,11 @@ const meta: MetaFunction<typeof loader> = (args) => {
 
 const PostRoute = () => {
   const { code, frontmatter, codeAssets, readTime } = useLoaderData<typeof loader>()
-  const Component = useMemo(
-    () => getMDXComponent(code, { styled: styled }),
-    [code],
-  )
-  const PostCodeAsset = useMemo(
-    () => getCodePostAssetComponent(codeAssets),
-    [codeAssets],
-  )
+  // Intentional: mdx-bundler's documented pattern for rendering compiled MDX
+  // is to build the component from the bundled `code` string via useMemo, so
+  // identity only changes when the post's compiled code changes.
+  const Component = useMemo(() => getMDXComponent(code, { styled: styled }), [code])
+  const PostCodeAsset = useMemo(() => getCodePostAssetComponent(codeAssets), [codeAssets])
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -140,12 +78,11 @@ const PostRoute = () => {
                 )}
               </Stack>
             </Stack>
-            {!!frontmatter.tags && frontmatter.tags.length > 0 && (
-              <Tags tags={frontmatter.tags} />
-            )}
+            {!!frontmatter.tags && frontmatter.tags.length > 0 && <Tags tags={frontmatter.tags} />}
           </Stack>
           <Divider />
           <Box sx={{ maxWidth: "760px", margin: "0 auto", "& > *:first-child": { marginTop: 0 } }}>
+            {/* eslint-disable-next-line react-hooks/static-components -- memoized on [code], see definition above */}
             <Component
               components={{
                 CodePostAsset: PostCodeAsset,
@@ -171,12 +108,7 @@ const PostRoute = () => {
                 table: Table,
                 pre: (props: any) => {
                   if (props.children.type === "code") {
-                    return (
-                      <CodePostAsset
-                        language={props.children.props.className}
-                        code={props.children.props.children}
-                      />
-                    )
+                    return <CodePostAsset language={props.children.props.className} code={props.children.props.children} />
                   }
 
                   return <pre {...props} />
