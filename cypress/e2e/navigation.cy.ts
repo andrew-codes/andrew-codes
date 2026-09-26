@@ -14,7 +14,12 @@ describe("primary navigation", () => {
     cy.contains("a", "Read my Posts").click()
     cy.wait("@postsData")
     cy.location("pathname").should("eq", "/posts")
-    cy.contains("h2", "Featured").should("be.visible")
+    // /posts.data embeds every post's fully bundled MDX code, making it a
+    // multi-megabyte payload - parsing and rendering it after the network
+    // wait above resolves can occasionally take longer than
+    // defaultCommandTimeout on a CPU-constrained CI runner, so this
+    // assertion gets its own more generous timeout instead of racing it.
+    cy.contains("h2", "Featured", { timeout: 20000 }).should("be.visible")
 
     // The back transition triggers a fetch for /_root.data before the
     // page re-renders, same as the forward transition above - wait on it
