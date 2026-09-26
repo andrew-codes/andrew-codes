@@ -51,6 +51,8 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       James Andrew Smith
     </Typography>
     <Box
+      role="img"
+      aria-label="QR code linking to James Andrew Smith's LinkedIn profile"
       sx={{
         width: "100%",
         maxWidth: "20rem",
