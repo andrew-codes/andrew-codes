@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import type { MdxPage } from "../../types"
-import { alphabetically, newestFirst, order } from "./sortPosts"
+import type { MdxPage } from "../../../types"
+import { alphabetically, newestFirst, order } from "../sortPosts"
 
 const post = (title: string, date?: string): MdxPage =>
   ({

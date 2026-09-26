@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import RecommendationsRoute from "./recommendations"
+import RecommendationsRoute from "../recommendations"
 
 describe("recommendations route", () => {
   it("renders without throwing", () => {

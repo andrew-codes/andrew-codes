@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { MemoryRouter, Route, Routes } from "react-router"
 import { describe, expect, it, vi } from "vitest"
-import PostRoute from "./posts.$id"
+import PostRoute from "../posts.$id"
 
 vi.mock("mdx-bundler/client", () => ({
   getMDXComponent: () => () => <div data-testid="mdx-body">Mock post body</div>,

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest"
-import { getDomainUrl, removeTrailingSlash, tryFormatDate, typedBoolean, useLoaderHeaders } from "./utils"
+import { getDomainUrl, removeTrailingSlash, tryFormatDate, typedBoolean, useLoaderHeaders } from "../utils"
 
 // Regression test for a production hydration crash (React error #418) that
 // kept reproducing on the deployed preview even after the charset fix for

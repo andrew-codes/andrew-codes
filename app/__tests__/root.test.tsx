@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import { Layout } from "./root"
+import { Layout } from "../root"
 
 // Regression test for a production hydration crash (React error #418).
 //

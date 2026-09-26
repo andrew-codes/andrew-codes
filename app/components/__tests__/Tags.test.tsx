@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import Tags from "./Tags"
+import Tags from "../Tags"
 
 const renderTags = (tags: string[]) => {
   const Stub = createRoutesStub([{ path: "/", Component: () => <Tags tags={tags} /> }])
