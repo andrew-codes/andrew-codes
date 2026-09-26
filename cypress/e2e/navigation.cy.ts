@@ -37,11 +37,7 @@ describe("primary navigation", () => {
   it("navigates from an article to a different article via a shared tag, then back to the first article", () => {
     cy.visit("/")
 
-    cy.contains("h2", "Latest Posts")
-      .closest("section")
-      .find(".MuiTypography-h3")
-      .first()
-      .click()
+    cy.contains("h2", "Latest Posts").closest("section").find(".MuiTypography-h3").first().click()
 
     cy.location("pathname").should("match", /^\/posts\/.+/)
     cy.get("article h2")
@@ -53,7 +49,9 @@ describe("primary navigation", () => {
 
           cy.get('a[href^="/posts/"]').not(`[href="${firstArticlePath}"]`).first().click()
 
-          cy.location("pathname").should("match", /^\/posts\/.+/).and("not.eq", firstArticlePath)
+          cy.location("pathname")
+            .should("match", /^\/posts\/.+/)
+            .and("not.eq", firstArticlePath)
           cy.get("article h2").invoke("text").should("not.eq", firstArticleTitle)
 
           cy.go("back")
