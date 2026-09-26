@@ -38,7 +38,8 @@ const meta: MetaFunction = () => {
 const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
   <Box
     sx={{
-      position: "relative",
+      display: "flex",
+      flexDirection: "column",
       minHeight: "100dvh",
       textAlign: "center",
     }}
@@ -48,10 +49,9 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       spacing={1}
       alignItems="center"
       sx={{
-        position: "absolute",
-        top: "2rem",
-        left: "50%",
-        transform: "translateX(-50%)",
+        pt: "2rem",
+        px: "1rem",
+        alignSelf: "center",
         width: "calc(100% - 2rem)",
         maxWidth: "20rem",
       }}
@@ -83,22 +83,28 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       <Typography level="body-lg">@ Atlassian</Typography>
     </Stack>
     <Box
-      role="img"
-      aria-label="QR code linking to Andrew Smith's LinkedIn profile"
       sx={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "calc(100% - 2rem)",
-        maxWidth: "20rem",
-        "& svg": {
-          width: "100%",
-          height: "auto",
-        },
+        display: "flex",
+        flex: "1 1 auto",
+        alignItems: "center",
+        justifyContent: "center",
+        px: "1rem",
       }}
-      dangerouslySetInnerHTML={{ __html: qrCodeSvg }}
-    />
+    >
+      <Box
+        role="img"
+        aria-label="QR code linking to Andrew Smith's LinkedIn profile"
+        sx={{
+          width: "100%",
+          maxWidth: "20rem",
+          "& svg": {
+            width: "100%",
+            height: "auto",
+          },
+        }}
+        dangerouslySetInnerHTML={{ __html: qrCodeSvg }}
+      />
+    </Box>
   </Box>
 )
 
