@@ -33,4 +33,36 @@ describe("primary navigation", () => {
     cy.location("pathname").should("eq", "/recommendations")
     cy.contains("h2", "Recommendations").should("be.visible")
   })
+
+  it("navigates from an article to a different article via a shared tag, then back to the first article", () => {
+    cy.visit("/")
+
+    cy.contains("h2", "Latest Posts")
+      .closest("section")
+      .find(".MuiTypography-h3")
+      .first()
+      .click()
+
+    cy.location("pathname").should("match", /^\/posts\/.+/)
+    cy.get("article h2")
+      .invoke("text")
+      .then((firstArticleTitle) => {
+        cy.location("pathname").then((firstArticlePath) => {
+          cy.get("a[href^='/tags/']").first().click()
+          cy.location("pathname").should("match", /^\/tags\/.+/)
+
+          cy.get('a[href^="/posts/"]').not(`[href="${firstArticlePath}"]`).first().click()
+
+          cy.location("pathname").should("match", /^\/posts\/.+/).and("not.eq", firstArticlePath)
+          cy.get("article h2").invoke("text").should("not.eq", firstArticleTitle)
+
+          cy.go("back")
+          cy.location("pathname").should("match", /^\/tags\/.+/)
+
+          cy.go("back")
+          cy.location("pathname").should("eq", firstArticlePath)
+          cy.get("article h2").invoke("text").should("eq", firstArticleTitle)
+        })
+      })
+  })
 })
