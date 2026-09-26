@@ -20,7 +20,7 @@ yarn build          # full production build (runs clean, remix, server, and post
 yarn build/client    # react-router build only
 yarn build/server   # Express server build only
 yarn lint           # eslint
-yarn test           # vitest (unit tests; see app/**/*.test.tsx)
+yarn test           # vitest (unit tests; see app/**/__tests__/*.test.{ts,tsx})
 yarn e2e            # builds, serves build/client, and runs the Cypress suite against it (see scripts/e2e.sh)
 ```
 
