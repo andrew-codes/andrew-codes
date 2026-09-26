@@ -16,7 +16,12 @@ describe("primary navigation", () => {
     cy.location("pathname").should("eq", "/posts")
     cy.contains("h2", "Featured").should("be.visible")
 
+    // The back transition triggers a fetch for /_root.data before the
+    // page re-renders, same as the forward transition above - wait on it
+    // directly rather than racing defaultCommandTimeout.
+    cy.intercept("GET", "**/_root.data").as("rootData")
     cy.go("back")
+    cy.wait("@rootData")
     cy.location("pathname").should("eq", "/")
     cy.contains("h1", "Andrew Smith").should("be.visible")
   })
