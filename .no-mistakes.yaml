@@ -1,0 +1,11 @@
+test:
+  instructions: |
+    Start the dev server with `yarn start` (React Router v7 dev server; confirm the
+    actual port/URL it prints rather than assuming one). Use a browser to navigate to
+    and screenshot the specific page(s) or feature described in the PR's intent -
+    for example the homepage, a blog post, or the /connect page - as a real end user
+    would view them, at both a typical desktop width and a narrow mobile width for any
+    page whose layout is mobile-sensitive (this site has at least one page,
+    /connect, explicitly designed for phone-width viewing).
+  evidence:
+    store_in_repo: true
