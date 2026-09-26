@@ -61,8 +61,8 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
         src={HEADSHOT_SRC}
         alt="Andrew Smith"
         sx={{
-          width: "5rem",
-          height: "5rem",
+          width: "6.5rem",
+          height: "6.5rem",
           borderRadius: "50%",
           objectFit: "cover",
           mb: 1,
