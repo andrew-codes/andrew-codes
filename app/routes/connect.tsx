@@ -36,19 +36,27 @@ const meta: MetaFunction = () => {
 }
 
 const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
-  <Stack
-    direction="column"
-    spacing={4}
-    alignItems="center"
-    justifyContent="center"
+  <Box
     sx={{
-      textAlign: "center",
+      position: "relative",
       minHeight: "100dvh",
-      px: 2,
-      py: 4,
+      textAlign: "center",
     }}
   >
-    <Stack direction="row" spacing={2} alignItems="center">
+    <Stack
+      direction="row"
+      spacing={2}
+      alignItems="center"
+      sx={{
+        position: "absolute",
+        top: "2rem",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "calc(100% - 2rem)",
+        maxWidth: "20rem",
+        minWidth: 0,
+      }}
+    >
       <Box
         component="img"
         src={HEADSHOT_SRC}
@@ -61,12 +69,12 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
           flexShrink: 0,
         }}
       />
-      <Box sx={{ textAlign: "left" }}>
+      <Box sx={{ textAlign: "left", minWidth: 0, flex: "1 1 auto" }}>
         <Typography level="h1" fontWeight={900} sx={{ fontSize: "1.75rem" }}>
           Andrew Smith
         </Typography>
         <Typography level="body-lg" sx={{ fontSize: "1rem" }}>
-          Principal Software Engineer @ Atlassian
+          {"Principal Software Engineer @ Atlassian"}
         </Typography>
       </Box>
     </Stack>
@@ -74,7 +82,11 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       role="img"
       aria-label="QR code linking to Andrew Smith's LinkedIn profile"
       sx={{
-        width: "100%",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "calc(100% - 2rem)",
         maxWidth: "20rem",
         "& svg": {
           width: "100%",
@@ -83,7 +95,7 @@ const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
       }}
       dangerouslySetInnerHTML={{ __html: qrCodeSvg }}
     />
-  </Stack>
+  </Box>
 )
 
 const ConnectRoute = () => {

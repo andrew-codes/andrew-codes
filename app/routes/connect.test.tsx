@@ -34,7 +34,7 @@ describe("connect route", () => {
 
     const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
 
-    expect(html).toContain("Principal Software Engineer @ Atlassian")
+    expect(html).toContain("Principal Software Engineer @ Atlassian")
   })
 
   it("loads a QR code that encodes the LinkedIn profile URL", async () => {
