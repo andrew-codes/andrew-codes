@@ -4,14 +4,13 @@ import type { MdxPage } from "../../types"
 type PostSort = (a: MdxPage, b: MdxPage) => 0 | 1 | -1
 
 const newestFirst: PostSort = (a, b) => {
-  console.log(a?.frontmatter.title, b?.frontmatter.title)
-  const aDate = new Date(a?.frontmatter?.date ?? 0)
-  const bDate = new Date(b?.frontmatter?.date ?? 0)
+  const aTime = new Date(a?.frontmatter?.date ?? 0).getTime()
+  const bTime = new Date(b?.frontmatter?.date ?? 0).getTime()
 
-  if (aDate.getTime() ?? 0 > (bDate.getTime() ?? 0)) {
+  if (aTime > bTime) {
     return -1
   }
-  if (bDate.getTime() ?? 0 > (aDate.getTime() ?? 0)) {
+  if (bTime > aTime) {
     return 1
   }
 

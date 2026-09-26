@@ -13,7 +13,12 @@
     "clean": "rimraf ./node_modules/.cache ./node_modules/.vite ./build",
     "prebuild": "yarn run clean",
     "build": "yarn react-router build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint .",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "e2e:serve": "serve build/client -l 4173",
+    "e2e": "bash scripts/e2e.sh"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -62,6 +67,7 @@
     "@types/react-dom": "19.2.3",
     "@types/sha1": "^1.1.5",
     "@vitejs/plugin-react": "^4.4.1",
+    "cypress": "^16.1.0",
     "esbuild": "^0.25.4",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
@@ -73,6 +79,7 @@
     "octokit": "^4.0.2",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
+    "serve": "^14.2.6",
     "tsc": "^2.0.4",
     "tslib": "^2.8.1",
     "typescript": "^5.8.3",

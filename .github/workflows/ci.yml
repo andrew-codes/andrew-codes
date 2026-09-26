@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn lint
+
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn test
+
+  e2e-tests:
+    name: E2E tests (Cypress)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - run: corepack enable
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          install-command: yarn install --immutable
+          build: yarn build
+          start: yarn e2e:serve
+          wait-on: "http://localhost:4173"
+          browser: chrome

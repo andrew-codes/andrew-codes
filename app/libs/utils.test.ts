@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest"
-import { tryFormatDate } from "./utils"
+import { getDomainUrl, removeTrailingSlash, tryFormatDate, typedBoolean, useLoaderHeaders } from "./utils"
 
 // Regression test for a production hydration crash (React error #418) that
 // kept reproducing on the deployed preview even after the charset fix for
@@ -50,5 +50,89 @@ describe("tryFormatDate", () => {
         timeZone: "America/New_York",
       }),
     ).toBe("August 2026")
+  })
+})
+
+describe("getDomainUrl", () => {
+  it("prefers X-Forwarded-Host over the host header", () => {
+    const request = new Request("http://example.com", {
+      headers: { host: "internal.local", "X-Forwarded-Host": "andrew.codes" },
+    })
+
+    expect(getDomainUrl(request)).toBe("https://andrew.codes")
+  })
+
+  it("falls back to the host header when X-Forwarded-Host is absent", () => {
+    const request = new Request("http://example.com", {
+      headers: { host: "andrew.codes" },
+    })
+
+    expect(getDomainUrl(request)).toBe("https://andrew.codes")
+  })
+
+  it("uses http for localhost", () => {
+    const request = new Request("http://example.com", {
+      headers: { host: "localhost:5173" },
+    })
+
+    expect(getDomainUrl(request)).toBe("http://localhost:5173")
+  })
+
+  it("throws when no host can be determined", () => {
+    const request = new Request("http://example.com")
+
+    expect(() => getDomainUrl(request)).toThrow("Could not determine domain URL.")
+  })
+})
+
+describe("removeTrailingSlash", () => {
+  it("removes a single trailing slash", () => {
+    expect(removeTrailingSlash("/posts/")).toBe("/posts")
+  })
+
+  it("leaves a string with no trailing slash unchanged", () => {
+    expect(removeTrailingSlash("/posts")).toBe("/posts")
+  })
+})
+
+describe("typedBoolean", () => {
+  it("narrows out falsy values", () => {
+    const values: Array<string | undefined | null | 0 | false> = ["a", "", 0, false, null, undefined, "b"]
+
+    expect(values.filter(typedBoolean)).toEqual(["a", "b"])
+  })
+})
+
+describe("useLoaderHeaders", () => {
+  it("copies default target headers from the loader response", () => {
+    const headersFn = useLoaderHeaders()
+    const loaderHeaders = new Headers({ "Cache-Control": "max-age=60", ETag: "abc123" })
+    const parentHeaders = new Headers()
+
+    const result = headersFn({ loaderHeaders, parentHeaders } as any)
+
+    expect(result.get("Cache-Control")).toBe("max-age=60")
+    expect(result.get("ETag")).toBe("abc123")
+  })
+
+  it("appends Server-Timing from the parent instead of overwriting it", () => {
+    const headersFn = useLoaderHeaders()
+    const loaderHeaders = new Headers({ "Server-Timing": "loader;dur=10" })
+    const parentHeaders = new Headers({ "Server-Timing": "parent;dur=5" })
+
+    const result = headersFn({ loaderHeaders, parentHeaders } as any)
+
+    expect(result.get("Server-Timing")).toBe("loader;dur=10, parent;dur=5")
+  })
+
+  it("only uses a parent header when the loader didn't already set it", () => {
+    const headersFn = useLoaderHeaders()
+    const loaderHeaders = new Headers({ "Cache-Control": "max-age=60" })
+    const parentHeaders = new Headers({ "Cache-Control": "max-age=0", Vary: "Accept" })
+
+    const result = headersFn({ loaderHeaders, parentHeaders } as any)
+
+    expect(result.get("Cache-Control")).toBe("max-age=60")
+    expect(result.get("Vary")).toBe("Accept")
   })
 })
