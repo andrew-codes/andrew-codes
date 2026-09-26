@@ -19,8 +19,12 @@ yarn start          # dev server (nodemon)
 yarn build          # full production build (runs clean, remix, server, and post-build steps)
 yarn build/client    # react-router build only
 yarn build/server   # Express server build only
+yarn lint           # eslint
 yarn test           # vitest (unit tests; see app/**/*.test.tsx)
+yarn e2e            # builds, serves build/client, and runs the Cypress suite against it (see scripts/e2e.sh)
 ```
+
+CI (`.github/workflows/ci.yml`) runs lint, unit tests, and the Cypress e2e suite on every PR.
 
 # Rendering Model
 

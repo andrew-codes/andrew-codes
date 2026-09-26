@@ -32,10 +32,7 @@ const alphabetically: PostSort = (a, b) => {
 
 const order = flow(
   partialRight(sortBy, (post: MdxPage) => post.frontmatter.title),
-  partialRight(
-    sortBy,
-    (post: MdxPage) => new Date(post.frontmatter.date ?? "").getTime() * -1,
-  ),
+  partialRight(sortBy, (post: MdxPage) => new Date(post.frontmatter.date ?? "").getTime() * -1),
 ) as (posts: MdxPage[]) => MdxPage[]
 
 export { alphabetically, newestFirst, order }
