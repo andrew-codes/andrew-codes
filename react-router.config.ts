@@ -19,9 +19,7 @@ export default {
   ssr: false,
   prerender: async () => {
     const allFiles = await readDir("app/posts")
-    const mdxFiles = allFiles.filter(
-      (f) => /\.mdx?$/.test(f) && !f.endsWith("AGENTS.md"),
-    )
+    const mdxFiles = allFiles.filter((f) => /\.mdx?$/.test(f) && !f.endsWith("AGENTS.md"))
     const slugs = mdxFiles.map((f) => {
       const parts = f.replace(/\\/g, "/").split("/")
       return parts[parts.length - 1].replace(/\.mdx?$/, "")
@@ -30,13 +28,6 @@ export default {
     const tagSets = await Promise.all(mdxFiles.map(getTagsFromFile))
     const uniqueTags = [...new Set(tagSets.flat())]
 
-    return [
-      "/",
-      "/posts",
-      "/recommendations",
-      "/connect",
-      ...slugs.map((slug) => `/posts/${slug}`),
-      ...uniqueTags.map((tag) => `/tags/${tag}`),
-    ]
+    return ["/", "/posts", "/recommendations", "/connect", ...slugs.map((slug) => `/posts/${slug}`), ...uniqueTags.map((tag) => `/tags/${tag}`)]
   },
 } satisfies Config
