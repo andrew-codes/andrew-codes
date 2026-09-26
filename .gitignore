@@ -26,3 +26,7 @@ vite.config.js*
 
 .react-router
 app/public/files
+
+cypress/screenshots
+cypress/videos
+cypress/downloads
