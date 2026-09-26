@@ -21,24 +21,9 @@ const colorGradient: Record<Category, string> = {
 }
 
 const descriptions: Record<Category, string | ReactNode> = {
-  engineering: (
-    <>
-      Document my learnings throughout my career relating to software
-      engineering.
-    </>
-  ),
-  presentation: (
-    <>
-      Presentations and workshops I’ve given at conferences, meetups, etc.;
-      freely available.
-    </>
-  ),
-  agility: (
-    <>
-      Articles about practices and tools that I’ve used to improve agility; both
-      personally and in the context of a team.
-    </>
-  ),
+  engineering: <>Document my learnings throughout my career relating to software engineering.</>,
+  presentation: <>Presentations and workshops I’ve given at conferences, meetups, etc.; freely available.</>,
+  agility: <>Articles about practices and tools that I’ve used to improve agility; both personally and in the context of a team.</>,
   "home automation": <>Posts relating to my home automation journey.</>,
   "not categorized": <>Posts that have not been categorized.</>,
 }
@@ -46,11 +31,8 @@ const getBackgroundGradient = (name: Category | undefined | null): string => {
   return name ? (colorGradient[name] ?? "rgb(255,255,255)") : "rgb(255,255,255)"
 }
 
-const getColors = (name: Category | undefined | null): string[] =>
-  name ? (colors[name] ?? []) : []
+const getColors = (name: Category | undefined | null): string[] => (name ? (colors[name] ?? []) : [])
 
-const getDescription = (
-  name: Category | undefined | null,
-): string | ReactNode => (name ? (descriptions[name] ?? "") : "")
+const getDescription = (name: Category | undefined | null): string | ReactNode => (name ? (descriptions[name] ?? "") : "")
 
 export { getBackgroundGradient, getCategories, getColors, getDescription }

@@ -4,29 +4,12 @@ import Card from "@mui/joy/Card"
 import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
-import type {
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "react-router"
+import type { LoaderFunctionArgs, MetaFunction } from "react-router"
 import { useLoaderData } from "react-router"
 import { getMDXComponent } from "mdx-bundler/client"
 import { useMemo } from "react"
-import getCodePostAssetComponent, {
-  CodePostAsset,
-} from "../components/CodePostAsset"
-import {
-  Blockquote,
-  CollapsibleSection,
-  H2,
-  H3,
-  H4,
-  Image,
-  Link,
-  OrderedList,
-  Paragraph,
-  Table,
-  UnorderedList,
-} from "../components/Post"
+import getCodePostAssetComponent, { CodePostAsset } from "../components/CodePostAsset"
+import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, Table, UnorderedList } from "../components/Post"
 import Tags from "../components/Tags"
 import { getMdxPage } from "../libs/mdx.server"
 import { tryFormatDate } from "../libs/utils"
@@ -59,14 +42,8 @@ const PostRoute = () => {
   // Intentional: mdx-bundler's documented pattern for rendering compiled MDX
   // is to build the component from the bundled `code` string via useMemo, so
   // identity only changes when the post's compiled code changes.
-  const Component = useMemo(
-    () => getMDXComponent(code, { styled: styled }),
-    [code],
-  )
-  const PostCodeAsset = useMemo(
-    () => getCodePostAssetComponent(codeAssets),
-    [codeAssets],
-  )
+  const Component = useMemo(() => getMDXComponent(code, { styled: styled }), [code])
+  const PostCodeAsset = useMemo(() => getCodePostAssetComponent(codeAssets), [codeAssets])
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -101,9 +78,7 @@ const PostRoute = () => {
                 )}
               </Stack>
             </Stack>
-            {!!frontmatter.tags && frontmatter.tags.length > 0 && (
-              <Tags tags={frontmatter.tags} />
-            )}
+            {!!frontmatter.tags && frontmatter.tags.length > 0 && <Tags tags={frontmatter.tags} />}
           </Stack>
           <Divider />
           <Box sx={{ maxWidth: "760px", margin: "0 auto", "& > *:first-child": { marginTop: 0 } }}>
@@ -133,12 +108,7 @@ const PostRoute = () => {
                 table: Table,
                 pre: (props: any) => {
                   if (props.children.type === "code") {
-                    return (
-                      <CodePostAsset
-                        language={props.children.props.className}
-                        code={props.children.props.children}
-                      />
-                    )
+                    return <CodePostAsset language={props.children.props.className} code={props.children.props.children} />
                   }
 
                   return <pre {...props} />

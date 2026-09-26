@@ -12,11 +12,7 @@ import { getMdxPages } from "../libs/mdx.server"
 import { featured } from "../recommendations"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
-  const posts = (await getMdxPages({ request })).sort(
-    (a, b) =>
-      new Date(b.frontmatter?.date ?? 0).getTime() -
-      new Date(a.frontmatter?.date ?? 0).getTime(),
-  )
+  const posts = (await getMdxPages({ request })).sort((a, b) => new Date(b.frontmatter?.date ?? 0).getTime() - new Date(a.frontmatter?.date ?? 0).getTime())
 
   return { posts: posts.slice(0, 3) }
 }
@@ -28,8 +24,7 @@ const meta: MetaFunction = () => {
     },
     {
       name: "description",
-      content:
-        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+      content: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
     },
     {
       name: "og:title",
@@ -37,8 +32,7 @@ const meta: MetaFunction = () => {
     },
     {
       name: "og:description",
-      content:
-        "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+      content: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
     },
   ]
 }
@@ -59,12 +53,7 @@ const HomeRoute = () => {
         >
           I create robust, scalable applications and drive engineering teams.
         </Typography>
-        <CallToAction
-          secondaryTitle="View Recommendations"
-          secondaryAction="/recommendations?priority=featured"
-          tertiaryTitle="Read my Posts"
-          tertiaryAction="/posts"
-        />
+        <CallToAction secondaryTitle="View Recommendations" secondaryAction="/recommendations?priority=featured" tertiaryTitle="Read my Posts" tertiaryAction="/posts" />
       </PageHeader>
       <Section>
         <SectionHeader title="Recommendations">
@@ -101,12 +90,7 @@ const HomeRoute = () => {
             View All
           </Button>
         </SectionHeader>
-        <Stack
-          direction="row"
-          flexWrap="wrap"
-          gap={2}
-          justifyContent="space-between"
-        >
+        <Stack direction="row" flexWrap="wrap" gap={2} justifyContent="space-between">
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}

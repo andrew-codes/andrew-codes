@@ -11,10 +11,7 @@ type MdxOptions = {
   forceFresh?: boolean | string
 }
 
-const mdx = async (
-  mdxFile: MdxPageFile,
-  fileContents: Record<string, string> = {},
-): Promise<{ code: string; frontmatter: Record<string, any>; readTime: ReturnType<typeof calculateReadingTime> }> => {
+const mdx = async (mdxFile: MdxPageFile, fileContents: Record<string, string> = {}): Promise<{ code: string; frontmatter: Record<string, any>; readTime: ReturnType<typeof calculateReadingTime> }> => {
   const source = await fs.readFile(mdxFile.filePath, "utf8")
 
   const { default: remarkMdxImages } = await import("remark-mdx-images")
@@ -42,10 +39,7 @@ const mdx = async (
 
     esbuildOptions(options, _frontmatter) {
       options.minify = true
-      options.outdir =
-        process.env.NODE_ENV === "production"
-          ? path.resolve("build", "client", "files")
-          : path.resolve("app", "public", "files")
+      options.outdir = process.env.NODE_ENV === "production" ? path.resolve("build", "client", "files") : path.resolve("app", "public", "files")
       options.loader = {
         ...options.loader,
         ".png": "file",
@@ -65,16 +59,10 @@ const mdx = async (
   return { code, frontmatter, readTime }
 }
 
-const getMdxFiles = async (
-  fileDirPath: string,
-): Promise<Record<string, MdxPageFile>> => {
+const getMdxFiles = async (fileDirPath: string): Promise<Record<string, MdxPageFile>> => {
   const allFilesInPostsDirectory = await readDir(fileDirPath)
   return allFilesInPostsDirectory
-    .filter(
-      (filePath) =>
-        /^.*\.mdx?$/.test(filePath) &&
-        path.basename(filePath) !== "AGENTS.md",
-    )
+    .filter((filePath) => /^.*\.mdx?$/.test(filePath) && path.basename(filePath) !== "AGENTS.md")
 
     .reduce((acc, filePath) => {
       const slug = path.basename(filePath).replace(/\.mdx?$/, "")
@@ -104,44 +92,27 @@ const EXT_TO_LANGUAGE: Record<string, string> = {
   go: "go",
 }
 
-const getCodeAssets = async (
-  mdxFile: MdxPageFile,
-): Promise<Record<string, { raw: string; highlightedHtml: string }>> => {
+const getCodeAssets = async (mdxFile: MdxPageFile): Promise<Record<string, { raw: string; highlightedHtml: string }>> => {
   try {
     const { default: hljs } = await import("highlight.js")
-    const assetsFiles = await readDirFiles(
-      path.join(
-        mdxFile.filePath.replace(new RegExp(`${mdxFile.fileName}$`), ""),
-        "assets",
-      ),
-    )
+    const assetsFiles = await readDirFiles(path.join(mdxFile.filePath.replace(new RegExp(`${mdxFile.fileName}$`), ""), "assets"))
     return assetsFiles
       .filter(([assetFilePath]) => /.*\.code\.*/.test(assetFilePath))
-      .reduce(
-        (acc, [assetFilePath, raw]) => {
-          const ext = assetFilePath.split(".").at(-1) ?? ""
-          const language = EXT_TO_LANGUAGE[ext]
-          const highlightedHtml = language
-            ? hljs.highlight(raw, { language }).value
-            : hljs.highlightAuto(raw).value
-          return {
-            ...acc,
-            [path.basename(assetFilePath)]: { raw, highlightedHtml },
-          }
-        },
-        {},
-      )
+      .reduce((acc, [assetFilePath, raw]) => {
+        const ext = assetFilePath.split(".").at(-1) ?? ""
+        const language = EXT_TO_LANGUAGE[ext]
+        const highlightedHtml = language ? hljs.highlight(raw, { language }).value : hljs.highlightAuto(raw).value
+        return {
+          ...acc,
+          [path.basename(assetFilePath)]: { raw, highlightedHtml },
+        }
+      }, {})
   } catch {
     return {}
   }
 }
 
-const getMdxPage = async (
-  slug: string,
-  _options: MdxOptions = {},
-  fileDirPath: string = "app/posts",
-  extraFilesPath: string = "app/components",
-): Promise<MdxPage> => {
+const getMdxPage = async (slug: string, _options: MdxOptions = {}, fileDirPath: string = "app/posts", extraFilesPath: string = "app/components"): Promise<MdxPage> => {
   const mdxFiles = await getMdxFiles(fileDirPath)
   const mdxFile = mdxFiles[slug]
 
@@ -151,12 +122,7 @@ const getMdxPage = async (
 
   const componentsDir = path.join(extraFilesPath)
   const allComponentFiles = await readDirFiles(componentsDir)
-  const fileContents = allComponentFiles
-    .map(([filePath, contents]) => [
-      `../${filePath.replace(/\\/g, "/")}`,
-      contents,
-    ])
-    .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
+  const fileContents = allComponentFiles.map(([filePath, contents]) => [`../${filePath.replace(/\\/g, "/")}`, contents]).reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
 
   const transformedMdx = await mdx(mdxFile, fileContents)
   const codeAssets = await getCodeAssets(mdxFile)
@@ -169,21 +135,12 @@ const getMdxPage = async (
   return output as MdxPage
 }
 
-const getMdxPages = async (
-  _options: MdxOptions = {},
-  fileDirPath: string = "app/posts",
-  extraFilesPath: string = "app/components",
-): Promise<MdxPage[]> => {
+const getMdxPages = async (_options: MdxOptions = {}, fileDirPath: string = "app/posts", extraFilesPath: string = "app/components"): Promise<MdxPage[]> => {
   const mdxFiles = await getMdxFiles(fileDirPath)
 
   const componentsDir = path.join(extraFilesPath)
   const allComponentFiles = await readDirFiles(componentsDir)
-  const fileContents = allComponentFiles
-    .map(([filePath, contents]) => [
-      `../${filePath.replace(/\\/g, "/")}`,
-      contents,
-    ])
-    .reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
+  const fileContents = allComponentFiles.map(([filePath, contents]) => [`../${filePath.replace(/\\/g, "/")}`, contents]).reduce((acc, [key, value]) => merge({}, acc, { [key]: value }), {})
 
   const pages: MdxPage[] = []
   for (const mdxFile of Object.values(mdxFiles)) {
