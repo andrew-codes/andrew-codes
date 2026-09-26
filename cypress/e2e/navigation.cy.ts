@@ -3,32 +3,30 @@ describe("primary navigation", () => {
     cy.visit("/")
 
     // The forward transition triggers a fetch for /posts.data (plus its
-    // lazy-loaded route chunk) before the page can render. On
-    // resource-constrained CI runners that fetch can occasionally run
-    // longer than defaultCommandTimeout, which previously made the
-    // location/content assertions below race that fetch and time out.
-    // Waiting on the request directly gives it its own (more generous)
-    // cy.wait timeout instead of competing with the DOM assertions for
-    // defaultCommandTimeout.
-    cy.intercept("GET", "**/posts.data").as("postsData")
+    // lazy-loaded route chunk) before the page can render, and that fetch
+    // can occasionally run longer than defaultCommandTimeout on a
+    // resource-constrained CI runner. A cy.intercept/cy.wait pair was tried
+    // here to synchronize on the request, but cy.wait races the request's
+    // *start* against its own (tighter, 5s-default) requestTimeout, which
+    // is a second flake source independent of the one below. Cypress
+    // location/content assertions already retry until they time out, so
+    // giving them a generous timeout directly - with no network
+    // synchronization in between - removes both races.
     cy.contains("a", "Read my Posts").click()
-    cy.wait("@postsData")
-    cy.location("pathname").should("eq", "/posts")
+    cy.location("pathname", { timeout: 20000 }).should("eq", "/posts")
     // /posts.data embeds every post's fully bundled MDX code, making it a
     // multi-megabyte payload - parsing and rendering it after the network
-    // wait above resolves can occasionally take longer than
-    // defaultCommandTimeout on a CPU-constrained CI runner, so this
-    // assertion gets its own more generous timeout instead of racing it.
+    // resolves can occasionally take longer than defaultCommandTimeout on a
+    // CPU-constrained CI runner, so this assertion gets its own more
+    // generous timeout instead of racing it.
     cy.contains("h2", "Featured", { timeout: 20000 }).should("be.visible")
 
-    // The back transition triggers a fetch for /_root.data before the
-    // page re-renders, same as the forward transition above - wait on it
-    // directly rather than racing defaultCommandTimeout.
-    cy.intercept("GET", "**/_root.data").as("rootData")
+    // The back transition triggers a fetch for /_root.data before the page
+    // re-renders, same as the forward transition above - use the same
+    // generous, retry-based assertion timeouts rather than an intercept.
     cy.go("back")
-    cy.wait("@rootData")
-    cy.location("pathname").should("eq", "/")
-    cy.contains("h1", "Andrew Smith").should("be.visible")
+    cy.location("pathname", { timeout: 20000 }).should("eq", "/")
+    cy.contains("h1", "Andrew Smith", { timeout: 20000 }).should("be.visible")
   })
 
   it("navigates from the home page to recommendations", () => {
