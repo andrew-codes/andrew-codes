@@ -37,11 +37,5 @@ jobs:
         with:
           node-version: "22.14.0"
       - run: corepack enable
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          install-command: yarn install --immutable
-          build: yarn build
-          start: yarn e2e:serve
-          wait-on: "http://localhost:4173"
-          browser: chrome
+      - run: yarn install --immutable
+      - run: yarn e2e
