@@ -42,3 +42,69 @@ jobs:
       - run: corepack enable
       - run: yarn install --immutable
       - run: yarn e2e
+
+  e2e-tests-cloudflare:
+    name: E2E tests (Cypress, Cloudflare preview)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - run: corepack enable
+      - run: yarn install --immutable
+      - name: Wait for Cloudflare commit preview deployment
+        id: cf-preview
+        env:
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        # The cloudflare-workers-and-pages bot posts one PR comment per branch
+        # and edits it in place on every push, so it may not exist yet, or may
+        # still reflect a previous commit, when this job starts (the
+        # Cloudflare build is async and can lag behind this CI run). Poll
+        # until the comment's "Latest Commit" column matches this PR's head
+        # SHA, then pull the Commit Preview URL (immutable, tied to this exact
+        # commit) out of that row - never the Branch Preview URL, which is
+        # overwritten by later pushes and can't be trusted to match.
+        run: |
+          set -euo pipefail
+          TIMEOUT_SECONDS=900
+          INTERVAL_SECONDS=20
+          ELAPSED=0
+
+          while [ "$ELAPSED" -lt "$TIMEOUT_SECONDS" ]; do
+            COMMENT_BODY=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" \
+              --jq '[.[] | select(.user.login == "cloudflare-workers-and-pages[bot]")] | last | .body // empty')
+
+            if [ -n "$COMMENT_BODY" ]; then
+              COMMIT_LINE=$(printf '%s\n' "$COMMENT_BODY" | grep -F 'Commit Preview URL' | tail -1 || true)
+              if [ -n "$COMMIT_LINE" ]; then
+                COMMENT_SHA=$(printf '%s' "$COMMIT_LINE" | awk -F'|' '{gsub(/^[ \t]+|[ \t]+$/, "", $4); print $4}')
+                if [ -n "$COMMENT_SHA" ] && [ "${HEAD_SHA#"$COMMENT_SHA"}" != "$HEAD_SHA" ]; then
+                  PREVIEW_URL=$(printf '%s' "$COMMIT_LINE" | grep -oE "href='[^']+'>Commit Preview URL" | grep -oE "href='[^']+'" | sed "s/href='//;s/'$//")
+                  if [ -n "$PREVIEW_URL" ]; then
+                    echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
+                    echo "Matched Cloudflare deployment for commit $HEAD_SHA: $PREVIEW_URL"
+                    exit 0
+                  fi
+                fi
+              fi
+            fi
+
+            sleep "$INTERVAL_SECONDS"
+            ELAPSED=$((ELAPSED + INTERVAL_SECONDS))
+          done
+
+          echo "::error::Timed out after ${TIMEOUT_SECONDS}s waiting for a Cloudflare preview comment matching commit $HEAD_SHA on PR #$PR_NUMBER" >&2
+          exit 1
+      - name: Run Cypress against Cloudflare commit preview
+        env:
+          CYPRESS_BASE_URL: ${{ steps.cf-preview.outputs.preview_url }}
+        run: yarn cy:run
