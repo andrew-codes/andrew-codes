@@ -109,6 +109,27 @@ jobs:
 
           echo "::error::Timed out after ${TIMEOUT_SECONDS}s waiting for the Cloudflare Workers Build check run to complete for commit $HEAD_SHA" >&2
           exit 1
+      - name: Wait for Cloudflare preview to respond
+        # A green Workers Build check run means the build succeeded, not that
+        # the deployed version is warm and consistently reachable across
+        # Cloudflare's edge yet - the first request(s) right after a build
+        # completes can hit a cold Worker isolate and be much slower than
+        # steady-state, which previously left the Cypress suite's first
+        # navigation racing that cold start against its own timeouts. Poll
+        # the preview URL directly (mirroring scripts/e2e.sh's local
+        # readiness loop) until it responds before starting the timed suite.
+        env:
+          PREVIEW_URL: ${{ steps.cf-preview.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 30); do
+            if curl -sf "$PREVIEW_URL" >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::Timed out waiting for $PREVIEW_URL to respond" >&2
+          exit 1
       - name: Run Cypress against Cloudflare commit preview
         env:
           CYPRESS_BASE_URL: ${{ steps.cf-preview.outputs.preview_url }}
