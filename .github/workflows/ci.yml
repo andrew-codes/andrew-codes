@@ -130,6 +130,23 @@ jobs:
           done
           echo "::error::Timed out waiting for $PREVIEW_URL to respond" >&2
           exit 1
+      - name: Warm the routes the Cypress suite navigates to
+        # The check above only confirms "/" is reachable. Each other route
+        # (and its *.data loader payload) is served as its own static asset
+        # behind Cloudflare's edge, so it gets its own independent cold miss
+        # on first request regardless of "/" already being warm. The
+        # navigation spec's first cross-route click (home -> /posts) used to
+        # race that first-ever fetch of /posts and /posts.data against its
+        # own assertion timeout and lose - fetch every route and *.data file
+        # the suite visits up front so the timed run only ever hits a warm
+        # cache.
+        env:
+          PREVIEW_URL: ${{ steps.cf-preview.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+          for path in / /posts /recommendations /connect /_root.data /posts.data; do
+            curl -sf "$PREVIEW_URL$path" >/dev/null 2>&1 || true
+          done
       - name: Run Cypress against Cloudflare commit preview
         env:
           CYPRESS_BASE_URL: ${{ steps.cf-preview.outputs.preview_url }}
