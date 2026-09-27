@@ -8,10 +8,10 @@ import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
-import { getMdxPages } from "../libs/mdx.server"
+import { getMdxListItems } from "../libs/mdx.server"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
-  const posts = await getMdxPages({ request })
+  const posts = await getMdxListItems({ request })
 
   return {
     posts: posts.sort(

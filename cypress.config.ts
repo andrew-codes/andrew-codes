@@ -20,6 +20,18 @@ export default defineConfig({
       runMode: 2,
       openMode: 0,
     },
+    // CYPRESS_BASE_URL can point this suite at a real deployed Cloudflare
+    // preview instead of localhost (see .github/workflows/ci.yml's
+    // "Cloudflare preview" job). Cypress's cy.wait('@alias') first waits up
+    // to requestTimeout (default 5000ms) for the intercepted request to even
+    // be dispatched, before it waits up to responseTimeout for the response.
+    // Against a live edge deployment, public-internet latency plus hydration
+    // can push the click-to-fetch gap past that 5000ms default in a way
+    // loopback-only localhost runs never hit, so cy.wait() reports "No
+    // request ever occurred" even though the request does eventually fire.
+    // Raise both to match the headroom already given to defaultCommandTimeout.
+    requestTimeout: 15000,
+    responseTimeout: 30000,
   },
   video: false,
 })

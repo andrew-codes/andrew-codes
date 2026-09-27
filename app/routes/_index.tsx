@@ -8,11 +8,11 @@ import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
-import { getMdxPages } from "../libs/mdx.server"
+import { getMdxListItems } from "../libs/mdx.server"
 import { featured } from "../recommendations"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
-  const posts = (await getMdxPages({ request })).sort((a, b) => new Date(b.frontmatter?.date ?? 0).getTime() - new Date(a.frontmatter?.date ?? 0).getTime())
+  const posts = (await getMdxListItems({ request })).sort((a, b) => new Date(b.frontmatter?.date ?? 0).getTime() - new Date(a.frontmatter?.date ?? 0).getTime())
 
   return { posts: posts.slice(0, 3) }
 }

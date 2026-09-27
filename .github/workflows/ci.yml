@@ -42,3 +42,112 @@ jobs:
       - run: corepack enable
       - run: yarn install --immutable
       - run: yarn e2e
+
+  e2e-tests-cloudflare:
+    name: E2E tests (Cypress, Cloudflare preview)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - run: corepack enable
+      - run: yarn install --immutable
+      - name: Wait for Cloudflare Workers Build check
+        id: cf-preview
+        env:
+          REPO: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        # Cloudflare's Workers Builds git integration publishes a real GitHub
+        # Check Run (app cloudflare-workers-and-pages, name "Workers Builds:
+        # <script>") directly against this commit SHA - unlike the bot's PR
+        # comment, the check-runs API is already scoped to the exact commit,
+        # so there's no separate SHA-matching step. The build is async and can
+        # still be queued/in_progress when this job starts, so poll until it
+        # completes. Its output.summary has a "Preview URL:" line (tied to
+        # this commit) and a separate "Preview Alias URL:" line (the branch
+        # one, overwritten by later pushes) - only the former is used.
+        run: |
+          set -euo pipefail
+          TIMEOUT_SECONDS=900
+          INTERVAL_SECONDS=20
+          ELAPSED=0
+
+          while [ "$ELAPSED" -lt "$TIMEOUT_SECONDS" ]; do
+            CHECK_RUN=$(gh api "repos/$REPO/commits/$HEAD_SHA/check-runs" \
+              --jq '[.check_runs[] | select(.app.slug == "cloudflare-workers-and-pages")] | sort_by(.started_at) | last // empty')
+
+            if [ -n "$CHECK_RUN" ]; then
+              STATUS=$(printf '%s' "$CHECK_RUN" | jq -r '.status')
+              if [ "$STATUS" = "completed" ]; then
+                CONCLUSION=$(printf '%s' "$CHECK_RUN" | jq -r '.conclusion')
+                if [ "$CONCLUSION" != "success" ]; then
+                  echo "::error::Cloudflare Workers Build check for commit $HEAD_SHA completed with conclusion '$CONCLUSION', not 'success'" >&2
+                  exit 1
+                fi
+
+                PREVIEW_URL=$(printf '%s' "$CHECK_RUN" | jq -r '.output.summary // ""' | { grep -oE '^Preview URL: .*' || true; } | sed -E 's/^Preview URL: //')
+                if [ -n "$PREVIEW_URL" ]; then
+                  echo "preview_url=$PREVIEW_URL" >> "$GITHUB_OUTPUT"
+                  echo "Cloudflare Workers Build ready for commit $HEAD_SHA: $PREVIEW_URL"
+                  exit 0
+                fi
+
+                echo "::error::Cloudflare Workers Build check for commit $HEAD_SHA completed successfully but no 'Preview URL:' line was found in its summary" >&2
+                exit 1
+              fi
+            fi
+
+            sleep "$INTERVAL_SECONDS"
+            ELAPSED=$((ELAPSED + INTERVAL_SECONDS))
+          done
+
+          echo "::error::Timed out after ${TIMEOUT_SECONDS}s waiting for the Cloudflare Workers Build check run to complete for commit $HEAD_SHA" >&2
+          exit 1
+      - name: Wait for Cloudflare preview to respond
+        # A green Workers Build check run means the build succeeded, not that
+        # the deployed version is warm and consistently reachable across
+        # Cloudflare's edge yet - the first request(s) right after a build
+        # completes can hit a cold Worker isolate and be much slower than
+        # steady-state, which previously left the Cypress suite's first
+        # navigation racing that cold start against its own timeouts. Poll
+        # the preview URL directly (mirroring scripts/e2e.sh's local
+        # readiness loop) until it responds before starting the timed suite.
+        env:
+          PREVIEW_URL: ${{ steps.cf-preview.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+          for _ in $(seq 1 30); do
+            if curl -sf "$PREVIEW_URL" >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::Timed out waiting for $PREVIEW_URL to respond" >&2
+          exit 1
+      - name: Warm the routes the Cypress suite navigates to
+        # The check above only confirms "/" is reachable. Each other route
+        # (and its *.data loader payload) is served as its own static asset
+        # behind Cloudflare's edge, so it gets its own independent cold miss
+        # on first request regardless of "/" already being warm. The
+        # navigation spec's first cross-route click (home -> /posts) used to
+        # race that first-ever fetch of /posts and /posts.data against its
+        # own assertion timeout and lose - fetch every route and *.data file
+        # the suite visits up front so the timed run only ever hits a warm
+        # cache.
+        env:
+          PREVIEW_URL: ${{ steps.cf-preview.outputs.preview_url }}
+        run: |
+          set -euo pipefail
+          for path in / /posts /recommendations /connect /_root.data /posts.data; do
+            curl -sf "$PREVIEW_URL$path" >/dev/null 2>&1 || true
+          done
+      - name: Run Cypress against Cloudflare commit preview
+        env:
+          CYPRESS_BASE_URL: ${{ steps.cf-preview.outputs.preview_url }}
+        run: yarn cy:run

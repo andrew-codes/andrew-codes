@@ -24,7 +24,7 @@ yarn test           # vitest (unit tests; see app/**/__tests__/*.test.{ts,tsx})
 yarn e2e            # builds, serves build/client, and runs the Cypress suite against it (see scripts/e2e.sh)
 ```
 
-CI (`.github/workflows/ci.yml`) runs lint, unit tests, and the Cypress e2e suite on every PR.
+CI (`.github/workflows/ci.yml`) runs lint, unit tests, and the Cypress e2e suite on every PR - once against the local build, and again against the PR's Cloudflare Workers Build preview once that check run completes.
 
 # Rendering Model
 

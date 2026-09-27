@@ -6,14 +6,14 @@ import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
-import { getMdxPages } from "../libs/mdx.server"
-import type { MdxPage } from "../types"
+import { getMdxListItems } from "../libs/mdx.server"
+import type { MdxListItem } from "../types"
 
-const onlyForTag = (tag: string) => (posts: MdxPage[]) =>
+const onlyForTag = (tag: string) => (posts: MdxListItem[]) =>
   posts.filter((post) => post.frontmatter.tags?.includes(tag))
 
 const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  const posts = await getMdxPages({ request })
+  const posts = await getMdxListItems({ request })
   const postsForTag = onlyForTag(params.id ?? "")(posts)
 
   return {

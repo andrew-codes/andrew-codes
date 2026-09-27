@@ -32,8 +32,16 @@ describe("primary navigation", () => {
   it("navigates from the home page to recommendations", () => {
     cy.visit("/")
 
+    // Unlike /posts and /_root, /recommendations has no loader, so
+    // react-router never prerenders a *.data file for it (see
+    // build/client/recommendations - only index.html) and there's no
+    // request to intercept and wait on. The transition still needs to
+    // fetch and evaluate the route's lazy-loaded JS chunk, which can take
+    // longer than defaultCommandTimeout against a live, remote deployment
+    // than it does against localhost, so this assertion gets the same
+    // more generous timeout used for other heavy post-transition loads.
     cy.contains("a", "View Recommendations").click()
-    cy.location("pathname").should("eq", "/recommendations")
+    cy.location("pathname", { timeout: 20000 }).should("eq", "/recommendations")
     cy.contains("h2", "Recommendations").should("be.visible")
   })
 

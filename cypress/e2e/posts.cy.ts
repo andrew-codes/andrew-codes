@@ -5,19 +5,17 @@ describe("posts", () => {
     cy.contains("h2", "All").should("be.visible")
 
     // Clicking "Read more" triggers a fetch for the post's .data file (plus
-    // its lazy-loaded route chunk) before the detail page can render. On
-    // resource-constrained CI runners that fetch can occasionally run
-    // longer than defaultCommandTimeout, which previously made the
-    // location/content assertions below race that fetch and time out (see
-    // the equivalent wait in navigation.cy.ts). Waiting on the request
-    // directly gives it its own timeout instead of competing with the DOM
-    // assertions for defaultCommandTimeout.
-    cy.intercept("GET", "**/posts/*.data").as("postData")
+    // its lazy-loaded route chunk) before the detail page can render.
+    // Against a live edge deployment, whether that fetch shows up as a
+    // distinct network request cy.intercept can catch (vs. served from an
+    // intermediate cache) isn't guaranteed the way it is on localhost, so
+    // asserting on the rendered result directly - with headroom for a slow
+    // fetch - is more reliable than waiting on the request (see the
+    // equivalent reasoning in navigation.cy.ts).
     cy.get("a").contains("Read more").first().click()
-    cy.wait("@postData")
 
-    cy.location("pathname").should("match", /^\/posts\/.+/)
-    cy.get("article").should("be.visible")
+    cy.location("pathname", { timeout: 20000 }).should("match", /^\/posts\/.+/)
+    cy.get("article", { timeout: 20000 }).should("be.visible")
     cy.get("article h2").should("not.be.empty")
   })
 })
