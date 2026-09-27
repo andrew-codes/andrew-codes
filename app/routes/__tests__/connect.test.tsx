@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import QRCode from "qrcode"
 import { describe, expect, it } from "vitest"
-import { ConnectPageContent, LINKEDIN_PROFILE_URL, loader } from "./connect"
+import { ConnectPageContent, LINKEDIN_PROFILE_URL, loader } from "../connect"
 
 describe("connect route", () => {
   it("renders Andrew Smith as the page header", async () => {

@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, it } from "vitest"
-import { Link, Paragraph } from "./Post"
+import { Link, Paragraph } from "../Post"
 
 // Regression test for a production hydration crash (React error #418,
 // args[]=HTML) found on every post page that has a standalone image in its

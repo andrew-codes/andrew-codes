@@ -1,8 +1,8 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import PostCard from "./PostCard"
-import type { MdxPage } from "../types"
+import PostCard from "../PostCard"
+import type { MdxPage } from "../../types"
 
 const post: MdxPage = {
   code: "",

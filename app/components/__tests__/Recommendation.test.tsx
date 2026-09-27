@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, it } from "vitest"
-import Recommendation from "./Recommendation"
+import Recommendation from "../Recommendation"
 
 describe("Recommendation", () => {
   it("renders the name, title, and company", () => {

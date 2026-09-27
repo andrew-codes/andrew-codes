@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import type { MdxPage } from "../../types"
-import postsByCategory from "./categorize"
+import type { MdxPage } from "../../../types"
+import postsByCategory from "../categorize"
 
 const post = (category: MdxPage["frontmatter"]["category"], title: string): MdxPage =>
   ({

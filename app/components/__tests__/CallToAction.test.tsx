@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import CallToAction from "./CallToAction"
+import CallToAction from "../CallToAction"
 
 const renderCta = (props: React.ComponentProps<typeof CallToAction>) => {
   const Stub = createRoutesStub([{ path: "/", Component: () => <CallToAction {...props} /> }])

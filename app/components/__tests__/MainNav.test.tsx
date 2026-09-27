@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import GlobalNav from "./MainNav"
+import GlobalNav from "../MainNav"
 
 describe("MainNav", () => {
   it("renders the site owner's identity and links to home and the resume", () => {

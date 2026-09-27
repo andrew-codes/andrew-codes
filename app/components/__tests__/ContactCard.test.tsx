@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { describe, expect, it } from "vitest"
-import { ConnectionList, ContactCard, FullName, JobTitle, Url } from "./ContactCard"
+import { ConnectionList, ContactCard, FullName, JobTitle, Url } from "../ContactCard"
 
 describe("ContactCard", () => {
   it("renders as an hCard with the vcard class", () => {

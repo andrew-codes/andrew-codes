@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { MemoryRouter, Route, Routes } from "react-router"
 import { describe, expect, it, vi } from "vitest"
-import HomeRoute from "./_index"
+import TagsRoute from "../tags.$id"
 
 vi.mock("react-router", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react-router")>()
@@ -12,25 +12,23 @@ vi.mock("react-router", async (importOriginal) => {
         {
           code: "",
           slug: "my-post",
-          frontmatter: { title: "My Post", description: "A description", category: "engineering", date: "2024-01-01" },
+          frontmatter: { title: "My Post", description: "A description", category: "engineering", date: "2024-01-01", tags: ["engineering"] },
         },
       ],
     }),
   }
 })
 
-describe("home route", () => {
-  it("renders without throwing, including the header and latest posts", () => {
+describe("tags route", () => {
+  it("renders without throwing, listing the posts for that tag", () => {
     const html = renderToStaticMarkup(
-      <MemoryRouter initialEntries={["/"]}>
+      <MemoryRouter initialEntries={["/tags/engineering"]}>
         <Routes>
-          <Route path="/" element={<HomeRoute />} />
+          <Route path="/tags/:id" element={<TagsRoute />} />
         </Routes>
       </MemoryRouter>,
     )
 
-    expect(html).toContain("Andrew Smith")
-    expect(html).toContain("Latest Posts")
     expect(html).toContain("My Post")
   })
 })
