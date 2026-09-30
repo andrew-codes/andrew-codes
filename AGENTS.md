@@ -29,7 +29,7 @@ CI (`.github/workflows/ci.yml`) runs lint, unit tests, and the Cypress e2e suite
 # Rendering Model
 
 This is a fully static-generated site: `react-router.config.ts` sets `ssr: false`
-and prerenders every route (`/`, `/posts`, `/recommendations`, `/connect`, every
+and prerenders every route (`/`, `/posts`, `/recommendations`, `/connect`, `/connect-with-me`, every
 post slug, every tag) at *build time*. There is no per-request server render in production
 - `yarn start` (the Vite dev server) does per-request SSR and is **not**
 representative of production rendering behavior for anything time-, locale-,

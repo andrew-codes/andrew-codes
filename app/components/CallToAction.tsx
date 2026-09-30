@@ -6,16 +6,36 @@ import MenuButton from "@mui/joy/MenuButton"
 import MenuItem from "@mui/joy/MenuItem"
 import Stack from "@mui/joy/Stack"
 import { Link as RemixLink } from "react-router"
-import React, { FC, MouseEventHandler, useEffect, useRef, useState } from "react"
+import { FC, MouseEventHandler, useEffect, useRef, useState } from "react"
+import { profile } from "../profile"
 
+const CONNECT_PATH = "/connect-with-me"
+const resumeHref = encodeURI(profile.resumeUrl)
+
+type Action = string | MouseEventHandler
+
+// A single call to action. `file` actions are plain anchors (never client-side
+// routed) so the browser handles the PDF itself.
+type Item = {
+  title: string
+  action?: Action
+  file?: { newTab?: boolean; download?: boolean }
+  href?: string
+}
+
+// "default" is every page except /connect-with-me: the desktop primary button
+// is "Connect / Resume" and the phone dropdown gains a "Connect with Me" link.
+// "connect" is the /connect-with-me page itself, where that spot offers the
+// resume instead of a link back to itself.
 const CallToAction: FC<{
+  variant?: "default" | "connect"
   primaryTitle?: string
   primaryAction?: string | MouseEventHandler
   secondaryTitle: string
   secondaryAction: string | MouseEventHandler
   tertiaryTitle?: string
   tertiaryAction?: string | MouseEventHandler
-}> = ({ primaryTitle, primaryAction, secondaryAction, secondaryTitle, tertiaryTitle, tertiaryAction }) => {
+}> = ({ variant = "default", primaryTitle, primaryAction, secondaryAction, secondaryTitle, tertiaryTitle, tertiaryAction }) => {
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const [menuWidth, setMenuWidth] = useState<number | undefined>()
 
@@ -25,16 +45,49 @@ const CallToAction: FC<{
     }
   }, [])
 
-  const handlePrimaryAction = (evt: React.MouseEvent) => {
-    if (typeof primaryAction === "function") {
-      primaryAction(evt)
-    }
+  const downloadResume: Item = { title: "Download Resume", href: resumeHref, file: { download: true } }
+  const viewResume: Item = { title: "View Resume", href: resumeHref, file: { newTab: true } }
+  const connect: Item = { title: "Connect / Resume", action: CONNECT_PATH }
+
+  let primary: Item
+  const phoneOnly: Item[] = []
+  const afterPrimary: Item[] = []
+  if (primaryAction) {
+    primary = { title: primaryTitle ?? "", action: primaryAction }
+  } else if (variant === "connect") {
+    primary = downloadResume
+    afterPrimary.push(viewResume)
+  } else {
+    primary = connect
+    // Phones list both the link and the resume download in the dropdown.
+    phoneOnly.push({ title: "Connect with Me", action: CONNECT_PATH }, downloadResume)
   }
 
-  const handleSecondaryAction = (evt: React.MouseEvent) => {
-    if (typeof secondaryAction === "function") {
-      secondaryAction(evt)
+  const items: Item[] = [primary, ...afterPrimary, { title: secondaryTitle, action: secondaryAction }]
+  if (tertiaryTitle && tertiaryAction) {
+    items.push({ title: tertiaryTitle, action: tertiaryAction })
+  }
+  const phoneItems = phoneOnly.length > 0 ? [...phoneOnly, ...items.slice(1)] : items
+
+  const linkProps = (item: Item) => {
+    if (item.file) {
+      return {
+        component: "a",
+        href: item.href,
+        ...(item.file.download && { download: "" }),
+        ...(item.file.newTab && { target: "_blank", rel: "noopener noreferrer" }),
+      }
     }
+    if (typeof item.action === "string") {
+      return { component: RemixLink, to: item.action }
+    }
+    return { onClick: item.action as MouseEventHandler | undefined }
+  }
+  const menuLinkProps = (item: Item) => {
+    const props = linkProps(item) as Record<string, unknown>
+    if (props.component === "a") return props
+    if (props.component) return { ...props, component: RemixLink as any }
+    return props
   }
 
   return (
@@ -46,122 +99,28 @@ const CallToAction: FC<{
             Navigation
           </MenuButton>
           <Menu sx={{ minWidth: menuWidth }}>
-            {!primaryAction ? (
-              <MenuItem component="a" href={encodeURI("/James Andrew Smith - Resume.pdf")}>
-                Download Resume
+            {phoneItems.map((item) => (
+              <MenuItem key={item.title} {...(menuLinkProps(item) as object)}>
+                {item.title}
               </MenuItem>
-            ) : typeof primaryAction === "string" ? (
-              <MenuItem component={RemixLink as any} to={primaryAction}>
-                {primaryTitle}
-              </MenuItem>
-            ) : (
-              <MenuItem onClick={handlePrimaryAction}>
-                {primaryTitle}
-              </MenuItem>
-            )}
-            {typeof secondaryAction === "string" ? (
-              <MenuItem component={RemixLink as any} to={secondaryAction}>
-                {secondaryTitle}
-              </MenuItem>
-            ) : (
-              <MenuItem onClick={handleSecondaryAction}>
-                {secondaryTitle}
-              </MenuItem>
-            )}
-            {tertiaryTitle && tertiaryAction && (
-              typeof tertiaryAction === "string" ? (
-                <MenuItem component={RemixLink as any} to={tertiaryAction}>
-                  {tertiaryTitle}
-                </MenuItem>
-              ) : (
-                <MenuItem onClick={tertiaryAction as MouseEventHandler}>
-                  {tertiaryTitle}
-                </MenuItem>
-              )
-            )}
+            ))}
           </Menu>
         </Dropdown>
       </Box>
 
       {/* Tablet+: button row */}
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ display: { xs: "none", sm: "flex" }, mt: 2, gap: 2 }}
-      >
-        {!primaryAction ? (
+      <Stack direction="row" alignItems="center" justifyContent="center" flexWrap="wrap" sx={{ display: { xs: "none", sm: "flex" }, mt: 2, gap: 2 }}>
+        {items.map((item, index) => (
           <Button
-            color="primary"
-            variant="solid"
-            href={encodeURI("/James Andrew Smith - Resume.pdf")}
-            component="a"
+            key={item.title}
+            color={index === 0 ? "primary" : "neutral"}
+            variant={index === 0 ? "solid" : "outlined"}
             size="lg"
+            {...(linkProps(item) as object)}
           >
-            Download Resume
+            {item.title}
           </Button>
-        ) : typeof primaryAction === "string" ? (
-          <Button
-            color="primary"
-            variant="solid"
-            to={primaryAction}
-            component={RemixLink}
-            size="lg"
-          >
-            {primaryTitle}
-          </Button>
-        ) : (
-          <Button
-            color="primary"
-            variant="solid"
-            onClick={handlePrimaryAction}
-            size="lg"
-          >
-            {primaryTitle}
-          </Button>
-        )}
-        {typeof secondaryAction === "string" ? (
-          <Button
-            color="neutral"
-            variant="outlined"
-            component={RemixLink}
-            to={secondaryAction}
-            size="lg"
-          >
-            {secondaryTitle}
-          </Button>
-        ) : (
-          <Button
-            color="neutral"
-            variant="outlined"
-            size="lg"
-            onClick={handleSecondaryAction}
-          >
-            {secondaryTitle}
-          </Button>
-        )}
-        {tertiaryTitle && tertiaryAction && (
-          typeof tertiaryAction === "string" ? (
-            <Button
-              color="neutral"
-              variant="outlined"
-              component={RemixLink}
-              to={tertiaryAction}
-              size="lg"
-            >
-              {tertiaryTitle}
-            </Button>
-          ) : (
-            <Button
-              color="neutral"
-              variant="outlined"
-              size="lg"
-              onClick={tertiaryAction as MouseEventHandler}
-            >
-              {tertiaryTitle}
-            </Button>
-          )
-        )}
+        ))}
       </Stack>
     </>
   )

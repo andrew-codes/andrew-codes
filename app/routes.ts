@@ -6,4 +6,5 @@ export default [
   route("recommendations", "routes/recommendations.tsx"),
   route("tags/:id", "routes/tags.$id.tsx"),
   route("connect", "routes/connect.tsx"),
+  route("connect-with-me", "routes/connect-with-me.tsx"),
 ] satisfies RouteConfig
