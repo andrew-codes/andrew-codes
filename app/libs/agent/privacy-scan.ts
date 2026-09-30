@@ -58,11 +58,11 @@ const maskDates = (text: string) => text.replace(/\b\d{4}-\d{2}-\d{2}(?:T[\d:.]+
 // Whole files are scanned, including <script> JSON-LD blocks and attributes.
 export const scanText = (file: string, text: string): Violation[] => {
   const masked = maskDates(text)
-  return Object.entries(FORBIDDEN).flatMap(([kind, pattern]) => {
-    const match = masked.match(pattern)
-    const allowed = match && ALLOWED.some((entry) => entry.file === file && entry.match === match[0])
-    return match && !allowed ? [{ file, kind, match: match[0] }] : []
-  })
+  return Object.entries(FORBIDDEN).flatMap(([kind, pattern]) =>
+    [...masked.matchAll(new RegExp(pattern.source, `${pattern.flags}g`))]
+      .filter((match) => !ALLOWED.some((entry) => entry.file === file && entry.match === match[0]))
+      .map((match) => ({ file, kind, match: match[0] })),
+  )
 }
 
 // Machine-facing outputs are everything that is not a rendered HTML page.
