@@ -14,7 +14,7 @@ import { buildPersonJsonLd } from "../libs/agent/resume"
 import { getSiteGraph } from "../libs/agent/site-graph.server"
 import { getMdxListItems } from "../libs/mdx.server"
 import { buildMeta } from "../libs/meta"
-import { buildProfilePageJsonLd } from "../libs/structured-data"
+import { buildProfilePageJsonLd } from "../libs/agent/structured-data"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
   const posts = (await getMdxListItems({ request })).sort((a, b) => new Date(b.frontmatter?.date ?? 0).getTime() - new Date(a.frontmatter?.date ?? 0).getTime())

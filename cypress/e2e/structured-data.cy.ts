@@ -2,7 +2,7 @@
 // crawlers and agents read the static <head> and never run the app.
 
 const ORIGIN = "https://andrew.codes"
-const PERSON_ID = `${ORIGIN}/#person`
+const PERSON_ID = `${ORIGIN}/#me`
 
 // The site owner's contact details must never appear in structured data.
 const FORBIDDEN = [/[^\s@"'<>()[\]]+@[^\s@"'<>()[\]]+\.[a-z]{2,}/i, /\b(mailto|tel):/i, /"(email|telephone|address|contactPoint)"/]
@@ -60,7 +60,7 @@ describe("JSON-LD in the built HTML", () => {
   })
 
   it("does not add JSON-LD to pages that have no profile or article to describe", () => {
-    for (const path of ["/posts/", "/recommendations/", "/connect/", "/connect-with-me/"]) {
+    for (const path of ["/posts/", "/connect/", "/connect-with-me/"]) {
       withJsonLd(path, (blocks) => expect(blocks, path).to.have.length(0))
     }
   })

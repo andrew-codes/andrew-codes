@@ -13,7 +13,7 @@ import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, P
 import Tags from "../components/Tags"
 import { getMdxPage } from "../libs/mdx.server"
 import { buildMeta } from "../libs/meta"
-import { buildBlogPostingJsonLd } from "../libs/structured-data"
+import { buildBlogPostingJsonLd } from "../libs/agent/structured-data"
 import { toIsoDate, tryFormatDate } from "../libs/utils"
 
 const DEFAULT_POST_DESCRIPTION = "An article by Andrew Smith on technology and software engineering."

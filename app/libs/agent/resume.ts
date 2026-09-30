@@ -1,7 +1,7 @@
 import { socialLinks } from "../../data/profile"
 import { skillTopics, type Resume } from "../../data/resume"
 import { topics } from "../../data/topics"
-import { personId } from "../structured-data"
+import { PERSON_ID } from "./structured-data"
 import type { SiteGraph, SitePost } from "./site-graph.server"
 
 // Pure transforms from the site graph to the machine-readable resume outputs.
@@ -105,7 +105,7 @@ const buildPersonJsonLd = (graph: SiteGraph): PersonJsonLd => {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": personId,
+    "@id": PERSON_ID,
     name: profile.name,
     alternateName: profile.displayName,
     url: profile.url,

@@ -4,7 +4,7 @@ import type { MdxListItem } from "../../../types"
 import type { MdxPostSource } from "../../mdx.server"
 import { buildPersonJsonLd, buildResumeDocument, renderResumeMarkdown } from "../resume"
 import { buildSiteGraph } from "../site-graph.server"
-import { buildBlogPostingJsonLd, buildProfilePageJsonLd } from "../../structured-data"
+import { buildBlogPostingJsonLd, buildProfilePageJsonLd } from "../structured-data"
 
 // Privacy allowlist: the machine layer must never expose an email address,
 // phone number or street address. Every generated output is scanned, plus the
