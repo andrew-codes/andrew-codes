@@ -17,8 +17,6 @@ PORT="$(node -e 'const s=require("net").createServer().listen(0,()=>{console.log
 URL="http://localhost:$PORT"
 echo "e2e: serving build on $URL"
 
-# --no-port-switching makes serve fail instead of silently moving to another
-# port, so a taken port can never leave us testing someone else's server.
 PORT="$PORT" yarn e2e:serve &
 SERVER_PID=$!
 trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT

@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "e2e:serve": "serve build/client --no-port-switching -l ${PORT:-4173}",
+    "e2e:serve": "serve build/client -l ${PORT:-4173}",
     "e2e": "bash scripts/e2e.sh"
   },
   "dependencies": {
