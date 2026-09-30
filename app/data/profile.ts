@@ -47,11 +47,15 @@ const socialLinks: SocialLink[] = [
   },
 ]
 
+// The Atom feed of posts: emitted by app/routes/feed.xml.ts and advertised to
+// feed readers by the autodiscovery link in app/root.tsx.
+const feed = { path: "/feed.xml", title: "Andrew Smith" }
+
 const getSocialLink = (id: string) => {
   const link = socialLinks.find((l) => l.id === id)
   if (!link) throw new Error(`Unknown social link: ${id}`)
   return link
 }
 
-export { getSocialLink, profile, socialLinks }
+export { feed, getSocialLink, profile, socialLinks }
 export type { SocialLink }

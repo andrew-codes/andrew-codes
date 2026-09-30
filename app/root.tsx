@@ -5,6 +5,7 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
 import { type FC } from "react"
 import { PHProvider } from "./analytics/PostHogProvider"
 import Baseline from "./components/Baseline"
+import { feed } from "./data/profile"
 import theme from "./theme"
 
 const avatar = "/images/Profile.webp"
@@ -53,6 +54,7 @@ export const links = () => [
   { rel: "icon", type: "image/png", sizes: "32x32", href: "/images/favicon-32x32.png" },
   { rel: "icon", type: "image/png", sizes: "16x16", href: "/images/favicon-16x16.png" },
   { rel: "apple-touch-icon", sizes: "180x180", href: "/images/apple-touch-icon.png" },
+  { rel: "alternate", type: "application/atom+xml", title: feed.title, href: feed.path },
   { rel: "preload", as: "font", type: "font/ttf", href: "/fonts/Lato-Regular.ttf", crossOrigin: "anonymous" },
   { rel: "preload", as: "font", type: "font/ttf", href: "/fonts/Lato-Bold.ttf", crossOrigin: "anonymous" },
   { rel: "preload", as: "font", type: "font/ttf", href: "/fonts/Lato-Black.ttf", crossOrigin: "anonymous" },

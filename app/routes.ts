@@ -7,4 +7,7 @@ export default [
   route("tags/:id", "routes/tags.$id.tsx"),
   route("connect", "routes/connect.tsx"),
   route("connect-with-me", "routes/connect-with-me.tsx"),
+  route("robots.txt", "routes/robots.txt.ts"),
+  route("sitemap.xml", "routes/sitemap.xml.ts"),
+  route("feed.xml", "routes/feed.xml.ts"),
 ] satisfies RouteConfig

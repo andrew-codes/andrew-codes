@@ -1,4 +1,4 @@
-import { profile } from "../../data/profile"
+import { feed, profile } from "../../data/profile"
 import { FEATURED_TAG, resolveTopics, topics, type Topic } from "../../data/topics"
 import type { Category, MdxListItem } from "../../types"
 import { getMdxPostSources, type MdxPostSource } from "../mdx.server"
@@ -14,6 +14,9 @@ import { toIsoDate } from "../utils"
 // outside the allowlist (email, phone, address) can reach consumers.
 
 const STATIC_PATHS = ["/", "/posts", "/recommendations", "/connect", "/connect-with-me"] as const
+
+// Resource routes (app/routes/*.ts) that emit crawler files rather than pages.
+const CRAWLER_PATHS = ["/robots.txt", "/sitemap.xml", feed.path] as const
 
 type SitePost = {
   slug: string
@@ -97,6 +100,7 @@ const getPrerenderPaths = (graph: SiteGraph): string[] => [
   ...graph.posts.map((post) => post.path),
   ...graph.invalidPosts.map((post) => post.path),
   ...graph.tags.map((tag) => `/tags/${tag}`),
+  ...CRAWLER_PATHS,
 ]
 
 // The graph is memoised per instance so every consumer in a build process
@@ -118,5 +122,5 @@ const createSiteGraphLoader = (loadSources: () => Promise<MdxPostSource[]>) => {
 
 const getSiteGraph = createSiteGraphLoader(() => getMdxPostSources())
 
-export { STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths, getSiteGraph }
+export { CRAWLER_PATHS, STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths, getSiteGraph }
 export type { InvalidPost, SiteGraph, SitePost }
