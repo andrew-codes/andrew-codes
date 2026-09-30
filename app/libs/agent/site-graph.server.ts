@@ -1,3 +1,4 @@
+import { companies as recommenderCompanies } from "../../data/companies"
 import { feed, profile } from "../../data/profile"
 import { resume, type Resume } from "../../data/resume"
 import { recommendations, type Recommendation } from "../../data/recommendations"
@@ -60,7 +61,7 @@ type SiteGraph = {
   resume: Resume
   // Every topic at least one post is tagged with, in first-seen order.
   topics: Topic[]
-  // Companies a post may name, keyed by the resume company slugs.
+  // Companies a post may name: the resume company slugs plus recommender-only organisations.
   companies: Company[]
   recommendations: readonly Recommendation[]
   // Newest first; ties broken by slug so the order is deterministic.
@@ -79,10 +80,16 @@ type SiteGraph = {
   problems: string[]
 }
 
+// The company registry: the resume's company slugs, plus organisations that
+// only appear in app/data/companies (they recommended Andrew but are not
+// employers). The resume entry wins where both name a slug.
 const getCompanies = (resume: Resume): Company[] => {
   const bySlug = new Map<string, Company>()
   for (const { company } of resume.experience) {
     if (!bySlug.has(company.slug)) bySlug.set(company.slug, company)
+  }
+  for (const { slug, name } of recommenderCompanies) {
+    if (!bySlug.has(slug)) bySlug.set(slug, { slug, name })
   }
   return [...bySlug.values()]
 }

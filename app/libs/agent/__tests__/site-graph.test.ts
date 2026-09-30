@@ -149,8 +149,20 @@ describe("projects and companies", () => {
     expect(post).toMatchObject({ projects: ["forecaster"], technologies: ["jest"], companies: ["microsoft"] })
   })
 
-  it("builds the company registry from the resume company slugs", () => {
-    expect(graph.companies.map((company) => company.slug)).toEqual(expect.arrayContaining(["microsoft"]))
+  it("builds the company registry from the resume slugs plus recommender-only organisations", () => {
+    const slugs = graph.companies.map((company) => company.slug)
+
+    expect(slugs).toEqual(expect.arrayContaining(["microsoft", "versionone-collabnet", "calendly", "amazon-studios"]))
+    expect(new Set(slugs).size).toBe(slugs.length)
+    // The resume's own entry wins for a slug both sources name.
+    expect(graph.companies.find((company) => company.slug === "matrix-professional-services")?.name).toBe("Matrix Professional Services")
+  })
+
+  it("accepts a post naming a recommender-only company", () => {
+    const named = buildSiteGraph(sources([page("a", { companies: ["calendly"] })]))
+
+    expect(named.problems).toEqual([])
+    expect(named.posts[0].companies).toEqual(["calendly"])
   })
 
   it("collects every authoring problem instead of stopping at the first", () => {

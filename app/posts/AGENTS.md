@@ -43,7 +43,7 @@ projects:
 
 **`featured`** - `true` surfaces the article in the featured section of the posts page. Do not add `featured` to `tags`: the build fails if you do.
 
-**`companies`** - slugs of the employers or organisations the article is about or drew from. Each must be a company slug from `app/data/resume.ts` (currently `microsoft`, `experience`, `versionone-collabnet`, `matrix-professional-services`). Leave it out unless the article says so itself.
+**`companies`** - slugs of the employers or organisations the article is about or drew from. Each must be a company slug from `app/data/resume.ts` or `app/data/companies.ts` (currently `microsoft`, `experience`, `versionone-collabnet`, `matrix-professional-services`, `amazon-studios`, `calendly`). Leave it out unless the article says so itself.
 
 **`projects`** - the projects and technologies the article is about. There is no projects page and no project registry: a project exists because an article defines it, and the index is built from the articles.
 
