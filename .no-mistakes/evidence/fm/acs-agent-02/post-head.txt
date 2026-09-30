@@ -1,0 +1,14 @@
+<meta name="description" content="Understand the role of estimation and effective ways to utilize it."/>
+<link rel="canonical" href="https://andrew.codes/posts/agile-estimation/"/>
+<meta property="og:title" content="Andrew Smith | Agile Estimation"/>
+<meta property="og:description" content="Understand the role of estimation and effective ways to utilize it."/>
+<meta property="og:url" content="https://andrew.codes/posts/agile-estimation/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://andrew.codes/images/andrew-smith.webp"/>
+<meta property="og:site_name" content="Andrew Smith"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="article:published_time" content="2023-11-14"/>
+<meta property="article:section" content="agility"/>
+<meta property="article:tag" content="estimation"/>
+<meta property="article:tag" content="story points"/>
+<meta property="article:tag" content="bucketing"/>
