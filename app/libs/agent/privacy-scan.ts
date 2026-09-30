@@ -69,13 +69,18 @@ export const scanText = (file: string, text: string): Violation[] => {
 // Pages may mention the PDF to visitors; agent feeds and markdown may not.
 const isMachineFacing = (file: string) => !file.endsWith(".html") && !file.endsWith(".data")
 
+const JSON_LD_BLOCK = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
+
+const pdfScope = (file: string, text: string) =>
+  isMachineFacing(file) ? text : file.endsWith(".html") ? [...text.matchAll(JSON_LD_BLOCK)].map((block) => block[1]).join("\n") : ""
+
 export const scanBuildDir = (dir: string): { scanned: string[]; violations: Violation[] } => {
   const scanned = discoverArtifacts(dir)
   const violations = scanned.flatMap((path) => {
     const file = relative(dir, path)
     const text = readFileSync(path, "utf8")
     const found = scanText(file, text)
-    const pdf = isMachineFacing(file) ? text.match(PDF_REFERENCE) : null
+    const pdf = pdfScope(file, text).match(PDF_REFERENCE)
     return pdf ? [...found, { file, kind: "resume PDF reference", match: pdf[0] }] : found
   })
   return { scanned, violations }

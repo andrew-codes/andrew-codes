@@ -85,6 +85,16 @@ describe("scanBuildDir", () => {
     expect(scanBuildDir(dir).violations.map((v) => v.file)).toEqual(["agent/resume.json"])
   })
 
+  it("fails when a JSON-LD block in a page references the resume PDF", () => {
+    const dir = buildDir({ "index.html": `<script type="application/ld+json">{"url":"https://andrew.codes/Resume.pdf"}</script>` })
+    expect(scanBuildDir(dir).violations.map((v) => v.kind)).toEqual(["resume PDF reference"])
+  })
+
+  it("allows an ordinary page link to the resume PDF", () => {
+    const dir = buildDir({ "index.html": `<script type="application/ld+json">{"name":"x"}</script><a href="/Resume.pdf">Download Resume</a>` })
+    expect(scanBuildDir(dir).violations).toEqual([])
+  })
+
   it("passes a clean build", () => {
     const dir = buildDir({ "index.html": `<a href="https://github.com/andrew-codes">gh</a>`, "sitemap.xml": "<lastmod>2026-08-12</lastmod>" })
     expect(scanBuildDir(dir).violations).toEqual([])
