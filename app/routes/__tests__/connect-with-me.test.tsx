@@ -10,6 +10,20 @@ const renderPage = () => {
   return renderToStaticMarkup(<Stub initialEntries={["/connect-with-me"]} />)
 }
 
+const stripStyleBlocks = (html: string) => {
+  let rest = html
+  let out = ""
+
+  for (let start = rest.indexOf("<style"); start !== -1; start = rest.indexOf("<style")) {
+    const end = rest.indexOf("</style>", start)
+
+    out += rest.slice(0, start)
+    rest = end === -1 ? "" : rest.slice(end + "</style>".length)
+  }
+
+  return out + rest
+}
+
 describe("connect-with-me route", () => {
   it("links to LinkedIn and GitHub in a new tab", () => {
     const html = renderPage()
@@ -39,7 +53,7 @@ describe("connect-with-me route", () => {
 
   it("exposes no email, phone, or address on the page or in its metadata", () => {
     // Emotion inlines <style> blocks full of digits; only the visible markup matters here.
-    const content = renderPage().replace(/<style[\s\S]*?<\/style>/g, "") + JSON.stringify(meta({} as any))
+    const content = stripStyleBlocks(renderPage()) + JSON.stringify(meta({} as any))
 
     expect(content).not.toMatch(/mailto:/i)
     expect(content).not.toMatch(/tel:/i)
