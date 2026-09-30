@@ -12,7 +12,7 @@ describe("crawler files", () => {
     cy.request("/sitemap.xml").then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.match(/<loc>https:\/\/andrew\.codes\/posts\/devtools<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)
-      expect(response.body).to.contain("<loc>https://andrew.codes/tags/home%20assistant</loc>")
+      expect(response.body).to.contain("<loc>https://andrew.codes/tags/home-assistant</loc>")
     })
   })
 

@@ -12,7 +12,7 @@ vi.mock("react-router", async (importOriginal) => {
         {
           code: "",
           slug: "featured-post",
-          frontmatter: { title: "Featured Post", description: "A description", category: "engineering", date: "2024-02-01", tags: ["featured"] },
+          frontmatter: { title: "Featured Post", description: "A description", category: "engineering", date: "2024-02-01", featured: true },
         },
         {
           code: "",
@@ -38,5 +38,19 @@ describe("posts route", () => {
     expect(html).toContain("All")
     expect(html).toContain("Featured Post")
     expect(html).toContain("Other Post")
+  })
+
+  it("lists only posts with the featured front matter flag in the Featured section", () => {
+    const html = renderToStaticMarkup(
+      <MemoryRouter initialEntries={["/posts"]}>
+        <Routes>
+          <Route path="/posts" element={<PostsRoute />} />
+        </Routes>
+      </MemoryRouter>,
+    )
+    const featuredSection = html.slice(html.indexOf("Featured"), html.indexOf("All"))
+
+    expect(featuredSection).toContain("Featured Post")
+    expect(featuredSection).not.toContain("Other Post")
   })
 })

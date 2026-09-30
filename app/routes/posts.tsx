@@ -70,7 +70,7 @@ const PostsRoute = () => {
               justifyContent="space-between"
             >
               {posts
-                .filter((post) => post.frontmatter.tags?.includes("featured"))
+                .filter((post) => post.frontmatter.featured)
                 .slice(0, 3)
                 .map((post) => (
                   <PostCard key={post.slug} post={post} />

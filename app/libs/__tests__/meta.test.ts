@@ -53,12 +53,12 @@ describe("buildMeta", () => {
     expect(find(meta, "property", "article:tag")).toEqual([])
   })
 
-  it("emits article tags for a post, one article:tag per tag and never the featured flag", () => {
+  it("emits article tags for a post, one article:tag per tag", () => {
     const meta = buildMeta({
       ...base,
       path: "/posts/devtools-declared",
       type: "article",
-      article: { publishedTime: "2026-08-10", tags: ["devtools", "nix", "featured"], section: "engineering" },
+      article: { publishedTime: "2026-08-10", tags: ["devtools", "nix"], section: "engineering" },
     })
 
     expect(content(meta, "property", "og:type")).toEqual(["article"])

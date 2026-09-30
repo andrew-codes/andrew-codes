@@ -55,8 +55,15 @@ describe("getSitemapEntries", () => {
     expect(lastmodOf("/tags/nix")).toBe("2024-09-18")
   })
 
-  it("percent-encodes tags with spaces", () => {
-    expect(lastmodOf("/tags/home%20assistant")).toBe("2024-09-18")
+  it("lists a page per topic, not per authored tag", () => {
+    expect(lastmodOf("/tags/home-assistant")).toBe("2024-09-18")
+    expect(entries.some((entry) => entry.loc.includes("%20"))).toBe(false)
+  })
+
+  it("percent-encodes a path segment that needs it", () => {
+    const encoded = getSitemapEntries({ ...graph, topics: [{ slug: "odd slug", label: "Odd", aliases: [] }] })
+
+    expect(encoded.some((entry) => entry.loc === "https://andrew.codes/tags/odd%20slug")).toBe(true)
   })
 
   it("leaves out the QR connect card", () => {

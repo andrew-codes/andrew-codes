@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
 import { profile } from "../profile"
-import { FEATURED_TAG, resolveTopic, resolveTopics, topics } from "../topics"
+import { findCuratedTopic, resolveTopics, slugify, topicForTag, topics } from "../topics"
 
-describe("topic vocabulary", () => {
+describe("curated topic list", () => {
   it("uses unique kebab-case slugs", () => {
     const slugs = topics.map((topic) => topic.slug)
 
@@ -18,10 +18,6 @@ describe("topic vocabulary", () => {
     expect(new Set(keys).size).toBe(keys.length)
   })
 
-  it("does not treat the featured flag as a topic", () => {
-    expect(resolveTopic(FEATURED_TAG)).toBeUndefined()
-  })
-
   it("only lists expertise topics that exist", () => {
     for (const slug of profile.expertise) {
       expect(topics.map((topic) => topic.slug)).toContain(slug)
@@ -29,38 +25,74 @@ describe("topic vocabulary", () => {
   })
 })
 
-describe("resolveTopic", () => {
-  it("resolves a slug, an alias, and is case and whitespace insensitive", () => {
-    expect(resolveTopic("home-assistant")?.slug).toBe("home-assistant")
-    expect(resolveTopic("home assistant")?.slug).toBe("home-assistant")
-    expect(resolveTopic("  Node.JS ")?.slug).toBe("nodejs")
+describe("topicForTag", () => {
+  it("resolves a curated slug or alias, case and whitespace insensitively", () => {
+    expect(topicForTag("home-assistant").slug).toBe("home-assistant")
+    expect(topicForTag("home assistant").slug).toBe("home-assistant")
+    expect(topicForTag("  Home   Assistant ").slug).toBe("home-assistant")
+    expect(topicForTag("  Node.JS ").slug).toBe("nodejs")
   })
 
-  it("merges ai and agents into one topic", () => {
-    expect(resolveTopic("ai")).toBe(resolveTopic("agents"))
+  it("merges spellings onto one curated topic", () => {
+    expect(topicForTag("ai")).toBe(topicForTag("agents"))
+    expect(topicForTag("estimation").slug).toBe("agile-estimation")
   })
 
-  it("returns undefined for an unknown tag", () => {
-    expect(resolveTopic("underwater-basket-weaving")).toBeUndefined()
+  it("gives an unlisted tag its own topic, derived from the tag text", () => {
+    expect(findCuratedTopic("underwater basket weaving")).toBeUndefined()
+    expect(topicForTag("underwater basket weaving")).toEqual({ slug: "underwater-basket-weaving", label: "Underwater Basket Weaving", aliases: [] })
+  })
+
+  it("keeps the author's capitalisation in a derived label when there is any", () => {
+    expect(topicForTag("OpenAI")).toMatchObject({ slug: "openai", label: "OpenAI" })
+  })
+
+  it("derives a stable kebab-case slug from punctuation and accents", () => {
+    expect(topicForTag("C++ / Rust!").slug).toBe("c-rust")
+    expect(topicForTag("Café Culture").slug).toBe("cafe-culture")
+    expect(topicForTag("  Spaced   Out ").slug).toBe("spaced-out")
+  })
+
+  it("never throws or returns an empty slug, even for a tag with nothing sluggable in it", () => {
+    for (const tag of ["+++", "!!!", "日本語", "   ", ""]) {
+      expect(topicForTag(tag).slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+    }
+    expect(topicForTag("+++").slug).not.toBe(topicForTag("!!!").slug)
+  })
+
+  it("folds an unlisted tag whose derived slug is a curated slug into that topic", () => {
+    expect(topicForTag("Voice-Assistant")).toBe(topicForTag("voice assistant"))
+  })
+
+  it("does not treat featured specially: it is validated out of tags before topics are read", () => {
+    expect(topicForTag("featured").slug).toBe("featured")
+  })
+})
+
+describe("slugify", () => {
+  it("is idempotent on its own output", () => {
+    for (const tag of ["Home Assistant", "node.js", "C++", "a  b", "Café"]) {
+      expect(slugify(slugify(tag))).toBe(slugify(tag))
+    }
   })
 })
 
 describe("resolveTopics", () => {
   it("dedupes topics that several tags map onto, keeping first-seen order", () => {
-    const { topics: resolved, unknown } = resolveTopics(["react", "agents", "ai", "graphql"])
+    const { topics: resolved, derivedFrom } = resolveTopics(["react", "agents", "ai", "graphql"])
 
     expect(resolved.map((topic) => topic.slug)).toEqual(["react", "ai", "graphql"])
-    expect(unknown).toEqual([])
+    expect(derivedFrom).toEqual([])
   })
 
-  it("skips the featured flag and reports unknown tags as authored", () => {
-    const { topics: resolved, unknown } = resolveTopics(["featured", "Mystery Tag", "nix"])
+  it("gives unlisted tags a topic and reports them as authored", () => {
+    const { topics: resolved, derivedFrom } = resolveTopics(["Mystery Tag", "nix", "mystery-tag"])
 
-    expect(resolved.map((topic) => topic.slug)).toEqual(["nix"])
-    expect(unknown).toEqual(["Mystery Tag"])
+    expect(resolved.map((topic) => topic.slug)).toEqual(["mystery-tag", "nix"])
+    expect(derivedFrom).toEqual(["Mystery Tag", "nix", "mystery-tag"])
   })
 
   it("handles missing tags", () => {
-    expect(resolveTopics(undefined)).toEqual({ topics: [], unknown: [] })
+    expect(resolveTopics(undefined)).toEqual({ topics: [], derivedFrom: [] })
   })
 })

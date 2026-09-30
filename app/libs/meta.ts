@@ -24,9 +24,6 @@ type BuildMetaOptions = {
   article?: ArticleMeta
 }
 
-// Tags that steer site behaviour rather than describe a post.
-const NON_TOPIC_TAGS: readonly string[] = ["featured"]
-
 // The deployed site serves every page from a directory index, and redirects
 // the slash-less form to `/path/`. The canonical is the URL that answers 200.
 const toCanonicalUrl = (path: string) => {
@@ -58,9 +55,7 @@ const buildMeta = ({ title, description, path, type = "website", article }: Buil
   if (type === "article" && article) {
     if (article.publishedTime) meta.push({ property: "article:published_time", content: article.publishedTime })
     if (article.section) meta.push({ property: "article:section", content: article.section })
-    for (const tag of article.tags ?? []) {
-      if (!NON_TOPIC_TAGS.includes(tag)) meta.push({ property: "article:tag", content: tag })
-    }
+    for (const tag of article.tags ?? []) meta.push({ property: "article:tag", content: tag })
   }
 
   return meta

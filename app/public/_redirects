@@ -3,3 +3,24 @@
 /jest-vs-mocha-why-jest-wins  /posts/jest-vs-mocha-why-jest-wins  301
 /react-with-relay-and-graphql-talk  /posts/react-with-relay-graphql-talk  301
 /software-craftsmanship  /posts/software-craftsmanship  301
+
+# Tag pages are topic pages now: /tags/:id is a topic slug (see app/data/topics.ts).
+# These are the tag URLs that existed before that change and no longer resolve.
+# Tags added later never had another URL, so they need no entry here.
+/tags/agents  /tags/ai/  301
+/tags/agents/  /tags/ai/  301
+/tags/estimation  /tags/agile-estimation/  301
+/tags/estimation/  /tags/agile-estimation/  301
+/tags/home%20assistant  /tags/home-assistant/  301
+/tags/home%20assistant/  /tags/home-assistant/  301
+/tags/node.js  /tags/nodejs/  301
+/tags/node.js/  /tags/nodejs/  301
+/tags/presence%20detection  /tags/presence-detection/  301
+/tags/presence%20detection/  /tags/presence-detection/  301
+/tags/story%20points  /tags/story-points/  301
+/tags/story%20points/  /tags/story-points/  301
+/tags/voice%20assistant  /tags/voice-assistant/  301
+/tags/voice%20assistant/  /tags/voice-assistant/  301
+# featured is a front matter field, not a tag; the posts page has the Featured section.
+/tags/featured  /posts  301
+/tags/featured/  /posts  301

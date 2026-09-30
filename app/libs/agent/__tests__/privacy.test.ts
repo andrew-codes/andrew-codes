@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import { resume } from "../../../data/resume"
 import type { MdxListItem } from "../../../types"
 import type { MdxPostSource } from "../../mdx.server"
+import { buildPostsDocument, buildProjectsDocument } from "../catalog"
 import { buildPersonJsonLd, buildResumeDocument, renderResumeMarkdown } from "../resume"
 import { buildSiteGraph } from "../site-graph.server"
 
@@ -26,6 +27,10 @@ const scan = (label: string, text: string) => {
   expect(hits).toEqual([])
 }
 
+// The post and project indexes carry ISO dates (2026-08-12), which the phone
+// pattern would read as a number. Dates are masked out before scanning them.
+const scanIndex = (label: string, text: string) => scan(label, text.replace(/\b\d{4}-\d{2}-\d{2}\b/g, "DATE"))
+
 const post: MdxListItem = {
   slug: "react-post",
   frontmatter: { title: "A React post", description: "About React", category: "engineering", date: "2026-01-01", tags: ["react"] },
@@ -44,6 +49,19 @@ describe("privacy allowlist", () => {
 
   it("keeps them out of /resume.md", () => {
     scan("resume.md", renderResumeMarkdown(buildResumeDocument(graph)))
+  })
+
+  it("keeps them out of /agent/posts.json and /agent/projects.json", () => {
+    scanIndex("posts.json", JSON.stringify(buildPostsDocument(graph), null, 2))
+    scanIndex("projects.json", JSON.stringify(buildProjectsDocument(graph), null, 2))
+  })
+
+  it("keeps them out of the real posts' projects and companies", async () => {
+    const { getMdxPostSources } = await import("../../mdx.server")
+    const realGraph = buildSiteGraph(await getMdxPostSources())
+
+    scanIndex("real posts.json", JSON.stringify(buildPostsDocument(realGraph), null, 2))
+    scanIndex("real projects.json", JSON.stringify(buildProjectsDocument(realGraph), null, 2))
   })
 
   it("keeps them out of the Person JSON-LD", () => {

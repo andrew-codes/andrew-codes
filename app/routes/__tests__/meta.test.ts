@@ -37,11 +37,11 @@ describe("route meta", () => {
   })
 
   it("gives each tag page its own title, description and canonical", () => {
-    const result = run(tagMeta, { params: { id: "voice assistant" } })
+    const result = run(tagMeta, { params: { id: "voice-assistant" }, data: { topic: { slug: "voice-assistant", label: "Voice assistants" }, posts: [] } })
 
-    expect(result).toContainEqual({ title: "Andrew Smith | Posts tagged voice assistant" })
-    expect(at(result, "name", "description")?.content).toContain("voice assistant")
-    expect(canonicalOf(result)).toBe("https://andrew.codes/tags/voice%20assistant/")
+    expect(result).toContainEqual({ title: "Andrew Smith | Posts tagged Voice assistants" })
+    expect(at(result, "name", "description")?.content).toContain("Voice assistants")
+    expect(canonicalOf(result)).toBe("https://andrew.codes/tags/voice-assistant/")
   })
 
   it("describes a post as an article with its own url, description and article:* tags", () => {
@@ -54,7 +54,7 @@ describe("route meta", () => {
           // YAML front matter parses to a Date at build time.
           date: new Date("2026-08-10"),
           category: "engineering",
-          tags: ["devtools", "nix", "featured"],
+          tags: ["devtools", "nix"],
         },
       },
     })

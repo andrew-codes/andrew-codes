@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest"
 import type { MdxListItem } from "../../../types"
 import type { MdxPostSource } from "../../mdx.server"
-import { CRAWLER_PATHS, RESOURCE_PATHS, STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths } from "../site-graph.server"
+import { CRAWLER_PATHS, RESOURCE_PATHS, STATIC_PATHS, SiteGraphError, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths } from "../site-graph.server"
 
 const sources = (items: MdxListItem[]): MdxPostSource[] => items.map((item) => ({ slug: item.slug, listItem: item }))
 const broken = (slug: string, message = "bad front matter"): MdxPostSource => ({ slug, error: new Error(message) })
@@ -14,7 +14,7 @@ const page = (slug: string, frontmatter: Partial<MdxListItem["frontmatter"]> = {
 
 describe("buildSiteGraph", () => {
   it("maps front matter onto typed posts", () => {
-    const graph = buildSiteGraph(sources([page("nix-post", { date: "2026-08-10", tags: ["nix", "featured", "agents"] })]))
+    const graph = buildSiteGraph(sources([page("nix-post", { date: "2026-08-10", featured: true, tags: ["nix", "agents"] })]))
 
     expect(graph.posts).toEqual([
       {
@@ -24,9 +24,12 @@ describe("buildSiteGraph", () => {
         description: "About nix-post",
         date: "2026-08-10",
         category: "engineering",
-        tags: ["nix", "featured", "agents"],
+        tags: ["nix", "agents"],
         topics: ["nix", "ai"],
         featured: true,
+        companies: [],
+        projects: [],
+        technologies: [],
         readingMinutes: 3,
       },
     ])
@@ -46,22 +49,33 @@ describe("buildSiteGraph", () => {
   })
 
   it("keeps authored tags verbatim, distinct, in first-seen order", () => {
-    const graph = buildSiteGraph(sources([page("one", { tags: ["home assistant", "featured"] }), page("two", { tags: ["featured", "nix"] }), page("three")]))
+    const graph = buildSiteGraph(sources([page("one", { tags: ["home assistant", "ai"] }), page("two", { tags: ["ai", "nix"] }), page("three")]))
 
-    expect(graph.tags).toEqual(["home assistant", "featured", "nix"])
+    expect(graph.tags).toEqual(["home assistant", "ai", "nix"])
   })
 
-  it("reports tags outside the topic vocabulary without failing", () => {
-    const graph = buildSiteGraph(sources([page("one", { tags: ["nix", "brand-new-tag"] }), page("two", { tags: ["brand-new-tag"] })]))
+  it("gives a tag outside the curated topic list its own topic, without any problem", () => {
+    const graph = buildSiteGraph(sources([page("one", { tags: ["nix", "Brand New Tag"] }), page("two", { tags: ["brand new tag"] })]))
 
-    expect(graph.unknownTags).toEqual(["brand-new-tag"])
-    expect(graph.posts.find((post) => post.slug === "one")?.topics).toEqual(["nix"])
+    expect(graph.problems).toEqual([])
+    expect(graph.derivedTags).toEqual(["nix", "Brand New Tag", "brand new tag"])
+    expect(graph.posts.find((post) => post.slug === "one")?.topics).toEqual(["nix", "brand-new-tag"])
+    expect(graph.topics).toEqual([
+      { slug: "nix", label: "Nix", aliases: [] },
+      { slug: "brand-new-tag", label: "Brand New Tag", aliases: [] },
+    ])
+  })
+
+  it("lists each topic once, merging curated spellings", () => {
+    const graph = buildSiteGraph(sources([page("one", { tags: ["ai", "home assistant"] }), page("two", { tags: ["agents"] })]))
+
+    expect(graph.topics.map((topic) => topic.slug)).toEqual(["ai", "home-assistant"])
   })
 
   it("defaults missing front matter fields", () => {
     const [post] = buildSiteGraph(sources([{ slug: "bare", frontmatter: { category: "engineering" } }])).posts
 
-    expect(post).toMatchObject({ title: "bare", description: "", date: undefined, tags: [], topics: [], featured: false, readingMinutes: undefined })
+    expect(post).toMatchObject({ title: "bare", description: "", date: undefined, tags: [], topics: [], featured: false, companies: [], projects: [], technologies: [], readingMinutes: undefined })
   })
 
   it("keeps a post whose front matter could not be read out of posts, but routable", () => {
@@ -72,11 +86,11 @@ describe("buildSiteGraph", () => {
     expect(graph.tags).toEqual(["nix"])
   })
 
-  it("exposes the public profile and topic vocabulary", () => {
+  it("exposes the public profile", () => {
     const graph = buildSiteGraph([])
 
     expect(graph.profile.location).toBe("Atlanta, GA")
-    expect(graph.topics.length).toBeGreaterThan(0)
+    expect(graph.topics).toEqual([])
   })
 
   it("contains no email, phone, or mailto/tel values", () => {
@@ -88,16 +102,20 @@ describe("buildSiteGraph", () => {
 })
 
 describe("getPrerenderPaths", () => {
-  it("lists the static pages, every post, and every authored tag", () => {
-    const graph = buildSiteGraph(sources([page("a", { date: "2024-01-01", tags: ["home assistant", "featured"] }), page("b", { date: "2023-01-01", tags: ["featured"] })]))
+  it("lists the static pages, every post, and one page per topic", () => {
+    const graph = buildSiteGraph(sources([page("a", { date: "2024-01-01", tags: ["home assistant", "agents"] }), page("b", { date: "2023-01-01", tags: ["ai", "Something New"] })]))
 
-    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, ...RESOURCE_PATHS, "/posts/a", "/posts/b", "/tags/home assistant", "/tags/featured", ...CRAWLER_PATHS])
+    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, ...RESOURCE_PATHS, "/posts/a", "/posts/b", "/tags/home-assistant", "/tags/ai", "/tags/something-new", ...CRAWLER_PATHS])
   })
 
   it("still lists a post whose front matter could not be read, so only its own prerender fails", () => {
     const graph = buildSiteGraph([...sources([page("good", { tags: ["nix"] })]), broken("broken-post")])
 
     expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, ...RESOURCE_PATHS, "/posts/good", "/posts/broken-post", "/tags/nix", ...CRAWLER_PATHS])
+  })
+
+  it("includes the agent JSON indexes", () => {
+    expect(getPrerenderPaths(buildSiteGraph([]))).toEqual(expect.arrayContaining(["/agent/posts.json", "/agent/projects.json"]))
   })
 
   it("includes the crawler files", () => {
@@ -109,7 +127,60 @@ describe("getPrerenderPaths", () => {
   })
 })
 
+describe("projects and companies", () => {
+  const defn = { slug: "forecaster", name: "Forecaster", role: "creator", repo: "https://github.com/o/forecaster" }
+  const graph = buildSiteGraph(
+    sources([
+      page("new", { date: "2026-01-01", tags: ["ai"], projects: ["forecaster", "jest"], companies: ["microsoft"] }),
+      page("old", { date: "2024-01-01", tags: ["forecasting"], projects: [defn, { slug: "jest", name: "Jest", role: "user", url: "https://jestjs.io" }] }),
+    ]),
+  )
+
+  it("aggregates projects across posts and splits out technologies I use", () => {
+    expect(graph.problems).toEqual([])
+    expect(graph.projects.map((project) => project.slug)).toEqual(["forecaster"])
+    expect(graph.technologies.map((project) => project.slug)).toEqual(["jest"])
+    expect(graph.projects[0]).toMatchObject({ name: "Forecaster", firstWritten: "2024-01-01", lastWritten: "2026-01-01", topics: ["ai", "forecasting"] })
+  })
+
+  it("puts each post's projects and technologies on the post, by role", () => {
+    const post = graph.posts.find((candidate) => candidate.slug === "new")
+
+    expect(post).toMatchObject({ projects: ["forecaster"], technologies: ["jest"], companies: ["microsoft"] })
+  })
+
+  it("builds the company registry from the resume company slugs", () => {
+    expect(graph.companies.map((company) => company.slug)).toEqual(expect.arrayContaining(["microsoft"]))
+  })
+
+  it("collects every authoring problem instead of stopping at the first", () => {
+    const bad = buildSiteGraph(sources([page("a", { tags: ["featured"], companies: ["initech"] }), page("b", { projects: ["ghost"] })]))
+
+    expect(bad.problems).toHaveLength(3)
+  })
+})
+
 describe("createSiteGraphLoader", () => {
+  it("rejects with every problem listed when front matter is invalid, and does not cache the failure", async () => {
+    const loadSources = vi.fn(async () => sources([page("a", { tags: ["featured"] }), page("b", { companies: ["initech"] })]))
+    const getGraph = createSiteGraphLoader(loadSources)
+
+    const error = await getGraph().catch((caught: unknown) => caught)
+    expect(error).toBeInstanceOf(SiteGraphError)
+    expect((error as SiteGraphError).problems).toHaveLength(2)
+    expect((error as SiteGraphError).message).toContain("post `a`")
+    expect((error as SiteGraphError).message).toContain("post `b`")
+
+    await getGraph().catch(() => undefined)
+    expect(loadSources).toHaveBeenCalledTimes(2)
+  })
+
+  it("does not fail the build over a tag that is not in the curated topic list", async () => {
+    const graph = await createSiteGraphLoader(async () => sources([page("a", { tags: ["never-heard-of-it"] })]))()
+
+    expect(graph.topics.map((topic) => topic.slug)).toEqual(["never-heard-of-it"])
+  })
+
   it("loads posts once and shares the graph between callers", async () => {
     const loadSources = vi.fn(async () => sources([page("a")]))
     const getGraph = createSiteGraphLoader(loadSources)

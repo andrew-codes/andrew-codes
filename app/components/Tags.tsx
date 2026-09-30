@@ -3,6 +3,7 @@ import Link from "@mui/joy/Link"
 import { Link as RemixLink } from "react-router"
 import type { FC } from "react"
 import { Fragment } from "react"
+import { topicForTag } from "../data/topics"
 import SmallContentDivider from "./SmallContentDivider"
 
 const TagList = styled.ul`
@@ -19,7 +20,7 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
     {tags.map((tag: string, index: number) =>
       index === 0 ? (
         <li key={tag}>
-          <Link component={RemixLink} to={`/tags/${tag}`} sx={{ color: "#c98a2a", textDecorationColor: "#c98a2a" }}>
+          <Link component={RemixLink} to={`/tags/${topicForTag(tag).slug}`} sx={{ color: "#c98a2a", textDecorationColor: "#c98a2a" }}>
             {tag}
           </Link>
         </li>
@@ -29,7 +30,7 @@ const Tags: FC<{ tags: string[] }> = ({ tags, ...props }) => (
             <SmallContentDivider />
           </li>
           <li key={tag}>
-            <Link component={RemixLink} to={`/tags/${tag}`} sx={{ color: "#c98a2a", textDecorationColor: "#c98a2a" }}>
+            <Link component={RemixLink} to={`/tags/${topicForTag(tag).slug}`} sx={{ color: "#c98a2a", textDecorationColor: "#c98a2a" }}>
               {tag}
             </Link>
           </li>
