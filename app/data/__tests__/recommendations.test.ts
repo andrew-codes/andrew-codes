@@ -2,6 +2,7 @@ import { existsSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import { companies } from "../companies"
+import { resume } from "../resume"
 import { featuredRecommendations, otherRecommendations, recommendations } from "../recommendations"
 
 describe("recommendations", () => {
@@ -17,6 +18,16 @@ describe("recommendations", () => {
 
     expect(new Set(ids).size).toBe(ids.length)
     for (const id of ids) expect(id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+  })
+
+  it("joins recommendation companies to resume company slugs, except recommendation-only organisations", () => {
+    const resumeSlugs = new Set(resume.experience.map((e) => e.company.slug))
+    const recommendationOnly = new Set(["calendly", "amazon-studios"])
+
+    for (const { author } of recommendations) {
+      if (recommendationOnly.has(author.company.slug)) continue
+      expect(resumeSlugs.has(author.company.slug)).toBe(true)
+    }
   })
 
   it("joins every author to a registered company", () => {

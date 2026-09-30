@@ -166,7 +166,7 @@ const recommendations: Recommendation[] = [
     author: {
       name: "Russell Thatcher",
       title: "Software Engineering Leader",
-      company: company("matrix-resources"),
+      company: company("matrix-professional-services"),
       image: "/images/russell.jpeg",
     },
     featured: false,

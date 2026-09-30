@@ -14,7 +14,7 @@ type Company = {
 const companies = [
   { slug: "microsoft", name: "Microsoft" },
   { slug: "experience", name: "Experience LLC." },
-  { slug: "matrix-resources", name: "Matrix Resources" },
+  { slug: "matrix-professional-services", name: "Matrix Resources" },
   { slug: "amazon-studios", name: "Amazon Studios" },
   { slug: "calendly", name: "Calendly" },
 ] as const satisfies readonly Company[]
