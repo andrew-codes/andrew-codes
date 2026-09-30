@@ -1,3 +1,5 @@
+import { MCP_ROUTE, handleMcp, type AssetsBinding } from "./mcp"
+
 const API_HOST = "us.i.posthog.com"
 const ASSET_HOST = "us-assets.i.posthog.com"
 
@@ -43,14 +45,18 @@ const posthogProxy = async (request: Request): Promise<Response> => {
   })
 }
 
-type Env = { ASSETS: { fetch(request: Request): Promise<Response> } }
+type Env = { ASSETS: AssetsBinding }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: Parameters<typeof handleMcp>[2]): Promise<Response> {
     const url = new URL(request.url)
 
     if (url.pathname.startsWith("/afph/")) {
       return posthogProxy(request)
+    }
+
+    if (url.pathname === MCP_ROUTE) {
+      return handleMcp(request, env, ctx)
     }
 
     if (url.pathname === "/healthcheck") {
