@@ -2,7 +2,8 @@ describe("connect with me page", () => {
   it("is reachable from the Connect / Resume button on the home page", () => {
     cy.visit("/")
 
-    cy.contains("a", "Connect / Resume").should("have.attr", "href", "/connect-with-me").click()
+    cy.contains("a", "Connect / Resume").should("have.attr", "href", "/connect-with-me")
+    cy.contains("a", "Connect / Resume").click()
     cy.location("pathname", { timeout: 20000 }).should("eq", "/connect-with-me")
     cy.contains("h2", "Connect with Me").should("be.visible")
   })
