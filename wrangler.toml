@@ -1,6 +1,8 @@
 name = "andrew-codes"
 main = "worker/src/index.ts"
 compatibility_date = "2026-04-17"
+# The MCP handler (agents SDK) uses node:async_hooks.
+compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = "build/client"
