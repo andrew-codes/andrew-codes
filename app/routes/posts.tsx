@@ -9,6 +9,7 @@ import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
 import { getMdxListItems } from "../libs/mdx.server"
+import { markdownPaths } from "../libs/agent/markdown-paths"
 import { buildMeta } from "../libs/meta"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -28,6 +29,7 @@ const meta: MetaFunction = () =>
     title: "Andrew Smith | Posts",
     description: "Professional profile of Andrew Smith. Read articles written on technology and software engineering.",
     path: "/posts",
+    markdownPath: markdownPaths.posts,
   })
 
 const PostsRoute = () => {

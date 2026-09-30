@@ -12,8 +12,8 @@ import getCodePostAssetComponent, { CodePostAsset } from "../components/CodePost
 import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, Table, UnorderedList } from "../components/Post"
 import Tags from "../components/Tags"
 import { getMdxPage } from "../libs/mdx.server"
+import { markdownPaths } from "../libs/agent/markdown-paths"
 import { buildMeta } from "../libs/meta"
-import { buildBlogPostingJsonLd } from "../libs/agent/structured-data"
 import { toIsoDate, tryFormatDate } from "../libs/utils"
 
 const DEFAULT_POST_DESCRIPTION = "An article by Andrew Smith on technology and software engineering."
@@ -32,32 +32,18 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
 const meta: MetaFunction<typeof loader> = ({ data, params }) => {
   const frontmatter = data?.frontmatter
   const title = `Andrew Smith | ${frontmatter?.title || "Post"}`
-  const slug = data?.slug ?? params.id ?? ""
-  const description = frontmatter?.description || DEFAULT_POST_DESCRIPTION
-  const publishedTime = toIsoDate(frontmatter?.date)
 
   return buildMeta({
     title,
-    description,
-    path: `/posts/${encodeURIComponent(slug)}`,
+    description: frontmatter?.description || DEFAULT_POST_DESCRIPTION,
+    path: `/posts/${encodeURIComponent(data?.slug ?? params.id ?? "")}`,
+    markdownPath: markdownPaths.post(encodeURIComponent(data?.slug ?? params.id ?? "")),
     type: "article",
     article: {
-      publishedTime,
+      publishedTime: toIsoDate(frontmatter?.date),
       tags: frontmatter?.tags,
       section: frontmatter?.category,
     },
-    jsonLd: frontmatter
-      ? [
-          buildBlogPostingJsonLd({
-            slug,
-            title: frontmatter.title || "Post",
-            description,
-            date: publishedTime,
-            category: frontmatter.category,
-            tags: frontmatter.tags,
-          }),
-        ]
-      : [],
   })
 }
 

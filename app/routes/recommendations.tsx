@@ -6,6 +6,7 @@ import PageHeader from "../components/PageHeader"
 import RecommendationCard from "../components/RecommendationCard"
 import { Section, SectionHeader } from "../components/Section"
 import { featuredRecommendations, otherRecommendations, recommendations } from "../data/recommendations"
+import { markdownPaths } from "../libs/agent/markdown-paths"
 import { buildReviewJsonLd } from "../libs/agent/structured-data"
 import { buildMeta } from "../libs/meta"
 
@@ -14,6 +15,7 @@ const meta: MetaFunction = () => [
     title: "Andrew Smith | Recommendations",
     description: "Recommendations from my peers, managers, and leaders in the industry.",
     path: "/recommendations",
+    markdownPath: markdownPaths.recommendations,
   }),
   { "script:ld+json": buildReviewJsonLd(recommendations) },
 ]

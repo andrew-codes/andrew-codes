@@ -8,6 +8,7 @@ import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
 import { topicForTag } from "../data/topics"
 import { getMdxListItems } from "../libs/mdx.server"
+import { markdownPaths } from "../libs/agent/markdown-paths"
 import { buildMeta } from "../libs/meta"
 import type { MdxListItem } from "../types"
 
@@ -41,6 +42,7 @@ const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     title: `Andrew Smith | Posts tagged ${label}`,
     description: `Posts by Andrew Smith about ${label}: experiences and thoughts on technology and software engineering.`,
     path: `/tags/${encodeURIComponent(slug)}`,
+    markdownPath: markdownPaths.tag(encodeURIComponent(slug)),
   })
 }
 

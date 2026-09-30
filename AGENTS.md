@@ -30,7 +30,7 @@ CI (`.github/workflows/ci.yml`) runs lint, unit tests, and the Cypress e2e suite
 
 This is a fully static-generated site: `react-router.config.ts` sets `ssr: false`
 and prerenders every route (`/`, `/posts`, `/recommendations`, `/connect`, `/connect-with-me`, every
-post slug, every tag, plus `/robots.txt`, `/sitemap.xml`, `/feed.xml`, `/agent/resume.json`, `/agent/posts.json`, `/agent/projects.json` and `/resume.md`) at *build time*. There is no per-request server render in production
+post slug, every tag, plus `/robots.txt`, `/sitemap.xml`, `/feed.xml`, `/agent/resume.json`, `/agent/posts.json`, `/agent/projects.json`, `/llms.txt`, `/llms-full.txt` and a `.md` markdown twin of every page: `/index.md`, `/posts.md`, `/posts/:id.md`, `/tags/:id.md`, `/recommendations.md`, `/resume.md`) at *build time*. There is no per-request server render in production
 - `yarn start` (the Vite dev server) does per-request SSR and is **not**
 representative of production rendering behavior for anything time-, locale-,
 or environment-sensitive. To reproduce a production-only rendering bug

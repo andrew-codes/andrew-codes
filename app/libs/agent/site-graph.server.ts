@@ -5,6 +5,7 @@ import { resolveTopics, type Topic } from "../../data/topics"
 import type { Category, MdxListItem } from "../../types"
 import { getMdxPostSources, type MdxPostSource } from "../mdx.server"
 import { toIsoDate } from "../utils"
+import { FIXED_MARKDOWN_PATHS, markdownPaths } from "./markdown-paths"
 import { RECOMMENDATIONS_PATH } from "./recommendations-document"
 import { aggregateProjects, parsePostRelations, type Company, type PostRelations, type SiteProject } from "./relations"
 
@@ -22,8 +23,10 @@ const STATIC_PATHS = ["/", "/posts", "/recommendations", "/connect", "/connect-w
 // Resource routes (app/routes/*.ts) that emit crawler files rather than pages.
 const CRAWLER_PATHS = ["/robots.txt", "/sitemap.xml", feed.path] as const
 
-// Machine-readable resource routes (not pages).
-const RESOURCE_PATHS = ["/agent/resume.json", "/resume.md", "/agent/posts.json", "/agent/projects.json", RECOMMENDATIONS_PATH] as const
+// Machine-readable resource routes (not pages): the resume, the markdown twins
+// that exist once, and the llms.txt files. Per-post and per-tag twins are added
+// by getPrerenderPaths.
+const RESOURCE_PATHS = ["/agent/resume.json", markdownPaths.resume, "/agent/posts.json", "/agent/projects.json", RECOMMENDATIONS_PATH, ...FIXED_MARKDOWN_PATHS, markdownPaths.llms, markdownPaths.llmsFull] as const
 
 type SitePost = {
   slug: string
@@ -160,6 +163,8 @@ const getPrerenderPaths = (graph: SiteGraph): string[] => [
   ...graph.posts.map((post) => post.path),
   ...graph.invalidPosts.map((post) => post.path),
   ...graph.topics.map((topic) => `/tags/${topic.slug}`),
+  ...graph.posts.map((post) => markdownPaths.post(post.slug)),
+  ...graph.topics.map((topic) => markdownPaths.tag(topic.slug)),
   ...CRAWLER_PATHS,
 ]
 

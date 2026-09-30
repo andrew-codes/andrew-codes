@@ -105,13 +105,27 @@ describe("getPrerenderPaths", () => {
   it("lists the static pages, every post, and one page per topic", () => {
     const graph = buildSiteGraph(sources([page("a", { date: "2024-01-01", tags: ["home assistant", "agents"] }), page("b", { date: "2023-01-01", tags: ["ai", "Something New"] })]))
 
-    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, ...RESOURCE_PATHS, "/posts/a", "/posts/b", "/tags/home-assistant", "/tags/ai", "/tags/something-new", ...CRAWLER_PATHS])
+    expect(getPrerenderPaths(graph)).toEqual([
+      ...STATIC_PATHS,
+      ...RESOURCE_PATHS,
+      "/posts/a",
+      "/posts/b",
+      "/tags/home-assistant",
+      "/tags/ai",
+      "/tags/something-new",
+      "/posts/a.md",
+      "/posts/b.md",
+      "/tags/home-assistant.md",
+      "/tags/ai.md",
+      "/tags/something-new.md",
+      ...CRAWLER_PATHS,
+    ])
   })
 
   it("still lists a post whose front matter could not be read, so only its own prerender fails", () => {
     const graph = buildSiteGraph([...sources([page("good", { tags: ["nix"] })]), broken("broken-post")])
 
-    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, ...RESOURCE_PATHS, "/posts/good", "/posts/broken-post", "/tags/nix", ...CRAWLER_PATHS])
+    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, ...RESOURCE_PATHS, "/posts/good", "/posts/broken-post", "/tags/nix", "/posts/good.md", "/tags/nix.md", ...CRAWLER_PATHS])
   })
 
   it("includes the agent JSON indexes", () => {
@@ -120,6 +134,12 @@ describe("getPrerenderPaths", () => {
 
   it("includes the crawler files", () => {
     expect(getPrerenderPaths(buildSiteGraph([]))).toEqual(expect.arrayContaining(["/robots.txt", "/sitemap.xml", "/feed.xml"]))
+  })
+
+  it("includes the markdown twins and llms.txt files", () => {
+    expect(getPrerenderPaths(buildSiteGraph([]))).toEqual(
+      expect.arrayContaining(["/index.md", "/posts.md", "/recommendations.md", "/resume.md", "/llms.txt", "/llms-full.txt"]),
+    )
   })
 
   it("includes the connect pages", () => {
