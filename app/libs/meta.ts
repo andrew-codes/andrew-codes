@@ -22,6 +22,9 @@ type BuildMetaOptions = {
   // `article` for posts; everything else is a plain `website`.
   type?: "website" | "article"
   article?: ArticleMeta
+  // schema.org JSON-LD objects, each emitted as its own
+  // `<script type="application/ld+json">` (see structured-data.ts).
+  jsonLd?: readonly Record<string, unknown>[]
 }
 
 // Tags that steer site behaviour rather than describe a post.
@@ -39,7 +42,7 @@ const toCanonicalUrl = (path: string) => {
 
 const toAbsoluteUrl = (path: string) => new URL(path, profile.url).toString()
 
-const buildMeta = ({ title, description, path, type = "website", article }: BuildMetaOptions): MetaDescriptor[] => {
+const buildMeta = ({ title, description, path, type = "website", article, jsonLd = [] }: BuildMetaOptions): MetaDescriptor[] => {
   const url = toCanonicalUrl(path)
 
   const meta: MetaDescriptor[] = [
@@ -62,6 +65,8 @@ const buildMeta = ({ title, description, path, type = "website", article }: Buil
       if (!NON_TOPIC_TAGS.includes(tag)) meta.push({ property: "article:tag", content: tag })
     }
   }
+
+  for (const entry of jsonLd) meta.push({ "script:ld+json": entry } as MetaDescriptor)
 
   return meta
 }
