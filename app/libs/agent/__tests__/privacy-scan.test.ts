@@ -47,6 +47,25 @@ describe("scanText", () => {
   })
 })
 
+describe("allowlist", () => {
+  it("allows the vendored font contact in fonts/OFL.txt", () => {
+    expect(scanText("fonts/OFL.txt", "Contact team@latofonts.com")).toEqual([])
+  })
+
+  it("still reports a planted email that follows the allowed one in the same file", () => {
+    const found = scanText("fonts/OFL.txt", "team@latofonts.com and then owner@example.com")
+    expect(found.map((v) => v.match)).toEqual(["owner@example.com"])
+  })
+
+  it("does not allow the font contact in other files", () => {
+    expect(scanText("index.html", "team@latofonts.com").map((v) => v.kind)).toEqual(["email"])
+  })
+
+  it("reports every match of a kind, not just the first", () => {
+    expect(scanText("a.txt", "a@example.com b@example.org").map((v) => v.match)).toEqual(["a@example.com", "b@example.org"])
+  })
+})
+
 describe("scanBuildDir", () => {
   it("discovers text artifacts by extension, including ones added later", () => {
     const dir = buildDir({ "a.html": "", "agent/x.json": "{}", "llms.txt": "", "later/new.md": "", "img.png": "", "app.js": "", "r.pdf": "" })
