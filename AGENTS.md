@@ -43,7 +43,9 @@ files instead of using the dev server.
 merge a leaf route's `meta` with its parent's (e.g. root's) `meta`. Anything
 that must appear on every page (charset, etc.) belongs as a literal tag in
 `root.tsx`'s `Layout`, not in a `meta` export, or it will be silently dropped
-on any route that defines its own `meta`.
+on any route that defines its own `meta`. Every route's `meta` must return
+`buildMeta()` (`app/libs/meta.ts`), which owns description, canonical and
+`og:*`/`article:*` tags.
 
 # Hydration Mismatch Classes to Watch For
 
