@@ -1,0 +1,159 @@
+index.html [
+ {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://andrew.codes/#profile",
+  "url": "https://andrew.codes/",
+  "name": "Andrew Smith | Staff Software Engineer",
+  "mainEntity": {
+   "@type": "Person",
+   "@id": "https://andrew.codes/#me",
+   "name": "James Andrew Smith",
+   "alternateName": "Andrew Smith",
+   "url": "https://andrew.codes",
+   "image": "https://andrew.codes/images/andrew-smith.webp",
+   "jobTitle": "Staff Software Engineer",
+   "description": "I create robust, scalable applications and drive engineering teams.",
+   "sameAs": [
+    "https://linkedin.com/in/JamesAndrewSmith",
+    "https://github.com/andrew-codes"
+   ],
+   "worksFor": {
+    "@type": "Organization",
+    "name": "Microsoft"
+   },
+   "knowsAbout": [
+    "TypeScript",
+    "React.js",
+    "Node.js",
+    "Next.js",
+    "C#",
+    "JavaScript",
+    "GraphQL",
+    "Redux",
+    "Webpack",
+    "esbuild",
+    "Vite",
+    "Remix",
+    "Distributed Systems",
+    "Front-end Architecture",
+    "Microservices",
+    "Monorepo (Nx, Yarn PnP)",
+    "Component Libraries",
+    "Cloud Architecture",
+    "Kubernetes",
+    "Docker",
+    "SQL",
+    "NoSQL Databases",
+    "Jest",
+    "Mocha",
+    "Cypress",
+    "End-to-End",
+    "Component",
+    "Visual Regression",
+    "NUnit",
+    "xUnit",
+    "MSTest",
+    "Ephemeral Environments",
+    "TDD (Test-Driven Development)",
+    "XP (Pair Programming)",
+    "Kanban",
+    "Monte-Carlo",
+    "React",
+    "Test-driven development",
+    "Software craftsmanship",
+    "Estimation",
+    "Forecasting",
+    "Developer tools",
+    "Automation",
+    "Home Assistant",
+    "AI"
+   ],
+   "alumniOf": [
+    {
+     "@type": "EducationalOrganization",
+     "name": "Columbus State University"
+    }
+   ]
+  }
+ }
+]
+posts/index.html []
+recommendations/index.html [
+ {
+  "@context": "https://schema.org",
+  "@graph": [
+   {
+    "@type": "Review",
+    "@id": "https://andrew.codes/recommendations#denise-architetto",
+    "reviewBody": "Andrew is a highly talented and passionate engineer who consistently brings innovation, precision, and thoughtfulness to everything he does. He\u2019s a true trailblazer\u2014always exploring modern technologies to solve complex legacy challenges and driving engineering productivity and efficiency across the board.\n\nWithin the team, Andrew is often referred to as \u201cthe professor\u201d\u2014a well-earned nickname that speaks to his natural ability to mentor and guide others. He excels at helping early-in-career engineers grow, teaching them solid engineering practices, design patterns, and how to effectively break down complex problems into clear, manageable solutions.\n\nAndrew takes great pride in his work and has been instrumental in designing and implementing core engineering solutions for Microsoft\u2019s Content Management System (CMS). His contributions have been critical to ensuring the reliability and scalability of a platform that handles over 15 billion requests per month.\n\nHe combines deep technical expertise with a passion for quality, mentorship, and continuous improvement. I highly recommend Andrew to any organization looking for a principled and forward-thinking engineer who leads with both skill and generosity.",
+    "author": {
+     "@type": "Person",
+     "name": "Denise Architetto",
+     "jobTitle": "Principal Group Engineering Manager (Director)",
+     "image": "https://andrew.codes/images/denise.jpeg",
+     "worksFor": {
+      "@type": "Organization",
+      "name": "Microsoft"
+     }
+    },
+    "itemReviewed": {
+     "@type": "Person",
+     "@id": "https://andrew.codes/#me",
+     "name": "James Andrew Smith"
+    }
+   },
+   {
+    "@type": "Review",
+    "@id": "https://andrew.codes/recommendations#rick-cabrera",
+    "reviewBody": "Andrew is a fantastic software developer. He was hired on at Experience to bring focus and leadership to our front-end technology stack and his impact has been significant. His technical acumen and ability to work extremely well with our design team has brought beautiful and functional components, along with consistency and improved development speed to our team.\n\nHis commitment to personal growth and to his team is beyond reproach. Aside from constantly learning new technologies and building hobby projects, Andrew is a thoughtful developer and leader that seeks and is very responsive to feedback from his peers and managers. I\u2019m excited for what the future holds for Andrew and recommend him highly. While he\u2019d be a significant asset to any team looking for immediate technical implementation and leadership, his potential is immense and very much worth consideration for your team.",
+    "author": {
+     "@type": "Person",
+     "name": "Rick Cabrera",
+     "jobTitle": "Chief Technology Officer (CTO)",
+     "image": "https://andrew.codes/images/rick-cabrera.jpeg",
+     "worksFor": {
+      "@type": "Organization",
+      "name": "Experience LLC."
+     }
+    },
+    "itemReviewed": {
+     "@type": "Person",
+     "@id": "https://andrew.codes/#me",
+     "name": "James Andrew Smith"
+    }
+   },
+   {
+    "@type": "Review",
+    "@id": "https://andrew.codes/recommendations#darnell-brown",
+    "reviewBody": "Where do I start. Andrew\u2019s impact has been felt at all levels of our team and he is as gifted and well seaso
+connect/index.html []
+11 posts
+bad 0
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://andrew.codes/posts/agile-estimation/#post",
+  "headline": "Agile Estimation",
+  "description": "Understand the role of estimation and effective ways to utilize it.",
+  "url": "https://andrew.codes/posts/agile-estimation/",
+  "mainEntityOfPage": "https://andrew.codes/posts/agile-estimation/",
+  "image": "https://andrew.codes/images/andrew-smith.webp",
+  "inLanguage": "en-US",
+  "datePublished": "2023-11-14",
+  "articleSection": "agility",
+  "keywords": [
+   "estimation",
+   "story points",
+   "bucketing"
+  ],
+  "author": {
+   "@type": "Person",
+   "@id": "https://andrew.codes/#me",
+   "name": "James Andrew Smith",
+   "url": "https://andrew.codes"
+  }
+ }
+]
+email/phone leak: []
