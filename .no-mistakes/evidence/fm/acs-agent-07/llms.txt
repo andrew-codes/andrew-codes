@@ -1,0 +1,64 @@
+# Andrew Smith
+
+> Staff Software Engineer in Atlanta, GA. I create robust, scalable applications and drive engineering teams.
+
+Personal site of James Andrew Smith: a resume, recommendations from peers and managers, and articles on software engineering, agile and home automation. Every page has a markdown version at the same path with `.md` appended.
+
+## About
+
+- [Home](https://andrew.codes/index.md): profile, links and latest posts
+- [Resume](https://andrew.codes/resume.md): experience, skills and education
+- [Recommendations](https://andrew.codes/recommendations.md): what peers, managers and leaders say
+
+## Posts
+
+- [My Developer Workflow, Delegated](https://andrew.codes/posts/workflow-delegated.md): 2026-08-12 - I went from VS Code to Zed to a terminal-only agentic workflow. Here is the tooling that finally let me run several threads of work at once, and what it cost me to get there.
+- [My Developer Workbench, Declared](https://andrew.codes/posts/devtools-declared.md): 2026-08-10 - Four months ago I argued that Ansible was the right tool for automating my dev environment. I have since deleted all of it and replaced it with Nix. Here is what changed my mind.
+- [My Developer Workbench, Revisited](https://andrew.codes/posts/devtools-revisited.md): 2026-04-22 - I rewrote my dev environment automation from scratch, trading bash scripts for Ansible playbooks. Here's what changed, what got harder, and whether it was worth it.
+- [Custom Voice Assistant](https://andrew.codes/posts/voice-assistant.md): 2026-04-07 - A practical walkthrough of my home automation voice assistant, including goals, architecture, and a live demo.
+- [Agile Forecasting](https://andrew.codes/posts/agile-forecasting.md): 2024-09-18 - Learn how to use this data-driven forecasting technique as a more effective way to predict project timelines.
+- [Agile Estimation](https://andrew.codes/posts/agile-estimation.md): 2023-11-14 - Understand the role of estimation and effective ways to utilize it.
+- [My Developer Workbench](https://andrew.codes/posts/devtools.md): 2023-05-19 - Show the development tools I love and how I've automated setting up my development environment.
+- [Guest Presence Detection](https://andrew.codes/posts/guest-presence-detection.md): 2020-11-13 - Detetermine if there are guests based on when they connect to the guest wi-fi. Useful with presence based home automations.
+- [React with Relay and GraphQL Talk](https://andrew.codes/posts/react-with-relay-graphql-talk.md): 2015-07-22 - Focusing on GraphQL and how it may impact React in the future.
+- [Jest vs. Mocha: Why Jest Wins](https://andrew.codes/posts/jest-vs-mocha-why-jest-wins.md): 2014-09-10 - An early assessment of the Jest testing framework and comparisons to mocha/karma.
+- [Software Craftsmanship](https://andrew.codes/posts/software-craftsmanship.md): 2014-07-08 - Understanding software craftsmanship and my determination to seek constant improvement.
+
+## Tags
+
+- [tdd](https://andrew.codes/tags/tdd.md)
+- [javascript](https://andrew.codes/tags/javascript.md)
+- [jest](https://andrew.codes/tags/jest.md)
+- [mocha](https://andrew.codes/tags/mocha.md)
+- [craftsmanship](https://andrew.codes/tags/craftsmanship.md)
+- [react](https://andrew.codes/tags/react.md)
+- [relay](https://andrew.codes/tags/relay.md)
+- [graphql](https://andrew.codes/tags/graphql.md)
+- [home assistant](https://andrew.codes/tags/home%20assistant.md)
+- [python](https://andrew.codes/tags/python.md)
+- [node.js](https://andrew.codes/tags/node.js.md)
+- [guests](https://andrew.codes/tags/guests.md)
+- [presence detection](https://andrew.codes/tags/presence%20detection.md)
+- [estimation](https://andrew.codes/tags/estimation.md)
+- [story points](https://andrew.codes/tags/story%20points.md)
+- [bucketing](https://andrew.codes/tags/bucketing.md)
+- [forecasting](https://andrew.codes/tags/forecasting.md)
+- [ai](https://andrew.codes/tags/ai.md)
+- [devtools](https://andrew.codes/tags/devtools.md)
+- [automation](https://andrew.codes/tags/automation.md)
+- [nix](https://andrew.codes/tags/nix.md)
+- [zsh](https://andrew.codes/tags/zsh.md)
+- [ansible](https://andrew.codes/tags/ansible.md)
+- [voice assistant](https://andrew.codes/tags/voice%20assistant.md)
+- [kubernetes](https://andrew.codes/tags/kubernetes.md)
+- [agents](https://andrew.codes/tags/agents.md)
+- [workflow](https://andrew.codes/tags/workflow.md)
+
+## Optional
+
+- [Everything in one file](https://andrew.codes/llms-full.txt): the resume, recommendations and every post in full
+- [All posts](https://andrew.codes/posts.md)
+- [Atom feed](https://andrew.codes/feed.xml)
+- [Sitemap](https://andrew.codes/sitemap.xml)
+- [LinkedIn](https://linkedin.com/in/JamesAndrewSmith)
+- [GitHub](https://github.com/andrew-codes)
