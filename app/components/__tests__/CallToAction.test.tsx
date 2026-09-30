@@ -10,10 +10,22 @@ const renderCta = (props: React.ComponentProps<typeof CallToAction>) => {
 }
 
 describe("CallToAction", () => {
-  it("defaults the primary action to downloading the resume", () => {
+  it("defaults the primary action to a Connect / Resume link to /connect-with-me", () => {
     const html = renderCta({ secondaryTitle: "Secondary", secondaryAction: "/secondary" })
 
+    expect(html).toContain("Connect / Resume")
+    expect(html).toContain('href="/connect-with-me"')
+  })
+
+  it("offers download and view resume, and no link to itself, on the connect variant", () => {
+    const html = renderCta({ variant: "connect", secondaryTitle: "Secondary", secondaryAction: "/secondary" })
+
     expect(html).toContain("Download Resume")
+    expect(html).toContain("View Resume")
+    expect(html).not.toContain("Connect / Resume")
+    expect(html).not.toContain("Connect with Me")
+    expect(html).not.toContain('href="/connect-with-me"')
+    expect(html).toContain('target="_blank"')
   })
 
   it("renders a custom primary action as a link when given a path", () => {

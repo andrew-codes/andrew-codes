@@ -56,3 +56,15 @@ describe("connect route", () => {
     expect(html).toContain("<svg")
   })
 })
+
+describe("connect route (conference QR page) is unaffected by connect-with-me", () => {
+  it("does not render the call to action or link to connect-with-me", async () => {
+    const { qrCodeSvg } = await loader({} as any)
+
+    const html = renderToStaticMarkup(<ConnectPageContent qrCodeSvg={qrCodeSvg} />)
+
+    expect(html).not.toContain("Connect / Resume")
+    expect(html).not.toContain("connect-with-me")
+    expect(html).toContain("QR code linking to Andrew Smith")
+  })
+})

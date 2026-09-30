@@ -4,6 +4,7 @@ const avatar = "/images/Profile.webp"
 import { ConnectionList, ContactCard, FullName, JobTitle, Url } from "./ContactCard"
 import Link from "./Link"
 import { NotMobileOnly } from "./MediaQuery"
+import { getSocialLink } from "../profile"
 
 const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);
@@ -87,8 +88,8 @@ const GlobalNavImpl: FC<object> = (props) => {
             <FullName as={ProfileName}>James Andrew Smith</FullName>
             <JobTitle>Staff Software Engineer</JobTitle>
             <ConnectionList>
-              <Url href="https://linkedin.com/in/JamesAndrewSmith">LinkedIn</Url>
-              <Url href="https://github.com/andrew-codes">andrew-codes (github)</Url>
+              <Url href={getSocialLink("linkedin").url}>LinkedIn</Url>
+              <Url href={getSocialLink("github").url}>andrew-codes (github)</Url>
             </ConnectionList>
           </ProfileInformation>
           <Image src={avatar} alt="Profile of Andrew Smith" width={112} height={112} />
