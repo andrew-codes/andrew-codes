@@ -10,4 +10,6 @@ export default [
   route("robots.txt", "routes/robots.txt.ts"),
   route("sitemap.xml", "routes/sitemap.xml.ts"),
   route("feed.xml", "routes/feed.xml.ts"),
+  route("agent/resume.json", "routes/agent.resume-json.ts"),
+  route("resume.md", "routes/resume-md.ts"),
 ] satisfies RouteConfig
