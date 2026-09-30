@@ -12,7 +12,10 @@ import getCodePostAssetComponent, { CodePostAsset } from "../components/CodePost
 import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, Table, UnorderedList } from "../components/Post"
 import Tags from "../components/Tags"
 import { getMdxPage } from "../libs/mdx.server"
+import { buildMeta } from "../libs/meta"
 import { toIsoDate, tryFormatDate } from "../libs/utils"
+
+const DEFAULT_POST_DESCRIPTION = "An article by Andrew Smith on technology and software engineering."
 
 const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { id } = params
@@ -25,16 +28,21 @@ const loader = async ({ params, request }: LoaderFunctionArgs) => {
   return post
 }
 
-const meta: MetaFunction<typeof loader> = (args) => {
-  return [
-    {
-      title: `Andrew Smith | ${args.data?.frontmatter?.title || "Post"}`,
+const meta: MetaFunction<typeof loader> = ({ data, params }) => {
+  const frontmatter = data?.frontmatter
+  const title = `Andrew Smith | ${frontmatter?.title || "Post"}`
+
+  return buildMeta({
+    title,
+    description: frontmatter?.description || DEFAULT_POST_DESCRIPTION,
+    path: `/posts/${encodeURIComponent(data?.slug ?? params.id ?? "")}`,
+    type: "article",
+    article: {
+      publishedTime: toIsoDate(frontmatter?.date),
+      tags: frontmatter?.tags,
+      section: frontmatter?.category,
     },
-    {
-      name: "og:title",
-      content: `Andrew Smith | ${args.data?.frontmatter?.title || "Post"}`,
-    },
-  ]
+  })
 }
 
 const PostRoute = () => {

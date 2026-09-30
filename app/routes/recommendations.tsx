@@ -4,27 +4,15 @@ import { MetaFunction, useLocation } from "react-router"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import { Section, SectionHeader } from "../components/Section"
+import { buildMeta } from "../libs/meta"
 import { featured, nonFeatured } from "../recommendations"
 
-const meta: MetaFunction = () => {
-  return [
-    {
-      title: "Andrew Smith | Home",
-    },
-    {
-      name: "description",
-      content: "Recommendations from my peers, managers, and leaders in the industry.",
-    },
-    {
-      name: "og:title",
-      content: "Andrew Smith - Staff Software Engineer",
-    },
-    {
-      name: "og:description",
-      content: "Recommendations from my peers, managers, and leaders in the industry.",
-    },
-  ]
-}
+const meta: MetaFunction = () =>
+  buildMeta({
+    title: "Andrew Smith | Recommendations",
+    description: "Recommendations from my peers, managers, and leaders in the industry.",
+    path: "/recommendations",
+  })
 
 const RecommendationsRoute = () => {
   const location = useLocation()

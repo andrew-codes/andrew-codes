@@ -9,6 +9,7 @@ import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
 import { getMdxListItems } from "../libs/mdx.server"
+import { buildMeta } from "../libs/meta"
 import { featured } from "../recommendations"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -17,25 +18,12 @@ const loader = async ({ request }: LoaderFunctionArgs) => {
   return { posts: posts.slice(0, 3) }
 }
 
-const meta: MetaFunction = () => {
-  return [
-    {
-      title: "Andrew Smith | Home",
-    },
-    {
-      name: "description",
-      content: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
-    },
-    {
-      name: "og:title",
-      content: "Andrew Smith - Staff Software Engineer",
-    },
-    {
-      name: "og:description",
-      content: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
-    },
-  ]
-}
+const meta: MetaFunction = () =>
+  buildMeta({
+    title: "Andrew Smith | Home",
+    description: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
+    path: "/",
+  })
 
 const HomeRoute = () => {
   const { posts } = useLoaderData<typeof loader>()
