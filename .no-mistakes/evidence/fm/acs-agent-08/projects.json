@@ -1,0 +1,579 @@
+{
+  "projects": [
+    {
+      "slug": "devtools",
+      "name": "devtools",
+      "role": "creator",
+      "summary": "The full setup for my developer workbench, declared as code.",
+      "repo": "https://github.com/andrew-codes/devtools",
+      "firstWritten": "2026-04-22",
+      "lastWritten": "2026-08-10",
+      "topics": [
+        "devtools",
+        "automation",
+        "nix",
+        "zsh",
+        "ansible"
+      ],
+      "posts": [
+        {
+          "slug": "devtools-declared",
+          "title": "My Developer Workbench, Declared",
+          "date": "2026-08-10",
+          "url": "https://andrew.codes/posts/devtools-declared"
+        },
+        {
+          "slug": "devtools-revisited",
+          "title": "My Developer Workbench, Revisited",
+          "date": "2026-04-22",
+          "url": "https://andrew.codes/posts/devtools-revisited"
+        }
+      ]
+    },
+    {
+      "slug": "forecast-work-oss",
+      "name": "forecast-work-oss",
+      "role": "creator",
+      "summary": "Open source desktop GUI tool that turns throughput data from a CSV into a project timeline forecast.",
+      "repo": "https://github.com/andrew-codes/forecast-work-oss",
+      "firstWritten": "2024-09-18",
+      "lastWritten": "2024-09-18",
+      "topics": [
+        "forecasting",
+        "agile-estimation",
+        "ai"
+      ],
+      "posts": [
+        {
+          "slug": "agile-forecasting",
+          "title": "Agile Forecasting",
+          "date": "2024-09-18",
+          "url": "https://andrew.codes/posts/agile-forecasting"
+        }
+      ]
+    },
+    {
+      "slug": "guest-presence-detection",
+      "name": "Guest Presence Detection",
+      "role": "creator",
+      "summary": "Detects house guests from when they connect to the guest wi-fi and registers them with Home Assistant for presence-based automations.",
+      "firstWritten": "2020-11-13",
+      "lastWritten": "2020-11-13",
+      "topics": [
+        "home-assistant",
+        "python",
+        "nodejs",
+        "guests",
+        "presence-detection"
+      ],
+      "posts": [
+        {
+          "slug": "guest-presence-detection",
+          "title": "Guest Presence Detection",
+          "date": "2020-11-13",
+          "url": "https://andrew.codes/posts/guest-presence-detection"
+        }
+      ]
+    },
+    {
+      "slug": "playnite-web",
+      "name": "Playnite Web",
+      "role": "creator",
+      "summary": "Custom web experience for browsing and remote controlling a game library across PC, PlayStation, Xbox, and Nintendo.",
+      "url": "https://public.home.playniteweb.com/",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    },
+    {
+      "slug": "voice-assistant",
+      "name": "Custom Voice Assistant",
+      "role": "creator",
+      "summary": "Home automation voice assistant built on Home Assistant, with speech to text and text to speech running in Kubernetes.",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    }
+  ],
+  "technologiesIUse": [
+    {
+      "slug": "ansible",
+      "name": "Ansible",
+      "role": "user",
+      "summary": "Automation tool I used to set up my dev environment before replacing it with Nix.",
+      "url": "https://www.ansible.com/",
+      "firstWritten": "2026-04-22",
+      "lastWritten": "2026-08-10",
+      "topics": [
+        "devtools",
+        "automation",
+        "nix",
+        "zsh",
+        "ansible"
+      ],
+      "posts": [
+        {
+          "slug": "devtools-declared",
+          "title": "My Developer Workbench, Declared",
+          "date": "2026-08-10",
+          "url": "https://andrew.codes/posts/devtools-declared"
+        },
+        {
+          "slug": "devtools-revisited",
+          "title": "My Developer Workbench, Revisited",
+          "date": "2026-04-22",
+          "url": "https://andrew.codes/posts/devtools-revisited"
+        }
+      ]
+    },
+    {
+      "slug": "appdaemon",
+      "name": "AppDaemon",
+      "role": "user",
+      "url": "https://appdaemon.readthedocs.io/en/latest/",
+      "firstWritten": "2020-11-13",
+      "lastWritten": "2020-11-13",
+      "topics": [
+        "home-assistant",
+        "python",
+        "nodejs",
+        "guests",
+        "presence-detection"
+      ],
+      "posts": [
+        {
+          "slug": "guest-presence-detection",
+          "title": "Guest Presence Detection",
+          "date": "2020-11-13",
+          "url": "https://andrew.codes/posts/guest-presence-detection"
+        }
+      ]
+    },
+    {
+      "slug": "axi",
+      "name": "AXI",
+      "role": "user",
+      "summary": "Focused CLI per outside service, such as GitHub and the browser, for work that has to leave the machine.",
+      "url": "https://axi.md",
+      "firstWritten": "2026-08-12",
+      "lastWritten": "2026-08-12",
+      "topics": [
+        "devtools",
+        "ai",
+        "workflow"
+      ],
+      "posts": [
+        {
+          "slug": "workflow-delegated",
+          "title": "My Developer Workflow, Delegated",
+          "date": "2026-08-12",
+          "url": "https://andrew.codes/posts/workflow-delegated"
+        }
+      ]
+    },
+    {
+      "slug": "extended-openai-conversation",
+      "name": "Extended OpenAI Conversation",
+      "role": "user",
+      "summary": "Home Assistant integration that connects Home Assistant Assist to OpenAI.",
+      "repo": "https://github.com/jekalmin/extended_openai_conversation",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    },
+    {
+      "slug": "faster-whisper",
+      "name": "Faster Whisper",
+      "role": "user",
+      "summary": "Speech to text service running in Kubernetes.",
+      "repo": "https://github.com/SYSTRAN/faster-whisper",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    },
+    {
+      "slug": "firstmate",
+      "name": "firstmate",
+      "role": "user",
+      "summary": "Orchestrator that takes a body of work and a repository URL, manages the worktrees, and drives the work to a merged PR.",
+      "repo": "https://github.com/kunchenguid/firstmate",
+      "firstWritten": "2026-08-12",
+      "lastWritten": "2026-08-12",
+      "topics": [
+        "devtools",
+        "ai",
+        "workflow"
+      ],
+      "posts": [
+        {
+          "slug": "workflow-delegated",
+          "title": "My Developer Workflow, Delegated",
+          "date": "2026-08-12",
+          "url": "https://andrew.codes/posts/workflow-delegated"
+        }
+      ]
+    },
+    {
+      "slug": "home-assistant",
+      "name": "Home Assistant",
+      "role": "user",
+      "url": "https://www.home-assistant.io/",
+      "firstWritten": "2020-11-13",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes",
+        "python",
+        "nodejs",
+        "guests",
+        "presence-detection"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        },
+        {
+          "slug": "guest-presence-detection",
+          "title": "Guest Presence Detection",
+          "date": "2020-11-13",
+          "url": "https://andrew.codes/posts/guest-presence-detection"
+        }
+      ]
+    },
+    {
+      "slug": "jest",
+      "name": "Jest",
+      "role": "user",
+      "url": "http://facebook.github.io/jest",
+      "firstWritten": "2014-09-10",
+      "lastWritten": "2014-09-10",
+      "topics": [
+        "tdd",
+        "javascript",
+        "jest",
+        "mocha"
+      ],
+      "posts": [
+        {
+          "slug": "jest-vs-mocha-why-jest-wins",
+          "title": "Jest vs. Mocha: Why Jest Wins",
+          "date": "2014-09-10",
+          "url": "https://andrew.codes/posts/jest-vs-mocha-why-jest-wins"
+        }
+      ]
+    },
+    {
+      "slug": "langchain",
+      "name": "LangChain",
+      "role": "user",
+      "url": "https://www.langchain.com/",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    },
+    {
+      "slug": "no-mistakes",
+      "name": "no-mistakes",
+      "role": "user",
+      "summary": "CLI tool that makes landing worktree changes safe.",
+      "url": "https://kunchenguid.github.io/no-mistakes/",
+      "firstWritten": "2026-08-12",
+      "lastWritten": "2026-08-12",
+      "topics": [
+        "devtools",
+        "ai",
+        "workflow"
+      ],
+      "posts": [
+        {
+          "slug": "workflow-delegated",
+          "title": "My Developer Workflow, Delegated",
+          "date": "2026-08-12",
+          "url": "https://andrew.codes/posts/workflow-delegated"
+        }
+      ]
+    },
+    {
+      "slug": "piper",
+      "name": "Piper",
+      "role": "user",
+      "summary": "Text to speech service running in Kubernetes.",
+      "repo": "https://github.com/rhasspy/piper",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    },
+    {
+      "slug": "treehouse",
+      "name": "treehouse",
+      "role": "user",
+      "summary": "CLI tool that makes worktrees cheap.",
+      "repo": "https://github.com/kunchenguid/treehouse",
+      "firstWritten": "2026-08-12",
+      "lastWritten": "2026-08-12",
+      "topics": [
+        "devtools",
+        "ai",
+        "workflow"
+      ],
+      "posts": [
+        {
+          "slug": "workflow-delegated",
+          "title": "My Developer Workflow, Delegated",
+          "date": "2026-08-12",
+          "url": "https://andrew.codes/posts/workflow-delegated"
+        }
+      ]
+    },
+    {
+      "slug": "viewassist-companion-app",
+      "name": "ViewAssist Companion App",
+      "role": "user",
+      "summary": "Android app that handles wake word detection, response visualization, and screen sleep and wake on the voice assistant tablet.",
+      "repo": "https://github.com/msp1974/ViewAssistCompanionApp",
+      "firstWritten": "2026-04-07",
+      "lastWritten": "2026-04-07",
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "posts": [
+        {
+          "slug": "voice-assistant",
+          "title": "Custom Voice Assistant",
+          "date": "2026-04-07",
+          "url": "https://andrew.codes/posts/voice-assistant"
+        }
+      ]
+    }
+  ],
+  "facets": {
+    "role": {
+      "creator": [
+        "devtools",
+        "forecast-work-oss",
+        "guest-presence-detection",
+        "playnite-web",
+        "voice-assistant"
+      ],
+      "user": [
+        "ansible",
+        "appdaemon",
+        "axi",
+        "extended-openai-conversation",
+        "faster-whisper",
+        "firstmate",
+        "home-assistant",
+        "jest",
+        "langchain",
+        "no-mistakes",
+        "piper",
+        "treehouse",
+        "viewassist-companion-app"
+      ]
+    },
+    "company": {},
+    "topic": {
+      "agile-estimation": [
+        "forecast-work-oss"
+      ],
+      "ai": [
+        "forecast-work-oss",
+        "playnite-web",
+        "voice-assistant",
+        "axi",
+        "extended-openai-conversation",
+        "faster-whisper",
+        "firstmate",
+        "home-assistant",
+        "langchain",
+        "no-mistakes",
+        "piper",
+        "treehouse",
+        "viewassist-companion-app"
+      ],
+      "ansible": [
+        "devtools",
+        "ansible"
+      ],
+      "automation": [
+        "devtools",
+        "ansible"
+      ],
+      "devtools": [
+        "devtools",
+        "ansible",
+        "axi",
+        "firstmate",
+        "no-mistakes",
+        "treehouse"
+      ],
+      "forecasting": [
+        "forecast-work-oss"
+      ],
+      "guests": [
+        "guest-presence-detection",
+        "appdaemon",
+        "home-assistant"
+      ],
+      "home-assistant": [
+        "guest-presence-detection",
+        "playnite-web",
+        "voice-assistant",
+        "appdaemon",
+        "extended-openai-conversation",
+        "faster-whisper",
+        "home-assistant",
+        "langchain",
+        "piper",
+        "viewassist-companion-app"
+      ],
+      "javascript": [
+        "jest"
+      ],
+      "jest": [
+        "jest"
+      ],
+      "kubernetes": [
+        "playnite-web",
+        "voice-assistant",
+        "extended-openai-conversation",
+        "faster-whisper",
+        "home-assistant",
+        "langchain",
+        "piper",
+        "viewassist-companion-app"
+      ],
+      "mocha": [
+        "jest"
+      ],
+      "nix": [
+        "devtools",
+        "ansible"
+      ],
+      "nodejs": [
+        "guest-presence-detection",
+        "appdaemon",
+        "home-assistant"
+      ],
+      "presence-detection": [
+        "guest-presence-detection",
+        "appdaemon",
+        "home-assistant"
+      ],
+      "python": [
+        "guest-presence-detection",
+        "appdaemon",
+        "home-assistant"
+      ],
+      "tdd": [
+        "jest"
+      ],
+      "voice-assistant": [
+        "playnite-web",
+        "voice-assistant",
+        "extended-openai-conversation",
+        "faster-whisper",
+        "home-assistant",
+        "langchain",
+        "piper",
+        "viewassist-companion-app"
+      ],
+      "workflow": [
+        "axi",
+        "firstmate",
+        "no-mistakes",
+        "treehouse"
+      ],
+      "zsh": [
+        "devtools",
+        "ansible"
+      ]
+    }
+  }
+}

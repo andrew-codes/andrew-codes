@@ -1,0 +1,670 @@
+{
+  "posts": [
+    {
+      "slug": "workflow-delegated",
+      "url": "https://andrew.codes/posts/workflow-delegated",
+      "title": "My Developer Workflow, Delegated",
+      "description": "I went from VS Code to Zed to a terminal-only agentic workflow. Here is the tooling that finally let me run several threads of work at once, and what it cost me to get there.",
+      "date": "2026-08-12",
+      "category": "engineering",
+      "tags": [
+        "devtools",
+        "ai",
+        "agents",
+        "workflow"
+      ],
+      "topics": [
+        "devtools",
+        "ai",
+        "workflow"
+      ],
+      "projects": [],
+      "technologies": [
+        "firstmate",
+        "treehouse",
+        "no-mistakes",
+        "axi"
+      ],
+      "companies": [],
+      "readingMinutes": 11,
+      "featured": true
+    },
+    {
+      "slug": "devtools-declared",
+      "url": "https://andrew.codes/posts/devtools-declared",
+      "title": "My Developer Workbench, Declared",
+      "description": "Four months ago I argued that Ansible was the right tool for automating my dev environment. I have since deleted all of it and replaced it with Nix. Here is what changed my mind.",
+      "date": "2026-08-10",
+      "category": "engineering",
+      "tags": [
+        "devtools",
+        "automation",
+        "nix",
+        "zsh",
+        "ansible"
+      ],
+      "topics": [
+        "devtools",
+        "automation",
+        "nix",
+        "zsh",
+        "ansible"
+      ],
+      "projects": [
+        "devtools"
+      ],
+      "technologies": [
+        "ansible"
+      ],
+      "companies": [],
+      "readingMinutes": 10,
+      "featured": true
+    },
+    {
+      "slug": "devtools-revisited",
+      "url": "https://andrew.codes/posts/devtools-revisited",
+      "title": "My Developer Workbench, Revisited",
+      "description": "I rewrote my dev environment automation from scratch, trading bash scripts for Ansible playbooks. Here's what changed, what got harder, and whether it was worth it.",
+      "date": "2026-04-22",
+      "category": "engineering",
+      "tags": [
+        "devtools",
+        "automation",
+        "ansible"
+      ],
+      "topics": [
+        "devtools",
+        "automation",
+        "ansible"
+      ],
+      "projects": [
+        "devtools"
+      ],
+      "technologies": [
+        "ansible"
+      ],
+      "companies": [],
+      "readingMinutes": 6,
+      "featured": false
+    },
+    {
+      "slug": "voice-assistant",
+      "url": "https://andrew.codes/posts/voice-assistant",
+      "title": "Custom Voice Assistant",
+      "description": "A practical walkthrough of my home automation voice assistant, including goals, architecture, and a live demo.",
+      "date": "2026-04-07",
+      "category": "home automation",
+      "tags": [
+        "home assistant",
+        "voice assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "topics": [
+        "home-assistant",
+        "voice-assistant",
+        "ai",
+        "kubernetes"
+      ],
+      "projects": [
+        "voice-assistant",
+        "playnite-web"
+      ],
+      "technologies": [
+        "home-assistant",
+        "viewassist-companion-app",
+        "faster-whisper",
+        "piper",
+        "extended-openai-conversation",
+        "langchain"
+      ],
+      "companies": [],
+      "readingMinutes": 8,
+      "featured": true
+    },
+    {
+      "slug": "agile-forecasting",
+      "url": "https://andrew.codes/posts/agile-forecasting",
+      "title": "Agile Forecasting",
+      "description": "Learn how to use this data-driven forecasting technique as a more effective way to predict project timelines.",
+      "date": "2024-09-18",
+      "category": "agility",
+      "tags": [
+        "forecasting",
+        "estimation",
+        "ai"
+      ],
+      "topics": [
+        "forecasting",
+        "agile-estimation",
+        "ai"
+      ],
+      "projects": [
+        "forecast-work-oss"
+      ],
+      "technologies": [],
+      "companies": [],
+      "readingMinutes": 5,
+      "featured": true
+    },
+    {
+      "slug": "agile-estimation",
+      "url": "https://andrew.codes/posts/agile-estimation",
+      "title": "Agile Estimation",
+      "description": "Understand the role of estimation and effective ways to utilize it.",
+      "date": "2023-11-14",
+      "category": "agility",
+      "tags": [
+        "estimation",
+        "story points",
+        "bucketing"
+      ],
+      "topics": [
+        "agile-estimation",
+        "story-points",
+        "bucketing"
+      ],
+      "projects": [],
+      "technologies": [],
+      "companies": [],
+      "readingMinutes": 5,
+      "featured": false
+    },
+    {
+      "slug": "devtools",
+      "url": "https://andrew.codes/posts/devtools",
+      "title": "My Developer Workbench",
+      "description": "Show the development tools I love and how I've automated setting up my development environment.",
+      "date": "2023-05-19",
+      "category": "engineering",
+      "tags": [
+        "craftsmanship"
+      ],
+      "topics": [
+        "craftsmanship"
+      ],
+      "projects": [],
+      "technologies": [],
+      "companies": [],
+      "readingMinutes": 11,
+      "featured": false
+    },
+    {
+      "slug": "guest-presence-detection",
+      "url": "https://andrew.codes/posts/guest-presence-detection",
+      "title": "Guest Presence Detection",
+      "description": "Detetermine if there are guests based on when they connect to the guest wi-fi. Useful with presence based home automations.",
+      "date": "2020-11-13",
+      "category": "home automation",
+      "tags": [
+        "home assistant",
+        "python",
+        "node.js",
+        "guests",
+        "presence detection"
+      ],
+      "topics": [
+        "home-assistant",
+        "python",
+        "nodejs",
+        "guests",
+        "presence-detection"
+      ],
+      "projects": [
+        "guest-presence-detection"
+      ],
+      "technologies": [
+        "home-assistant",
+        "appdaemon"
+      ],
+      "companies": [],
+      "readingMinutes": 7,
+      "featured": false
+    },
+    {
+      "slug": "react-with-relay-graphql-talk",
+      "url": "https://andrew.codes/posts/react-with-relay-graphql-talk",
+      "title": "React with Relay and GraphQL Talk",
+      "description": "Focusing on GraphQL and how it may impact React in the future.",
+      "date": "2015-07-22",
+      "category": "presentation",
+      "tags": [
+        "react",
+        "relay",
+        "graphql",
+        "javascript"
+      ],
+      "topics": [
+        "react",
+        "relay",
+        "graphql",
+        "javascript"
+      ],
+      "projects": [],
+      "technologies": [],
+      "companies": [],
+      "readingMinutes": 1,
+      "featured": true
+    },
+    {
+      "slug": "jest-vs-mocha-why-jest-wins",
+      "url": "https://andrew.codes/posts/jest-vs-mocha-why-jest-wins",
+      "title": "Jest vs. Mocha: Why Jest Wins",
+      "description": "An early assessment of the Jest testing framework and comparisons to mocha/karma.",
+      "date": "2014-09-10",
+      "category": "engineering",
+      "tags": [
+        "tdd",
+        "javascript",
+        "jest",
+        "mocha"
+      ],
+      "topics": [
+        "tdd",
+        "javascript",
+        "jest",
+        "mocha"
+      ],
+      "projects": [],
+      "technologies": [
+        "jest"
+      ],
+      "companies": [],
+      "readingMinutes": 5,
+      "featured": false
+    },
+    {
+      "slug": "software-craftsmanship",
+      "url": "https://andrew.codes/posts/software-craftsmanship",
+      "title": "Software Craftsmanship",
+      "description": "Understanding software craftsmanship and my determination to seek constant improvement.",
+      "date": "2014-07-08",
+      "category": "engineering",
+      "tags": [
+        "craftsmanship"
+      ],
+      "topics": [
+        "craftsmanship"
+      ],
+      "projects": [],
+      "technologies": [],
+      "companies": [],
+      "readingMinutes": 4,
+      "featured": false
+    }
+  ],
+  "topics": [
+    {
+      "slug": "agile-estimation",
+      "label": "Estimation"
+    },
+    {
+      "slug": "ai",
+      "label": "AI"
+    },
+    {
+      "slug": "ansible",
+      "label": "Ansible"
+    },
+    {
+      "slug": "automation",
+      "label": "Automation"
+    },
+    {
+      "slug": "bucketing",
+      "label": "Bucketing"
+    },
+    {
+      "slug": "craftsmanship",
+      "label": "Software craftsmanship"
+    },
+    {
+      "slug": "devtools",
+      "label": "Developer tools"
+    },
+    {
+      "slug": "forecasting",
+      "label": "Forecasting"
+    },
+    {
+      "slug": "graphql",
+      "label": "GraphQL"
+    },
+    {
+      "slug": "guests",
+      "label": "Guests"
+    },
+    {
+      "slug": "home-assistant",
+      "label": "Home Assistant"
+    },
+    {
+      "slug": "javascript",
+      "label": "JavaScript"
+    },
+    {
+      "slug": "jest",
+      "label": "Jest"
+    },
+    {
+      "slug": "kubernetes",
+      "label": "Kubernetes"
+    },
+    {
+      "slug": "mocha",
+      "label": "Mocha"
+    },
+    {
+      "slug": "nix",
+      "label": "Nix"
+    },
+    {
+      "slug": "nodejs",
+      "label": "Node.js"
+    },
+    {
+      "slug": "presence-detection",
+      "label": "Presence Detection"
+    },
+    {
+      "slug": "python",
+      "label": "Python"
+    },
+    {
+      "slug": "react",
+      "label": "React"
+    },
+    {
+      "slug": "relay",
+      "label": "Relay"
+    },
+    {
+      "slug": "story-points",
+      "label": "Story Points"
+    },
+    {
+      "slug": "tdd",
+      "label": "Test-driven development"
+    },
+    {
+      "slug": "voice-assistant",
+      "label": "Voice assistants"
+    },
+    {
+      "slug": "workflow",
+      "label": "Workflow"
+    },
+    {
+      "slug": "zsh",
+      "label": "Zsh"
+    }
+  ],
+  "facets": {
+    "category": {
+      "agility": [
+        "agile-forecasting",
+        "agile-estimation"
+      ],
+      "engineering": [
+        "workflow-delegated",
+        "devtools-declared",
+        "devtools-revisited",
+        "devtools",
+        "jest-vs-mocha-why-jest-wins",
+        "software-craftsmanship"
+      ],
+      "home automation": [
+        "voice-assistant",
+        "guest-presence-detection"
+      ],
+      "presentation": [
+        "react-with-relay-graphql-talk"
+      ]
+    },
+    "tag": {
+      "agents": [
+        "workflow-delegated"
+      ],
+      "ai": [
+        "workflow-delegated",
+        "voice-assistant",
+        "agile-forecasting"
+      ],
+      "ansible": [
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "automation": [
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "bucketing": [
+        "agile-estimation"
+      ],
+      "craftsmanship": [
+        "devtools",
+        "software-craftsmanship"
+      ],
+      "devtools": [
+        "workflow-delegated",
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "estimation": [
+        "agile-forecasting",
+        "agile-estimation"
+      ],
+      "forecasting": [
+        "agile-forecasting"
+      ],
+      "graphql": [
+        "react-with-relay-graphql-talk"
+      ],
+      "guests": [
+        "guest-presence-detection"
+      ],
+      "home assistant": [
+        "voice-assistant",
+        "guest-presence-detection"
+      ],
+      "javascript": [
+        "react-with-relay-graphql-talk",
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "jest": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "kubernetes": [
+        "voice-assistant"
+      ],
+      "mocha": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "nix": [
+        "devtools-declared"
+      ],
+      "node.js": [
+        "guest-presence-detection"
+      ],
+      "presence detection": [
+        "guest-presence-detection"
+      ],
+      "python": [
+        "guest-presence-detection"
+      ],
+      "react": [
+        "react-with-relay-graphql-talk"
+      ],
+      "relay": [
+        "react-with-relay-graphql-talk"
+      ],
+      "story points": [
+        "agile-estimation"
+      ],
+      "tdd": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "voice assistant": [
+        "voice-assistant"
+      ],
+      "workflow": [
+        "workflow-delegated"
+      ],
+      "zsh": [
+        "devtools-declared"
+      ]
+    },
+    "topic": {
+      "agile-estimation": [
+        "agile-forecasting",
+        "agile-estimation"
+      ],
+      "ai": [
+        "workflow-delegated",
+        "voice-assistant",
+        "agile-forecasting"
+      ],
+      "ansible": [
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "automation": [
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "bucketing": [
+        "agile-estimation"
+      ],
+      "craftsmanship": [
+        "devtools",
+        "software-craftsmanship"
+      ],
+      "devtools": [
+        "workflow-delegated",
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "forecasting": [
+        "agile-forecasting"
+      ],
+      "graphql": [
+        "react-with-relay-graphql-talk"
+      ],
+      "guests": [
+        "guest-presence-detection"
+      ],
+      "home-assistant": [
+        "voice-assistant",
+        "guest-presence-detection"
+      ],
+      "javascript": [
+        "react-with-relay-graphql-talk",
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "jest": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "kubernetes": [
+        "voice-assistant"
+      ],
+      "mocha": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "nix": [
+        "devtools-declared"
+      ],
+      "nodejs": [
+        "guest-presence-detection"
+      ],
+      "presence-detection": [
+        "guest-presence-detection"
+      ],
+      "python": [
+        "guest-presence-detection"
+      ],
+      "react": [
+        "react-with-relay-graphql-talk"
+      ],
+      "relay": [
+        "react-with-relay-graphql-talk"
+      ],
+      "story-points": [
+        "agile-estimation"
+      ],
+      "tdd": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "voice-assistant": [
+        "voice-assistant"
+      ],
+      "workflow": [
+        "workflow-delegated"
+      ],
+      "zsh": [
+        "devtools-declared"
+      ]
+    },
+    "project": {
+      "devtools": [
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "forecast-work-oss": [
+        "agile-forecasting"
+      ],
+      "guest-presence-detection": [
+        "guest-presence-detection"
+      ],
+      "playnite-web": [
+        "voice-assistant"
+      ],
+      "voice-assistant": [
+        "voice-assistant"
+      ]
+    },
+    "technology": {
+      "ansible": [
+        "devtools-declared",
+        "devtools-revisited"
+      ],
+      "appdaemon": [
+        "guest-presence-detection"
+      ],
+      "axi": [
+        "workflow-delegated"
+      ],
+      "extended-openai-conversation": [
+        "voice-assistant"
+      ],
+      "faster-whisper": [
+        "voice-assistant"
+      ],
+      "firstmate": [
+        "workflow-delegated"
+      ],
+      "home-assistant": [
+        "voice-assistant",
+        "guest-presence-detection"
+      ],
+      "jest": [
+        "jest-vs-mocha-why-jest-wins"
+      ],
+      "langchain": [
+        "voice-assistant"
+      ],
+      "no-mistakes": [
+        "workflow-delegated"
+      ],
+      "piper": [
+        "voice-assistant"
+      ],
+      "treehouse": [
+        "workflow-delegated"
+      ],
+      "viewassist-companion-app": [
+        "voice-assistant"
+      ]
+    },
+    "company": {}
+  }
+}
