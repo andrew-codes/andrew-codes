@@ -1,4 +1,5 @@
 import { feed, profile } from "../../data/profile"
+import { resume, type Resume } from "../../data/resume"
 import { FEATURED_TAG, resolveTopics, topics, type Topic } from "../../data/topics"
 import type { Category, MdxListItem } from "../../types"
 import { getMdxPostSources, type MdxPostSource } from "../mdx.server"
@@ -17,6 +18,9 @@ const STATIC_PATHS = ["/", "/posts", "/recommendations", "/connect", "/connect-w
 
 // Resource routes (app/routes/*.ts) that emit crawler files rather than pages.
 const CRAWLER_PATHS = ["/robots.txt", "/sitemap.xml", feed.path] as const
+
+// Machine-readable resource routes (not pages).
+const RESOURCE_PATHS = ["/agent/resume.json", "/resume.md"] as const
 
 type SitePost = {
   slug: string
@@ -44,6 +48,7 @@ type InvalidPost = {
 
 type SiteGraph = {
   profile: typeof profile
+  resume: Resume
   topics: readonly Topic[]
   // Newest first; ties broken by slug so the order is deterministic.
   posts: SitePost[]
@@ -86,6 +91,7 @@ const buildSiteGraph = (sources: readonly MdxPostSource[]): SiteGraph => {
 
   return {
     profile,
+    resume,
     topics,
     posts,
     invalidPosts,
@@ -97,6 +103,7 @@ const buildSiteGraph = (sources: readonly MdxPostSource[]): SiteGraph => {
 // Every route that is prerendered at build time.
 const getPrerenderPaths = (graph: SiteGraph): string[] => [
   ...STATIC_PATHS,
+  ...RESOURCE_PATHS,
   ...graph.posts.map((post) => post.path),
   ...graph.invalidPosts.map((post) => post.path),
   ...graph.tags.map((tag) => `/tags/${tag}`),
@@ -122,5 +129,5 @@ const createSiteGraphLoader = (loadSources: () => Promise<MdxPostSource[]>) => {
 
 const getSiteGraph = createSiteGraphLoader(() => getMdxPostSources())
 
-export { CRAWLER_PATHS, STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths, getSiteGraph }
+export { CRAWLER_PATHS, RESOURCE_PATHS, STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths, getSiteGraph }
 export type { InvalidPost, SiteGraph, SitePost }
