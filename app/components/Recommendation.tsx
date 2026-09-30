@@ -19,13 +19,14 @@ import {
 
 const Recommendation: FC<
   PropsWithChildren<{
+    id?: string
     profileImage: string
     name: string
     title: string
     company: string
     summarized?: boolean
   }>
-> = ({ profileImage, name, title, children, company, summarized }) => {
+> = ({ id, profileImage, name, title, children, company, summarized }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev)
@@ -125,7 +126,7 @@ const Recommendation: FC<
   )
 
   return (
-    <Box sx={{ minHeight: "191px" }}>
+    <Box id={id} sx={{ minHeight: "191px" }}>
       <Card>{cardContent(false)}</Card>
       {summarized && (
         <Modal open={isOpen} onClose={toggleOpen}>

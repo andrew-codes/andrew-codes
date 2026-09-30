@@ -4,6 +4,7 @@ export default [
   index("routes/_index.tsx"),
   route("posts", "routes/posts.tsx", [route(":id", "routes/posts.$id.tsx")]),
   route("recommendations", "routes/recommendations.tsx"),
+  route("agent/recommendations.json", "routes/agent.recommendations.json.ts"),
   route("tags/:id", "routes/tags.$id.tsx"),
   route("connect", "routes/connect.tsx"),
   route("connect-with-me", "routes/connect-with-me.tsx"),

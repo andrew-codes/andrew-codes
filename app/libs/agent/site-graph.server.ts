@@ -1,9 +1,11 @@
 import { feed, profile } from "../../data/profile"
 import { resume, type Resume } from "../../data/resume"
+import { recommendations, type Recommendation } from "../../data/recommendations"
 import { FEATURED_TAG, resolveTopics, topics, type Topic } from "../../data/topics"
 import type { Category, MdxListItem } from "../../types"
 import { getMdxPostSources, type MdxPostSource } from "../mdx.server"
 import { toIsoDate } from "../utils"
+import { RECOMMENDATIONS_PATH } from "./recommendations-document"
 
 // The site graph is the one typed, validated view of site content that
 // everything machine-facing (prerender list, and later the JSON endpoints,
@@ -20,7 +22,7 @@ const STATIC_PATHS = ["/", "/posts", "/recommendations", "/connect", "/connect-w
 const CRAWLER_PATHS = ["/robots.txt", "/sitemap.xml", feed.path] as const
 
 // Machine-readable resource routes (not pages).
-const RESOURCE_PATHS = ["/agent/resume.json", "/resume.md"] as const
+const RESOURCE_PATHS = ["/agent/resume.json", "/resume.md", RECOMMENDATIONS_PATH] as const
 
 type SitePost = {
   slug: string
@@ -50,6 +52,7 @@ type SiteGraph = {
   profile: typeof profile
   resume: Resume
   topics: readonly Topic[]
+  recommendations: readonly Recommendation[]
   // Newest first; ties broken by slug so the order is deterministic.
   posts: SitePost[]
   invalidPosts: InvalidPost[]
@@ -93,6 +96,7 @@ const buildSiteGraph = (sources: readonly MdxPostSource[]): SiteGraph => {
     profile,
     resume,
     topics,
+    recommendations,
     posts,
     invalidPosts,
     tags: [...new Set(pages.flatMap((page) => page.frontmatter.tags ?? []))],
