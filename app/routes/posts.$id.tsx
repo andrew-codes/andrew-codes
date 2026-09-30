@@ -11,6 +11,7 @@ import { useMemo } from "react"
 import getCodePostAssetComponent, { CodePostAsset } from "../components/CodePostAsset"
 import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, Table, UnorderedList } from "../components/Post"
 import Tags from "../components/Tags"
+import { markdownPaths } from "../libs/agent/markdown-paths"
 import { getMdxPage } from "../libs/mdx.server"
 import { buildMeta } from "../libs/meta"
 import { buildBlogPostingJsonLd } from "../libs/agent/structured-data"
@@ -40,6 +41,7 @@ const meta: MetaFunction<typeof loader> = ({ data, params }) => {
     title,
     description,
     path: `/posts/${encodeURIComponent(slug)}`,
+    markdownPath: markdownPaths.post(encodeURIComponent(slug)),
     type: "article",
     article: {
       publishedTime,

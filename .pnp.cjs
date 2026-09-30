@@ -49,6 +49,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint", "npm:9.6.1"],\
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/lodash-es", "npm:4.17.12"],\
+          ["@types/mdast", "npm:4.0.4"],\
           ["@types/node", "npm:22.15.20"],\
           ["@types/qrcode", "npm:1.5.6"],\
           ["@types/react", "npm:19.2.14"],\
@@ -79,10 +80,13 @@ const RAW_RUNTIME_STATE =
           ["react-router", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:7.14.0"],\
           ["reading-time", "npm:1.5.0"],\
           ["rehype-highlight", "npm:7.0.2"],\
+          ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-gfm", "npm:4.0.1"],\
+          ["remark-mdx", "npm:3.1.1"],\
           ["remark-mdx-images", "npm:3.0.0"],\
           ["remark-parse", "npm:11.0.0"],\
           ["remark-rehype", "npm:11.1.2"],\
+          ["remark-stringify", "npm:11.0.0"],\
           ["rimraf", "npm:6.0.1"],\
           ["serve", "npm:14.2.6"],\
           ["tsc", "npm:2.0.4"],\
@@ -90,6 +94,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.70.1"],\
           ["ua-parser-js", "npm:2.0.3"],\
+          ["unified", "npm:11.0.5"],\
           ["usehooks-ts", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.1.1"],\
           ["vite", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:5.4.19"],\
           ["vite-plugin-babel", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:1.3.1"],\
@@ -135,6 +140,7 @@ const RAW_RUNTIME_STATE =
           ["@types/eslint", "npm:9.6.1"],\
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/lodash-es", "npm:4.17.12"],\
+          ["@types/mdast", "npm:4.0.4"],\
           ["@types/node", "npm:22.15.20"],\
           ["@types/qrcode", "npm:1.5.6"],\
           ["@types/react", "npm:19.2.14"],\
@@ -165,10 +171,13 @@ const RAW_RUNTIME_STATE =
           ["react-router", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:7.14.0"],\
           ["reading-time", "npm:1.5.0"],\
           ["rehype-highlight", "npm:7.0.2"],\
+          ["remark-frontmatter", "npm:5.0.0"],\
           ["remark-gfm", "npm:4.0.1"],\
+          ["remark-mdx", "npm:3.1.1"],\
           ["remark-mdx-images", "npm:3.0.0"],\
           ["remark-parse", "npm:11.0.0"],\
           ["remark-rehype", "npm:11.1.2"],\
+          ["remark-stringify", "npm:11.0.0"],\
           ["rimraf", "npm:6.0.1"],\
           ["serve", "npm:14.2.6"],\
           ["tsc", "npm:2.0.4"],\
@@ -176,6 +185,7 @@ const RAW_RUNTIME_STATE =
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:8.70.1"],\
           ["ua-parser-js", "npm:2.0.3"],\
+          ["unified", "npm:11.0.5"],\
           ["usehooks-ts", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:3.1.1"],\
           ["vite", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:5.4.19"],\
           ["vite-plugin-babel", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:1.3.1"],\
@@ -12649,6 +12659,15 @@ const RAW_RUNTIME_STATE =
           ["mdast-util-mdx", "npm:3.0.0"],\
           ["micromark-extension-mdxjs", "npm:3.0.0"],\
           ["remark-mdx", "npm:3.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:3.1.1", {\
+        "packageLocation": "./.yarn/cache/remark-mdx-npm-3.1.1-d7cc68add9-aaeb8d52cc.zip/node_modules/remark-mdx/",\
+        "packageDependencies": [\
+          ["mdast-util-mdx", "npm:3.0.0"],\
+          ["micromark-extension-mdxjs", "npm:3.0.0"],\
+          ["remark-mdx", "npm:3.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\

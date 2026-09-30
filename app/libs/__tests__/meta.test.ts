@@ -42,6 +42,22 @@ describe("buildMeta", () => {
     expect(content(meta, "property", "og:description")).toEqual(["All my posts."])
   })
 
+  it("advertises the markdown twin as an absolute alternate link when there is one", () => {
+    const meta = buildMeta({ ...base, markdownPath: "/posts.md" })
+
+    expect(meta).toContainEqual({ tagName: "link", rel: "alternate", type: "text/markdown", href: "https://andrew.codes/posts.md" })
+  })
+
+  it("keeps a percent-encoded twin path encoded", () => {
+    const meta = buildMeta({ ...base, markdownPath: `/tags/${encodeURIComponent("voice assistant")}.md` })
+
+    expect(meta).toContainEqual({ tagName: "link", rel: "alternate", type: "text/markdown", href: "https://andrew.codes/tags/voice%20assistant.md" })
+  })
+
+  it("emits no markdown alternate for a page without a twin", () => {
+    expect(buildMeta(base).some((entry) => (entry as Record<string, unknown>).type === "text/markdown")).toBe(false)
+  })
+
   it("uses an absolute og:image", () => {
     expect(content(buildMeta(base), "property", "og:image")).toEqual(["https://andrew.codes/images/andrew-smith.webp"])
   })

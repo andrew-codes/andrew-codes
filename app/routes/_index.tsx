@@ -12,6 +12,7 @@ import { Section, SectionHeader } from "../components/Section"
 import { featuredRecommendations } from "../data/recommendations"
 import { buildPersonJsonLd } from "../libs/agent/resume"
 import { getSiteGraph } from "../libs/agent/site-graph.server"
+import { markdownPaths } from "../libs/agent/markdown-paths"
 import { getMdxListItems } from "../libs/mdx.server"
 import { buildMeta } from "../libs/meta"
 import { buildProfilePageJsonLd } from "../libs/agent/structured-data"
@@ -31,6 +32,7 @@ const meta: MetaFunction<typeof loader> = ({ data }) =>
     title: "Andrew Smith | Home",
     description: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
     path: "/",
+    markdownPath: markdownPaths.home,
     jsonLd: data ? [data.profilePage] : [],
   })
 

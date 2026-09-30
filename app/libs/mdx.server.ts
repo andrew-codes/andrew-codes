@@ -207,5 +207,28 @@ const getMdxPostSources = async (fileDirPath: string = "app/posts"): Promise<Mdx
   )
 }
 
-export { getMdxListItems, getMdxPage, getMdxPages, getMdxPostSources }
-export type { MdxPostSource }
+type MdxPostMarkdownInput = {
+  // The post's MDX with front matter removed.
+  content: string
+  // The compiled post; the asset URLs the page uses are found in it.
+  code: string
+  codeAssets: NonNullable<MdxPage["codeAssets"]>
+}
+
+// Everything the markdown twin of a post needs beyond its front matter. The
+// post is compiled (as its page does) only so relative asset paths can be
+// resolved to the exact hashed URLs the page serves them from.
+const getMdxPostMarkdownInput = async (slug: string, fileDirPath: string = "app/posts", extraFilesPath: string = "app/components"): Promise<MdxPostMarkdownInput> => {
+  const mdxFile = (await getMdxFiles(fileDirPath))[slug]
+  if (!mdxFile) {
+    throw new Error(`No MDX file found for slug: ${slug}`)
+  }
+
+  const { content } = matter((await fs.readFile(mdxFile.filePath, "utf8")).trim(), {})
+  const { code, codeAssets } = await getMdxPage(slug, {}, fileDirPath, extraFilesPath)
+
+  return { content, code, codeAssets: codeAssets ?? {} }
+}
+
+export { getMdxListItems, getMdxPage, getMdxPages, getMdxPostMarkdownInput, getMdxPostSources }
+export type { MdxPostMarkdownInput, MdxPostSource }

@@ -25,6 +25,9 @@ type BuildMetaOptions = {
   // schema.org JSON-LD objects, each emitted as its own
   // `<script type="application/ld+json">` (see structured-data.ts).
   jsonLd?: readonly Record<string, unknown>[]
+  // Site-relative path of this page's markdown twin, advertised to agents as
+  // `<link rel="alternate" type="text/markdown">`.
+  markdownPath?: string
 }
 
 // The deployed site serves every page from a directory index, and redirects
@@ -39,13 +42,14 @@ const toCanonicalUrl = (path: string) => {
 
 const toAbsoluteUrl = (path: string) => new URL(path, profile.url).toString()
 
-const buildMeta = ({ title, description, path, type = "website", article, jsonLd = [] }: BuildMetaOptions): MetaDescriptor[] => {
+const buildMeta = ({ title, description, path, type = "website", article, jsonLd = [], markdownPath }: BuildMetaOptions): MetaDescriptor[] => {
   const url = toCanonicalUrl(path)
 
   const meta: MetaDescriptor[] = [
     { title },
     { name: "description", content: description },
     { tagName: "link", rel: "canonical", href: url },
+    ...(markdownPath ? [{ tagName: "link", rel: "alternate", type: "text/markdown", href: toAbsoluteUrl(markdownPath) } as const] : []),
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:url", content: url },

@@ -15,4 +15,11 @@ export default [
   route("resume.md", "routes/resume-md.ts"),
   route("agent/posts.json", "routes/agent.posts-json.ts"),
   route("agent/projects.json", "routes/agent.projects-json.ts"),
+  route("index.md", "routes/index-md.ts"),
+  route("posts.md", "routes/posts-index-md.ts"),
+  route("posts/:id.md", "routes/posts-md.ts"),
+  route("tags/:id.md", "routes/tags-md.ts"),
+  route("recommendations.md", "routes/recommendations-md.ts"),
+  route("llms.txt", "routes/llms-txt.ts"),
+  route("llms-full.txt", "routes/llms-full-txt.ts"),
 ] satisfies RouteConfig

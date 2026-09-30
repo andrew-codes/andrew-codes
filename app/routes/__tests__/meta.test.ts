@@ -32,6 +32,23 @@ describe("route meta", () => {
     expect(at(result, "property", "og:type")?.content).toBe("website")
   })
 
+  it.each([
+    ["home", homeMeta, {}, "https://andrew.codes/index.md"],
+    ["posts", postsMeta, {}, "https://andrew.codes/posts.md"],
+    ["recommendations", recommendationsMeta, {}, "https://andrew.codes/recommendations.md"],
+    ["a post", postMeta, { params: { id: "devtools" }, data: { slug: "devtools", frontmatter: { title: "Devtools" } } }, "https://andrew.codes/posts/devtools.md"],
+    ["a tag", tagMeta, { params: { id: "voice assistant" } }, "https://andrew.codes/tags/voice%20assistant.md"],
+  ])("links %s to its markdown twin", (_name, meta, args, href) => {
+    expect(at(run(meta, args), "type", "text/markdown")).toMatchObject({ tagName: "link", rel: "alternate", href })
+  })
+
+  it.each([
+    ["connect", connectMeta],
+    ["connect-with-me", connectWithMeMeta],
+  ])("does not advertise a markdown twin for %s, which has none", (_name, meta) => {
+    expect(at(run(meta), "type", "text/markdown")).toBeUndefined()
+  })
+
   it("gives the recommendations page its own title", () => {
     expect(at(run(recommendationsMeta), "title", "Andrew Smith | Recommendations")).toBeDefined()
   })

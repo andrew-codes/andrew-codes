@@ -1,8 +1,11 @@
 import { describe, expect, it } from "vitest"
+import { recommendations } from "../../../data/recommendations"
 import { resume } from "../../../data/resume"
 import type { MdxListItem } from "../../../types"
 import type { MdxPostSource } from "../../mdx.server"
 import { buildPostsDocument, buildProjectsDocument } from "../catalog"
+import { buildLlmsFullTxt, buildLlmsTxt } from "../llms"
+import { renderHomeMarkdown, renderPostMarkdown, renderPostsIndexMarkdown, renderRecommendationsMarkdown, renderTagMarkdown } from "../markdown-twins"
 import { buildPersonJsonLd, buildResumeDocument, renderResumeMarkdown } from "../resume"
 import { buildSiteGraph } from "../site-graph.server"
 import { buildBlogPostingJsonLd, buildProfilePageJsonLd } from "../structured-data"
@@ -73,6 +76,28 @@ describe("privacy allowlist", () => {
   it("keeps them out of the ProfilePage and BlogPosting JSON-LD", () => {
     scan("profile page json-ld", JSON.stringify(buildProfilePageJsonLd(buildPersonJsonLd(graph))))
     scan("blog posting json-ld", JSON.stringify(buildBlogPostingJsonLd({ slug: post.slug, title: "A React post", description: "About React", date: "2026-01-01" })))
+  })
+
+  describe("markdown twins and llms.txt", () => {
+    // Post front matter dates are ISO calendar dates, which the phone pattern
+    // would otherwise read as a number.
+    const scanTwin = (label: string, text: string) => scan(label, text.replace(/\b\d{4}-\d{2}-\d{2}\b/g, "DATE"))
+
+    it("keeps them out of the home, posts, tag and recommendations twins", () => {
+      scanTwin("index.md", renderHomeMarkdown(graph))
+      scanTwin("posts.md", renderPostsIndexMarkdown(graph))
+      scanTwin("tag twin", renderTagMarkdown(graph, "react"))
+      scanTwin("recommendations.md", renderRecommendationsMarkdown(graph, recommendations))
+    })
+
+    it("keeps them out of a post twin's header", () => {
+      scanTwin("post twin", renderPostMarkdown(graph, graph.posts[0], "Body."))
+    })
+
+    it("keeps them out of llms.txt and llms-full.txt", () => {
+      scanTwin("llms.txt", buildLlmsTxt(graph))
+      scanTwin("llms-full.txt", buildLlmsFullTxt(graph, [{ markdown: renderResumeMarkdown(buildResumeDocument(graph)) }]))
+    })
   })
 
   it("has patterns that catch what they are meant to catch", () => {
