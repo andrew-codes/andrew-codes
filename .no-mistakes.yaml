@@ -1,8 +1,15 @@
 test:
   instructions: |
-    Start the dev server with `yarn start` (React Router v7 dev server; confirm the
-    actual port/URL it prints rather than assuming one). Use a browser to navigate to
-    and screenshot the specific page(s) or feature described in the PR's intent -
+    Never assume or reuse a fixed port such as 4173 or 5173: other worktrees run
+    checks in parallel, so a fixed port may already be held by someone else's server.
+
+    To run the e2e suite, use `yarn e2e`; it picks a free port itself and tears down
+    its own server. Do not start a separate server on a fixed port for it.
+
+    For browser evidence, start the dev server with an unused port (find a free one
+    first, then pass it, for example `yarn start --port <free-port>`), and confirm
+    the URL it prints rather than assuming one. Use a browser to navigate to that
+    URL and screenshot the specific page(s) or feature described in the PR's intent -
     for example the homepage, a blog post, or the /connect page - as a real end user
     would view them, at both a typical desktop width and a narrow mobile width for any
     page whose layout is mobile-sensitive (this site has at least one page,
