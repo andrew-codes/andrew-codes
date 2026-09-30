@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest"
 import type { MdxListItem } from "../../../types"
 import type { MdxPostSource } from "../../mdx.server"
-import { STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths } from "../site-graph.server"
+import { CRAWLER_PATHS, STATIC_PATHS, buildSiteGraph, createSiteGraphLoader, getPrerenderPaths } from "../site-graph.server"
 
 const sources = (items: MdxListItem[]): MdxPostSource[] => items.map((item) => ({ slug: item.slug, listItem: item }))
 const broken = (slug: string, message = "bad front matter"): MdxPostSource => ({ slug, error: new Error(message) })
@@ -91,13 +91,17 @@ describe("getPrerenderPaths", () => {
   it("lists the static pages, every post, and every authored tag", () => {
     const graph = buildSiteGraph(sources([page("a", { date: "2024-01-01", tags: ["home assistant", "featured"] }), page("b", { date: "2023-01-01", tags: ["featured"] })]))
 
-    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, "/posts/a", "/posts/b", "/tags/home assistant", "/tags/featured"])
+    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, "/posts/a", "/posts/b", "/tags/home assistant", "/tags/featured", ...CRAWLER_PATHS])
   })
 
   it("still lists a post whose front matter could not be read, so only its own prerender fails", () => {
     const graph = buildSiteGraph([...sources([page("good", { tags: ["nix"] })]), broken("broken-post")])
 
-    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, "/posts/good", "/posts/broken-post", "/tags/nix"])
+    expect(getPrerenderPaths(graph)).toEqual([...STATIC_PATHS, "/posts/good", "/posts/broken-post", "/tags/nix", ...CRAWLER_PATHS])
+  })
+
+  it("includes the crawler files", () => {
+    expect(getPrerenderPaths(buildSiteGraph([]))).toEqual(expect.arrayContaining(["/robots.txt", "/sitemap.xml", "/feed.xml"]))
   })
 
   it("includes the connect pages", () => {
