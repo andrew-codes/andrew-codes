@@ -1,5 +1,6 @@
 import type { Recommendation } from "../../data/recommendations"
 import { socialLinks } from "../../data/profile"
+import { topics as curatedTopics } from "../../data/topics"
 import { toCanonicalUrl } from "../meta"
 import { markdownPaths } from "./markdown-paths"
 import type { SiteGraph, SitePost } from "./site-graph.server"
@@ -23,7 +24,7 @@ const listPosts = (graph: SiteGraph, posts: readonly SitePost[]): string[] => po
 const join = (blocks: readonly (string | string[])[]): string => `${blocks.flat().join("\n").replace(/\n{3,}/g, "\n\n").trim()}\n`
 
 const renderPostMarkdown = (graph: SiteGraph, post: SitePost, body: string): string => {
-  const tags = post.tags.filter((tag) => tag !== "featured")
+  const topicLabels = post.topics.map((slug) => graph.topics.find((topic) => topic.slug === slug)?.label ?? slug)
 
   return join([
     `# ${post.title}`,
@@ -33,7 +34,7 @@ const renderPostMarkdown = (graph: SiteGraph, post: SitePost, body: string): str
     `- Author: ${graph.profile.displayName} (${graph.profile.url})`,
     ...(post.date ? [`- Published: ${post.date}`] : []),
     `- Category: ${post.category}`,
-    ...(tags.length > 0 ? [`- Tags: ${tags.join(", ")}`] : []),
+    ...(topicLabels.length > 0 ? [`- Topics: ${topicLabels.join(", ")}`] : []),
     ...(post.readingMinutes ? [`- Reading time: ${post.readingMinutes} min`] : []),
     "",
     body,
@@ -49,17 +50,23 @@ const renderPostsIndexMarkdown = (graph: SiteGraph): string =>
     listPosts(graph, graph.posts),
   ])
 
-const renderTagMarkdown = (graph: SiteGraph, tag: string): string =>
-  join([
-    `# Posts tagged "${tag}"`,
+// A tag page is a topic page: its slug is the topic's, and it lists every post
+// with a tag that resolves to the topic.
+const renderTagMarkdown = (graph: SiteGraph, topicSlug: string): string => {
+  const topic = graph.topics.find((candidate) => candidate.slug === topicSlug)
+  if (!topic) throw new Error(`Unknown topic: ${topicSlug}`)
+
+  return join([
+    `# Posts tagged "${topic.label}"`,
     "",
-    `Posts by Andrew Smith about ${tag}. Source: ${toCanonicalUrl(`/tags/${tag}`)}`,
+    `Posts by Andrew Smith about ${topic.label}. Source: ${toCanonicalUrl(`/tags/${topic.slug}`)}`,
     "",
     listPosts(
       graph,
-      graph.posts.filter((post) => post.tags.includes(tag)),
+      graph.posts.filter((post) => post.topics.includes(topic.slug)),
     ),
   ])
+}
 
 const renderRecommendationsMarkdown = (graph: SiteGraph, recommendations: readonly Recommendation[]): string =>
   join([
@@ -82,7 +89,7 @@ const LATEST_POSTS_ON_HOME = 3
 
 const renderHomeMarkdown = (graph: SiteGraph): string => {
   const { profile } = graph
-  const topicLabels = new Map(graph.topics.map((topic) => [topic.slug, topic.label]))
+  const topicLabels = new Map<string, string>(curatedTopics.map((topic) => [topic.slug, topic.label]))
   const expertise = profile.expertise.map((slug) => topicLabels.get(slug)).filter((label): label is string => Boolean(label))
 
   return join([

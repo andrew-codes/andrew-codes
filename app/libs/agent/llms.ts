@@ -13,7 +13,6 @@ const link = (graph: SiteGraph, label: string, path: string, note?: string) => `
 
 const buildLlmsTxt = (graph: SiteGraph): string => {
   const { profile } = graph
-  const tags = graph.tags.filter((tag) => tag !== "featured")
 
   return `${[
     `# ${profile.displayName}`,
@@ -32,7 +31,7 @@ const buildLlmsTxt = (graph: SiteGraph): string => {
     "",
     ...graph.posts.map((post) => link(graph, post.title, markdownPaths.post(post.slug), [post.date, post.description].filter(Boolean).join(" - "))),
     "",
-    ...(tags.length > 0 ? ["## Tags", "", ...tags.map((tag) => link(graph, tag, markdownPaths.tag(tag))), ""] : []),
+    ...(graph.topics.length > 0 ? ["## Tags", "", ...graph.topics.map((topic) => link(graph, topic.label, markdownPaths.tag(topic.slug))), ""] : []),
     "## Optional",
     "",
     link(graph, "Everything in one file", markdownPaths.llmsFull, "the resume, recommendations and every post in full"),

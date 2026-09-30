@@ -17,7 +17,7 @@ const page = (slug: string, frontmatter: Partial<MdxListItem["frontmatter"]> = {
 
 const graph = buildSiteGraph([
   page("old", { date: "2023-02-03", tags: ["home assistant"] }),
-  page("new", { date: "2024-09-18", tags: ["home assistant", "nix", "featured"] }),
+  page("new", { date: "2024-09-18", tags: ["home assistant", "nix"], featured: true }),
   page("undated", { description: "" }),
 ])
 const post = (slug: string) => graph.posts.find((candidate) => candidate.slug === slug)!
@@ -36,8 +36,8 @@ describe("renderPostMarkdown", () => {
     expect(markdown).toContain("- Reading time: 3 min")
   })
 
-  it("leaves the featured flag out of the tags", () => {
-    expect(markdown).toContain("- Tags: home assistant, nix\n")
+  it("lists the post's topics by their display label", () => {
+    expect(markdown).toContain("- Topics: Home Assistant, Nix\n")
   })
 
   it("follows the metadata with the body", () => {
@@ -65,14 +65,26 @@ describe("renderPostsIndexMarkdown", () => {
 })
 
 describe("renderTagMarkdown", () => {
-  const markdown = renderTagMarkdown(graph, "home assistant")
+  const markdown = renderTagMarkdown(graph, "home-assistant")
 
-  it("lists only posts with the tag, and names the encoded source page", () => {
-    expect(markdown).toContain("# Posts tagged \"home assistant\"")
-    expect(markdown).toContain("Source: https://andrew.codes/tags/home%20assistant/")
+  it("lists only posts on the topic, and names the topic's source page", () => {
+    expect(markdown).toContain("# Posts tagged \"Home Assistant\"")
+    expect(markdown).toContain("Source: https://andrew.codes/tags/home-assistant/")
     expect(markdown).toContain("posts/old.md")
     expect(markdown).toContain("posts/new.md")
     expect(markdown).not.toContain("posts/undated.md")
+  })
+
+  it("groups posts whose different tags share a topic", () => {
+    const merged = buildSiteGraph([page("a", { tags: ["ai"] }), page("b", { tags: ["agents"] })])
+    const tagMarkdown = renderTagMarkdown(merged, "ai")
+
+    expect(tagMarkdown).toContain("posts/a.md")
+    expect(tagMarkdown).toContain("posts/b.md")
+  })
+
+  it("rejects a topic no post has", () => {
+    expect(() => renderTagMarkdown(graph, "nope")).toThrow(/Unknown topic/)
   })
 })
 

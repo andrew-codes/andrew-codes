@@ -50,7 +50,7 @@ describe("markdown twins", () => {
   })
 
   it("serves tags, the posts index, the home page and recommendations as markdown", () => {
-    cy.request("/tags/home%20assistant.md").its("body").should("contain", "# Posts tagged \"home assistant\"")
+    cy.request("/tags/home-assistant.md").its("body").should("contain", "# Posts tagged \"Home Assistant\"")
     cy.request("/posts.md").its("body").should("contain", "# Posts by Andrew Smith")
     cy.request("/index.md").its("body").should("match", /^# Andrew Smith\n/)
     cy.request("/recommendations.md").then((response) => {
@@ -64,7 +64,7 @@ describe("markdown twins", () => {
       "/": "/index.md",
       "/posts": "/posts.md",
       "/posts/devtools": "/posts/devtools.md",
-      "/tags/home assistant": "/tags/home%20assistant.md",
+      "/tags/home-assistant": "/tags/home-assistant.md",
       "/recommendations": "/recommendations.md",
     }
     for (const [page, twin] of Object.entries(pages)) {

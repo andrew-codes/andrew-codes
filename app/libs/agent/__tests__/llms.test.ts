@@ -9,7 +9,7 @@ const page = (slug: string, frontmatter: Partial<MdxListItem["frontmatter"]> = {
   listItem: { slug, frontmatter: { title: `Title of ${slug}`, description: `About ${slug}`, category: "engineering", ...frontmatter } },
 })
 
-const graph = buildSiteGraph([page("old", { date: "2023-02-03", tags: ["home assistant"] }), page("new", { date: "2024-09-18", tags: ["nix", "featured"] })])
+const graph = buildSiteGraph([page("old", { date: "2023-02-03", tags: ["home assistant"] }), page("new", { date: "2024-09-18", tags: ["nix", "agents", "ai", "Something New"], featured: true })])
 
 describe("buildLlmsTxt", () => {
   const llms = buildLlmsTxt(graph)
@@ -31,9 +31,12 @@ describe("buildLlmsTxt", () => {
     expect(llms).toContain("(https://andrew.codes/recommendations.md)")
   })
 
-  it("links tag twins with spaces encoded, and leaves out the featured flag", () => {
-    expect(llms).toContain("- [home assistant](https://andrew.codes/tags/home%20assistant.md)")
-    expect(llms).not.toContain("/tags/featured.md")
+  it("lists one tag twin per topic, by label and slug, with tags that share a topic merged", () => {
+    expect(llms).toContain("- [Home Assistant](https://andrew.codes/tags/home-assistant.md)")
+    expect(llms).toContain("- [Something New](https://andrew.codes/tags/something-new.md)")
+    expect(llms.match(/\/tags\/ai\.md/g)).toHaveLength(1)
+    expect(llms).not.toContain("/tags/agents.md")
+    expect(llms).not.toContain("%20")
   })
 
   it("points at the full-content file, feed, sitemap and profiles already linked on the site", () => {
