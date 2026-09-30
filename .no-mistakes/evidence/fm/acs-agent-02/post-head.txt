@@ -1,3 +1,8 @@
+<meta charSet="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="emotion-insertion-point" content=""/>
+<meta name="keywords" content="Software Engineer, Staff Engineer, Tech Lead, Full Stack Developer, JavaScript, React, Node.js"/>
+<meta name="author" content="Andrew Smith"/>
 <meta name="description" content="Understand the role of estimation and effective ways to utilize it."/>
 <link rel="canonical" href="https://andrew.codes/posts/agile-estimation/"/>
 <meta property="og:title" content="Andrew Smith | Agile Estimation"/>
