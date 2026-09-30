@@ -10,22 +10,30 @@ import PostCard from "../components/PostCard"
 import RecommendationCard from "../components/RecommendationCard"
 import { Section, SectionHeader } from "../components/Section"
 import { featuredRecommendations } from "../data/recommendations"
-import { getMdxListItems } from "../libs/mdx.server"
+import { buildPersonJsonLd } from "../libs/agent/resume"
+import { getSiteGraph } from "../libs/agent/site-graph.server"
 import { markdownPaths } from "../libs/agent/markdown-paths"
+import { getMdxListItems } from "../libs/mdx.server"
 import { buildMeta } from "../libs/meta"
+import { buildProfilePageJsonLd } from "../libs/agent/structured-data"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
   const posts = (await getMdxListItems({ request })).sort((a, b) => new Date(b.frontmatter?.date ?? 0).getTime() - new Date(a.frontmatter?.date ?? 0).getTime())
 
-  return { posts: posts.slice(0, 3) }
+  // Built here, on the server, because the Person is enriched from the resume
+  // and the site graph is server-only. It reaches `meta` through loader data.
+  const profilePage = buildProfilePageJsonLd(buildPersonJsonLd(await getSiteGraph()))
+
+  return { posts: posts.slice(0, 3), profilePage }
 }
 
-const meta: MetaFunction = () =>
+const meta: MetaFunction<typeof loader> = ({ data }) =>
   buildMeta({
     title: "Andrew Smith | Home",
     description: "Professional profile of Andrew Smith. View my resume, recommendations, and featured posts.",
     path: "/",
     markdownPath: markdownPaths.home,
+    jsonLd: data ? [data.profilePage] : [],
   })
 
 const HomeRoute = () => {

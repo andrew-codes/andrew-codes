@@ -22,6 +22,9 @@ type BuildMetaOptions = {
   // `article` for posts; everything else is a plain `website`.
   type?: "website" | "article"
   article?: ArticleMeta
+  // schema.org JSON-LD objects, each emitted as its own
+  // `<script type="application/ld+json">` (see structured-data.ts).
+  jsonLd?: readonly Record<string, unknown>[]
   // Site-relative path of this page's markdown twin, advertised to agents as
   // `<link rel="alternate" type="text/markdown">`.
   markdownPath?: string
@@ -39,7 +42,7 @@ const toCanonicalUrl = (path: string) => {
 
 const toAbsoluteUrl = (path: string) => new URL(path, profile.url).toString()
 
-const buildMeta = ({ title, description, path, type = "website", article, markdownPath }: BuildMetaOptions): MetaDescriptor[] => {
+const buildMeta = ({ title, description, path, type = "website", article, jsonLd = [], markdownPath }: BuildMetaOptions): MetaDescriptor[] => {
   const url = toCanonicalUrl(path)
 
   const meta: MetaDescriptor[] = [
@@ -61,6 +64,8 @@ const buildMeta = ({ title, description, path, type = "website", article, markdo
     if (article.section) meta.push({ property: "article:section", content: article.section })
     for (const tag of article.tags ?? []) meta.push({ property: "article:tag", content: tag })
   }
+
+  for (const entry of jsonLd) meta.push({ "script:ld+json": entry } as MetaDescriptor)
 
   return meta
 }
