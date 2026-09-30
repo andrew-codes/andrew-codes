@@ -7,28 +7,16 @@ import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import { Section, SectionHeader } from "../components/Section"
 import { socialLinks } from "../data/profile"
+import { buildMeta } from "../libs/meta"
 
 const description = "Connect with Andrew Smith on LinkedIn or follow along on GitHub."
 
-const meta: MetaFunction = () => {
-  return [
-    {
-      title: "Andrew Smith | Connect with Me",
-    },
-    {
-      name: "description",
-      content: description,
-    },
-    {
-      name: "og:title",
-      content: "Andrew Smith - Connect with Me",
-    },
-    {
-      name: "og:description",
-      content: description,
-    },
-  ]
-}
+const meta: MetaFunction = () =>
+  buildMeta({
+    title: "Andrew Smith | Connect with Me",
+    description,
+    path: "/connect-with-me",
+  })
 
 const ConnectWithMeRoute = () => {
   return (

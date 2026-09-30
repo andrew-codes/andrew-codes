@@ -7,6 +7,7 @@ import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import { Section, SectionHeader } from "../components/Section"
 import { getMdxListItems } from "../libs/mdx.server"
+import { buildMeta } from "../libs/meta"
 import type { MdxListItem } from "../types"
 
 const onlyForTag = (tag: string) => (posts: MdxListItem[]) =>
@@ -25,26 +26,14 @@ const loader = async ({ request, params }: LoaderFunctionArgs) => {
   }
 }
 
-const meta: MetaFunction = () => {
-  return [
-    {
-      title: "Andrew Smith | Post Tags",
-    },
-    {
-      name: "description",
-      content:
-        "Read about my experiences and thoughts on technology and software engineering.",
-    },
-    {
-      name: "og:title",
-      content: "Andrew Smith - Post Tags",
-    },
-    {
-      name: "og:description",
-      content:
-        "Read about my experiences and thoughts on technology and software engineering.",
-    },
-  ]
+const meta: MetaFunction = ({ params }) => {
+  const tag = params.id ?? ""
+
+  return buildMeta({
+    title: `Andrew Smith | Posts tagged ${tag}`,
+    description: `Posts by Andrew Smith about ${tag}: experiences and thoughts on technology and software engineering.`,
+    path: `/tags/${encodeURIComponent(tag)}`,
+  })
 }
 
 const TagsRoute = () => {

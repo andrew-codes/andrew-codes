@@ -5,6 +5,7 @@ import QRCode from "qrcode"
 import type { FC } from "react"
 import type { LoaderFunctionArgs, MetaFunction } from "react-router"
 import { useLoaderData } from "react-router"
+import { buildMeta } from "../libs/meta"
 
 // LinkedIn's own QR-connect feature (and its public API) only opens the
 // scanned profile page for the visitor to tap Connect themselves - there is
@@ -23,17 +24,12 @@ const loader = async (_args: LoaderFunctionArgs) => {
 
 const HEADSHOT_SRC = "/images/andrew-smith.webp"
 
-const meta: MetaFunction = () => {
-  return [
-    {
-      title: "Andrew Smith | Connect",
-    },
-    {
-      name: "description",
-      content: "Scan this QR code to connect with Andrew Smith on LinkedIn.",
-    },
-  ]
-}
+const meta: MetaFunction = () =>
+  buildMeta({
+    title: "Andrew Smith | Connect",
+    description: "Scan this QR code to connect with Andrew Smith on LinkedIn.",
+    path: "/connect",
+  })
 
 const ConnectPageContent: FC<{ qrCodeSvg: string }> = ({ qrCodeSvg }) => (
   <Box

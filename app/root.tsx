@@ -8,8 +8,6 @@ import Baseline from "./components/Baseline"
 import { feed } from "./data/profile"
 import theme from "./theme"
 
-const avatar = "/images/Profile.webp"
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-US">
@@ -32,11 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="keywords" content="Software Engineer, Staff Engineer, Tech Lead, Full Stack Developer, JavaScript, React, Node.js" />
         <meta name="author" content="Andrew Smith" />
-        <meta name="og:image" content={avatar} />
-        <meta name="og:url" content="https://andrew.codes" />
-        <meta name="og:type" content="website" />
-        <meta name="og:site_name" content="Andrew Smith" />
-        <meta name="og:locale" content="en_US" />
+        {/* Description, canonical and og:* / article:* tags come from each route via buildMeta (app/libs/meta.ts). */}
         <Meta />
         <Links />
       </head>
