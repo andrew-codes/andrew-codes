@@ -7,10 +7,11 @@ import { Link as RemixLink, useLoaderData } from "react-router"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
+import RecommendationCard from "../components/RecommendationCard"
 import { Section, SectionHeader } from "../components/Section"
+import { featuredRecommendations } from "../data/recommendations"
 import { getMdxListItems } from "../libs/mdx.server"
 import { buildMeta } from "../libs/meta"
-import { featured } from "../recommendations"
 
 const loader = async ({ request }: LoaderFunctionArgs) => {
   const posts = (await getMdxListItems({ request })).sort((a, b) => new Date(b.frontmatter?.date ?? 0).getTime() - new Date(a.frontmatter?.date ?? 0).getTime())
@@ -58,8 +59,8 @@ const HomeRoute = () => {
           </Button>
         </SectionHeader>
         <Stack direction="column" spacing={2}>
-          {featured.map((Recommendation, index) => (
-            <Recommendation key={index} />
+          {featuredRecommendations.map((recommendation) => (
+            <RecommendationCard key={recommendation.id} recommendation={recommendation} />
           ))}
         </Stack>
       </Section>
