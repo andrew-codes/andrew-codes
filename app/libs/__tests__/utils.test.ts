@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest"
-import { getDomainUrl, removeTrailingSlash, tryFormatDate, typedBoolean, useLoaderHeaders } from "../utils"
+import { getDomainUrl, removeTrailingSlash, toIsoDate, tryFormatDate, typedBoolean, useLoaderHeaders } from "../utils"
 
 // Regression test for a production hydration crash (React error #418) that
 // kept reproducing on the deployed preview even after the charset fix for
@@ -134,5 +134,33 @@ describe("useLoaderHeaders", () => {
 
     expect(result.get("Cache-Control")).toBe("max-age=60")
     expect(result.get("Vary")).toBe("Accept")
+  })
+})
+
+describe("toIsoDate", () => {
+  it("returns a YYYY-MM-DD string, not a locale-formatted one", () => {
+    expect(toIsoDate("2024-09-18")).toBe("2024-09-18")
+  })
+
+  it("accepts the Date objects YAML front matter parses into", () => {
+    expect(toIsoDate(new Date("2023-05-19"))).toBe("2023-05-19")
+  })
+
+  it("is independent of the runtime's local timezone", () => {
+    const originalTz = process.env.TZ
+    try {
+      process.env.TZ = "America/Los_Angeles"
+      expect(toIsoDate("2024-01-01")).toBe("2024-01-01")
+      process.env.TZ = "Pacific/Auckland"
+      expect(toIsoDate("2024-01-01")).toBe("2024-01-01")
+    } finally {
+      process.env.TZ = originalTz
+    }
+  })
+
+  it("returns undefined for a missing or invalid date", () => {
+    expect(toIsoDate(undefined)).toBeUndefined()
+    expect(toIsoDate(null)).toBeUndefined()
+    expect(toIsoDate("not a date")).toBeUndefined()
   })
 })

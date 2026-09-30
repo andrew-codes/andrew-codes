@@ -64,6 +64,7 @@ const RAW_RUNTIME_STATE =
           ["fs-extra", "npm:11.2.0"],\
           ["glob", "npm:11.0.0"],\
           ["globals", "npm:17.12.0"],\
+          ["gray-matter", "npm:4.0.3"],\
           ["highlight.js", "npm:11.10.0"],\
           ["lodash-es", "npm:4.17.21"],\
           ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:10.1.1"],\
@@ -149,6 +150,7 @@ const RAW_RUNTIME_STATE =
           ["fs-extra", "npm:11.2.0"],\
           ["glob", "npm:11.0.0"],\
           ["globals", "npm:17.12.0"],\
+          ["gray-matter", "npm:4.0.3"],\
           ["highlight.js", "npm:11.10.0"],\
           ["lodash-es", "npm:4.17.21"],\
           ["mdx-bundler", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:10.1.1"],\

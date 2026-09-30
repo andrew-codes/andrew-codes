@@ -1,4 +1,5 @@
 import fs from "fs/promises"
+import matter from "gray-matter"
 import { merge } from "lodash-es"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
@@ -156,15 +157,55 @@ const getMdxPages = async (_options: MdxOptions = {}, fileDirPath: string = "app
   return pages
 }
 
+// Front matter, slug and reading time only - no MDX compilation. bundleMDX
+// parses front matter with the same gray-matter defaults, so `frontmatter`
+// here is identical to what a compiled MdxPage carries.
+const readMdxListItem = async (mdxFile: MdxPageFile): Promise<MdxListItem> => {
+  const source = await fs.readFile(mdxFile.filePath, "utf8")
+  // Passing an options object opts out of gray-matter's content-keyed cache,
+  // which stores a file before parsing it: once a malformed post has thrown,
+  // the cache would hand the same content back later as if it had parsed
+  // cleanly, with empty front matter. Defaults are otherwise unchanged.
+  const { data } = matter(source.trim(), {})
+  const frontmatter = { ...data } as MdxListItem["frontmatter"]
+  if (!frontmatter.category) {
+    frontmatter.category = "not categorized"
+  }
+
+  return { frontmatter, readTime: calculateReadingTime(source), slug: mdxFile.slug }
+}
+
 // List views (posts index, tags, home) only render frontmatter/slug/readTime
 // via PostCard - never the bundled MDX `code` or `codeAssets`. Those fields
 // are the fully compiled, per-post JS and syntax-highlighted code blocks, so
 // including them in a list loader's response bloats its prerendered *.data
 // file to multiple megabytes, which is slow enough to fetch that route
-// transitions in e2e tests (and for real visitors) can time out.
-const getMdxListItems = async (options: MdxOptions = {}, fileDirPath: string = "app/posts", extraFilesPath: string = "app/components"): Promise<MdxListItem[]> => {
-  const pages = await getMdxPages(options, fileDirPath, extraFilesPath)
-  return pages.map(({ code: _code, codeAssets: _codeAssets, ...listItem }) => listItem)
+// transitions in e2e tests (and for real visitors) can time out. They also
+// cost a full compile of every post, so list views read front matter directly
+// and only the post route (getMdxPage) compiles, once per post.
+const getMdxListItems = async (_options: MdxOptions = {}, fileDirPath: string = "app/posts"): Promise<MdxListItem[]> => {
+  const mdxFiles = await getMdxFiles(fileDirPath)
+  return Promise.all(Object.values(mdxFiles).map(readMdxListItem))
 }
 
-export { getMdxListItems, getMdxPage, getMdxPages }
+type MdxPostSource = { slug: string; listItem: MdxListItem } | { slug: string; listItem?: undefined; error: Error }
+
+// Like getMdxListItems, but a post whose front matter cannot be read is
+// reported beside the others instead of rejecting the whole listing, so route
+// enumeration still lists its slug and the failure surfaces in that post's own
+// prerender.
+const getMdxPostSources = async (fileDirPath: string = "app/posts"): Promise<MdxPostSource[]> => {
+  const mdxFiles = await getMdxFiles(fileDirPath)
+  return Promise.all(
+    Object.values(mdxFiles).map(async (mdxFile): Promise<MdxPostSource> => {
+      try {
+        return { slug: mdxFile.slug, listItem: await readMdxListItem(mdxFile) }
+      } catch (error) {
+        return { slug: mdxFile.slug, error: error instanceof Error ? error : new Error(String(error)) }
+      }
+    }),
+  )
+}
+
+export { getMdxListItems, getMdxPage, getMdxPages, getMdxPostSources }
+export type { MdxPostSource }

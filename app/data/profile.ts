@@ -1,7 +1,10 @@
 // Single source of truth for Andrew's public profile and social accounts.
-// Read by the /connect-with-me page and MainNav; a future machine-readable
-// endpoint (HO-256) should read from here too. Public links only - never add
-// email, phone, or address.
+// Read by the /connect-with-me page and MainNav, and by the site graph
+// (app/libs/agent/site-graph.server.ts) that feeds the machine-readable
+// endpoints. Public fields only - never add email, phone, or address, and
+// keep `location` to the city.
+
+import type { TopicSlug } from "./topics"
 
 type SocialLink = {
   id: string
@@ -15,8 +18,14 @@ type SocialLink = {
 const profile = {
   name: "James Andrew Smith",
   displayName: "Andrew Smith",
-  jobTitle: "Staff Software Engineer",
+  headline: "Staff Software Engineer",
+  bio: "I create robust, scalable applications and drive engineering teams.",
+  url: "https://andrew.codes",
+  image: "/images/andrew-smith.webp",
+  location: "Atlanta, GA",
   resumeUrl: "/James Andrew Smith - Resume.pdf",
+  // Topic slugs (see ./topics) the site's own posts back up.
+  expertise: ["react", "graphql", "javascript", "tdd", "craftsmanship", "agile-estimation", "forecasting", "devtools", "automation", "home-assistant", "ai"] satisfies TopicSlug[],
 }
 
 const socialLinks: SocialLink[] = [

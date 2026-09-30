@@ -40,4 +40,16 @@ describe("post detail route", () => {
     expect(html).toContain("3 min read")
     expect(html).toContain("mdx-body")
   })
+
+  it("gives the time element a machine-readable dateTime, not the displayed text", () => {
+    const html = renderToStaticMarkup(
+      <MemoryRouter initialEntries={["/posts/my-post"]}>
+        <Routes>
+          <Route path="/posts/:id" element={<PostRoute />} />
+        </Routes>
+      </MemoryRouter>,
+    )
+
+    expect(html).toContain('<time dateTime="2024-01-01">January 2024</time>')
+  })
 })

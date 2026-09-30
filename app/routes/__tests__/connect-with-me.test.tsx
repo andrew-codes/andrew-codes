@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server"
 import { createRoutesStub } from "react-router"
 import { describe, expect, it } from "vitest"
-import { socialLinks } from "../../profile"
+import { socialLinks } from "../../data/profile"
 import ConnectWithMeRoute, { meta } from "../connect-with-me"
 
 const renderPage = () => {

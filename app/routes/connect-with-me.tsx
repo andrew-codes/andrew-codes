@@ -6,7 +6,7 @@ import type { MetaFunction } from "react-router"
 import CallToAction from "../components/CallToAction"
 import PageHeader from "../components/PageHeader"
 import { Section, SectionHeader } from "../components/Section"
-import { socialLinks } from "../profile"
+import { socialLinks } from "../data/profile"
 
 const description = "Connect with Andrew Smith on LinkedIn or follow along on GitHub."
 

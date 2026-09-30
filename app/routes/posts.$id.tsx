@@ -12,7 +12,7 @@ import getCodePostAssetComponent, { CodePostAsset } from "../components/CodePost
 import { Blockquote, CollapsibleSection, H2, H3, H4, Image, Link, OrderedList, Paragraph, Table, UnorderedList } from "../components/Post"
 import Tags from "../components/Tags"
 import { getMdxPage } from "../libs/mdx.server"
-import { tryFormatDate } from "../libs/utils"
+import { toIsoDate, tryFormatDate } from "../libs/utils"
 
 const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { id } = params
@@ -64,7 +64,7 @@ const PostRoute = () => {
               <Typography level="h2">{frontmatter.title}</Typography>
               <Stack direction="column" alignItems="flex-end" spacing={0.25}>
                 {!!frontmatter.date && (
-                  <time dateTime={tryFormatDate(frontmatter.date)}>
+                  <time dateTime={toIsoDate(frontmatter.date)}>
                     {tryFormatDate(frontmatter.date, {
                       month: "long",
                       year: "numeric",
