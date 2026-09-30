@@ -1,7 +1,21 @@
+import { existsSync } from "node:fs"
 import { defineConfig } from "cypress"
+import { formatViolations, scanBuildDir } from "./app/libs/agent/privacy-scan"
 
 export default defineConfig({
   e2e: {
+    setupNodeEvents(on) {
+      on("task", {
+        // Scans the build output on disk (discovered by extension) for
+        // contact details. See cypress/e2e/privacy.cy.ts.
+        scanBuildForPrivacy(dir: string) {
+          // The Cloudflare preview job has no local build to read.
+          if (!existsSync(dir)) return null
+          const { scanned, violations } = scanBuildDir(dir)
+          return { scanned, violations: formatViolations(violations) }
+        },
+      })
+    },
     baseUrl: "http://localhost:4173",
     supportFile: "cypress/support/e2e.ts",
     // Client-side route transitions lazy-load a JS chunk per route (see
