@@ -26,8 +26,7 @@ type SitemapEntry = { loc: string; lastmod?: string }
 const escapeXml = (value: string): string =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;")
 
-// Authored tags can contain spaces ("home assistant"), so a tag's URL path
-// must be percent-encoded to be a valid sitemap <loc>.
+// Percent-encode each path segment so the URL is a valid sitemap <loc>.
 const absoluteUrl = (graph: SiteGraph, path: string): string => {
   const encoded = path
     .split("/")
@@ -60,9 +59,9 @@ const getSitemapEntries = (graph: SiteGraph): SitemapEntry[] => {
     .filter((path) => !SITEMAP_EXCLUDED_PATHS.has(path))
     .map((path) => ({ path, lastmod: staticLastmod[path] }))
   const postEntries = graph.posts.map((post) => ({ path: post.path, lastmod: post.date }))
-  const tagEntries = graph.tags.map((tag) => ({
-    path: `/tags/${tag}`,
-    lastmod: newestDate(graph.posts.filter((post) => post.tags.includes(tag))),
+  const tagEntries = graph.topics.map((topic) => ({
+    path: `/tags/${topic.slug}`,
+    lastmod: newestDate(graph.posts.filter((post) => post.topics.includes(topic.slug))),
   }))
 
   return [...staticEntries, ...postEntries, ...tagEntries].map(({ path, lastmod }) => ({

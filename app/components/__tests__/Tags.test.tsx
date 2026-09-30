@@ -17,6 +17,16 @@ describe("Tags", () => {
     expect(html).toContain('href="/tags/agility"')
   })
 
+  it("links a tag to its topic page and shows the tag as authored", () => {
+    const html = renderTags(["home assistant", "agents", "Brand New Tag"])
+
+    expect(html).toContain('href="/tags/home-assistant"')
+    expect(html).toContain(">home assistant<")
+    expect(html).toContain('href="/tags/ai"')
+    expect(html).toContain('href="/tags/brand-new-tag"')
+    expect(html).toContain(">Brand New Tag<")
+  })
+
   it("separates tags after the first with a divider", () => {
     const html = renderTags(["one", "two", "three"])
 

@@ -66,15 +66,14 @@ describe("page metadata in the built HTML", () => {
 
       expect(metaContents(head, "property", "article:published_time")).to.deep.eq(["2026-08-10"])
       expect(metaContents(head, "property", "article:section")).to.deep.eq(["engineering"])
-      // `featured` is a behaviour flag, not a topic.
       expect(metaContents(head, "property", "article:tag")).to.deep.eq(["devtools", "automation", "nix", "zsh", "ansible"])
       expect(metaContents(head, "name", "description")[0]).to.contain("Nix")
     })
   })
 
-  it("gives tag pages their own canonical, with spaces percent-encoded", () => {
-    withHead("/tags/voice%20assistant/", (head) => {
-      expectPageMeta(head, { url: `${ORIGIN}/tags/voice%20assistant/`, type: "website", title: "Andrew Smith | Posts tagged voice assistant" })
+  it("gives tag pages their own canonical, keyed by topic slug", () => {
+    withHead("/tags/voice-assistant/", (head) => {
+      expectPageMeta(head, { url: `${ORIGIN}/tags/voice-assistant/`, type: "website", title: "Andrew Smith | Posts tagged Voice assistants" })
     })
   })
 })

@@ -13,4 +13,6 @@ export default [
   route("feed.xml", "routes/feed.xml.ts"),
   route("agent/resume.json", "routes/agent.resume-json.ts"),
   route("resume.md", "routes/resume-md.ts"),
+  route("agent/posts.json", "routes/agent.posts-json.ts"),
+  route("agent/projects.json", "routes/agent.projects-json.ts"),
 ] satisfies RouteConfig

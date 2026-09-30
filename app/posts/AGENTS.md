@@ -19,7 +19,39 @@ tags:
 
 **`category`** — must be one of: `engineering`, `agility`, `home automation`
 
-**`tags`** — free-form slugs. Add `featured` to surface the article in the featured section of the site.
+**`tags`** - free-form. Write them however reads naturally (`home assistant`, `node.js`); there is nothing to register. Every tag becomes a topic with its own `/tags/{slug}` page, and the slug and label are derived from the tag text (`home assistant` becomes `home-assistant`, `Brand New Tag` becomes `brand-new-tag`), so a new tag works the moment you use it and can never fail the build. `app/data/topics.ts` is only a short list of special cases: spellings that should merge into one topic (`ai` and `agents`) and display labels that derivation gets wrong (`GraphQL`). Edit it only for those; otherwise leave it alone.
+
+# Optional Front Matter
+
+These fields are optional. They feed the machine-readable indexes at `/agent/posts.json` and `/agent/projects.json`, and the build validates them: a mistake fails the build with a message naming the post and the field.
+
+```yaml
+featured: true
+companies:
+  - microsoft
+projects:
+  - slug: playnite-web
+    name: Playnite Web
+    role: creator
+    url: https://example.com/playnite-web
+    repo: https://github.com/example/playnite-web
+    summary: One line about what it is.
+    status: active
+    company: microsoft
+  - forecast-work-oss
+```
+
+**`featured`** - `true` surfaces the article in the featured section of the posts page. Do not add `featured` to `tags`: the build fails if you do.
+
+**`companies`** - slugs of the employers or organisations the article is about or drew from. Each must be a company slug from `app/data/resume.ts` (currently `microsoft`, `experience`, `versionone-collabnet`, `matrix-professional-services`). Leave it out unless the article says so itself.
+
+**`projects`** - the projects and technologies the article is about. There is no projects page and no project registry: a project exists because an article defines it, and the index is built from the articles.
+
+- A **definition** is an object. `slug` (kebab-case, the join key across posts), `name` and `role` are required. `role` is one of `creator`, `maintainer`, `contributor` (things I built or work on) or `user` (a technology I write about using, which is listed separately as "technologies I use").
+- `url`, `repo`, `summary`, `status` (`active`, `archived` or `experimental`) and `company` (a company slug, only if it was built as part of that job) are optional. Only put a `url` or `repo` in if the site's own posts already link to it. If nothing links it, leave it out. Never guess a URL.
+- A **bare slug** (`- forecast-work-oss`) refers to a project defined in another post. It must resolve to a definition somewhere or the build fails.
+- Define a project fully in one post and refer to it by slug from the others. If a project is defined in several posts, the fields must agree; a conflict fails the build and names both posts.
+- Unknown fields fail the build, so a typo like `github:` cannot silently drop data.
 
 # File Layout
 
