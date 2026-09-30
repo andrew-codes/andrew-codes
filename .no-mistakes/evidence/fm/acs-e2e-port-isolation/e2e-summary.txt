@@ -1,0 +1,3 @@
+e2e: serving build on http://localhost:64611
+    ✔  All specs passed!                        00:02       18       18        -        -        -  
+exit 0

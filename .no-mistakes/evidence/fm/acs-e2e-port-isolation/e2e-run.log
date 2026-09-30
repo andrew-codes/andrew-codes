@@ -1,0 +1,1326 @@
+vite v5.4.19 building for production...
+transforming...
+✓ 761 modules transformed.
+Generated an empty chunk: "robots.txt".
+Generated an empty chunk: "sitemap.xml".
+Generated an empty chunk: "feed.xml".
+Generated an empty chunk: "agent.resume-json".
+Generated an empty chunk: "resume-md".
+rendering chunks...
+computing gzip size...
+build/client/.vite/manifest.json                     8.34 kB │ gzip:  1.03 kB
+build/client/assets/robots.txt-l0sNRNKZ.js           0.00 kB │ gzip:  0.02 kB
+build/client/assets/agent.resume-json-l0sNRNKZ.js    0.00 kB │ gzip:  0.02 kB
+build/client/assets/feed.xml-l0sNRNKZ.js             0.00 kB │ gzip:  0.02 kB
+build/client/assets/sitemap.xml-l0sNRNKZ.js          0.00 kB │ gzip:  0.02 kB
+build/client/assets/resume-md-l0sNRNKZ.js            0.00 kB │ gzip:  0.02 kB
+build/client/assets/ThemeProvider-CsSxji8Q.js        0.14 kB │ gzip:  0.14 kB
+build/client/assets/profile-BhTT7oQd.js              0.93 kB │ gzip:  0.52 kB
+build/client/assets/tags._id-CLlaLvWf.js             1.28 kB │ gzip:  0.65 kB
+build/client/assets/recommendations-CBZnHlts.js      1.32 kB │ gzip:  0.71 kB
+build/client/assets/connect-DmryK5dM.js              1.37 kB │ gzip:  0.76 kB
+build/client/assets/connect-with-me-D_FvfXHm.js      1.79 kB │ gzip:  0.89 kB
+build/client/assets/posts-ChhB8PSP.js                1.84 kB │ gzip:  0.88 kB
+build/client/assets/_index-Cvln5Dol.js               1.88 kB │ gzip:  0.87 kB
+build/client/assets/PostCard-BrkpR39d.js             2.82 kB │ gzip:  1.32 kB
+build/client/assets/index-BnexJzRx.js                3.81 kB │ gzip:  1.49 kB
+build/client/assets/useId-BqZuOYE7.js                4.31 kB │ gzip:  1.83 kB
+build/client/assets/utils-Bo7PIdpo.js                5.58 kB │ gzip:  2.32 kB
+build/client/assets/Typography-D9baOpkU.js          12.12 kB │ gzip:  4.72 kB
+build/client/assets/posts._id-NSmhHvOJ.js           22.33 kB │ gzip:  7.42 kB
+build/client/assets/ModalDialog-D5jWMy1l.js         24.21 kB │ gzip:  8.09 kB
+build/client/assets/recommendations-DtmHmfI1.js     26.54 kB │ gzip:  9.09 kB
+build/client/assets/Card-DISQQnjA.js                38.27 kB │ gzip:  9.17 kB
+build/client/assets/Box-CCGjEn9X.js                 56.04 kB │ gzip: 20.09 kB
+build/client/assets/Section-BHjIntC_.js             57.60 kB │ gzip: 19.45 kB
+build/client/assets/chunk-QFMPRPBF-CfoM-6Hj.js     127.64 kB │ gzip: 42.77 kB
+build/client/assets/entry.client-CeJmbDct.js       186.83 kB │ gzip: 59.10 kB
+build/client/assets/root-DbmyOk76.js               207.26 kB │ gzip: 69.10 kB
+✓ built in 1.10s
+vite v5.4.19 building SSR bundle for production...
+transforming...
+✓ 687 modules transformed.
+rendering chunks...
+build/server/.vite/manifest.json    0.17 kB
+build/server/index.js             939.81 kB
+Prerender (data): / -> build/client/_root.data
+Prerender (html): / -> build/client/index.html
+Prerender (data): /posts -> build/client/posts.data
+Prerender (html): /posts -> build/client/posts/index.html
+Prerender (html): /recommendations -> build/client/recommendations/index.html
+Prerender (data): /connect -> build/client/connect.data
+Prerender (html): /connect -> build/client/connect/index.html
+Prerender (html): /connect-with-me -> build/client/connect-with-me/index.html
+Prerender (data): /agent/resume.json -> build/client/agent/resume.json.data
+Prerender (resource): /agent/resume.json -> build/client/agent/resume.json
+Prerender (data): /resume.md -> build/client/resume.md.data
+Prerender (resource): /resume.md -> build/client/resume.md
+Prerender (data): /posts/workflow-delegated -> build/client/posts/workflow-delegated.data
+Prerender (html): /posts/workflow-delegated -> build/client/posts/workflow-delegated/index.html
+Prerender (data): /posts/devtools-declared -> build/client/posts/devtools-declared.data
+Prerender (html): /posts/devtools-declared -> build/client/posts/devtools-declared/index.html
+Prerender (data): /posts/devtools-revisited -> build/client/posts/devtools-revisited.data
+Prerender (html): /posts/devtools-revisited -> build/client/posts/devtools-revisited/index.html
+Prerender (data): /posts/voice-assistant -> build/client/posts/voice-assistant.data
+Prerender (html): /posts/voice-assistant -> build/client/posts/voice-assistant/index.html
+Prerender (data): /posts/agile-forecasting -> build/client/posts/agile-forecasting.data
+Prerender (html): /posts/agile-forecasting -> build/client/posts/agile-forecasting/index.html
+Prerender (data): /posts/agile-estimation -> build/client/posts/agile-estimation.data
+Prerender (html): /posts/agile-estimation -> build/client/posts/agile-estimation/index.html
+Prerender (data): /posts/devtools -> build/client/posts/devtools.data
+Prerender (html): /posts/devtools -> build/client/posts/devtools/index.html
+Prerender (data): /posts/guest-presence-detection -> build/client/posts/guest-presence-detection.data
+Prerender (html): /posts/guest-presence-detection -> build/client/posts/guest-presence-detection/index.html
+Prerender (data): /posts/react-with-relay-graphql-talk -> build/client/posts/react-with-relay-graphql-talk.data
+Prerender (html): /posts/react-with-relay-graphql-talk -> build/client/posts/react-with-relay-graphql-talk/index.html
+Prerender (data): /posts/jest-vs-mocha-why-jest-wins -> build/client/posts/jest-vs-mocha-why-jest-wins.data
+Prerender (html): /posts/jest-vs-mocha-why-jest-wins -> build/client/posts/jest-vs-mocha-why-jest-wins/index.html
+Prerender (data): /posts/software-craftsmanship -> build/client/posts/software-craftsmanship.data
+Prerender (html): /posts/software-craftsmanship -> build/client/posts/software-craftsmanship/index.html
+Prerender (data): /tags/tdd -> build/client/tags/tdd.data
+Prerender (html): /tags/tdd -> build/client/tags/tdd/index.html
+Prerender (data): /tags/javascript -> build/client/tags/javascript.data
+Prerender (html): /tags/javascript -> build/client/tags/javascript/index.html
+Prerender (data): /tags/jest -> build/client/tags/jest.data
+Prerender (html): /tags/jest -> build/client/tags/jest/index.html
+Prerender (data): /tags/mocha -> build/client/tags/mocha.data
+Prerender (html): /tags/mocha -> build/client/tags/mocha/index.html
+Prerender (data): /tags/craftsmanship -> build/client/tags/craftsmanship.data
+Prerender (html): /tags/craftsmanship -> build/client/tags/craftsmanship/index.html
+Prerender (data): /tags/featured -> build/client/tags/featured.data
+Prerender (html): /tags/featured -> build/client/tags/featured/index.html
+Prerender (data): /tags/react -> build/client/tags/react.data
+Prerender (html): /tags/react -> build/client/tags/react/index.html
+Prerender (data): /tags/relay -> build/client/tags/relay.data
+Prerender (html): /tags/relay -> build/client/tags/relay/index.html
+Prerender (data): /tags/graphql -> build/client/tags/graphql.data
+Prerender (html): /tags/graphql -> build/client/tags/graphql/index.html
+Prerender (data): /tags/home assistant -> build/client/tags/home assistant.data
+Prerender (html): /tags/home assistant -> build/client/tags/home assistant/index.html
+Prerender (data): /tags/python -> build/client/tags/python.data
+Prerender (html): /tags/python -> build/client/tags/python/index.html
+Prerender (data): /tags/node.js -> build/client/tags/node.js.data
+Prerender (html): /tags/node.js -> build/client/tags/node.js/index.html
+Prerender (data): /tags/guests -> build/client/tags/guests.data
+Prerender (html): /tags/guests -> build/client/tags/guests/index.html
+Prerender (data): /tags/presence detection -> build/client/tags/presence detection.data
+Prerender (html): /tags/presence detection -> build/client/tags/presence detection/index.html
+Prerender (data): /tags/estimation -> build/client/tags/estimation.data
+Prerender (html): /tags/estimation -> build/client/tags/estimation/index.html
+Prerender (data): /tags/story points -> build/client/tags/story points.data
+Prerender (html): /tags/story points -> build/client/tags/story points/index.html
+Prerender (data): /tags/bucketing -> build/client/tags/bucketing.data
+Prerender (html): /tags/bucketing -> build/client/tags/bucketing/index.html
+Prerender (data): /tags/forecasting -> build/client/tags/forecasting.data
+Prerender (html): /tags/forecasting -> build/client/tags/forecasting/index.html
+Prerender (data): /tags/ai -> build/client/tags/ai.data
+Prerender (html): /tags/ai -> build/client/tags/ai/index.html
+Prerender (data): /tags/devtools -> build/client/tags/devtools.data
+Prerender (html): /tags/devtools -> build/client/tags/devtools/index.html
+Prerender (data): /tags/automation -> build/client/tags/automation.data
+Prerender (html): /tags/automation -> build/client/tags/automation/index.html
+Prerender (data): /tags/nix -> build/client/tags/nix.data
+Prerender (html): /tags/nix -> build/client/tags/nix/index.html
+Prerender (data): /tags/zsh -> build/client/tags/zsh.data
+Prerender (html): /tags/zsh -> build/client/tags/zsh/index.html
+Prerender (data): /tags/ansible -> build/client/tags/ansible.data
+Prerender (html): /tags/ansible -> build/client/tags/ansible/index.html
+Prerender (data): /tags/voice assistant -> build/client/tags/voice assistant.data
+Prerender (html): /tags/voice assistant -> build/client/tags/voice assistant/index.html
+Prerender (data): /tags/kubernetes -> build/client/tags/kubernetes.data
+Prerender (html): /tags/kubernetes -> build/client/tags/kubernetes/index.html
+Prerender (data): /tags/agents -> build/client/tags/agents.data
+Prerender (html): /tags/agents -> build/client/tags/agents/index.html
+Prerender (data): /tags/workflow -> build/client/tags/workflow.data
+Prerender (html): /tags/workflow -> build/client/tags/workflow/index.html
+Prerender (data): /robots.txt -> build/client/robots.txt.data
+Prerender (resource): /robots.txt -> build/client/robots.txt
+Prerender (data): /sitemap.xml -> build/client/sitemap.xml.data
+Prerender (resource): /sitemap.xml -> build/client/sitemap.xml
+Prerender (data): /feed.xml -> build/client/feed.xml.data
+Prerender (resource): /feed.xml -> build/client/feed.xml
+Prerender (html): SPA Fallback -> build/client/__spa-fallback.html
+Removing the server build in /Users/andrew/.no-mistakes/worktrees/fbe03410f043/01M3SCY40GKS5N53G4JN9NYX6B/build/server due to ssr:false
+✓ built in 4.44s
+e2e: serving build on http://localhost:49807
+ INFO  Accepting connections at http://localhost:49807
+ HTTP  9/30/2026 10:58:25 AM ::1 GET /
+ HTTP  9/30/2026 10:58:25 AM ::1 Returned 200 in 12 ms
+
+================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        16.1.0                                                                         │
+  │ Browser:        Electron 146 (headless) (deprecated)                                           │
+  │ Node Version:   v24.18.1 (/Users/andrew/.volta/tools/image/node/24.18.1/bin/node)              │
+  │ Specs:          7 found (connect-with-me.cy.ts, connect.cy.ts, crawler-files.cy.ts, home.cy.ts │
+  │                 , navigation.cy.ts, posts.cy.ts, resume.cy.ts)                                 │
+  │ Searched:       cypress/e2e/**/*.cy.{js,jsx,ts,tsx}                                            │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+Warning: The Electron browser is deprecated as a test browser and will be removed in a future version of Cypress.
+
+Switch to Chrome or another installed browser to avoid a breaking change when you upgrade.
+
+Read more about supported browsers: https://on.cypress.io/launching-browsers
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  connect-with-me.cy.ts                                                           (1 of 7)
+
+
+  connect with me page
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/connect-with-me-D_FvfXHm.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780308304&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config?ip=0&_=1790780308313&ver=1.369.2
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 404 in 1 ms
+    ✓ is reachable from the Connect / Resume button on the home page (312ms)
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /connect-with-me
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/connect-with-me-D_FvfXHm.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+    ✓ links to LinkedIn and GitHub and offers the resume instead of a connect link (57ms)
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /connect-with-me
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/connect-with-me-D_FvfXHm.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+    ✓ does not expose an email, phone, or address (48ms)
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /connect
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /images/andrew-smith.webp
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/connect-DmryK5dM.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 304 in 1 ms
+    ✓ leaves the conference /connect page untouched (49ms)
+
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:28 AM 127.0.0.1 Returned 404 in 1 ms
+
+  4 passing (523ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     connect-with-me.cy.ts                                                            │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  connect.cy.ts                                                                   (2 of 7)
+
+
+  connect page
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /connect
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /images/andrew-smith.webp
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/connect-DmryK5dM.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 304 in 1 ms
+    ✓ renders the header and QR code (95ms)
+
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:29 AM 127.0.0.1 Returned 304 in 0 ms
+
+  1 passing (132ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     connect.cy.ts                                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  crawler-files.cy.ts                                                             (3 of 7)
+
+
+  crawler files
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /robots.txt
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 2 ms
+    ✓ serves a robots.txt that allows search, agents and training and names the sitemap (26ms)
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /sitemap.xml
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+    ✓ serves a sitemap with lastmod dates from post front matter (8ms)
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /feed.xml
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+    ✓ serves an Atom feed of the posts (9ms)
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /posts
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/posts-ChhB8PSP.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:30 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /posts/devtools
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/posts-ChhB8PSP.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/posts._id-NSmhHvOJ.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /connect-with-me
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/connect-with-me-D_FvfXHm.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+    ✓ advertises the feed in the head of every page (371ms)
+
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 404 in 1 ms
+
+  4 passing (456ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     crawler-files.cy.ts                                                              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780311138&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780311203&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:31 AM 127.0.0.1 Returned 404 in 0 ms
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  home.cy.ts                                                                      (4 of 7)
+
+
+  home page
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+    ✓ loads and renders the header, recommendations, and latest posts (125ms)
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+    ✓ shows exactly 3 recommendations, each with a name, title, and summary (87ms)
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 404 in 1 ms
+    ✓ shows exactly 3 latest posts, each with a category, date, title, and description (81ms)
+
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780312616&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:32 AM 127.0.0.1 Returned 404 in 1 ms
+
+  3 passing (391ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     home.cy.ts                                                                       │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  navigation.cy.ts                                                                (5 of 7)
+
+
+  primary navigation
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /assets/posts-ChhB8PSP.js
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /posts.data
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780313907&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config?ip=0&_=1790780313915&ver=1.369.2
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 GET /_root.data
+ HTTP  9/30/2026 10:58:33 AM 127.0.0.1 Returned 200 in 1 ms
+    ✓ navigates from the home page to posts and back home (305ms)
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/recommendations-CBZnHlts.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780314137&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config?ip=0&_=1790780314144&ver=1.369.2
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/keith.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/walker-smith.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/jamel.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/micah.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/arun.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/maxine.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/russell.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+    ✓ navigates from the home page to recommendations (176ms)
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/denise.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/rick-cabrera.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/_index-Cvln5Dol.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/recommendations-DtmHmfI1.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /images/darnell.jpeg
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/posts-ChhB8PSP.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/posts._id-NSmhHvOJ.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /posts/workflow-delegated.data
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780314316&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config?ip=0&_=1790780314321&ver=1.369.2
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /files/firstmate-usage-3AXMB7ZJ.png
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /assets/tags._id-CLlaLvWf.js
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /tags/devtools.data
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /posts/devtools-declared.data
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /files/ansible-nix-diagram-3KNOS65J.png
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /files/home-nix-file-section-VHARRAGC.png
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /files/terminal-R5BQO2G6.png
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /files/nix-list-generations-DUA2SEYA.png
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /tags/devtools.data
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 GET /posts/workflow-delegated.data
+ HTTP  9/30/2026 10:58:34 AM 127.0.0.1 Returned 304 in 0 ms
+    ✓ navigates from an article to a different article via a shared tag, then back to the first article (490ms)
+
+
+  3 passing (1s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        3                                                                                │
+  │ Passing:      3                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     navigation.cy.ts                                                                 │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  posts.cy.ts                                                                     (6 of 7)
+
+
+  posts
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /posts
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/manifest-fc03d7af.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/entry.client-CeJmbDct.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/chunk-QFMPRPBF-CfoM-6Hj.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/index-BnexJzRx.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/root-DbmyOk76.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/ThemeProvider-CsSxji8Q.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/Box-CCGjEn9X.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/useId-BqZuOYE7.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/profile-BhTT7oQd.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/posts-ChhB8PSP.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/Section-BHjIntC_.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/PostCard-BrkpR39d.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/Typography-D9baOpkU.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/Card-DISQQnjA.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/utils-Bo7PIdpo.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /fonts/Lato-Regular.ttf
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /fonts/Lato-Bold.ttf
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /fonts/Lato-Black.ttf
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /css/fonts.css
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /css/dracula.css
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/posts._id-NSmhHvOJ.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /posts/workflow-delegated.data
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 POST /afph/flags/?v=2&ip=0&_=1790780315472&ver=1.369.2&compression=base64
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /afph/array/phc_7RJ0FZOHZHy4iaMte1XwyX7RqqqMudOq4Sv9g5fUvLC/config?ip=0&_=1790780315479&ver=1.369.2
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 404 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /assets/ModalDialog-D5jWMy1l.js
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 GET /files/firstmate-usage-3AXMB7ZJ.png
+ HTTP  9/30/2026 10:58:35 AM 127.0.0.1 Returned 200 in 1 ms
+    ✓ renders the post list and opens a post's detail page (258ms)
+
+
+  1 passing (273ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     posts.cy.ts                                                                      │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  resume.cy.ts                                                                    (7 of 7)
+
+
+  resume for machines
+ HTTP  9/30/2026 10:58:36 AM 127.0.0.1 GET /agent/resume.json
+ HTTP  9/30/2026 10:58:36 AM 127.0.0.1 Returned 200 in 1 ms
+    ✓ serves structured resume JSON (24ms)
+ HTTP  9/30/2026 10:58:36 AM 127.0.0.1 GET /resume.md
+ HTTP  9/30/2026 10:58:36 AM 127.0.0.1 Returned 200 in 1 ms
+    ✓ serves the resume as markdown (8ms)
+
+
+  2 passing (44ms)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     0 seconds                                                                        │
+  │ Spec Ran:     resume.cy.ts                                                                     │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  connect-with-me.cy.ts                    525ms        4        4        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  connect.cy.ts                            132ms        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  crawler-files.cy.ts                      458ms        4        4        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  home.cy.ts                               392ms        3        3        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  navigation.cy.ts                         00:01        3        3        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  posts.cy.ts                              274ms        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ ✔  resume.cy.ts                              45ms        2        2        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        00:02       18       18        -        -        -  
+
+
+ INFO  Gracefully shutting down. Please wait...
