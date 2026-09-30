@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://andrew.codes/</id>
+  <title>Andrew Smith</title>
+  <subtitle>I create robust, scalable applications and drive engineering teams.</subtitle>
+  <link rel="self" type="application/atom+xml" href="https://andrew.codes/feed.xml"/>
+  <link rel="alternate" type="text/html" href="https://andrew.codes/posts"/>
+  <updated>2026-08-12T00:00:00Z</updated>
+  <author>
+    <name>James Andrew Smith</name>
+    <uri>https://andrew.codes</uri>
+  </author>
+  <entry>
+    <id>https://andrew.codes/posts/workflow-delegated</id>
+    <title>My Developer Workflow, Delegated</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/workflow-delegated"/>
+    <published>2026-08-12T00:00:00Z</published>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary>I went from VS Code to Zed to a terminal-only agentic workflow. Here is the tooling that finally let me run several threads of work at once, and what it cost me to get there.</summary>
+    <category term="engineering"/>
+    <category term="devtools"/>
+    <category term="ai"/>
+    <category term="agents"/>
+    <category term="workflow"/>
+    <category term="featured"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/devtools-declared</id>
+    <title>My Developer Workbench, Declared</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/devtools-declared"/>
+    <published>2026-08-10T00:00:00Z</published>
+    <updated>2026-08-10T00:00:00Z</updated>
+    <summary>Four months ago I argued that Ansible was the right tool for automating my dev environment. I have since deleted all of it and replaced it with Nix. Here is what changed my mind.</summary>
+    <category term="engineering"/>
+    <category term="devtools"/>
+    <category term="automation"/>
+    <category term="nix"/>
+    <category term="zsh"/>
+    <category term="ansible"/>
+    <category term="featured"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/devtools-revisited</id>
+    <title>My Developer Workbench, Revisited</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/devtools-revisited"/>
+    <published>2026-04-22T00:00:00Z</published>
+    <updated>2026-04-22T00:00:00Z</updated>
+    <summary>I rewrote my dev environment automation from scratch, trading bash scripts for Ansible playbooks. Here&apos;s what changed, what got harder, and whether it was worth it.</summary>
+    <category term="engineering"/>
+    <category term="devtools"/>
+    <category term="automation"/>
+    <category term="ansible"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/voice-assistant</id>
+    <title>Custom Voice Assistant</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/voice-assistant"/>
+    <published>2026-04-07T00:00:00Z</published>
+    <updated>2026-04-07T00:00:00Z</updated>
+    <summary>A practical walkthrough of my home automation voice assistant, including goals, architecture, and a live demo.</summary>
+    <category term="home automation"/>
+    <category term="featured"/>
+    <category term="home assistant"/>
+    <category term="voice assistant"/>
+    <category term="ai"/>
+    <category term="kubernetes"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/agile-forecasting</id>
+    <title>Agile Forecasting</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/agile-forecasting"/>
+    <published>2024-09-18T00:00:00Z</published>
+    <updated>2024-09-18T00:00:00Z</updated>
+    <summary>Learn how to use this data-driven forecasting technique as a more effective way to predict project timelines.</summary>
+    <category term="agility"/>
+    <category term="featured"/>
+    <category term="forecasting"/>
+    <category term="estimation"/>
+    <category term="ai"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/agile-estimation</id>
+    <title>Agile Estimation</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/agile-estimation"/>
+    <published>2023-11-14T00:00:00Z</published>
+    <updated>2023-11-14T00:00:00Z</updated>
+    <summary>Understand the role of estimation and effective ways to utilize it.</summary>
+    <category term="agility"/>
+    <category term="estimation"/>
+    <category term="story points"/>
+    <category term="bucketing"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/devtools</id>
+    <title>My Developer Workbench</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/devtools"/>
+    <published>2023-05-19T00:00:00Z</published>
+    <updated>2023-05-19T00:00:00Z</updated>
+    <summary>Show the development tools I love and how I&apos;ve automated setting up my development environment.</summary>
+    <category term="engineering"/>
+    <category term="craftsmanship"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/guest-presence-detection</id>
+    <title>Guest Presence Detection</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/guest-presence-detection"/>
+    <published>2020-11-13T00:00:00Z</published>
+    <updated>2020-11-13T00:00:00Z</updated>
+    <summary>Detetermine if there are guests based on when they connect to the guest wi-fi. Useful with presence based home automations.</summary>
+    <category term="home automation"/>
+    <category term="home assistant"/>
+    <category term="python"/>
+    <category term="node.js"/>
+    <category term="guests"/>
+    <category term="presence detection"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/react-with-relay-graphql-talk</id>
+    <title>React with Relay and GraphQL Talk</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/react-with-relay-graphql-talk"/>
+    <published>2015-07-22T00:00:00Z</published>
+    <updated>2015-07-22T00:00:00Z</updated>
+    <summary>Focusing on GraphQL and how it may impact React in the future.</summary>
+    <category term="presentation"/>
+    <category term="featured"/>
+    <category term="react"/>
+    <category term="relay"/>
+    <category term="graphql"/>
+    <category term="javascript"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/jest-vs-mocha-why-jest-wins</id>
+    <title>Jest vs. Mocha: Why Jest Wins</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/jest-vs-mocha-why-jest-wins"/>
+    <published>2014-09-10T00:00:00Z</published>
+    <updated>2014-09-10T00:00:00Z</updated>
+    <summary>An early assessment of the Jest testing framework and comparisons to mocha/karma.</summary>
+    <category term="engineering"/>
+    <category term="tdd"/>
+    <category term="javascript"/>
+    <category term="jest"/>
+    <category term="mocha"/>
+  </entry>
+  <entry>
+    <id>https://andrew.codes/posts/software-craftsmanship</id>
+    <title>Software Craftsmanship</title>
+    <link rel="alternate" type="text/html" href="https://andrew.codes/posts/software-craftsmanship"/>
+    <published>2014-07-08T00:00:00Z</published>
+    <updated>2014-07-08T00:00:00Z</updated>
+    <summary>Understanding software craftsmanship and my determination to seek constant improvement.</summary>
+    <category term="engineering"/>
+    <category term="craftsmanship"/>
+  </entry>
+</feed>

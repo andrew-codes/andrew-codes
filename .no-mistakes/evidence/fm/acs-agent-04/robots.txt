@@ -1,0 +1,7 @@
+# Search, AI input (agents, answer engines) and AI training are all allowed.
+# Cloudflare's AI crawler and managed robots.txt settings must agree with this file.
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+Sitemap: https://andrew.codes/sitemap.xml
