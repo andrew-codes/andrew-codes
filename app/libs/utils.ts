@@ -43,6 +43,17 @@ const tryFormatDate = (
   }
 }
 
+// Machine-readable counterpart of tryFormatDate: a `YYYY-MM-DD` calendar date
+// in UTC, suitable for `<time dateTime>` and structured data. Accepts a Date
+// as well as a string because front matter dates are parsed by YAML into Date
+// objects at build time (and arrive as Dates in loader data), even though the
+// MdxPage type says string. Returns undefined when there is no valid date.
+const toIsoDate = (value: string | Date | null | undefined): string | undefined => {
+  if (value === null || value === undefined) return undefined
+  const date = value instanceof Date ? value : new Date(value)
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString().slice(0, 10)
+}
+
 const useLoaderHeaders =
   (
     targetHeaders = ["Cache-Control", "Vary", "Server-Timing", "ETag"],
@@ -74,6 +85,7 @@ export {
   tryFormatDate,
   getDomainUrl,
   removeTrailingSlash,
+  toIsoDate,
   typedBoolean,
   useLoaderHeaders,
 }

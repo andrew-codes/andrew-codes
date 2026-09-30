@@ -4,7 +4,7 @@ const avatar = "/images/Profile.webp"
 import { ConnectionList, ContactCard, FullName, JobTitle, Url } from "./ContactCard"
 import Link from "./Link"
 import { NotMobileOnly } from "./MediaQuery"
-import { getSocialLink } from "../profile"
+import { getSocialLink } from "../data/profile"
 
 const Image = styled.img`
   border: 2px solid rgb(255, 255, 255);

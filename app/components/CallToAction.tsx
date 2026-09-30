@@ -7,7 +7,7 @@ import MenuItem from "@mui/joy/MenuItem"
 import Stack from "@mui/joy/Stack"
 import { Link as RemixLink } from "react-router"
 import { FC, MouseEventHandler, useEffect, useRef, useState } from "react"
-import { profile } from "../profile"
+import { profile } from "../data/profile"
 
 const CONNECT_PATH = "/connect-with-me"
 const resumeHref = encodeURI(profile.resumeUrl)
