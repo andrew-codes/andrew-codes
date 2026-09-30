@@ -51,19 +51,17 @@ const CallToAction: FC<{
 
   let primary: Item
   const phoneOnly: Item[] = []
-  const afterPrimary: Item[] = []
   if (primaryAction) {
     primary = { title: primaryTitle ?? "", action: primaryAction }
   } else if (variant === "connect") {
-    primary = downloadResume
-    afterPrimary.push(viewResume)
+    primary = viewResume
   } else {
     primary = connect
     // Phones list both the link and the resume download in the dropdown.
     phoneOnly.push({ title: "Connect with Me", action: CONNECT_PATH }, downloadResume)
   }
 
-  const items: Item[] = [primary, ...afterPrimary, { title: secondaryTitle, action: secondaryAction }]
+  const items: Item[] = [primary, { title: secondaryTitle, action: secondaryAction }]
   if (tertiaryTitle && tertiaryAction) {
     items.push({ title: tertiaryTitle, action: tertiaryAction })
   }

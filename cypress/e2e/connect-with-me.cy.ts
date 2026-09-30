@@ -13,8 +13,9 @@ describe("connect with me page", () => {
 
     cy.contains("a", "Connect on LinkedIn").should("have.attr", "href", "https://linkedin.com/in/JamesAndrewSmith")
     cy.contains("a", "Follow on GitHub").should("have.attr", "href", "https://github.com/andrew-codes")
-    cy.contains("a", "Download Resume").should("be.visible")
-    cy.contains("a", "View Resume").should("have.attr", "target", "_blank")
+    cy.contains("a", "Download Resume").should("not.exist")
+    cy.contains("a", "View Resume").should("be.visible").and("have.attr", "target", "_blank")
+    cy.contains("a", "View Recommendations").should("have.attr", "href", "/recommendations?priority=featured")
     cy.contains("Connect / Resume").should("not.exist")
   })
 
