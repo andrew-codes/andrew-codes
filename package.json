@@ -33,6 +33,7 @@
     "@react-router/dev": "^7.14.0",
     "@react-router/fs-routes": "^7.14.0",
     "@react-router/node": "^7.14.0",
+    "gray-matter": "^4.0.3",
     "highlight.js": "^11.10.0",
     "lodash-es": "^4.17.21",
     "mdx-bundler": "^10.1.1",

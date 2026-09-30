@@ -54,6 +54,7 @@ __metadata:
     fs-extra: "npm:^11.2.0"
     glob: "npm:^11.0.0"
     globals: "npm:^17.12.0"
+    gray-matter: "npm:^4.0.3"
     highlight.js: "npm:^11.10.0"
     lodash-es: "npm:^4.17.21"
     mdx-bundler: "npm:^10.1.1"
