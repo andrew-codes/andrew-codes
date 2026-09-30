@@ -64,7 +64,7 @@ describe("buildPersonJsonLd", () => {
   const person = buildPersonJsonLd(graph)
 
   it("is a schema.org Person with a stable id", () => {
-    expect(person).toMatchObject({ "@context": "https://schema.org", "@type": "Person", "@id": "https://andrew.codes/#person", name: "James Andrew Smith", jobTitle: "Staff Software Engineer" })
+    expect(person).toMatchObject({ "@context": "https://schema.org", "@type": "Person", "@id": "https://andrew.codes/#me", name: "James Andrew Smith", jobTitle: "Staff Software Engineer" })
   })
 
   it("sets worksFor from the current role", () => {

@@ -76,6 +76,18 @@ describe("buildMeta", () => {
     expect(find(meta, "property", "article:tag")).toEqual([])
   })
 
+  it("emits each JSON-LD object as its own script:ld+json entry", () => {
+    const first = { "@context": "https://schema.org", "@type": "ProfilePage" }
+    const second = { "@context": "https://schema.org", "@type": "BlogPosting" }
+    const meta = buildMeta({ ...base, jsonLd: [first, second] })
+
+    expect(meta.filter((entry) => "script:ld+json" in entry)).toEqual([{ "script:ld+json": first }, { "script:ld+json": second }])
+  })
+
+  it("emits no JSON-LD unless asked", () => {
+    expect(JSON.stringify(buildMeta(base))).not.toContain("ld+json")
+  })
+
   it("does not emit a charset - that stays a literal tag in root.tsx", () => {
     expect(JSON.stringify(buildMeta(base))).not.toMatch(/charset/i)
   })
