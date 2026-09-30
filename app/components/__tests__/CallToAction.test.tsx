@@ -17,10 +17,10 @@ describe("CallToAction", () => {
     expect(html).toContain('href="/connect-with-me"')
   })
 
-  it("offers download and view resume, and no link to itself, on the connect variant", () => {
+  it("offers view resume as the primary action, and no link to itself, on the connect variant", () => {
     const html = renderCta({ variant: "connect", secondaryTitle: "Secondary", secondaryAction: "/secondary" })
 
-    expect(html).toContain("Download Resume")
+    expect(html).not.toContain("Download Resume")
     expect(html).toContain("View Resume")
     expect(html).not.toContain("Connect / Resume")
     expect(html).not.toContain("Connect with Me")

@@ -42,11 +42,13 @@ describe("connect-with-me route", () => {
     }
   })
 
-  it("offers to download and view the resume instead of a connect link", () => {
+  it("offers to view the resume, then recommendations, instead of a connect link", () => {
     const html = renderPage()
 
-    expect(html).toContain("Download Resume")
-    expect(html).toContain("View Resume")
+    expect(html).not.toContain("Download Resume")
+    expect(html.indexOf("View Resume")).toBeGreaterThan(-1)
+    expect(html.indexOf("View Recommendations")).toBeGreaterThan(html.indexOf("View Resume"))
+    expect(html).toContain('href="/recommendations?priority=featured"')
     expect(html).not.toContain("Connect / Resume")
     expect(html).not.toContain('href="/connect-with-me"')
   })

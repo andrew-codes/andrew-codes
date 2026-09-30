@@ -44,7 +44,7 @@ const ConnectWithMeRoute = () => {
         >
           I like meeting people who care about building software well. Say hello, or follow along.
         </Typography>
-        <CallToAction variant="connect" secondaryTitle="Read my Posts" secondaryAction="/posts" />
+        <CallToAction variant="connect" secondaryTitle="View Recommendations" secondaryAction="/recommendations?priority=featured" tertiaryTitle="Read my Posts" tertiaryAction="/posts" />
       </PageHeader>
       <Section>
         <SectionHeader title="Connect with Me" />
