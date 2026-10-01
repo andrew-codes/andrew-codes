@@ -12,7 +12,7 @@ import { useTheme } from "@mui/joy/styles"
 import styled from "@mui/joy/styles/styled"
 import Typography from "@mui/joy/Typography"
 import { Link as RemixLink } from "react-router"
-import { FC, Fragment, MouseEvent, PropsWithChildren, useEffect, useState } from "react"
+import { FC, Fragment, MouseEvent, PropsWithChildren, ReactNode, useEffect, useState } from "react"
 
 // Image (below) renders a block-level <div> wrapper for its full-bleed
 // breakout positioning. MDX/remark still wraps a markdown paragraph that
@@ -206,13 +206,13 @@ const renderBlockquoteChild = (child: any, key: number) => {
 
 const Blockquote: FC<PropsWithChildren<{ children: Array<{ props: Record<string, any> }> }>> = (props) => {
   if (props.children.length > 1) {
-    return <StyledBlockquote>{props.children.filter((child) => typeof child !== "string").map(renderBlockquoteChild)}</StyledBlockquote>
+    return <StyledBlockquote>{props.children.filter((child: any) => typeof child !== "string").map(renderBlockquoteChild)}</StyledBlockquote>
   }
 
   const [child] = Array.isArray(props.children) ? props.children : [props.children]
 
   if ((child as any)?.type && (child as any).type !== Paragraph) {
-    return <blockquote>{child}</blockquote>
+    return <blockquote>{child as ReactNode}</blockquote>
   }
 
   return (
@@ -322,7 +322,7 @@ const UnorderedList: FC<object> = (props: any) => {
   return (
     <List marker={"disc"} sx={{ marginBottom: props.root ? 2 : 0, marginTop: props.root ? -2 : 0 }}>
       {props.children
-        .filter((child) => typeof child !== "string")
+        .filter((child: any) => typeof child !== "string")
         .map((child: any, index: number) => {
           return (
             <ListItem key={index} nested={child.type !== "li"} {...child.props}>
@@ -343,7 +343,7 @@ const OrderedList: FC<object> = (props: any) => {
   return (
     <List marker={"decimal"} sx={{ marginBottom: props.root ? 2 : 0 }}>
       {props.children
-        .filter((child) => typeof child !== "string")
+        .filter((child: any) => typeof child !== "string")
         .map((child: any, index: number) => {
           return (
             <ListItem key={index} nested={child.type !== "li"} {...child.props}>

@@ -67,6 +67,6 @@ describe("getMdxPostSources", () => {
     expect(Object.keys(bySlug).sort()).toEqual(["broken", "good"])
     expect(bySlug.good.listItem?.frontmatter.title).toBe("Good")
     expect(bySlug.broken.listItem).toBeUndefined()
-    expect(bySlug.broken.error).toBeInstanceOf(Error)
+    expect("error" in bySlug.broken && bySlug.broken.error).toBeInstanceOf(Error)
   })
 })

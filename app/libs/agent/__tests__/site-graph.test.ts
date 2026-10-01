@@ -148,7 +148,7 @@ describe("getPrerenderPaths", () => {
 })
 
 describe("projects and companies", () => {
-  const defn = { slug: "forecaster", name: "Forecaster", role: "creator", repo: "https://github.com/o/forecaster" }
+  const defn = { slug: "forecaster", name: "Forecaster", role: "creator" as const, repo: "https://github.com/o/forecaster" }
   const graph = buildSiteGraph(
     sources([
       page("new", { date: "2026-01-01", tags: ["ai"], projects: ["forecaster", "jest"], companies: ["microsoft"] }),

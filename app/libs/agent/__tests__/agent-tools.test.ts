@@ -54,7 +54,7 @@ describe("search_posts", () => {
   })
 
   it("filters by category and tag and combines filters", async () => {
-    expect((await runJson("search_posts", { category: "process" })).posts.map((post: { slug: string }) => post.slug)).toEqual(["estimating"])
+    expect((await runJson("search_posts", { category: "agility" })).posts.map((post: { slug: string }) => post.slug)).toEqual(["estimating"])
     expect((await runJson("search_posts", { tag: "GraphQL" })).posts.map((post: { slug: string }) => post.slug)).toEqual(["graphql-schema"])
     expect((await runJson("search_posts", { category: "engineering", tag: "forecasting" })).total).toBe(0)
   })

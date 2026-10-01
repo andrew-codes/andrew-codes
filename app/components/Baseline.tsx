@@ -1,8 +1,9 @@
 import CssBaseline from "@mui/joy/CssBaseline"
 import GlobalStyles from "@mui/joy/GlobalStyles"
 import { useTheme } from "@mui/joy/styles"
+import type { PropsWithChildren } from "react"
 
-const Baseline = ({ children }) => {
+const Baseline = ({ children }: PropsWithChildren) => {
   const theme = useTheme()
   return (
     <>

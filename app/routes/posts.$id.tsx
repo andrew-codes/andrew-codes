@@ -120,7 +120,7 @@ const PostRoute = () => {
                 img: Image,
                 h4: H4,
                 p: Paragraph,
-                strong: (props) => (
+                strong: (props: any) => (
                   <Typography
                     fontWeight={900}
                     sx={(theme) => ({
@@ -129,8 +129,8 @@ const PostRoute = () => {
                     {...props}
                   />
                 ),
-                ul: (props) => <UnorderedList root {...props} />,
-                ol: (props) => <OrderedList root {...props} />,
+                ul: (props: any) => <UnorderedList root {...props} />,
+                ol: (props: any) => <OrderedList root {...props} />,
                 table: Table,
                 pre: (props: any) => {
                   if (props.children.type === "code") {

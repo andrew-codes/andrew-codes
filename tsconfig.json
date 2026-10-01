@@ -1,6 +1,9 @@
 {
   "exclude": [
-    "./cypress"
+    "./cypress",
+    ".yarn",
+    "node_modules",
+    "build"
   ],
   "include": [
     "remix.env.d.ts",
