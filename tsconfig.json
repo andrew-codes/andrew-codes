@@ -24,8 +24,7 @@
       "@types/react",
       "@types/node",
       "@types/react-dom",
-      "@types/sha1",
-      "@types/lodash"
+      "@types/sha1"
     ],
     "isolatedModules": true,
     "esModuleInterop": true,
