@@ -39,7 +39,7 @@
     "highlight.js": "^11.10.0",
     "lodash-es": "^4.17.21",
     "mdx-bundler": "^10.1.1",
-    "posthog-js": "^1.369.2",
+    "posthog-js": "^1.435.6",
     "qrcode": "^1.5.4",
     "react": "19.2.5",
     "react-dom": "19.2.5",
