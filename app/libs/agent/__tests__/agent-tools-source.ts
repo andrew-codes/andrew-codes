@@ -15,7 +15,7 @@ import { buildSiteGraph, type SiteGraph } from "../site-graph.server"
 const posts: MdxListItem[] = [
   { slug: "react-testing", frontmatter: { title: "Testing React components", description: "How I test components", category: "engineering", date: "2026-03-01", tags: ["react", "tdd"] }, readTime: { text: "", minutes: 4, time: 240000, words: 800 } },
   { slug: "graphql-schema", frontmatter: { title: "GraphQL schema design", description: "Designing a schema", category: "engineering", date: "2026-02-01", tags: ["graphql"] }, readTime: { text: "", minutes: 6, time: 360000, words: 1200 } },
-  { slug: "estimating", frontmatter: { title: "Estimating without guessing", description: "Forecasting instead of estimating", category: "process", date: "2026-01-01", tags: ["forecasting"] }, readTime: { text: "", minutes: 3, time: 180000, words: 600 } },
+  { slug: "estimating", frontmatter: { title: "Estimating without guessing", description: "Forecasting instead of estimating", category: "agility", date: "2026-01-01", tags: ["forecasting"] }, readTime: { text: "", minutes: 3, time: 180000, words: 600 } },
 ]
 
 const fixtureGraph = (): SiteGraph => buildSiteGraph(posts.map((listItem) => ({ slug: listItem.slug, listItem }) satisfies MdxPostSource))

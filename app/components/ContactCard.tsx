@@ -1,12 +1,13 @@
 import styled from "@emotion/styled"
+import type { SxProps } from "@mui/joy/styles/types"
 import { styled as muiStyled } from "@mui/joy/styles"
-import type { FC, HTMLProps, ReactNode } from "react"
+import type { ElementType, FC, HTMLProps, ReactNode } from "react"
 import { Children } from "react"
 import SmallContentDivider from "./SmallContentDivider"
 
 type WrappedStyledComponent<Props = object> = FC<
   {
-    as?: string | React.ComponentType<any>
+    as?: ElementType
     children: ReactNode | ReactNode[]
   } & Props
 >
@@ -22,7 +23,7 @@ const FullNameStyled = muiStyled("h1")({
   fontWeight: 600,
   lineHeight: "2rem",
 })
-const FullName: WrappedStyledComponent = ({ as, children, sx }) => (
+const FullName: WrappedStyledComponent<{ sx?: SxProps }> = ({ as, children, sx }) => (
   <FullNameStyled as={as} className="fn" sx={sx}>
     {children}
   </FullNameStyled>

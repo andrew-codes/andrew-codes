@@ -15,6 +15,7 @@
     "build": "yarn react-router build",
     "test": "vitest run",
     "lint": "eslint .",
+    "typecheck": "react-router typegen && tsc --noEmit",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "e2e:serve": "serve build/client -l ${PORT:-4173}",

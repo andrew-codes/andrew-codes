@@ -109,7 +109,7 @@ describe("useLoaderHeaders", () => {
     const loaderHeaders = new Headers({ "Cache-Control": "max-age=60", ETag: "abc123" })
     const parentHeaders = new Headers()
 
-    const result = headersFn({ loaderHeaders, parentHeaders } as any)
+    const result = new Headers(headersFn({ loaderHeaders, parentHeaders } as any))
 
     expect(result.get("Cache-Control")).toBe("max-age=60")
     expect(result.get("ETag")).toBe("abc123")
@@ -120,7 +120,7 @@ describe("useLoaderHeaders", () => {
     const loaderHeaders = new Headers({ "Server-Timing": "loader;dur=10" })
     const parentHeaders = new Headers({ "Server-Timing": "parent;dur=5" })
 
-    const result = headersFn({ loaderHeaders, parentHeaders } as any)
+    const result = new Headers(headersFn({ loaderHeaders, parentHeaders } as any))
 
     expect(result.get("Server-Timing")).toBe("loader;dur=10, parent;dur=5")
   })
@@ -130,7 +130,7 @@ describe("useLoaderHeaders", () => {
     const loaderHeaders = new Headers({ "Cache-Control": "max-age=60" })
     const parentHeaders = new Headers({ "Cache-Control": "max-age=0", Vary: "Accept" })
 
-    const result = headersFn({ loaderHeaders, parentHeaders } as any)
+    const result = new Headers(headersFn({ loaderHeaders, parentHeaders } as any))
 
     expect(result.get("Cache-Control")).toBe("max-age=60")
     expect(result.get("Vary")).toBe("Accept")

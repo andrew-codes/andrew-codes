@@ -19,6 +19,18 @@ jobs:
       - run: yarn install --immutable
       - run: yarn lint
 
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn typecheck
+
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-latest

@@ -6,7 +6,8 @@ import { defineConfig } from "vitest/config"
 // route modules, etc.), which isn't relevant for unit tests that import
 // components directly.
 export default defineConfig({
-  plugins: [react()],
+  // vitest bundles its own vite; @vitejs/plugin-react resolves the root vite, so their Plugin types differ.
+  plugins: [react() as never],
   test: {
     environment: "node",
     include: ["app/**/*.test.{ts,tsx}", "worker/**/*.test.ts"],

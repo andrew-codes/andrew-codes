@@ -1,6 +1,9 @@
 {
   "exclude": [
-    "./cypress"
+    "./cypress",
+    ".yarn",
+    "node_modules",
+    "build"
   ],
   "include": [
     "remix.env.d.ts",
@@ -24,8 +27,7 @@
       "@types/react",
       "@types/node",
       "@types/react-dom",
-      "@types/sha1",
-      "@types/lodash"
+      "@types/sha1"
     ],
     "isolatedModules": true,
     "esModuleInterop": true,

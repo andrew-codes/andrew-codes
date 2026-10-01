@@ -30,11 +30,7 @@ export default async function handleRequest(
     let shellRendered = false
 
     const { pipe, abort } = renderToPipeableStream(
-      <ServerRouter
-        context={routerContext}
-        url={request.url}
-        abortDelay={ABORT_DELAY}
-      />,
+      <ServerRouter context={routerContext} url={request.url} />,
       {
         onShellReady() {
           shellRendered = true
