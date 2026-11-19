@@ -15,3 +15,17 @@ describe("PageHeader", () => {
     expect(html).toContain("child content")
   })
 })
+
+describe("PageHeader portrait", () => {
+  it("renders an eager, high-priority profile image with alt text when given a portrait", () => {
+    const html = renderToStaticMarkup(<PageHeader portrait={{ src: "/images/me.webp", alt: "A portrait" }} />)
+
+    expect(html).toContain('src="/images/me.webp"')
+    expect(html).toContain('alt="A portrait"')
+    expect(html).toContain('loading="eager"')
+  })
+
+  it("renders no image without a portrait", () => {
+    expect(renderToStaticMarkup(<PageHeader />)).not.toContain("<img")
+  })
+})
