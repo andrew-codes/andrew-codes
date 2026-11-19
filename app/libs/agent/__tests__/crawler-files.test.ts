@@ -46,13 +46,22 @@ describe("getSitemapEntries", () => {
 
   it("omits lastmod when a page has no date, rather than inventing one", () => {
     expect(entries.find((entry) => entry.loc.endsWith("/posts/undated"))).toEqual({ loc: "https://andrew.codes/posts/undated" })
-    expect(lastmodOf("/recommendations")).toBeUndefined()
   })
 
-  it("dates the home page, post list and tag pages by their newest post", () => {
-    expect(lastmodOf("/")).toBe("2024-09-18")
+  it("dates the post list and tag pages by their newest post", () => {
     expect(lastmodOf("/posts")).toBe("2024-09-18")
     expect(lastmodOf("/tags/nix")).toBe("2024-09-18")
+  })
+
+  it("dates the home, recommendations and connect pages from their committed source dates", () => {
+    expect(lastmodOf("/")).toBe("2026-11-19")
+    expect(lastmodOf("/recommendations")).toBe("2026-09-30")
+    expect(lastmodOf("/connect-with-me")).toBe("2026-09-30")
+  })
+
+  it("dates the home page by a newer post than its own source", () => {
+    const future = buildSiteGraph([page("future", { date: "2999-01-01" })])
+    expect(getSitemapEntries(future).find((entry) => entry.loc === "https://andrew.codes/")?.lastmod).toBe("2999-01-01")
   })
 
   it("lists a page per topic, not per authored tag", () => {

@@ -1,3 +1,4 @@
+import { pageLastmod } from "../../data/page-lastmod"
 import { feed } from "../../data/profile"
 import { STATIC_PATHS, type SiteGraph, type SitePost } from "./site-graph.server"
 
@@ -5,7 +6,7 @@ import { STATIC_PATHS, type SiteGraph, type SitePost } from "./site-graph.server
 // from the site graph and emitted by resource routes, so the prerender
 // pipeline writes them into build/client beside the HTML.
 //
-// Every date comes from post front matter, never the build clock, so
+// Every date comes from post front matter or the committed app/data/page-lastmod.ts, never the build clock, so
 // rebuilding without content changes produces byte-identical files.
 //
 // Cloudflare: the site is served behind Cloudflare, which has its own AI
@@ -51,9 +52,18 @@ const buildRobotsTxt = (graph: SiteGraph): string =>
     "",
   ].join("\n")
 
+const newest = (...dates: (string | undefined)[]): string | undefined => dates.filter((date): date is string => Boolean(date)).sort().at(-1)
+
 const getSitemapEntries = (graph: SiteGraph): SitemapEntry[] => {
   const latest = newestDate(graph.posts)
-  const staticLastmod: Record<string, string | undefined> = { "/": latest, "/posts": latest }
+  // The home page lists the newest posts, so it changes with them as well as
+  // with its own source (see app/data/page-lastmod.ts).
+  const staticLastmod: Record<string, string | undefined> = {
+    "/": newest(latest, pageLastmod["/"]?.lastmod),
+    "/posts": latest,
+    "/recommendations": pageLastmod["/recommendations"]?.lastmod,
+    "/connect-with-me": pageLastmod["/connect-with-me"]?.lastmod,
+  }
 
   const staticEntries = STATIC_PATHS
     .filter((path) => !SITEMAP_EXCLUDED_PATHS.has(path))
