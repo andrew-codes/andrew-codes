@@ -2,7 +2,6 @@ import { afterEach, describe, expect, it, vi } from "vitest"
 import type { MdxListItem } from "../../../types"
 import type { MdxPostSource } from "../../mdx.server"
 import { buildAtomFeed, buildRobotsTxt, buildSitemapXml, getSitemapEntries } from "../crawler-files.server"
-import { pageLastmod } from "../../../data/page-lastmod"
 import { buildSiteGraph } from "../site-graph.server"
 
 const page = (slug: string, frontmatter: Partial<MdxListItem["frontmatter"]> = {}): MdxPostSource => ({
@@ -55,9 +54,9 @@ describe("getSitemapEntries", () => {
   })
 
   it("dates the home, recommendations and connect pages from their committed source dates", () => {
-    expect(lastmodOf("/")).toBe(pageLastmod["/"].lastmod)
-    expect(lastmodOf("/recommendations")).toBe(pageLastmod["/recommendations"].lastmod)
-    expect(lastmodOf("/connect-with-me")).toBe(pageLastmod["/connect-with-me"].lastmod)
+    expect(lastmodOf("/")).toBe("2026-11-19")
+    expect(lastmodOf("/recommendations")).toBe("2026-09-30")
+    expect(lastmodOf("/connect-with-me")).toBe("2026-09-30")
   })
 
   it("dates the home page by a newer post than its own source", () => {
