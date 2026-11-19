@@ -112,8 +112,8 @@ describe("buildMeta", () => {
     const meta = buildMeta(base)
 
     expect(content(meta, "property", "og:image")).toEqual(["https://andrew.codes/images/andrew-smith.webp"])
-    expect(content(meta, "property", "og:image:width")).toEqual(["200"])
-    expect(content(meta, "property", "og:image:height")).toEqual(["200"])
+    expect(content(meta, "property", "og:image:width")).toEqual(["768"])
+    expect(content(meta, "property", "og:image:height")).toEqual(["768"])
     expect(content(meta, "property", "og:image:alt")).toHaveLength(1)
     expect(content(meta, "name", "twitter:image")).toEqual(["https://andrew.codes/images/andrew-smith.webp"])
   })

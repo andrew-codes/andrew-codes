@@ -25,7 +25,7 @@ const PageHeader: FC<PropsWithChildren<{ portrait?: Portrait }>> = ({ children, 
             alt={portrait.alt}
             src={portrait.src}
             variant="plain"
-            slotProps={{ img: { width: 200, height: 200, loading: "eager", fetchPriority: "high" } }}
+            slotProps={{ img: { width: 768, height: 768, loading: "eager", fetchPriority: "high" } }}
             sx={(theme) => ({
               width: 160,
               height: 160,

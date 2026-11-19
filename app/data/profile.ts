@@ -23,8 +23,8 @@ const profile = {
   url: "https://andrew.codes",
   image: "/images/andrew-smith.webp",
   imageAlt: "Andrew Smith, smiling, wearing glasses and a green jacket",
-  imageWidth: 200,
-  imageHeight: 200,
+  imageWidth: 768,
+  imageHeight: 768,
   location: "Atlanta, GA",
   resumeUrl: "/James Andrew Smith - Resume.pdf",
   // Topic slugs (see ./topics) the site's own posts back up.
