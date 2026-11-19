@@ -51,7 +51,7 @@ const RAW_RUNTIME_STATE =
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/mdast", "npm:4.0.4"],\
-          ["@types/node", "npm:22.15.20"],\
+          ["@types/node", "npm:26.6.6"],\
           ["@types/qrcode", "npm:1.5.6"],\
           ["@types/react", "npm:19.2.14"],\
           ["@types/react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:19.2.3"],\
@@ -144,7 +144,7 @@ const RAW_RUNTIME_STATE =
           ["@types/fs-extra", "npm:11.0.4"],\
           ["@types/lodash-es", "npm:4.17.12"],\
           ["@types/mdast", "npm:4.0.4"],\
-          ["@types/node", "npm:22.15.20"],\
+          ["@types/node", "npm:26.6.6"],\
           ["@types/qrcode", "npm:1.5.6"],\
           ["@types/react", "npm:19.2.14"],\
           ["@types/react-dom", "virtual:100c0bc2098589bc3a611ce9ac4f746abe6d8fbeb42922ec43a321559e5b911cbaad27cb0854a7b0d33a9deb6e9b54c4db654c2c84b490d8137b5d74e33ed3ed#npm:19.2.3"],\
@@ -4519,11 +4519,11 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:22.15.20", {\
-        "packageLocation": "./.yarn/cache/@types-node-npm-22.15.20-e73baa5cdc-75f4c0787b.zip/node_modules/@types/node/",\
+      ["npm:26.6.6", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-26.6.6-a217a0974b-07c6c6fc1f.zip/node_modules/@types/node/",\
         "packageDependencies": [\
-          ["@types/node", "npm:22.15.20"],\
-          ["undici-types", "npm:6.21.0"]\
+          ["@types/node", "npm:26.6.6"],\
+          ["undici-types", "npm:8.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -13650,10 +13650,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "HARD"\
       }],\
-      ["npm:6.21.0", {\
-        "packageLocation": "./.yarn/cache/undici-types-npm-6.21.0-eb2b0ed56a-ec8f41aa43.zip/node_modules/undici-types/",\
+      ["npm:8.9.0", {\
+        "packageLocation": "./.yarn/cache/undici-types-npm-8.9.0-c5953f392d-8785591929.zip/node_modules/undici-types/",\
         "packageDependencies": [\
-          ["undici-types", "npm:6.21.0"]\
+          ["undici-types", "npm:8.9.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -14004,7 +14004,7 @@ const RAW_RUNTIME_STATE =
           ["@types/jiti", null],\
           ["@types/less", null],\
           ["@types/lightningcss", null],\
-          ["@types/node", "npm:22.15.20"],\
+          ["@types/node", "npm:26.6.6"],\
           ["@types/sass", null],\
           ["@types/sass-embedded", null],\
           ["@types/stylus", null],\
@@ -14172,7 +14172,7 @@ const RAW_RUNTIME_STATE =
           ["@types/edge-runtime__vm", null],\
           ["@types/happy-dom", null],\
           ["@types/jsdom", null],\
-          ["@types/node", "npm:22.15.20"],\
+          ["@types/node", "npm:26.6.6"],\
           ["@types/opentelemetry__api", null],\
           ["@types/vite", null],\
           ["@types/vitest__browser-playwright", null],\
