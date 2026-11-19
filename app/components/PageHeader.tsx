@@ -1,10 +1,16 @@
+import Avatar from "@mui/joy/Avatar"
 import Box from "@mui/joy/Box"
 import Divider from "@mui/joy/Divider"
 import Stack from "@mui/joy/Stack"
 import Typography from "@mui/joy/Typography"
 import { FC, PropsWithChildren } from "react"
 
-const PageHeader: FC<PropsWithChildren<object>> = ({ children }) => {
+type Portrait = { src: string; alt: string }
+
+// `portrait` renders a prominent profile photo above the heading. It is a real
+// <img> in the prerendered HTML (eager, high priority) so search engines see
+// it as the page's primary image.
+const PageHeader: FC<PropsWithChildren<{ portrait?: Portrait }>> = ({ children, portrait }) => {
   return (
     <>
       <Stack
@@ -14,6 +20,23 @@ const PageHeader: FC<PropsWithChildren<object>> = ({ children }) => {
         }}
         spacing={3}
       >
+        {portrait && (
+          <Avatar
+            alt={portrait.alt}
+            src={portrait.src}
+            variant="plain"
+            slotProps={{ img: { width: 768, height: 768, loading: "eager", fetchPriority: "high" } }}
+            sx={(theme) => ({
+              width: 160,
+              height: 160,
+              alignSelf: "center",
+              [theme.breakpoints.up("sm")]: {
+                width: 200,
+                height: 200,
+              },
+            })}
+          />
+        )}
         <Box>
           <Typography
             level="h1"

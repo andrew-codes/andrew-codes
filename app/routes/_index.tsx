@@ -9,6 +9,7 @@ import PageHeader from "../components/PageHeader"
 import PostCard from "../components/PostCard"
 import RecommendationCard from "../components/RecommendationCard"
 import { Section, SectionHeader } from "../components/Section"
+import { profile } from "../data/profile"
 import { featuredRecommendations } from "../data/recommendations"
 import { buildPersonJsonLd } from "../libs/agent/resume"
 import { getSiteGraph } from "../libs/agent/site-graph.server"
@@ -41,7 +42,7 @@ const HomeRoute = () => {
 
   return (
     <Stack direction="column" spacing={4}>
-      <PageHeader>
+      <PageHeader portrait={{ src: profile.image, alt: profile.imageAlt }}>
         <Typography
           level="body-md"
           sx={(theme) => ({

@@ -55,6 +55,12 @@ const buildMeta = ({ title, description, path, type = "website", article, jsonLd
     { property: "og:url", content: url },
     { property: "og:type", content: type },
     { property: "og:image", content: toAbsoluteUrl(profile.image) },
+    { property: "og:image:width", content: String(profile.imageWidth) },
+    { property: "og:image:height", content: String(profile.imageHeight) },
+    { property: "og:image:alt", content: profile.imageAlt },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:image", content: toAbsoluteUrl(profile.image) },
+    { name: "twitter:image:alt", content: profile.imageAlt },
     { property: "og:site_name", content: profile.displayName },
     { property: "og:locale", content: "en_US" },
   ]

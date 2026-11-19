@@ -47,6 +47,7 @@ const Recommendation: FC<
       <Avatar
         alt={name}
         src={profileImage}
+        slotProps={{ img: { loading: "lazy", width: 80, height: 80 } }}
         sx={(theme) => ({
           width: 80,
           height: 80,

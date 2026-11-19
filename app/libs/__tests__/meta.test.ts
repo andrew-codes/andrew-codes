@@ -107,4 +107,14 @@ describe("buildMeta", () => {
   it("does not emit a charset - that stays a literal tag in root.tsx", () => {
     expect(JSON.stringify(buildMeta(base))).not.toMatch(/charset/i)
   })
+
+  it("emits the profile image with dimensions and alt text for og and twitter", () => {
+    const meta = buildMeta(base)
+
+    expect(content(meta, "property", "og:image")).toEqual(["https://andrew.codes/images/andrew-smith.webp"])
+    expect(content(meta, "property", "og:image:width")).toEqual(["768"])
+    expect(content(meta, "property", "og:image:height")).toEqual(["768"])
+    expect(content(meta, "property", "og:image:alt")).toHaveLength(1)
+    expect(content(meta, "name", "twitter:image")).toEqual(["https://andrew.codes/images/andrew-smith.webp"])
+  })
 })
